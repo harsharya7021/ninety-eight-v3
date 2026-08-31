@@ -860,7 +860,10 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   .mwg102 .container > p{font-size:8.4vw}
 }
 @media(prefers-reduced-motion:reduce){
-  .mwg102 .pin-height{height:100vh}
+  .mwg102 .pin-height{height:auto!important}
+  .mwg102 .container{height:auto;padding:14vh 0 0}
+  .mwg102 .container > p{position:static;transform:none!important;white-space:normal;margin:0 auto;text-align:center}
+  .mwg102 .ctafoot{position:static;padding-top:6vh}
 }
 /* ---- the postcard: the brief, on 089's jelly -----------------------------
    The drum asks; this is where the answer gets written. Cream card on the
@@ -900,6 +903,13 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 .pc-stamp{position:absolute;top:46px;right:6px;width:44px;height:44px;border:2px solid #17171C;border-radius:50%}
 .pc-stamp::after{content:'';position:absolute;inset:14px;background:#17171C;border-radius:50%}
 .pc-alt{margin:2.4rem 0 1.2rem;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* the pop: the whole closing column is parked below the drum's held screen and
+   springs up under the ask — which drifts to the top, small, as the title of
+   its own screen. Matter's sway stays on the inner wrapper. */
+.mwg102 .ctafoot{position:absolute;top:100%;left:0;width:100%;z-index:2;
+  padding:0 var(--pad);will-change:transform}
+.pc-cities{display:block;margin-top:12px;font-size:11px;font-weight:400;letter-spacing:.24em;
+  text-transform:uppercase;color:#4c4c52}
 @media(max-width:900px){
   .pc-barcode{width:84px;height:28px}
   .pc-grid{grid-template-columns:1fr}
@@ -1272,13 +1282,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       <p><span>Yours to keep. No deck.</span></p>
       <p><span>No retainer. No chase.</span></p>
       <p><span>Tell us what you’re building<i class="dot">.</i></span></p>
-
-
-    </div>
-  </div>
-</section>
-
-<section class="section wrap" id="contact">
+      <div class="ctafoot" id="contact" role="region" aria-label="Contact">
   <!-- The brief, as a postcard: the drum asks, this is where the answer gets
        written. The card hangs on the 089 physics — a soft pin and scroll
        tugs, so it sways like jelly and settles — and springs in elastically
@@ -1305,7 +1309,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
           </div>
           <div class="pc-right">
             <span class="pc-lab mono">Deliver to</span>
-            <p class="pc-addr"><b>Ninety-Eight</b>Delhi NCR · Goa ·<br>Hyderabad ·<br>San&nbsp;Francisco</p>
+            <p class="pc-addr"><b>Ninety-Eight</b><span class="pc-cities mono">Delhi NCR · Goa · HYD · SF</span></p>
             <p class="pc-links mono"><a href="mailto:contact@ninety-eight.in">contact@ninety-eight.in</a></p>
             <span class="pc-stamp" aria-hidden="true"></span>
           </div>
@@ -1322,7 +1326,14 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
     <span class="mono">Ninety-Eight Entertainment — est. 01.01.2020</span>
     <span class="mono" id="ftime">—</span>
   </footer>
+      </div>
+
+
+    </div>
+  </div>
 </section>
+
+
 
 
 
@@ -2353,28 +2364,40 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   });
 })();
 
-/* ===== the CTA drum: effect 102 ============================================
-   The reference's flip-drum: one master timeline pinned across 500vh; each
-   line rotates up and out as the next rolls in from -90°, the inner span
-   rolling ±20° with its alpha snapping at the vertical — expo.inOut. Six
-   transitions; the ask lands as the pin releases and stays. Built on a
-   timeout so every pin above exists first. */
+/* ===== the closing window: drum, then the postcard pops ====================
+   Six flips land the ask; one more beat of scroll and — in the same held
+   screen — the ask drifts to the top, small, becoming the title, while the
+   whole closing column (postcard, pills, fine print, est. line) springs up
+   from below with a back.out overshoot: the jelly pop, scrubbed and
+   reversible. Matter's soft-pin sway keeps breathing on the card's own
+   wrapper underneath the pop. Runway is set from the column's measured
+   height; the pin releases with the column at rest and the page ends. */
 (function(){
   var root=document.querySelector('.mwg102');
   if(!root) return;
   var pinH=root.querySelector('.pin-height');
   var container=root.querySelector('.container');
   var paragraphs=root.querySelectorAll('.container > p');
-  if(!pinH||!container||!paragraphs.length) return;
+  var foot=root.querySelector('.ctafoot');
+  if(!pinH||!container||!paragraphs.length||!foot) return;
   if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined') return;
   if(matchMedia('(prefers-reduced-motion:reduce)').matches){
-    gsap.set(paragraphs,{autoAlpha:0});
-    gsap.set(paragraphs[paragraphs.length-1],{autoAlpha:1,rotateX:0});
+    gsap.set(paragraphs,{autoAlpha:0,display:'none'});
+    gsap.set(paragraphs[paragraphs.length-1],{autoAlpha:1,rotateX:0,display:'block'});
     return;
   }
+
   gsap.set(paragraphs,{rotateX:-90});
   gsap.set(paragraphs[0],{rotateX:0});
+
   function build(){
+    var vh=window.innerHeight;
+    var colH=foot.scrollHeight;
+    var POP=1.3, HOLD=0.35;
+    var UNIT=Math.round(vh*0.8);
+    var total=6+HOLD+POP;
+    pinH.style.height=(vh+Math.round(total*UNIT))+'px';
+
     var master=gsap.timeline({
       scrollTrigger:{ trigger:pinH, start:'top top', end:'bottom bottom',
                       pin:container, scrub:true, invalidateOnRefresh:true }
@@ -2389,27 +2412,44 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       master.from(paragraphs[i+1].querySelector('span'),{rotateZ:angle,ease:ease,duration:1},i);
       master.from(paragraphs[i+1].querySelector('span'),{autoAlpha:0,duration:0.2,delay:0.3,ease:ease},i);
     }
+
+    /* the ask becomes the title of its own screen… */
+    var last=paragraphs[paragraphs.length-1];
+    var START=6+HOLD;
+    master.to(last,{y:-(vh*0.365),scale:0.42,autoAlpha:0,ease:'power2.inOut',duration:0.9},START);
+    /* …and the column springs up beneath it — the jelly pop */
+    var TRAVEL=Math.min(colH+28, vh*1.6);
+    master.fromTo(foot,{y:0},{y:-TRAVEL,ease:'back.out(1.2)',duration:POP},START);
+
+    /* the header's Contact lands on the settled screen */
+    var st=master.scrollTrigger;
+    [].forEach.call(document.querySelectorAll('a[href="#contact"]'),function(a2){
+      a2.addEventListener('click',function(e){
+        e.preventDefault();
+        var y=st.end-4;
+        if(window.__lenis) window.__lenis.scrollTo(y); else window.scrollTo(0,y);
+      });
+    });
+
     ScrollTrigger.refresh();
   }
-  setTimeout(build, 80);
+  var start=function(){ setTimeout(build,140); };
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(start); }
+  else{ start(); }
 })();
 
-/* ===== the postcard: effect 089, on the whole card =========================
-   One Matter body instead of a chain of letters: the postcard hangs from a
-   soft pin (stiffness .005, damping .004), scroll velocity tugs the anchor
-   (×0.05), rotation is damped hard so the card tilts a few degrees and
-   rights itself — jelly, not chaos. It also springs in elastically the
-   first time the section approaches. The send button composes the mail from
-   the fields client-side. */
+/* ===== the postcard's sway: effect 089 =====================================
+   One Matter body on a soft pin under the pop: scroll velocity tugs the
+   anchor, rotation is damped to a tilt, and the card rights itself — the
+   idle jelly. Runs only while the closing window is anywhere near. */
 (function(){
   var sec=document.getElementById('contact');
-  if(!sec) return;
   var wrap=document.getElementById('pc-wrap');
   var card=document.getElementById('postcard');
   var form=document.getElementById('pc-form');
-  if(!wrap||!card||!form) return;
+  var gate=document.querySelector('.mwg102 .pin-height');
+  if(!sec||!wrap||!card||!form||!gate) return;
 
-  /* the mail, regardless of motion preferences */
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var v=function(n){ var el=form.elements[n]; return el&&el.value?el.value.trim():''; };
@@ -2423,17 +2463,10 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
   function build(){
-    /* the elastic arrival — the jelly moment, once */
-    gsap.from(card,{y:130,scaleY:0.82,scaleX:1.04,transformOrigin:'top center',
-      ease:'elastic.out(1,0.42)',duration:1.7,
-      scrollTrigger:{trigger:sec,start:'top 78%',once:true}});
-
-    /* the hang — 089's soft pin on the whole card */
     var Engine=Matter.Engine, World=Matter.World, Bodies=Matter.Bodies,
         Body=Matter.Body, Constraint=Matter.Constraint;
     var engine=Engine.create();
     engine.world.gravity.y=0.5;
-
     var rect=wrap.getBoundingClientRect();
     var sy=window.scrollY;
     var cx=rect.left+rect.width/2;
@@ -2448,34 +2481,32 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       Engine.update(engine,1000/60);
       Body.setAngle(body,body.angle*0.9);
       Body.setAngularVelocity(body,body.angularVelocity*0.9);
+      /* the anchor always springs home — a violent last scroll frame (or a
+         programmatic jump) can no longer park the card off-screen */
+      constraint.pointA.y+=(cy-constraint.pointA.y)*0.05;
       var dx=body.position.x-cx;
       var dy=body.position.y-cy;
       wrap.style.transform='translate('+dx+'px, '+dy+'px) rotate('+body.angle+'rad)';
     }
-
     ScrollTrigger.create({
-      trigger:sec,
-      start:'top 150%',
-      end:'bottom -50%',
+      trigger:gate, start:'top 150%', end:'bottom -50%',
       onEnter:function(){ gsap.ticker.add(tick); },
       onEnterBack:function(){ gsap.ticker.add(tick); },
       onLeave:function(){ gsap.ticker.remove(tick); },
       onLeaveBack:function(){ gsap.ticker.remove(tick); },
       onUpdate:function(self){
-        constraint.pointA.y=cy+self.getVelocity()*0.05;
+        var tug=Math.max(-260,Math.min(260,self.getVelocity()*0.05));
+        constraint.pointA.y=cy+tug;
       }
     });
-
     if(matchMedia('(hover: none)').matches){
-      var realign=function(){
-        gsap.to(constraint.pointA,{y:cy,duration:0.35,ease:'power3.out',overwrite:true});
-      };
+      var realign=function(){ gsap.to(constraint.pointA,{y:cy,duration:0.35,ease:'power3.out',overwrite:true}); };
       window.addEventListener('touchend',realign,{passive:true});
       window.addEventListener('touchcancel',realign,{passive:true});
     }
     ScrollTrigger.refresh();
   }
-  var start=function(){ setTimeout(build,180); };
+  var start=function(){ setTimeout(build,220); };
   if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(start); }
   else{ start(); }
 })();
