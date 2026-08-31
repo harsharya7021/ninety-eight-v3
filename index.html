@@ -782,21 +782,25 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 .wvf-tabs{display:flex;flex-wrap:wrap;align-items:flex-end;position:relative;z-index:3;
   padding:0}
 .wvf-tab{display:flex;align-items:stretch;height:var(--tab-h);position:relative;
-  background:none;border:0;padding:0;margin:0 0 -1px;cursor:pointer;color:var(--tfg,#14141A);
-  transition:height .3s cubic-bezier(.2,.7,.2,1)}
-.wvf-side{width:40px;height:100%;display:block;color:var(--tbg);flex:0 0 auto}
+  background:none;border:0;padding:0;margin:0 0 -1px;cursor:pointer;color:var(--tfg,#14141A)}
+/* CSS transitions are the no-GSAP fallback only; they stand down when .gsap-on
+   lands, or the two would fight over the same height */
+.wvf:not(.gsap-on) .wvf-tab{transition:height .3s cubic-bezier(.2,.7,.2,1)}
+.wvf-side{width:62px;height:100%;display:block;color:var(--tbg);flex:0 0 auto}
 .wvf-side--end{transform:scaleX(-1)}
 .wvf-mid{background:var(--tbg);color:var(--tfg,#14141A);display:flex;align-items:center;
-  white-space:nowrap;font-family:'Instrument Serif',Georgia,serif;font-size:19px;font-weight:400;
-  letter-spacing:.005em;line-height:1;padding-bottom:5px;margin:0 -1px}
-.wvf-tab:hover{height:calc(var(--tab-h) + 10px);z-index:60!important;filter:brightness(1.07)}
+  white-space:nowrap;font-weight:600;font-size:clamp(12.5px,1.15vw,16px);
+  letter-spacing:-.005em;line-height:1;padding:0 3px 2px;margin:0 -1px}
+.wvf-tab:hover{z-index:60!important}
+.wvf:not(.gsap-on) .wvf-tab:hover{height:calc(var(--tab-h) + 11px)}
 .wvf-tab:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 /* The open tab used to turn paper-coloured, which is why the first tab always
    looked blank. In Ambrosia the tab keeps its colour and the SHEET takes that
    colour instead — the file and its folder match because the folder moved, not
    because the file gave up its tab. It only stands taller here. */
-.wvf-tab.on{height:calc(var(--tab-h) + 10px);z-index:70!important}
-.wvf-tab.on .wvf-mid{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.wvf-tab.on{z-index:70!important}
+.wvf:not(.gsap-on) .wvf-tab.on{height:calc(var(--tab-h) + 11px)}
+.wvf-tab.on .wvf-mid{font-weight:700}
 
 /* --sheetbg/--sheetfg are written per file by showFile, from the same STOCK
    pair the tab is drawn from, so the sheet always lands on a foreground that
@@ -872,8 +876,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 
 @media(max-width:820px){
   .wvf{--tab-h:38px}
-  .wvf-side{width:32px}
-  .wvf-mid{font-size:15px}
+  .wvf-side{width:50px}
   .wvf-paper{grid-template-columns:1fr;padding-left:clamp(40px,10vw,52px)}
   .wvf-print{justify-self:start;transform:rotate(-1.6deg)}
 }
@@ -2318,19 +2321,21 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
      single rule. White on #FF6319 or #FCCC0A is roughly 2.8:1 and 1.9:1 —
      unreadable at 12.5px — so orange and yellow take ink and the darker
      four take white. */
+  /* The Ambrosia stock: pastel tab, and a lighter wash of the same hue that
+     the open sheet takes (data-bg on each tab). The MTA saturated set this
+     replaces needed per-colour contrast surgery; ink on any of these pastels
+     clears 11:1 without correction, and the room's own colour stays on the
+     kicker, the dot and the folder ground where it always was. */
   var STOCK=[
-    {b:'#E0322B',f:'#FFFFFF'},  /* red    — 1 2 3 */
-    {b:'#0039A6',f:'#FFFFFF'},  /* blue   — A C E */
-    {b:'#FCCC0A',f:'#14141A'},  /* yellow — N Q R */
-    {b:'#008938',f:'#FFFFFF'},  /* green  — 4 5 6 */
-    {b:'#FF6319',f:'#14141A'},  /* orange — B D F */
-    {b:'#996633',f:'#FFFFFF'}   /* brown  — J Z   */
+    {b:'#CFD8F4',f:'#14141A',w:'#F0F3FA'},  /* periwinkle */
+    {b:'#E9D1F3',f:'#14141A',w:'#F7F0FA'},  /* lilac      */
+    {b:'#F4DDCF',f:'#14141A',w:'#FAF4F0'},  /* peach      */
+    {b:'#F4CFCF',f:'#14141A',w:'#FAF0F0'},  /* rose       */
+    {b:'#F4F0CF',f:'#14141A',w:'#FAF9F0'},  /* butter     */
+    {b:'#CFE2F4',f:'#14141A',w:'#F0F5FA'},  /* sky        */
+    {b:'#CFF4EE',f:'#14141A',w:'#F0FAF9'},  /* mint       */
+    {b:'#EAE4D9',f:'#14141A',w:'#F8F6F2'}   /* bone       */
   ];
-  /* Red and green are the two the logo is made of, so they keep white on them
-     rather than being re-paired with ink. At the true #EE352E and #00933C that
-     lands at 4.05:1 and 4.01:1 — under AA for 12.5px text — so those two fills
-     alone are carried 6% darker, which clears 4.5:1 and is not a shift the eye
-     reads as a different red. The tokens and the room colours are untouched. */
 
   /* One line per room, so a circle keeps the same colour whether you meet it
      on the wheel or inside the drawer. */
@@ -2365,10 +2370,30 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
     return w.slice(0,2).map(function(x){return x.charAt(0);}).join('').toUpperCase();
   }
 
+  /* ---- the Ambrosia pull ---------------------------------------------------
+     MWG 109's behaviour, same numbers as folders.html: a tab drawn 11px up
+     out of its folder on back.out(2) — a pulled file has weight — dropped
+     back on power2.out; and the file arrives from whichever side you
+     travelled from, back.out(1.3) across 28% of the slot. CSS transitions
+     take over untouched when GSAP or motion is unavailable. */
+  var WVANIM=(typeof gsap!=='undefined')&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var lastTab=-1;
+  function wvTabH(){
+    var el=rows.querySelector('.wvf');
+    var v=el?parseFloat(getComputedStyle(el).getPropertyValue('--tab-h')):46;
+    return isNaN(v)?46:v;
+  }
+  function liftTab(t,up){
+    if(!WVANIM) return;
+    gsap.to(t,{height:wvTabH()+(up?11:0),duration:up?0.34:0.26,
+      ease:up?'back.out(2)':'power2.out',overwrite:true});
+  }
+
   function showFile(ri,ci){
     var m=MEDIA[ri]; if(!m) return;
     var c=m.cases[ci], box=document.getElementById('wv-file');
     if(!box||!c) return;
+    var dir=(lastTab<0||ci>=lastTab)?1:-1; lastTab=ci;
     var rec=CASES[c.s]||{}, sub=rec.sub||'';
     box.innerHTML=
       '<div class="wvf-paper">'+
@@ -2382,23 +2407,33 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
         (c.c?'<img class="wvf-print" src="'+c.c+'" alt="" loading="lazy">'
             :'<span class="wvf-print wvf-stamp" aria-hidden="true">'+initials(c.n)+'</span>')+
       '</div>';
+    if(WVANIM){
+      var node=box.firstElementChild;
+      if(node){
+        var d=(box.clientWidth||620)*0.28;
+        gsap.fromTo(node,{x:dir<0?-d:d,autoAlpha:0},
+          {x:0,autoAlpha:1,duration:0.5,ease:'back.out(1.3)',overwrite:true});
+      }
+    }
     var t=rows.querySelectorAll('.wvf-tab');
     for(var k=0;k<t.length;k++){
-      t[k].classList.toggle('on', k===ci);
-      t[k].setAttribute('aria-selected', k===ci?'true':'false');
+      var on=(k===ci);
+      t[k].classList.toggle('on', on);
+      t[k].setAttribute('aria-selected', on?'true':'false');
+      liftTab(t[k], on);
     }
     /* the folder takes the colour of the file that is out — the Ambrosia move.
        Read off the tab itself so the pair can never drift from what is drawn. */
     var sheet=rows.querySelector('.wvf-sheet'), tab=t[ci];
     if(sheet&&tab){
       var cs=getComputedStyle(tab);
-      sheet.style.setProperty('--sheetbg', cs.getPropertyValue('--tbg').trim()||'#F5F3ED');
+      sheet.style.setProperty('--sheetbg', tab.dataset.bg||cs.getPropertyValue('--tbg').trim()||'#F5F3ED');
       sheet.style.setProperty('--sheetfg', cs.getPropertyValue('--tfg').trim()||'#14141A');
     }
   }
 
   function showFolder(i){
-    var m=MEDIA[i]; curRoom=i;
+    var m=MEDIA[i]; curRoom=i; lastTab=-1;
     var pop=ROOMPOP[i%ROOMPOP.length], box=document.getElementById('wv-folder');
     box.style.setProperty('--pop',pop);
     box.style.setProperty('--popink',ROOMINK[i%ROOMINK.length]);
@@ -2414,7 +2449,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       var tabs=m.cases.map(function(c,j){
         var st=STOCK[j%STOCK.length];
         return '<button class="wvf-tab" type="button" role="tab" data-i="'+j+'" '+
-          'style="--tbg:'+st.b+';--tfg:'+st.f+';z-index:'+(n-j)+'">'+
+          'style="--tbg:'+st.b+';--tfg:'+st.f+';z-index:'+(n-j)+'" data-bg="'+st.w+'">'+
           SIDE+'<span class="wvf-mid">'+c.n+'</span>'+SIDE_END+'</button>';
       }).join('');
       var hero = m.video ? '<div class="wvf-hero"><video src="'+m.video+'" autoplay muted loop playsinline preload="metadata"></video>'+
@@ -2432,6 +2467,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
         hv.addEventListener('loadeddata', go, {once:true});
         hv.addEventListener('canplay', go, {once:true});
       }
+      if(WVANIM){ var wvroot=rows.querySelector('.wvf'); if(wvroot) wvroot.classList.add('gsap-on'); }
       showFile(i,0);
     }
     view.classList.add('folded');
@@ -2441,6 +2477,16 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   rows.addEventListener('click', function(e){
     var t=e.target.closest('.wvf-tab');
     if(t) showFile(curRoom, +t.dataset.i);
+  });
+  rows.addEventListener('mouseover', function(e){
+    var t=e.target.closest('.wvf-tab');
+    if(!t||t.contains(e.relatedTarget)) return;
+    liftTab(t,true);
+  });
+  rows.addEventListener('mouseout', function(e){
+    var t=e.target.closest('.wvf-tab');
+    if(!t||t.contains(e.relatedTarget)) return;
+    if(!t.classList.contains('on')) liftTab(t,false);
   });
   document.getElementById('wv-backbtn').addEventListener('click',function(){ view.classList.remove('folded'); });
 
