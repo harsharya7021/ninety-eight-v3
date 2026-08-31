@@ -88,7 +88,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 /* ---------- header ---------- */
 #hdr{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:flex-end;
+  display:flex;align-items:center;justify-content:space-between;
   padding:.9rem var(--pad);
   transition:background .4s,border-color .4s;
   border-bottom:1px solid transparent;
@@ -102,12 +102,39 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 #hdr nav a:hover{color:var(--ink)}
 #hdr .right{display:flex;align-items:center;gap:1.4rem}
 #clock{white-space:nowrap}
+button.hnav{background:none;border:0;cursor:pointer;padding:0}
+
+/* ---------- the menu: effect 035 ----------
+   Reference numbers kept exactly: 45px rows blooming to 122px, 92px media
+   rising from y:100% behind an overflow clip, 15px gaps, borders at .3 -
+   retyped in house Archivo/Space Mono and regrounded on carbon. */
+.nav035{position:fixed;inset:0;z-index:400;background:var(--bg);
+  opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.nav035.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.n35-close{position:absolute;top:.9rem;right:var(--pad);z-index:2}
+.n35-inner{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.n35-label{padding:0 0 40px var(--pad)}
+.nav035 ul{width:100%;border-bottom:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;list-style:none;margin:0;padding:0}
+.nav035 ul li{flex:1 1 45px;align-items:center;border-top:1px solid rgba(255,255,255,.3);width:100%;padding:0 var(--pad);display:flex;justify-content:space-between;position:relative;overflow:hidden}
+.nav035 ul li:first-child{flex:1 1 122px}
+.nav035 ul li a{display:flex;align-items:center;align-self:stretch;flex:1;color:var(--ink)}
+.n35-name{font-weight:800;font-stretch:118%;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;line-height:1;transition:color .3s}
+.nav035 ul li:hover .n35-name{color:var(--red)}
+.n35-medias{display:flex;gap:15px;position:absolute;right:var(--pad);top:50%;transform:translate(0,-50%);overflow:hidden}
+.n35-media{width:92px;height:92px;object-fit:cover;transform:translate(0,100%);border-radius:4%}
+.nav035.nofx .n35-media{transform:none}
+@media (max-width:768px){
+  .nav035 ul li{padding:0 15px}
+  .nav035 ul li:first-child{flex:1 1 90px}
+  .n35-medias{gap:5px;right:15px}
+  .n35-media{width:60px;height:60px}
+  .n35-media:nth-child(n+5){display:none}
+}
 .talk{
   font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
   border:1px solid var(--line);padding:.55em 1.1em;border-radius:99px;transition:.3s;color:var(--ink);
 }
 .talk:hover{background:var(--red);border-color:var(--red);color:#fff}
-#menu-btn{display:none}
 #progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0;z-index:101}
 
 /* mobile menu */
@@ -623,7 +650,6 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   .nazar{right:1.4rem;width:26px}
   #hdr nav{display:none}
   #hdr .right #clock{display:none}
-  #menu-btn{display:block;font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;padding:.55em 0 .55em 1em}
   .ch-inner{grid-template-columns:1fr}
   .ch-meta{flex-direction:row;flex-wrap:wrap;gap:1.1rem}
   .numbers{grid-template-columns:repeat(2,1fr)}
@@ -1156,8 +1182,68 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 
 <!-- header -->
 <header id="hdr">
+  <button class="hnav mono" id="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035">Menu</button>
   <a class="hnav mono" href="#contact">Contact</a>
 </header>
+
+<!-- ===== the menu: effect 035 ===============================================
+     The reference is a category list: compact rows that bloom from 45px to
+     122px on hover while that row's images rise in on a random stagger and
+     the previous row's drop out at 3x speed. Here the rows are the story's
+     stops, in page order, each carrying the true imagery of the section it
+     points to - a table of contents, not an exit ramp. -->
+<div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <button class="n35-close hnav mono" type="button">Close</button>
+  <div class="n35-inner">
+    <p class="n35-label mono">The story, in order.</p>
+    <ul>
+      <li><a href="#culture">
+        <span class="n35-name">For the culture</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="#verticals">
+        <span class="n35-name">Three verticals</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/practice/talent.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/practice/hospitality.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="#voices">
+        <span class="n35-name">In their words</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/one8.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/hardrock.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="#press">
+        <span class="n35-name">On the record</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="#contact">
+        <span class="n35-name">Tell us what you&rsquo;re building.</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/hero.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m7.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m8.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m9.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+    </ul>
+  </div>
+</div>
 
 
 <main>
@@ -2455,6 +2541,107 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   var start=function(){ setTimeout(build,140); };
   if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(start); }
   else{ start(); }
+})();
+
+/* ===== the menu: effect 035 ================================================
+   The reference's category list, hired as the table of contents. Numbers
+   kept exactly: 0.04s random stagger, 0.4s power4.out rise, previous row
+   reversed at 3x speed, rows tweened between 45px and 122px of flex basis.
+   Landing is a jump under the closing fade - an animated scroll would
+   replay every pinned scene between here and there. */
+(function(){
+  var root=document.getElementById('nav035');
+  var btn=document.getElementById('menu-btn');
+  if(!root||!btn) return;
+  var items=root.querySelectorAll('ul li');
+  var closeBtn=root.querySelector('.n35-close');
+  var fx=(typeof gsap!=='undefined')&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!fx) root.classList.add('nofx');
+
+  var expanded=function(){ return window.innerWidth>768?122:90; };
+  var lastIndexEntered=0, tls=[], isOpen=false;
+
+  if(fx){
+    [].forEach.call(items,function(item,index){
+      var medias=item.querySelectorAll('.n35-media');
+      var tl=gsap.timeline({paused:true});
+      tl.to(medias,{
+        y:0,
+        stagger:{each:0.04,from:'random'},
+        duration:0.4,
+        ease:'power4.out'
+      });
+      tls.push(tl);
+      item.addEventListener('mouseenter',function(){
+        tls[lastIndexEntered].timeScale(3).reverse();
+        lastIndexEntered=index;
+        tls[index].timeScale(1).play();
+        gsap.to(items,{flex:'1 1 45px',duration:0.2,ease:'power2.inOut'});
+        gsap.to(item,{flex:'1 1 '+expanded()+'px',duration:0.2,ease:'power2.inOut'});
+      });
+    });
+  }
+
+  function openMenu(){
+    if(isOpen) return; isOpen=true;
+    document.body.style.overflow='hidden';
+    if(window.__scrollLock) window.__scrollLock(true);
+    root.classList.add('open');
+    root.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+    if(fx){
+      /* the reference's load moment, replayed per open: first row expanded,
+         its media already rising, everything else shut */
+      lastIndexEntered=0;
+      for(var i=0;i<tls.length;i++) tls[i].pause(0);
+      gsap.set(items,{flex:'1 1 45px'});
+      gsap.set(items[0],{flex:'1 1 '+expanded()+'px'});
+      tls[0].timeScale(1).play();
+    }
+    if(closeBtn) closeBtn.focus();
+  }
+  function closeMenu(){
+    if(!isOpen) return; isOpen=false;
+    root.classList.remove('open');
+    root.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    if(window.__scrollLock) window.__scrollLock(false);
+  }
+
+  function jumpTo(href){
+    var y;
+    if(href==='#contact'){
+      y=(window.ScrollTrigger?ScrollTrigger.maxScroll(window):document.documentElement.scrollHeight-window.innerHeight);
+    }else{
+      var el=document.querySelector(href); if(!el) return;
+      var box=el, p=el.parentElement;
+      /* land at a pinned section's start in the document, not where its
+         pinned body happens to be painted right now */
+      if(p&&p.classList&&p.classList.contains('pin-spacer')) box=p;
+      y=window.pageYOffset+box.getBoundingClientRect().top;
+    }
+    if(window.__lenis){
+      window.__lenis.resize();   /* Lenis clamps to a cached limit; remeasure first */
+      window.__lenis.scrollTo(y,{immediate:true,force:true});
+    } else { window.scrollTo(0,y); }
+  }
+
+  [].forEach.call(root.querySelectorAll('ul li a'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      /* the drum binds its own glide to a[href="#contact"] later; this
+         listener registered first, and the menu jumps instead */
+      e.stopImmediatePropagation();
+      var href=a.getAttribute('href');
+      closeMenu();
+      jumpTo(href);
+    });
+  });
+
+  btn.addEventListener('click',openMenu);
+  closeBtn.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen) closeMenu(); });
 })();
 
 /* ===== the postcard's sway: effect 089 =====================================
