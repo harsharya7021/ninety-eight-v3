@@ -884,15 +884,11 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
    a pinned screen on a 3D drum — expo.inOut, the reference's ±20° roll on
    the inner span, alpha snapping at the vertical — and the last one lands
    with the pin's release and stays: the ask itself. Type is the house 750 at
-   6vw sentence case so the longest line clears the frame; the mono rail up
-   top is the reference's header in the house voice. */
+   6vw sentence case so the longest line clears the frame. The reference's
+   mono header rail came out at Harsh's call — a bare room for the ask. */
 .mwg102{position:relative;background:var(--bg)}
 .mwg102 .pin-height{height:500vh}
 .mwg102 .container{height:100vh;perspective:300vw;position:relative;overflow:hidden}
-.mwg102 .header{position:absolute;top:0;left:0;width:100%;padding:22px var(--pad);
-  display:flex;justify-content:space-between;gap:18px;
-  font-family:'Space Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--dim)}
 .mwg102 .container > p{position:absolute;top:50%;left:50%;white-space:nowrap;margin:0;
   transform:translate3d(-50%,-50%,-8vw);transform-style:preserve-3d;
   font-weight:750;font-stretch:112%;font-size:6vw;letter-spacing:-.03em;line-height:1.1;
@@ -900,7 +896,6 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 .mwg102 .container > p > span{transform:translate3d(0,0,8vw);display:block;backface-visibility:hidden}
 .mwg102 .dot{font-style:normal;color:var(--red)}
 @media (max-width:768px){
-  .mwg102 .header{display:none}
   .mwg102 .container > p{font-size:8.4vw}
 }
 @media(prefers-reduced-motion:reduce){
@@ -1374,11 +1369,6 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 <section class="mwg102" id="assemble" aria-label="Tell us what you’re building.">
   <div class="pin-height">
     <div class="container">
-      <div class="header" aria-hidden="true">
-        <span>Ninety-Eight — est. 2020</span>
-        <span>The smallest possible yes</span>
-        <span>Delhi NCR · IST</span>
-      </div>
       <p><span>You’re building something.</span></p>
       <p><span>We’re built for that.</span></p>
       <p><span>Send us one line.</span></p>
