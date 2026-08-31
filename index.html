@@ -920,7 +920,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   width:clamp(90px,10vw,150px);height:clamp(34px,3.6vw,56px);
   background:repeating-linear-gradient(90deg,#17171C 0 2px,transparent 2px 5px,#17171C 5px 8px,transparent 8px 10px)}
 .pc-grid{display:grid;grid-template-columns:1fr clamp(240px,24vw,340px);gap:clamp(24px,3.4vw,56px)}
-.pc-left{min-width:0}
+.pc-left{min-width:0;position:relative}
 .pc-row2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,40px)}
 .pc-field{display:block;margin-bottom:clamp(18px,2.4vh,26px)}
 .pc-lab{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4c4c52;margin-bottom:10px}
@@ -933,6 +933,25 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   padding:16px 24px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-radius:6px;
   transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .pc-send:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.pc-send[disabled]{opacity:.55;cursor:default;transform:none;box-shadow:none}
+.pc-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.pc-field.pc-miss input,.pc-field.pc-miss textarea{border-bottom-color:var(--red)}
+.pc-err{display:none;margin:.9rem 0 0;color:var(--red);font-size:10px}
+.pc-err a{color:var(--red);text-decoration:underline}
+#pc-form.pc-form-err .pc-err{display:block}
+/* the card itself is the confirmation: fields hold their ground invisibly so the
+   geometry (and Matter's sway body) never changes; the postmark lands on the stamp */
+.pc-posted{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;gap:.5rem;color:#17171C;text-align:left}
+.pc-posted b{color:var(--red);letter-spacing:.2em;text-transform:uppercase;font-size:12px;font-weight:400}
+.pc-posted span{font-size:clamp(16px,1.5vw,22px);font-weight:700;letter-spacing:-.01em}
+.pc-posted i{font-style:normal;border-bottom:1px solid #17171C}
+.postcard.is-sent .pc-posted{display:flex}
+.postcard.is-sent .pc-left > .pc-row2,.postcard.is-sent .pc-left > .pc-field,
+.postcard.is-sent .pc-left > .pc-send,.postcard.is-sent .pc-left > .pc-err{visibility:hidden}
+.postcard.is-sent .pc-right::after{content:'RECEIVED · 98';position:absolute;top:40px;right:-8px;
+  padding:8px 10px;border:2px solid var(--red);border-radius:8px;color:var(--red);
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;
+  transform:rotate(-12deg);background:rgba(243,239,226,.65)}
 .pc-right{position:relative;border-left:2px dotted #b9b5a8;padding-left:clamp(20px,2.4vw,40px)}
 .pc-addr{margin:14px 0 0;font-size:clamp(18px,1.7vw,26px);font-weight:700;letter-spacing:-.02em;line-height:1.35}
 .pc-addr b{display:block;font-weight:800;font-stretch:112%;font-size:1.15em;margin-bottom:2px}
@@ -1392,11 +1411,15 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
               <label class="pc-field"><span class="pc-lab mono">Sender · Email</span>
                 <input type="email" name="email" placeholder="you@studio.com" autocomplete="email"></label>
             </div>
-            <label class="pc-field"><span class="pc-lab mono">Studio / Brand / Project</span>
-              <input type="text" name="project" placeholder="What we&#39;d be working on together"></label>
             <label class="pc-field"><span class="pc-lab mono">The brief</span>
-              <textarea name="brief" rows="3" placeholder="Where you are · where you&#39;re going · what you want from us"></textarea></label>
+              <textarea name="brief" rows="4" placeholder="One line — where you are · where you&#39;re going · what you want from us"></textarea></label>
+            <input type="text" name="_gotcha" class="pc-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button class="pc-send mono" type="submit">Send the brief ↗</button>
+            <p class="pc-err mono" aria-live="polite">Didn&rsquo;t go through — <a id="pc-mailto" href="mailto:contact@ninety-eight.in">mail it instead ↗</a></p>
+            <div class="pc-posted" aria-live="polite">
+              <b class="mono">Received</b>
+              <span>One idea, on its way to <i id="pc-echo"></i></span>
+            </div>
           </div>
           <div class="pc-right">
             <span class="pc-lab mono">Deliver to</span>
@@ -2643,13 +2666,41 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   var gate=document.querySelector('.mwg102 .pin-height');
   if(!sec||!wrap||!card||!form||!gate) return;
 
+  /* The postcard posts for real now. A mailto was the whole conversion path —
+     on a phone that is a bounce into an unconfigured mail app and a lost brief.
+     Harsh: create the form at formspree.io and paste its ID over REPLACE_ME;
+     until then submissions take the old mailto road, so nothing is ever dead. */
+  var ENDPOINT='https://formspree.io/f/REPLACE_ME';
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var v=function(n){ var el=form.elements[n]; return el&&el.value?el.value.trim():''; };
-    var name=v('name'), email=v('email'), project=v('project'), brief=v('brief');
-    var subject='The brief — '+(name||'a builder')+(project?(' · '+project):'');
-    var body=(brief||'Here is what we are building:')+'\n\n— '+(name||'')+(email?('\n'+email):'')+(project?('\n'+project):'');
-    location.href='mailto:contact@ninety-eight.in?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    var name=v('name'), email=v('email'), brief=v('brief');
+    [].forEach.call(form.querySelectorAll('.pc-field'),function(f){ f.classList.remove('pc-miss'); });
+    var miss=[];
+    if(!email) miss.push('email');
+    if(!brief) miss.push('brief');
+    if(miss.length){
+      miss.forEach(function(nm){ var el=form.elements[nm]; if(el&&el.closest('.pc-field')) el.closest('.pc-field').classList.add('pc-miss'); });
+      var first=form.elements[miss[0]]; if(first) first.focus();
+      return;
+    }
+    var subject='The brief — '+(name||'a builder');
+    var mail='mailto:contact@ninety-eight.in?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(brief+'\n\n— '+(name||'')+(email?('\n'+email):''));
+    var fb=document.getElementById('pc-mailto'); if(fb) fb.href=mail;
+    if(ENDPOINT.indexOf('REPLACE_ME')>-1){ location.href=mail; return; }
+    var btn=form.querySelector('.pc-send');
+    form.classList.remove('pc-form-err');
+    btn.disabled=true; var was=btn.textContent; btn.textContent='Sending\u2026';
+    fetch(ENDPOINT,{method:'POST',
+      headers:{'Accept':'application/json','Content-Type':'application/json'},
+      body:JSON.stringify({name:name,email:email,brief:brief,_subject:subject,_gotcha:v('_gotcha')})})
+    .then(function(r){
+      if(!r.ok) throw 0;
+      var echo=document.getElementById('pc-echo'); if(echo) echo.textContent=email;
+      card.classList.add('is-sent');
+    })
+    .catch(function(){ form.classList.add('pc-form-err'); })
+    .then(function(){ btn.disabled=false; btn.textContent=was; });
   });
 
   if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'||typeof Matter==='undefined') return;
