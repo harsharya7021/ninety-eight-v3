@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Talent &amp; Branding — Ninety-Eight</title>
 <meta name="description" content="We don't manage talent. We run a brand. Ninety-Eight's talent representation and personal-branding practice — and the same operating system applied to businesses.">
+<meta property="og:title" content="Talent &amp; Branding — Ninety-Eight">
+<meta property="og:description" content="We don't manage talent. We run a brand.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
+<link rel="canonical" href="https://www.ninety-eight.in/talent.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -725,7 +732,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
       var targets=container.matches('h2')?[container]:container.querySelectorAll('.chapter .content h3, .chapter .content p, .chapter .content .pull, .acttwo p, .acttwo .t');
       [].forEach.call(targets,function(el){
         el.classList.remove('rev'); el.classList.add('in');
-        splits.push(SplitText.create(el,{type:'lines, words',linesClass:'line',wordsClass:'word'}));
+        splits.push(SplitText.create(el,{type:'lines, words',linesClass:'line',wordsClass:'word',aria:'none'}));
       });
       container.querySelectorAll('.line').forEach(function(line){
         var measure=line.closest('.content')||(container.matches('h2')?container.parentElement:container);
