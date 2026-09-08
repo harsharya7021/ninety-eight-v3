@@ -60,6 +60,10 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
   .verts{font-size:clamp(1.7rem,8.6vw,3rem);line-height:1.4}
 }
 
+/* effect 097: lines set to max-content so the gathered words never reflow */
+.g97 .line{width:max-content;max-width:none}
+.g97 .word{will-change:transform}
+
 /* ---------- section furniture ---------- */
 .sec{position:relative;padding:clamp(5rem,14vh,10rem) 0}
 .sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line);margin-bottom:clamp(2.5rem,6vh,4.5rem)}
@@ -253,7 +257,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
       <p class="under mono">The card keeps score as you read &darr;</p>
     </div>
 
-    <div class="chapters" data-chapters>
+    <div class="chapters g97" data-chapters>
 
       <article class="chapter" data-tag="The name"
         data-stats='[["Tests","105"],["Wickets","311"],["India career","13 yrs"],["Brand deals","11"]]'
@@ -382,7 +386,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
         <div class="gloss"></div>
       </div>
     </div>
-    <div class="chapters" data-chapters>
+    <div class="chapters g97" data-chapters>
       <article class="chapter" data-tag="The silence"
         data-stats='[["Nationals","5×"],["Industry","0"],["Role","Captain, India"],["Era","2016 → 2020"]]'
         data-fact="Where cricket has an industry, women&rsquo;s basketball had silence.">
@@ -419,7 +423,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
 
 <!-- ============ ACT TWO: BUSINESSES ============ -->
 <section class="sec wrap" id="business">
-  <div class="acttwo">
+  <div class="acttwo g97">
     <div>
       <p class="kicker mono rev"><i style="background:var(--red)"></i>Act two &middot; Branding for businesses</p>
       <h2 class="t rev" style="--d:.08s">Same operating system. <em>Different asset class.</em></h2>
@@ -440,7 +444,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
 <!-- ============ THE ASK ============ -->
 <section id="ask">
   <p class="kicker mono rev" style="justify-content:center"><i></i>The smallest possible yes</p>
-  <h2 class="rev" style="--d:.08s">Tell us who you&rsquo;re building<i>.</i></h2>
+  <h2 class="g97">Tell us who you&rsquo;re building<i>.</i></h2>
   <div class="btns rev" style="--d:.16s">
     <a class="btn-y" href="index.html#contact">Send one line &rarr;</a>
     <a class="pill" href="https://wa.me/919999999999?text=Hi%20Ninety-Eight%20%E2%80%94%20talent%20%2F%20branding%20enquiry" target="_blank" rel="noopener">WhatsApp instead</a>
@@ -456,6 +460,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/SplitText.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
 <script>
 (function(){
@@ -578,6 +583,40 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
       }
     }
   });
+
+  /* effect 097 - every line of copy arrives spread across its column and
+     gathers into natural text as it rises from the bottom edge to 60% of
+     the screen, scrubbed at 0.2 (power2.out), reversible. Reference numbers;
+     the spread measure is the column the text sits in. Built after fonts. */
+  (function(){
+    if(!hasGsap||reduce||typeof SplitText==='undefined') return;
+    var go=function(){
+      document.querySelectorAll('.g97').forEach(function(container){
+        var targets=container.matches('h2')?[container]:container.querySelectorAll('.chapter h3, .chapter p:not(.num), .chapter .pull, .acttwo p, .acttwo .t');
+        var measure=container.matches('h2')?container.parentElement:container;
+        [].forEach.call(targets,function(el){
+          el.classList.remove('rev'); el.classList.add('in');
+          SplitText.create(el,{type:'lines, words',linesClass:'line',wordsClass:'word'});
+        });
+        var containerWidth=measure.clientWidth, cRect=measure.getBoundingClientRect();
+        container.querySelectorAll('.line').forEach(function(line){
+          var words=[].slice.call(line.querySelectorAll('.word'));
+          var total=words.reduce(function(a,w){ return a+w.getBoundingClientRect().width; },0);
+          var gaps=words.length-1, free=Math.max(containerWidth-total,0), gap=gaps>0?free/gaps:0;
+          var targetLeft=0;
+          var lineLeft=line.getBoundingClientRect().left-cRect.left;
+          words.forEach(function(w,i){
+            var r=w.getBoundingClientRect(); var cur=r.left-cRect.left;
+            gsap.set(w,{x:(targetLeft+lineLeft*0)-cur+ (0)});
+            targetLeft+=r.width+(i<words.length-1?gap:0);
+          });
+          gsap.to(words,{x:0,ease:'power2.out',scrollTrigger:{trigger:line,start:'top bottom',end:'top 60%',scrub:0.2}});
+        });
+      });
+      ScrollTrigger.refresh();
+    };
+    if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(go,60); }); else go();
+  })();
 
   /* effect 086 - the hero's three practices */
   (function(){
