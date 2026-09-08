@@ -108,10 +108,30 @@ button.hnav{background:none;border:0;cursor:pointer;padding:0}
    Reference numbers kept exactly: 45px rows blooming to 122px, 92px media
    rising from y:100% behind an overflow clip, 15px gaps, borders at .3 -
    retyped in house Archivo/Space Mono and regrounded on carbon. */
+/* Sep 8 call: the menu is a curtain now. It drops from the top edge on a
+   solid carbon ground (not transparent - the film would fight the rows),
+   and while it is down, scrolling lifts it away again and the hero film
+   shows through as it goes: menu -> scroll -> back on the first screen.
+   The header sits above it (z 500 > 400) so the dots button carries over. */
 .nav035{position:fixed;inset:0;z-index:400;background:var(--bg);
-  opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
-.nav035.open{opacity:1;visibility:visible;transition:opacity .35s ease}
-.n35-close{position:absolute;top:.9rem;right:var(--pad);z-index:2}
+  visibility:hidden;transform:translate3d(0,-100%,0);will-change:transform,opacity;
+  transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease,visibility 0s .6s}
+.nav035.open{visibility:visible;transform:none;opacity:1;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease}
+.nav035.dragging{transition:none}
+.n35-hint{position:absolute;left:0;right:0;bottom:1.6rem;text-align:center;color:var(--dim);opacity:.7;animation:npulse 2.8s ease-in-out infinite}
+.n35-name .beta{font-size:.55em;font-weight:600;color:var(--red);letter-spacing:.1em;vertical-align:super;margin-left:.5em}
+#hdr.menu-open{z-index:500;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
+/* the dots: three points that read as a menu; while open, the middle one
+   drops out and the outer two slide together into a single mark beside Close */
+.mdots{display:inline-flex;align-items:center;gap:.6rem;color:var(--ink);transition:opacity .25s}
+.md-dots{display:inline-flex;gap:4px;align-items:center}
+.md-dots i{display:block;width:5px;height:5px;border-radius:50%;background:currentColor;transition:transform .4s var(--ease),opacity .4s var(--ease)}
+.mdots:hover .md-dots i:nth-child(1){transform:translateX(-2px)}
+.mdots:hover .md-dots i:nth-child(3){transform:translateX(2px)}
+.mdots[aria-expanded="true"] .md-dots i:nth-child(2){opacity:0;transform:scale(0)}
+.mdots[aria-expanded="true"] .md-dots i:nth-child(1){transform:translateX(4.5px)}
+.mdots[aria-expanded="true"] .md-dots i:nth-child(3){transform:translateX(-4.5px)}
+.md-txt{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
 .n35-inner{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 .n35-label{padding:0 0 40px var(--pad)}
 .nav035 ul{width:100%;border-bottom:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;list-style:none;margin:0;padding:0}
@@ -128,7 +148,8 @@ button.hnav{background:none;border:0;cursor:pointer;padding:0}
   .nav035 ul li:first-child{flex:1 1 90px}
   .n35-medias{gap:5px;right:15px}
   .n35-media{width:60px;height:60px}
-  .n35-media:nth-child(n+5){display:none}
+  .n35-media:nth-child(n+4){display:none}
+  .n35-name{font-size:.8rem}
 }
 .talk{
   font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
@@ -527,6 +548,12 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 .nudge-l{position:absolute;left:1.4rem;bottom:1.7rem;width:1px;height:46px;background:rgba(244,244,242,.2);overflow:hidden;z-index:3}
 .nudge-l::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:drip 2.1s var(--ease) infinite}
 .nudge-r{position:absolute;right:1.4rem;bottom:1.6rem;z-index:3;animation:npulse 2.8s ease-in-out infinite}
+/* the studio, kept quiet: one mono line in the corner, dim until hovered */
+a.studio-hint{color:rgba(244,244,242,.42);animation:none;text-decoration:none;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+.in a.studio-hint{transition:color .3s}
+a.studio-hint:hover{color:var(--ink)}
+a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spacing:.1em}
+@media (max-width:640px){ a.studio-hint{right:1.2rem;font-size:.55rem} }
 @keyframes npulse{0%,100%{opacity:.4}50%{opacity:1}}
 
 /* ---------- pitch (former hero type) ---------- */
@@ -1200,8 +1227,13 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 
 <!-- header -->
 <header id="hdr">
-  <button class="hnav mono" id="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035">Menu</button>
-  <a class="hnav mono" href="#contact">Contact</a>
+  <!-- Sep 8 call: Contact leaves the header (it lives in the menu now — last
+       row — and on the postcard). The Menu button is the dots: three points
+       that carry over the open overlay and read Close while it is down. -->
+  <button class="hnav mono mdots" id="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu">
+    <span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="md-txt">Menu</span>
+  </button>
 </header>
 
 <!-- ===== the menu: effect 035 ===============================================
@@ -1211,9 +1243,8 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
      stops, in page order, each carrying the true imagery of the section it
      points to - a table of contents, not an exit ramp. -->
 <div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
-  <button class="n35-close hnav mono" type="button">Close</button>
   <div class="n35-inner">
-    <p class="n35-label mono">The story, in order.</p>
+    <p class="n35-label mono">Everything that isn&rsquo;t on the first screen.</p>
     <ul>
       <li><a href="#culture">
         <span class="n35-name">For the culture</span>
@@ -1225,21 +1256,23 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
           <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
-      <li><a href="#verticals">
-        <span class="n35-name">Three verticals</span>
+      <li><a href="#wheel" data-action="wheel">
+        <span class="n35-name">The flywheel &middot; 35 cases</span>
         <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/practice/talent.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/practice/hospitality.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/ishant.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/slay.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/one8.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/sneakerfest.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/andreas.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="#voices">
         <span class="n35-name">In their words</span>
         <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/covers/one8.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/hardrock.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="#press">
@@ -1250,8 +1283,14 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
           <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
+      <li><a href="#film" data-action="film">
+        <span class="n35-name">In the building <sup class="beta">98 Studio &middot; beta</sup></span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
       <li><a href="#contact">
-        <span class="n35-name">Tell us what you&rsquo;re building.</span>
+        <span class="n35-name">Contact &mdash; tell us what you&rsquo;re building.</span>
         <span class="n35-medias" aria-hidden="true">
           <img class="n35-media" src="assets/hero.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/montage/m7.jpg" alt="" loading="lazy" decoding="async">
@@ -1260,6 +1299,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
         </span>
       </a></li>
     </ul>
+    <p class="n35-hint mono" aria-hidden="true">Scroll &darr; to go back to the film</p>
   </div>
 </div>
 
@@ -1278,15 +1318,20 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
     <img src="assets/98-graffiti.png" alt="Ninety-Eight — the mark, as found on the wall" class="mark98 rev">
   </div>
 
+  <!-- Sep 8 call: 98 Studio comes off the hero - a beta product next to the
+       two verticals diluted the argument. It survives as the quiet line in
+       the corner below (and as a menu row). The two verticals now land on
+       their own cards (#v-talent / #v-marketing); each will get its own page
+       later - see NOTES FOR UX.md. Hover: image today, film when a file
+       exists at data-video (assets/practice/talent.mp4 / marketing.mp4). -->
   <nav class="practice" id="practice" aria-label="The practice">
-    <span class="plabel mono rev" style="--d:.55s">Three verticals of scale</span>
-    <a class="rev" style="--d:.63s" href="#v-talent" data-img="assets/practice/talent.jpg" data-cap="Talent Management &amp; Personal Branding — exclusive contracts · editorial · individuals built into brands">Talent &amp; Branding</a>
-    <a class="rev" style="--d:.7s" href="#v-marketing" data-img="assets/practice/hospitality.jpg" data-cap="Marketing — launch · amplify · convert · retain · events">Marketing</a>
-    <a class="rev" style="--d:.77s" href="#v-madai" data-img="assets/98-studio.jpg" data-video="assets/98-studio.mp4" data-cap="98 Studio — our AI product, in beta">98 Studio<sup class="beta">Beta</sup></a>
+    <span class="plabel mono rev" style="--d:.55s">Two verticals of scale</span>
+    <a class="rev" style="--d:.63s" href="#v-talent" data-img="assets/practice/talent.jpg" data-video="assets/practice/talent.mp4" data-cap="Talent Management &amp; Personal Branding — exclusive contracts · editorial · individuals built into brands">Talent &amp; Branding</a>
+    <a class="rev" style="--d:.7s" href="#v-marketing" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — launch · amplify · convert · retain · events">Marketing</a>
   </nav>
 
   <span class="nudge-l" aria-hidden="true"></span>
-  <span class="nudge-r mono" aria-hidden="true">[ || ]</span>
+  <a class="nudge-r mono studio-hint rev" style="--d:.9s" href="#film" data-film="1" aria-label="98 Studio, in beta — watch the first film">Something in the building &middot; 98 Studio<sup>beta</sup></a>
 </section>
 
 
@@ -1335,9 +1380,9 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 <!-- ============ THE THREE VERTICALS ============ -->
 
 <section class="mwg031" id="verticals" aria-label="What we do — three verticals">
-  <div class="v-slide"><div class="v-wrap"><div class="v-card" style="--vc:#00933C;--vcbg:#092415"><div class="v-top"><h2>Talent &amp; Branding</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Management and representation — athletes, creators, founders — and the practice that sits with it: building individuals into brands worth betting on, plus brand identity for businesses.</p><div class="v-subs"><span>Exclusive contracts</span><span>Editorial &amp; podcasts</span><span>Deal flow</span><span>Personal brands</span><span>Brand identity</span></div><button class="v-go" type="button" data-case="ishant">Proof — the Ishant Sharma contract ↗</button></div><div class="v-fig"><p class="v-num">(01)</p><img src="assets/practice/talent.jpg" alt="" loading="lazy"></div></div></div></div></div>
-  <div class="v-slide"><div class="v-wrap"><div class="v-card" style="--vc:#EE352E;--vcbg:#341312"><div class="v-top"><h2>Marketing</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Five rooms named for what they get you, not for what we call them internally. Production sits inside Retain, because a shoot is a channel we own, not a service we sell apart from it.</p><div class="v-subs"><span>Launch — PR &amp; coverage</span><span>Amplify — creator marketing</span><span>Convert — SEO &amp; performance</span><span>Retain — production, social, design</span><span>Events — activations</span></div><button class="v-go" type="button" data-wheel="1">Open the flywheel ↗</button></div><div class="v-fig"><p class="v-num">(02)</p><img src="assets/practice/hospitality.jpg" alt="" loading="lazy"></div></div></div></div></div>
-  <div class="v-slide"><div class="v-wrap"><div class="v-card" style="--vc:#5278C2;--vcbg:#181F2D"><div class="v-top"><h2>98 Studio<sup class="beta">Beta</sup></h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Our AI product — an AI-first studio where token-based pricing meters human hours and compute hours apart, and the savings from every model advance pass to you, not us. In beta, in the building.</p><div class="v-subs"><span>AI-first</span><span>Token-based pricing</span><span>Human + compute — metered apart</span></div><button class="v-go" type="button" data-film="1">Watch the first film ↗</button></div><div class="v-fig"><p class="v-num">(03)</p><img src="assets/98-studio.jpg" alt="" loading="lazy"></div></div></div></div></div>
+  <div class="v-slide" id="v-talent"><div class="v-wrap"><div class="v-card" style="--vc:#00933C;--vcbg:#092415"><div class="v-top"><h2>Talent &amp; Branding</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Management and representation — athletes, creators, founders — and the practice that sits with it: building individuals into brands worth betting on, plus brand identity for businesses.</p><div class="v-subs"><span>Exclusive contracts</span><span>Editorial &amp; podcasts</span><span>Deal flow</span><span>Personal brands</span><span>Brand identity</span></div><button class="v-go" type="button" data-case="ishant">Proof — the Ishant Sharma contract ↗</button></div><div class="v-fig"><p class="v-num">(01)</p><img src="assets/practice/talent.jpg" alt="" loading="lazy"></div></div></div></div></div>
+  <div class="v-slide" id="v-marketing"><div class="v-wrap"><div class="v-card" style="--vc:#EE352E;--vcbg:#341312"><div class="v-top"><h2>Marketing</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Five rooms named for what they get you, not for what we call them internally. Production sits inside Retain, because a shoot is a channel we own, not a service we sell apart from it.</p><div class="v-subs"><span>Launch — PR &amp; coverage</span><span>Amplify — creator marketing</span><span>Convert — SEO &amp; performance</span><span>Retain — production, social, design</span><span>Events — activations</span></div><button class="v-go" type="button" data-wheel="1">Open the flywheel ↗</button></div><div class="v-fig"><p class="v-num">(02)</p><img src="assets/practice/hospitality.jpg" alt="" loading="lazy"></div></div></div></div></div>
+  <div class="v-slide" id="v-madai"><div class="v-wrap"><div class="v-card" style="--vc:#5278C2;--vcbg:#181F2D"><div class="v-top"><h2>98 Studio<sup class="beta">Beta</sup></h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Our AI product — an AI-first studio where token-based pricing meters human hours and compute hours apart, and the savings from every model advance pass to you, not us. In beta, in the building.</p><div class="v-subs"><span>AI-first</span><span>Token-based pricing</span><span>Human + compute — metered apart</span></div><button class="v-go" type="button" data-film="1">Watch the first film ↗</button></div><div class="v-fig"><p class="v-num">(03)</p><img src="assets/98-studio.jpg" alt="" loading="lazy"></div></div></div></div></div>
 </section>
 
 <!-- ============ TICKER ============ -->
@@ -1616,7 +1661,16 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   plinks.forEach(function(a){
     a.addEventListener('pointerenter', function(e){ if(e.pointerType!=='touch') showPreview(a); });
     a.addEventListener('click', function(e){
-      if (matchMedia('(hover:none)').matches && !a.classList.contains('on')){ e.preventDefault(); showPreview(a); } /* touch: 1st tap previews, 2nd navigates */
+      if (matchMedia('(hover:none)').matches && !a.classList.contains('on')){ e.preventDefault(); showPreview(a); return; } /* touch: 1st tap previews, 2nd navigates */
+      /* Sep 8: the words land on their own vertical card. A jump, not a
+         glide - a glide would replay the whole culture pin on the way down.
+         (The hrefs pointed at ids that did not exist before this.) */
+      var href = a.getAttribute('href');
+      if (href && href.charAt(0)==='#' && document.querySelector(href)){
+        e.preventDefault(); hidePreview();
+        if (typeof window.__jumpTo==='function') window.__jumpTo(href);
+        else document.querySelector(href).scrollIntoView();
+      }
     });
   });
   document.getElementById('practice').addEventListener('pointerleave', hidePreview);
@@ -1831,10 +1885,21 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   document.getElementById('fv-close').addEventListener('click', closeFilm);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && fv.classList.contains('open')) closeFilm(); });
   /* hover: play the film silently behind the landing */
+  /* Sep 8: every vertical carries its own film on hover. The src swaps per
+     word (it used to load once and stick), and a file that is not there yet
+     (404 -> error) simply leaves the still image up - so the hooks can ship
+     before the cuts exist. Missing files are remembered so they are not
+     re-requested on every hover. */
+  var missing = {};
+  if (pvid){ pvid.addEventListener('error', function(){ var src=pvid.getAttribute('src'); if(src) missing[src]=true; preview.classList.remove('vid'); }); }
   document.querySelectorAll('.practice a[data-video]').forEach(function(a){
     a.addEventListener('pointerenter', function(e){
       if (e.pointerType === 'touch') return;
-      if (pvid){ if (!pvid.getAttribute('src')) pvid.src = a.dataset.video; preview.classList.add('vid'); try{ pvid.play(); }catch(err){} }
+      var src = a.dataset.video;
+      if (!pvid || !src || missing[src]) return;
+      if (pvid.getAttribute('src') !== src){ pvid.src = src; try{ pvid.load(); }catch(err){} }
+      preview.classList.add('vid');
+      var pr = pvid.play(); if (pr && pr.catch) pr.catch(function(){});
     });
     a.addEventListener('pointerleave', function(){ if (pvid){ preview.classList.remove('vid'); try{ pvid.pause(); }catch(err){} } });
   });
@@ -2582,8 +2647,10 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
     var TRAVEL=Math.min(colH+28, vh*1.6);
     master.fromTo(foot,{y:0},{y:-TRAVEL,ease:'back.out(1.2)',duration:POP},START);
 
-    /* the header's Contact lands on the settled screen */
+    /* Contact lands on the settled screen: the drum's own end, exposed for
+       the menu (Sep 8: the header link is gone; the menu row jumps here) */
     var st=master.scrollTrigger;
+    window.__contactY=function(){ return st.end-4; };
     [].forEach.call(document.querySelectorAll('a[href="#contact"]'),function(a2){
       a2.addEventListener('click',function(e){
         e.preventDefault();
@@ -2599,18 +2666,27 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
   else{ start(); }
 })();
 
-/* ===== the menu: effect 035 ================================================
+/* ===== the menu: effect 035, hung as a curtain ============================
    The reference's category list, hired as the table of contents. Numbers
    kept exactly: 0.04s random stagger, 0.4s power4.out rise, previous row
    reversed at 3x speed, rows tweened between 45px and 122px of flex basis.
-   Landing is a jump under the closing fade - an animated scroll would
-   replay every pinned scene between here and there. */
+   Sep 8 call, three changes on top:
+     1. It drops from the top edge (CSS transform) on solid carbon.
+     2. While it is down, a scroll gesture lifts it away again - the curtain
+        rises with the wheel/finger and fades as it goes, the hero film
+        showing through underneath. Past ~55% of a screen it lets go and the
+        page is exactly where it was (usually the first screen). Scroll back
+        up and it settles again. No page scroll happens while it is down.
+     3. The header's dots button carries over the overlay and reads Close.
+   Landing on a row is still a jump under the closing fade - an animated
+   scroll would replay every pinned scene between here and there. */
 (function(){
   var root=document.getElementById('nav035');
   var btn=document.getElementById('menu-btn');
+  var hdr=document.getElementById('hdr');
   if(!root||!btn) return;
   var items=root.querySelectorAll('ul li');
-  var closeBtn=root.querySelector('.n35-close');
+  var txt=btn.querySelector('.md-txt');
   var fx=(typeof gsap!=='undefined')&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!fx) root.classList.add('nofx');
 
@@ -2638,13 +2714,61 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
     });
   }
 
+  /* ---- the curtain's scroll-to-dismiss ---- */
+  var lift=0;                 /* 0 = fully down, 1 = gone */
+  var RUN=function(){ return window.innerHeight*0.5; };
+  var settleT=null;
+  function paint(){
+    root.style.transform='translate3d(0,'+(-lift*100)+'%,0)';
+    root.style.opacity=String(1-lift*0.85);
+    /* the dots step aside while rows pass under them */
+    btn.style.opacity=String(Math.max(0,1-lift*2.5));
+  }
+  function resetPaint(){ root.style.transform=''; root.style.opacity=''; btn.style.opacity=''; root.classList.remove('dragging'); }
+  function settle(){
+    /* the gesture stopped: past halfway it finishes leaving, short of it
+       the curtain eases back down */
+    if(lift>0.5){ closeMenu(true); return; }
+    root.classList.remove('dragging');
+    lift=0; root.style.transform=''; root.style.opacity=''; btn.style.opacity='';
+  }
+  function nudge(dy){
+    if(!isOpen) return;
+    if(dy<=0&&lift<=0) return;
+    clearTimeout(settleT);
+    root.classList.add('dragging');
+    lift=Math.max(0,Math.min(1,lift+dy/RUN()));
+    paint();
+    if(lift>=1){ closeMenu(true); return; }
+    settleT=setTimeout(settle,420);
+  }
+  /* on the window, not the curtain: once it has risen, the pointer is over
+     the film beneath it and the curtain would never hear the next notch */
+  window.addEventListener('wheel',function(e){ if(!isOpen) return; e.preventDefault(); nudge(e.deltaY); },{passive:false});
+  var ty=null;
+  window.addEventListener('touchstart',function(e){ if(isOpen) ty=e.touches[0].clientY; },{passive:true});
+  window.addEventListener('touchmove',function(e){
+    if(!isOpen||ty===null) return;
+    var y=e.touches[0].clientY; var dy=ty-y; ty=y;
+    if(dy>0||lift>0){ e.preventDefault(); nudge(dy*1.4); }
+  },{passive:false});
+  window.addEventListener('touchend',function(){ ty=null; },{passive:true});
+  document.addEventListener('keydown',function(e){
+    if(!isOpen) return;
+    if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); closeMenu(); }
+  });
+
   function openMenu(){
     if(isOpen) return; isOpen=true;
+    clearTimeout(settleT); lift=0; resetPaint();
     document.body.style.overflow='hidden';
     if(window.__scrollLock) window.__scrollLock(true);
     root.classList.add('open');
     root.setAttribute('aria-hidden','false');
     btn.setAttribute('aria-expanded','true');
+    btn.setAttribute('aria-label','Close menu');
+    if(txt) txt.textContent='Close';
+    if(hdr) hdr.classList.add('menu-open');
     if(fx){
       /* the reference's load moment, replayed per open: first row expanded,
          its media already rising, everything else shut */
@@ -2654,21 +2778,37 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       gsap.set(items[0],{flex:'1 1 '+expanded()+'px'});
       tls[0].timeScale(1).play();
     }
-    if(closeBtn) closeBtn.focus();
+    btn.focus();
   }
-  function closeMenu(){
+  function closeMenu(viaScroll){
     if(!isOpen) return; isOpen=false;
+    clearTimeout(settleT);
+    if(viaScroll){
+      /* the gesture already carried it off - let the CSS transition take
+         over from wherever the drag left it, no snap */
+      root.classList.remove('dragging');
+      root.style.transform=''; root.style.opacity=''; btn.style.opacity='';
+    } else { resetPaint(); }
+    lift=0;
     root.classList.remove('open');
     root.setAttribute('aria-hidden','true');
     btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-label','Menu');
+    if(txt) txt.textContent='Menu';
+    if(hdr) hdr.classList.remove('menu-open');
     document.body.style.overflow='';
     if(window.__scrollLock) window.__scrollLock(false);
   }
+  window.__closeMenu=closeMenu;
 
   function jumpTo(href){
     var y;
     if(href==='#contact'){
-      y=(window.ScrollTrigger?ScrollTrigger.maxScroll(window):document.documentElement.scrollHeight-window.innerHeight);
+      /* land inside the drum's settled screen (its trigger end), not on the
+         document's raw bottom - the two differ once the pin's spacer is
+         counted, which is what "Contact scrolls too far" was */
+      y=(typeof window.__contactY==='function')?window.__contactY():null;
+      if(y==null) y=(window.ScrollTrigger?ScrollTrigger.maxScroll(window):document.documentElement.scrollHeight-window.innerHeight);
     }else{
       var el=document.querySelector(href); if(!el) return;
       var box=el, p=el.parentElement;
@@ -2682,6 +2822,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       window.__lenis.scrollTo(y,{immediate:true,force:true});
     } else { window.scrollTo(0,y); }
   }
+  window.__jumpTo=jumpTo;
 
   [].forEach.call(root.querySelectorAll('ul li a'),function(a){
     a.addEventListener('click',function(e){
@@ -2689,14 +2830,24 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
       /* the drum binds its own glide to a[href="#contact"] later; this
          listener registered first, and the menu jumps instead */
       e.stopImmediatePropagation();
-      var href=a.getAttribute('href');
+      var href=a.getAttribute('href'), act=a.getAttribute('data-action');
       closeMenu();
+      if(act==='wheel'){
+        /* the flywheel has one door - the Marketing card's button */
+        var door=document.querySelector('[data-wheel]');
+        if(door) setTimeout(function(){ door.click(); },80);
+        return;
+      }
+      if(act==='film'){
+        var f=document.querySelector('[data-film]');
+        if(f) setTimeout(function(){ f.click(); },80);
+        return;
+      }
       jumpTo(href);
     });
   });
 
-  btn.addEventListener('click',openMenu);
-  closeBtn.addEventListener('click',closeMenu);
+  btn.addEventListener('click',function(){ if(isOpen) closeMenu(); else openMenu(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen) closeMenu(); });
 })();
 
