@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Talent &amp; Branding — Ninety-Eight</title>
+<meta name="description" content="We don't manage talent. We run a brand. Ninety-Eight's talent representation and personal-branding practice — and the same operating system applied to businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   TALENT & BRANDING — vertical 01's own page (v3.29, Sep 2026)
+   Same house as index.html: carbon, Archivo / Instrument Serif / Space Mono,
+   one red, the green of the talent card. One idea per viewport.
+   The mechanic: a trading card of the talent pinned on the left, and the
+   journey walked chapter by chapter on the right — the card's stat rows and
+   its FACT line change as each chapter arrives.
+   ========================================================================= */
+:root{
+  --bg:#0B0B0C; --bg2:#121214; --ink:#F4F4F2; --dim:#8E8E88;
+  --line:rgba(244,244,242,.13); --red:#EE352E; --green:#00933C; --yellow:#FCCC0A;
+  --pad:clamp(1.25rem,4vw,4rem); --ease:cubic-bezier(.16,1,.3,1);
+  --card:#101113; --cardline:rgba(244,244,242,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
+.mono{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.mono b{color:var(--ink);font-weight:400}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.wrap{padding:0 var(--pad)}
+.rev{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rev.in,.in .rev{opacity:1;transform:none}
+
+/* ---------- header ---------- */
+#hdr{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem var(--pad);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+#hdr.scrolled{background:rgba(11,11,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+#hdr a{color:var(--ink);transition:color .3s}
+#hdr a:hover{color:var(--red)}
+#hdr .home{display:inline-flex;align-items:center;gap:.7rem}
+#hdr .home img{height:22px;width:auto;opacity:.92}
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--green);width:0;z-index:101}
+
+/* ---------- hero ---------- */
+#top{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--pad) clamp(3rem,8vh,6rem);overflow:hidden;background:var(--bg)}
+#top .bg{position:absolute;inset:0;z-index:0}
+#top .bg img,#top .bg video{width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.85)}
+#top .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.25) 0%,rgba(11,11,12,.55) 55%,var(--bg) 100%)}
+#top .in-hero{position:relative;z-index:2;max-width:1100px}
+.kicker{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem}
+.kicker i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green)}
+h1.thesis{font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.012em;line-height:.92;font-size:clamp(2.8rem,8.4vw,8.6rem)}
+h1.thesis em{font-style:normal;color:var(--green)}
+#top .lede{margin-top:2rem;max-width:44rem;font-size:clamp(1.05rem,1.55vw,1.4rem);line-height:1.4;color:rgba(244,244,242,.82)}
+#top .nudge{position:absolute;left:var(--pad);bottom:1.6rem;z-index:2;width:1px;height:46px;background:rgba(244,244,242,.2);overflow:hidden}
+#top .nudge::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:drip 2.1s var(--ease) infinite}
+@keyframes drip{0%{top:-100%}60%,100%{top:100%}}
+
+/* ---------- section furniture ---------- */
+.sec{position:relative;padding:clamp(5rem,14vh,10rem) 0}
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line);margin-bottom:clamp(2.5rem,6vh,4.5rem)}
+.sec-head h2{font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;font-size:clamp(2rem,5.2vw,4.8rem)}
+.sec-head h2 small{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:.42em;color:var(--dim);margin-top:.5rem}
+
+/* ---------- the walk: card + chapters ---------- */
+.walk{display:grid;grid-template-columns:minmax(300px,38%) 1fr;gap:clamp(2rem,6vw,7rem);align-items:start}
+.card-col{position:sticky;top:clamp(4.5rem,11vh,7rem);align-self:start}
+.chapters{padding-top:2vh}
+
+/* the card — our own object: carbon stock, a colour band down the spine,
+   the name set up the spine like a jersey number, the photograph, then the
+   stat ladder and the FACT line. Rows are what the chapters play on. */
+.tcard{--band:var(--green);position:relative;width:min(100%,400px);aspect-ratio:63/88;border-radius:18px;background:var(--card);border:1px solid var(--cardline);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.04) inset;transform-style:preserve-3d;will-change:transform;margin:0 auto}
+.tcard .band{position:absolute;left:0;top:0;bottom:0;width:20%;background:linear-gradient(180deg,var(--band) 0%,color-mix(in srgb,var(--band) 55%,#000) 100%);z-index:2}
+.tcard .band .mark{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:44%;opacity:.95}
+.tcard .band .spine{position:absolute;left:50%;bottom:8%;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;font-weight:800;font-stretch:112%;text-transform:uppercase;letter-spacing:.02em;line-height:.88;font-size:clamp(1.5rem,2.6vw,2.35rem);color:#fff;white-space:nowrap}
+.tcard .band .spine small{display:block;font-weight:500;font-size:.5em;letter-spacing:.14em;opacity:.9;margin-bottom:.15em}
+.tcard .photo{position:absolute;left:20%;top:0;right:0;height:60%;overflow:hidden;background:#1a1b1e}
+.tcard .photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.02)}
+.tcard .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,var(--card) 100%)}
+.tcard .photo .mono-photo{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-stretch:112%;font-size:6rem;color:rgba(244,244,242,.08)}
+.tcard .tag{position:absolute;left:23%;top:12px;z-index:3;font-size:.58rem;color:rgba(244,244,242,.85);background:rgba(11,11,12,.55);padding:.35em .7em;border-radius:99px;backdrop-filter:blur(6px)}
+.tcard .ladder{position:absolute;left:20%;right:0;top:60%;bottom:0;padding:10px 12px 12px 14px;display:flex;flex-direction:column;gap:5px;z-index:3}
+.tcard .row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.42em .8em;border-radius:6px;background:rgba(244,244,242,.05);border:1px solid rgba(244,244,242,.06);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,244,242,.72);transform-origin:left center}
+.tcard .row b{font-family:'Archivo',sans-serif;font-weight:800;font-stretch:112%;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink);white-space:nowrap}
+.tcard .row.hot{background:color-mix(in srgb,var(--band) 22%,transparent);border-color:color-mix(in srgb,var(--band) 45%,transparent);color:var(--ink)}
+.tcard .row.hot b{color:#fff}
+.tcard .fact{margin-top:auto;padding-top:6px;font-family:'Space Mono',monospace;font-size:.56rem;line-height:1.45;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,244,242,.6)}
+.tcard .fact b{color:var(--band);font-weight:700}
+.tcard .nick{position:absolute;right:0;top:0;height:60%;width:34px;z-index:4;display:flex;align-items:flex-start;justify-content:center;padding-top:14px}
+.tcard .nick span{writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,244,242,.85);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.tcard .big{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:.5rem;margin-top:2px}
+.tcard .big div{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem}
+.tcard .big div:last-child{align-items:flex-end;text-align:right}
+.tcard .big b{font-weight:800;font-stretch:112%;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:.9;letter-spacing:-.01em;color:var(--ink)}
+.tcard .big b.hot{color:var(--band)}
+.tcard .big span{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,244,242,.65)}
+.tcard .big .no{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.14em;color:rgba(244,244,242,.45);padding-bottom:.35rem}
+.tcard .gloss{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(60% 40% at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.09),rgba(255,255,255,0) 70%);mix-blend-mode:screen}
+.card-col .under{margin-top:1.2rem;text-align:center}
+
+/* chapters */
+.chapter{min-height:78vh;display:flex;flex-direction:column;justify-content:center;padding:6vh 0;border-top:1px solid var(--line)}
+.chapter:first-child{border-top:0;min-height:60vh}
+.chapter .num{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.chapter .num i{display:inline-block;height:1px;width:34px;background:var(--dim)}
+.chapter h3{font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:.96;font-size:clamp(1.8rem,3.8vw,3.6rem);margin-bottom:1.3rem}
+.chapter h3 em{font-style:normal;color:var(--green)}
+.chapter p{max-width:36rem;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.5;color:rgba(244,244,242,.8);margin-bottom:.9rem}
+.chapter p strong{color:var(--ink);font-weight:600}
+.chapter p em{font-style:italic;font-family:'Instrument Serif',Georgia,serif;font-size:1.12em;color:var(--ink)}
+.chapter .numbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:1.4rem 0 1.2rem;max-width:36rem}
+.chapter .numbers div{background:var(--bg);padding:1rem 1.1rem}
+.chapter .numbers b{display:block;font-weight:800;font-stretch:112%;font-size:clamp(1.6rem,2.8vw,2.6rem);line-height:1;letter-spacing:-.01em}
+.chapter .numbers span{display:block;margin-top:.35rem}
+.chapter .numbers i{display:block;font-style:normal;color:var(--green);margin-top:.15rem}
+.pull{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.6rem,3.2vw,3rem);line-height:1.15;max-width:30ch;color:var(--ink)}
+.pull cite{display:block;font-style:normal;margin-top:1.2rem}
+.chapter .bridge{display:inline-flex;align-items:center;gap:.6rem;margin-top:.6rem;padding:.7em 1.1em;border:1px solid var(--line);border-radius:99px;color:var(--ink);transition:.3s}
+.chapter .bridge:hover{border-color:var(--ink)}
+
+/* ---------- the practice: four beats ---------- */
+.beats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.beat{background:var(--bg);padding:clamp(1.4rem,2.4vw,2.4rem);min-height:22rem;display:flex;flex-direction:column}
+.beat .n{color:var(--green)}
+.beat h4{font-weight:750;font-stretch:112%;text-transform:uppercase;font-size:clamp(1.2rem,1.9vw,1.7rem);line-height:1;margin:1.4rem 0 1rem}
+.beat p{color:rgba(244,244,242,.78);font-size:.98rem}
+.beat .who{margin-top:auto;padding-top:1.4rem}
+.roster-line{margin-top:1.4rem}
+.roster-line span{color:var(--ink)}
+.roster-line i{color:var(--dim);font-style:normal;margin:0 .5em}
+
+/* ---------- act two: branding for businesses ---------- */
+#business{background:var(--bg2)}
+.acttwo{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:start}
+.acttwo .t{font-weight:750;font-stretch:112%;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;font-size:clamp(2.2rem,5.4vw,5.4rem)}
+.acttwo .t em{font-style:normal;color:var(--red)}
+.acttwo p{font-size:clamp(1rem,1.3vw,1.25rem);line-height:1.5;color:rgba(244,244,242,.8);margin-bottom:1rem;max-width:36rem}
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3.5rem}
+.case{background:var(--bg2);padding:clamp(1.2rem,2vw,2rem);min-height:20rem;display:flex;flex-direction:column;transition:background .3s}
+.case:hover{background:#18181b}
+.case .cv{aspect-ratio:4/3;background:#1a1b1e;overflow:hidden;margin-bottom:1.2rem;display:grid;place-items:center}
+.case .cv img{width:100%;height:100%;object-fit:cover}
+.case .cv span{font-weight:800;font-stretch:112%;font-size:2.4rem;color:rgba(244,244,242,.12)}
+.case h4{font-weight:750;font-stretch:112%;text-transform:uppercase;font-size:1.25rem;line-height:1;margin:.5rem 0 .6rem}
+.case p{font-size:.95rem;color:rgba(244,244,242,.75)}
+.case .go{margin-top:auto;padding-top:1.2rem;color:var(--red)}
+.placeholder{margin-top:1.4rem;padding:1rem 1.2rem;border:1px dashed rgba(252,204,10,.5);color:var(--yellow);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.6}
+
+/* ---------- ending ---------- */
+#ask{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(5rem,14vh,10rem) var(--pad)}
+#ask h2{font-weight:750;font-stretch:112%;text-transform:uppercase;line-height:.92;letter-spacing:-.012em;font-size:clamp(2.6rem,7.4vw,7.6rem);max-width:12ch}
+#ask h2 i{font-style:normal;color:var(--red)}
+#ask .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:2.4rem}
+.btn-y{display:inline-flex;align-items:center;gap:.6rem;background:var(--yellow);color:#111;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;padding:1em 1.6em;border-radius:99px;transition:transform .3s var(--ease),background .3s}
+.btn-y:hover{transform:translateY(-2px);background:#ffd83a}
+.pill{display:inline-flex;align-items:center;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;padding:1em 1.4em;border-radius:99px;border:1px solid var(--line);color:var(--ink);transition:.3s}
+.pill:hover{border-color:var(--ink)}
+footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .beats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .acttwo{grid-template-columns:1fr}
+  .cases{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .walk{grid-template-columns:1fr;gap:0}
+  .card-col{position:sticky;top:3.4rem;z-index:20;background:linear-gradient(180deg,var(--bg) 82%,rgba(11,11,12,0));padding:.6rem 0 1.2rem}
+  .tcard{width:100%;aspect-ratio:auto;height:min(38vh,280px);border-radius:14px}
+  #hdr .home b{display:none}
+  #hdr a:last-child b{font-size:.6rem;letter-spacing:.12em}
+  #hdr{padding:.7rem var(--pad)}
+  .tcard .band{width:14%}
+  .tcard .band .spine{font-size:1rem}
+  .tcard .band .mark{width:60%}
+  .tcard .photo{left:14%;right:52%;height:100%}
+  .tcard .photo::after{background:linear-gradient(90deg,rgba(0,0,0,0) 60%,var(--card) 100%)}
+  .tcard .ladder{left:48%;top:0;padding:10px 10px 10px 6px;gap:4px;justify-content:center}
+  .tcard .row{padding:.32em .6em;font-size:.52rem}
+  .tcard .row b{font-size:.9rem}
+  .tcard .fact{margin-top:.4rem;font-size:.5rem}
+  .tcard .tag{left:16%}
+  .tcard .nick{display:none}
+  .tcard .big b{font-size:1.2rem}
+  .card-col .under{display:none}
+  .chapter{min-height:0;padding:3.5rem 0}
+  .chapters{padding-top:1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .rev{opacity:1!important;transform:none!important}
+  *{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header id="hdr">
+  <a class="home mono" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""><b>Ninety-Eight</b></a>
+  <a class="mono" href="index.html#contact"><b>Tell us what you&rsquo;re building &rarr;</b></a>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="in">
+  <div class="bg" aria-hidden="true"><img src="assets/ishant-hero.jpg" alt=""></div>
+  <div class="in-hero">
+    <p class="kicker mono rev"><i></i>Vertical 01 &middot; Talent &amp; Branding</p>
+    <h1 class="thesis rev" style="--d:.1s">We don&rsquo;t manage talent.<br>We <em>run a brand.</em></h1>
+    <p class="lede rev" style="--d:.25s">Most agencies sell calendar holds, brand briefs and an inbox between the athlete and the sponsor. We sell the operating system underneath: a personal brand designed for revenue, with deal flow, editorial and equity built into the model. Then we apply the same system to businesses.</p>
+  </div>
+  <span class="nudge" aria-hidden="true"></span>
+</section>
+
+<!-- ============ THE WALK — ISHANT ============ -->
+<section class="sec wrap" id="ishant">
+  <div class="sec-head rev">
+    <h2>Proof, walked.<small>Ishant Sharma · exclusive contract · 2022 &rarr;</small></h2>
+    <p class="mono">ISH&mdash;2020 &middot; Talent &middot; Personal brand</p>
+  </div>
+
+  <div class="walk">
+    <div class="card-col">
+      <div class="tcard" id="card-ishant" data-band="#00933C">
+        <div class="band">
+          <img class="mark" src="assets/98-graffiti.png" alt="">
+          <div class="spine"><small>India &middot; fast bowler</small>Ishant<br>Sharma</div>
+        </div>
+        <div class="photo"><img src="assets/ishant-hero.jpg" alt="Ishant Sharma"></div>
+        <span class="tag mono" data-tag>Career</span>
+        <div class="nick" aria-hidden="true"><span>Tez Express</span></div>
+        <div class="ladder" data-ladder>
+          <div class="row"><span>India career</span><b>13 yrs</b></div>
+          <div class="row"><span>Brand deals</span><b>11</b></div>
+          <div class="big" data-big>
+            <div><b>105</b><span>Tests</span></div>
+            <p class="no">No. 001</p>
+            <div><b>311</b><span>Wickets</span></div>
+          </div>
+          <p class="fact" data-fact><b>Fact:</b> India&rsquo;s most-capped fast bowler. Already a name before we arrived.</p>
+        </div>
+        <div class="gloss"></div>
+      </div>
+      <p class="under mono">The card keeps score as you read &darr;</p>
+    </div>
+
+    <div class="chapters" data-chapters>
+
+      <article class="chapter" data-tag="The name"
+        data-stats='[["Tests","105"],["Wickets","311"],["India career","13 yrs"],["Brand deals","11"]]'
+        data-fact="India&rsquo;s most-capped fast bowler. Already a name before we arrived.">
+        <p class="num mono"><i></i>01 &middot; Before us</p>
+        <h3>Already a name. <em>Not yet a brand.</em></h3>
+        <p>105 Tests, 311 wickets, a thirteen-year India career. What was missing wasn&rsquo;t fame. It was the mechanism to <em>monetise that name without diluting it.</em></p>
+        <p>A talented bowler taking sponsor calls is not a property. It&rsquo;s an inbox.</p>
+      </article>
+
+      <article class="chapter" data-tag="The signing"
+        data-stats='[["Signed","2022"],["Agency of record","Sole"],["Scope","Deals · social · comms"],["Posture","A property"]]'
+        data-fact="Exclusive representation, 2022. From &ldquo;what&rsquo;s the brief&rdquo; to &ldquo;what is the brand worth.&rdquo;">
+        <p class="num mono"><i></i>02 &middot; 2022</p>
+        <h3>The signing.</h3>
+        <p>Exclusive representation, won in 2022 &mdash; sole agency-of-record for brand deals, social media and personal communications.</p>
+        <p>The shift in posture: from <strong>what&rsquo;s the brief</strong> to <strong>what does the brand sound like, what is it worth, what kind of partner do we want.</strong> An ownable property with a managed brand surface.</p>
+      </article>
+
+      <article class="chapter" data-tag="The numbers"
+        data-stats='[["Reels views","23.7M"],["Instagram likes","7.5M"],["Comments","8,868 · +85%"],["Twitter impr.","4.75M"]]'
+        data-fact="Year over year, same audience. 58 posts in &rsquo;22, 61 in &rsquo;23 &mdash; better posts, not more posts.">
+        <p class="num mono"><i></i>03 &middot; 2022 &rarr; 2023</p>
+        <h3>Better posts. <em>Not more posts.</em></h3>
+        <div class="numbers">
+          <div><b>7.5M</b><span class="mono">Instagram likes</span><i class="mono">+140% &middot; 2.4&times;</i></div>
+          <div><b>23.7M</b><span class="mono">Reels views</span><i class="mono">+156% &middot; 2.56&times;</i></div>
+          <div><b>8,868</b><span class="mono">Comments</span><i class="mono">+85% &middot; 1.85&times;</i></div>
+          <div><b>4.75M</b><span class="mono">Twitter impressions</span><i class="mono">70 tweets, up from 55</i></div>
+        </div>
+        <p>Publishing volume was nearly flat. The lift came from format choices, collab structure and timing &mdash; not from working the channel harder.</p>
+      </article>
+
+      <article class="chapter" data-tag="RuPay × IPL"
+        data-stats='[["Films","5"],["IPL","2022"],["Campaign","RuPay · Be On-The-Go"],["Our role","The talent"]]'
+        data-fact="NPCI&rsquo;s first-ever IPL campaign, April 2022. Howzzaaaatt. DDB Mudra on creative; we ran the talent.">
+        <p class="num mono"><i></i>04 &middot; April 2022</p>
+        <h3>The face of <em>RuPay &times; IPL.</em></h3>
+        <p>NPCI&rsquo;s first-ever IPL campaign &mdash; <em>RuPay. Be On-The-Go</em> &mdash; with Ishant as the lead face. Five films across TV, OTT, digital and social; the <em>Howzzaaaatt!</em> gag positioning RuPay&rsquo;s payment speed against his bowling.</p>
+        <p>Harsha Bhogle and Virender Sehwag amplified on Twitter. DDB Mudra handled the creative. We ran the talent &mdash; national scale, the most-watched cricket window of the year, our talent at the centre. Covered by <strong>ET BrandEquity</strong>.</p>
+      </article>
+
+      <article class="chapter" data-tag="Spinny"
+        data-stats='[["Reels lift","+14M"],["Weeks","Multi"],["Partner","Spinny"],["Format","Archival reels"]]'
+        data-fact="We didn&rsquo;t sell a slot. We rented the channel. One format carried most of the year&rsquo;s reels lift.">
+        <p class="num mono"><i></i>05 &middot; The thesis in action</p>
+        <h3>Rent the channel. <em>Don&rsquo;t sell the slot.</em></h3>
+        <p>Instead of selling sponsorship slots one-off, Spinny ran a multi-week placement programme through Ishant&rsquo;s handles, anchored on archival cricket reels &mdash; the format the metrics team had flagged as the year&rsquo;s highest-performing.</p>
+        <p>That single format is most of the +14M jump in reels views. For Spinny: a sustained share-of-voice in cricket-fan circles that no single-window IPL slot could buy.</p>
+      </article>
+
+      <article class="chapter" data-tag="CRED"
+        data-stats='[["Sponsor","CRED"],["Brands in window","4"],["Room","Streetwear · Mainstreet"],["In window","CRED · RuPay · WinZO · Spinny"]]'
+        data-fact="A 35-year-old Test bowler owning a Gen-Z signal, credibly. We engineered the room; CRED rode along.">
+        <p class="num mono"><i></i>06 &middot; Mainstreet &times; CRED</p>
+        <h3>Sneakers <em>as content.</em></h3>
+        <p>A streetwear spree at Mainstreet Marketplace, sponsored by CRED, turned into a piece of content: Ishant on the floor, picking a haul, talking sneaker stories on camera. A brand placement that didn&rsquo;t read as one.</p>
+        <p>Streetwear is a Gen-Z signal a Test bowler doesn&rsquo;t usually own. We built the room where he could own it credibly &mdash; CRED as the sponsor of the visit, not the subject of the post.</p>
+      </article>
+
+      <article class="chapter" data-tag="The bridge"
+        data-stats='[["Bridges","3"],["2023 lift","No. 1 driver"],["With","Ranveer · Sanyam · Rajesh"],["Mechanic","Engineered cross-over"]]'
+        data-fact="The 2023 report named the cross-talent collaborations the primary driver of the year&rsquo;s engagement lift.">
+        <p class="num mono"><i></i>07 &middot; Ranveer &times; Ishant</p>
+        <h3>Two rooms. <em>One bridge.</em></h3>
+        <p>Cross-talent collaborations between cinema&rsquo;s biggest livewire and cricket&rsquo;s quiet veteran &mdash; engineered, not coincidental. Joint content windows, cross-posted reels, brand-aligned moments.</p>
+        <p>The bridge work extended to <strong>Sanyam Sharma</strong> and <strong>Rajesh Yadav</strong> &mdash; separate creator audiences, the same engineered cross-over. The thesis is the bridge, not the host.</p>
+      </article>
+
+      <article class="chapter" data-tag="Partners"
+        data-stats='[["Partners","RD · ABS"],["Horizon","Multi-year"],["RD Accessories","Deal architecture"],["Asian Business School","Campus, long-form"]]'
+        data-fact="Long horizons over high spreads. The deal you keep coming back to.">
+        <p class="num mono"><i></i>08 &middot; The long deals</p>
+        <h3>Business partner, <em>not vendor.</em></h3>
+        <p><strong>RD Accessories</strong> &mdash; a homegrown D2C brand that needed structure, not stardom. We built the deal architecture: rights, licensing, content windows, reporting cadence. Then we shipped the campaign.</p>
+        <p><strong>Asian Business School</strong> &mdash; the partnership that didn&rsquo;t run on a quarter. Multi-year campus engagements; content for ABS that reads as content for Ishant, not as paid placement.</p>
+      </article>
+
+      <article class="chapter" data-tag="Trust"
+        data-stats='[["Metric","Trust"],["Brand handles","0"],["The news","Ours to break"],["Voice","His, not ours"]]'
+        data-fact="Personal milestones are where agency relationships break. We treated the moment as his, not ours. The numbers came anyway.">
+        <p class="num mono"><i></i>09 &middot; The daughter announcement</p>
+        <h3>The metric was <em>trust.</em></h3>
+        <p>We were the ones to break the news &mdash; not because we wanted the engagement, because we&rsquo;d earned the trust to. The post went out on his timeline, in his voice, with no brand handle in the caption.</p>
+        <p>The documentary window came the same way: a long-form film on cricket, identity and the modern Indian player. Coverage a competitor can&rsquo;t sponsor their way into.</p>
+      </article>
+
+      <article class="chapter" data-tag="The quote"
+        data-stats='[["Tests","105"],["Wickets","311"],["Brand deals","11"],["Agency of record","Ninety-Eight"]]'
+        data-fact="Talent is the train. Personal brand is the timetable. We ran the timetable.">
+        <p class="num mono"><i></i>10 &middot; In his words</p>
+        <blockquote class="pull">&ldquo;They didn&rsquo;t manage my calendar. They built me as a product.&rdquo;<cite class="mono">Ishant Sharma</cite></blockquote>
+        <p style="margin-top:1.6rem"><a class="bridge mono" href="index.html#case-ishant"><b>Open the full case file</b> &rarr;</a></p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRATIMA ============ -->
+<section class="sec wrap" id="pratima">
+  <div class="sec-head rev">
+    <h2>Where there was silence.<small>Pratima Singh &middot; captain, Indian basketball</small></h2>
+    <p class="mono">PSG&mdash;2021 &middot; Talent &middot; Sports</p>
+  </div>
+  <div class="walk">
+    <div class="card-col">
+      <div class="tcard" id="card-pratima" data-band="#EE352E" style="--band:#EE352E">
+        <div class="band">
+          <img class="mark" src="assets/98-graffiti.png" alt="">
+          <div class="spine"><small>India &middot; basketball</small>Pratima<br>Singh</div>
+        </div>
+        <div class="photo"><div class="mono-photo">PS</div></div>
+        <span class="tag mono" data-tag>Career</span>
+        <div class="nick" aria-hidden="true"><span>Captain</span></div>
+        <div class="ladder" data-ladder>
+          <div class="row"><span>Role</span><b>Captain, India</b></div>
+          <div class="row"><span>Era</span><b>2016 &rarr; 2020</b></div>
+          <div class="big" data-big>
+            <div><b>5&times;</b><span>Nationals</span></div>
+            <p class="no">No. 002</p>
+            <div><b>1st</b><span>Brand book</span></div>
+          </div>
+          <p class="fact" data-fact><b>Fact:</b> Where cricket has an industry, women&rsquo;s basketball had silence.</p>
+        </div>
+        <div class="gloss"></div>
+      </div>
+    </div>
+    <div class="chapters" data-chapters>
+      <article class="chapter" data-tag="The silence"
+        data-stats='[["Nationals","5×"],["Industry","0"],["Role","Captain, India"],["Era","2016 → 2020"]]'
+        data-fact="Where cricket has an industry, women&rsquo;s basketball had silence.">
+        <p class="num mono"><i></i>01 &middot; The room</p>
+        <h3>A captain <em>without an industry.</em></h3>
+        <p>Five-time national player, captain of India. Where cricket has sponsors, agents and a media machine, women&rsquo;s basketball had none of it. No template to follow &mdash; which meant one had to be written.</p>
+      </article>
+      <article class="chapter" data-tag="The brand book"
+        data-stats='[["Brand book","1st"],["Nationals","5×"],["Positioning · partnerships","Written"],["Channel","The practice court"]]'
+        data-fact="The first brand book in Indian women&rsquo;s basketball: positioning, partnerships, and the practice court as a media channel.">
+        <p class="num mono"><i></i>02 &middot; The work</p>
+        <h3>The first brand book <em>in the sport.</em></h3>
+        <p>98 wrote the first brand book in Indian women&rsquo;s basketball: positioning, partnerships, and the case that the practice court itself is a media channel &mdash; that the work of becoming good is content before the game is.</p>
+        <blockquote class="pull" style="margin-top:1.4rem;font-size:clamp(1.3rem,2.4vw,2.2rem)">&ldquo;They saw the practice before they saw the player.&rdquo;<cite class="mono">Pratima Singh</cite></blockquote>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE PRACTICE ============ -->
+<section class="sec wrap" id="practice">
+  <div class="sec-head rev">
+    <h2>The operating system.<small>What representation means here, in four beats</small></h2>
+    <p class="mono">Athletes &middot; creators &middot; founders</p>
+  </div>
+  <div class="beats">
+    <div class="beat rev"><p class="n mono">01</p><h4>Representation</h4><p>Agency of record, exclusively. One inbox, one voice, one answer to &ldquo;what is this brand worth.&rdquo; We say no on your behalf more often than we say yes.</p><p class="who mono">Deals &middot; comms &middot; the calendar, last</p></div>
+    <div class="beat rev" style="--d:.08s"><p class="n mono">02</p><h4>Editorial</h4><p>The managed brand surface: what the person sounds like, what they post, what they never post. Better posts, not more posts &mdash; format, collab structure and timing.</p><p class="who mono">Social &middot; podcasts &middot; long-form</p></div>
+    <div class="beat rev" style="--d:.16s"><p class="n mono">03</p><h4>Deal flow</h4><p>Rights, licensing, content windows, reporting cadence. Renting the channel instead of selling the slot. Bridges into other rooms &mdash; other talent, other audiences.</p><p class="who mono">Structure &middot; cross-overs &middot; long horizons</p></div>
+    <div class="beat rev" style="--d:.24s"><p class="n mono">04</p><h4>Equity</h4><p>When we believe, we own the upside. The same operating system, offered on equity terms instead of fees &mdash; first on a person, then on a business.</p><p class="who mono">Partner, not vendor</p></div>
+  </div>
+  <p class="roster-line mono rev">On the roster &middot; <span>Ishant Sharma</span><i>&middot;</i><span>Pratima Singh</span><i>&middot;</i><span>Moksh Bainsla</span><i>&middot;</i><span>Rajnandini</span> &middot; exclusive contracts, creators &amp; voices, spokespeople</p>
+</section>
+
+<!-- ============ ACT TWO: BUSINESSES ============ -->
+<section class="sec wrap" id="business">
+  <div class="acttwo">
+    <div>
+      <p class="kicker mono rev"><i style="background:var(--red)"></i>Act two &middot; Branding for businesses</p>
+      <h2 class="t rev" style="--d:.08s">Same operating system. <em>Different asset class.</em></h2>
+    </div>
+    <div class="rev" style="--d:.16s">
+      <p>Once the system was proven on a person, we ran it on brands: positioning that reads like a point of view, an identity that survives the feed, and a deal structure that makes us a partner in the outcome, not a line in the budget.</p>
+      <p>The natural extension was equity. <strong>Arista Vault</strong> &mdash; a luggage-tech founder we partnered with on equity terms instead of fees, because we knew the deck was Shark-Tank-bound.</p>
+    </div>
+  </div>
+  <div class="cases">
+    <a class="case rev" href="index.html#case-arista-vault"><div class="cv"><span>AV</span></div><p class="mono">Brand &middot; D2C &middot; Equity partnership</p><h4>Arista Vault</h4><p>Equity, not retainer. When we believe, we own the upside.</p><p class="go mono">Open the case &rarr;</p></a>
+    <a class="case rev" style="--d:.08s" href="index.html#case-slay-coffee"><div class="cv"><img src="assets/covers/slay.jpg" alt=""></div><p class="mono">Brand &middot; Coffee &middot; D2C</p><h4>Slay Coffee</h4><p>Don&rsquo;t sell coffee. Sell the moment in the cup. 6.9M reach, zero paid.</p><p class="go mono">Open the case &rarr;</p></a>
+    <a class="case rev" style="--d:.16s" href="index.html#case-borges"><div class="cv"><span>B</span></div><p class="mono">Brand &middot; Pantry &middot; FMCG</p><h4>Borges India</h4><p>A Spanish heritage brand told in the language of Indian home kitchens.</p><p class="go mono">Open the case &rarr;</p></a>
+  </div>
+  <p class="placeholder rev">Awaiting Harsh&rsquo;s brief: the brand-identity work from the Design Portfolio goes here &mdash; two or three identities, shown as artefacts, not decks. This block comes out when they land.</p>
+</section>
+
+<!-- ============ THE ASK ============ -->
+<section id="ask">
+  <p class="kicker mono rev" style="justify-content:center"><i></i>The smallest possible yes</p>
+  <h2 class="rev" style="--d:.08s">Tell us who you&rsquo;re building<i>.</i></h2>
+  <div class="btns rev" style="--d:.16s">
+    <a class="btn-y" href="index.html#contact">Send one line &rarr;</a>
+    <a class="pill" href="https://wa.me/919999999999?text=Hi%20Ninety-Eight%20%E2%80%94%20talent%20%2F%20branding%20enquiry" target="_blank" rel="noopener">WhatsApp instead</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="mono">
+  <span>Ninety-Eight Entertainment &mdash; est. 01.01.2020</span>
+  <span><a href="index.html">The film</a> &middot; <a href="index.html#v-marketing">Marketing</a> &middot; <a href="privacy.html">Privacy</a></span>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  /* Lenis, as on the landing */
+  if (typeof Lenis !== 'undefined' && !reduce){
+    var lenis = new Lenis({ autoRaf:true });
+    window.__lenis = lenis;
+    if (hasGsap) lenis.on('scroll', ScrollTrigger.update);
+    var relaying=false;
+    lenis.on('scroll', function(){ if(relaying) return; relaying=true; try{ window.dispatchEvent(new Event('scroll')); } finally { relaying=false; } });
+  }
+
+  /* header + progress */
+  var hdr=document.getElementById('hdr'), prog=document.getElementById('progress');
+  function onScroll(){
+    var y=window.pageYOffset, h=document.documentElement.scrollHeight-window.innerHeight;
+    hdr.classList.toggle('scrolled', y>24);
+    prog.style.width=(h>0?(y/h*100):0)+'%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* reveals */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -12% 0px'});
+  document.querySelectorAll('.rev').forEach(function(el){ if(!el.closest('#top')) io.observe(el); });
+
+  /* ---- the card keeps score ----
+     Each chapter carries the four rows and the FACT line the card should
+     show while it is the one in view. On enter (either direction) the old
+     rows drop out, the new ones step in, the hot row (the one that changed
+     most) flashes in the band colour. */
+  document.querySelectorAll('.walk').forEach(function(walk){
+    var card=walk.querySelector('.tcard'), ladder=card.querySelector('[data-ladder]');
+    var fact=card.querySelector('[data-fact]'), tag=card.querySelector('[data-tag]');
+    var chapters=walk.querySelectorAll('.chapter');
+    var current=-1;
+    function apply(i){
+      if(i===current||i<0||i>=chapters.length) return;
+      current=i;
+      var ch=chapters[i], stats;
+      try{ stats=JSON.parse(ch.getAttribute('data-stats')); }catch(e){ return; }
+      var rows=[].slice.call(ladder.querySelectorAll('.row'));
+      var factHTML='<b>Fact:</b> '+ch.getAttribute('data-fact');
+      var tagText=ch.getAttribute('data-tag')||'';
+      var bigs=[].slice.call(ladder.querySelectorAll('[data-big] > div'));
+      var swap=function(){
+        /* stats: [0],[1] are the two big scores; [2],[3] the ladder rows */
+        bigs.forEach(function(d,k){
+          var s=stats[k]; if(!s) return;
+          d.innerHTML='<b class="'+(k===0?'hot':'')+'">'+s[1]+'</b><span>'+s[0]+'</span>';
+        });
+        rows.forEach(function(r,k){
+          var s=stats[k+2]; if(!s) return;
+          r.innerHTML='<span>'+s[0]+'</span><b>'+s[1]+'</b>';
+          r.classList.remove('hot');
+        });
+        fact.innerHTML=factHTML; tag.textContent=tagText;
+      };
+      if(!hasGsap||reduce){ swap(); return; }
+      gsap.timeline()
+        .to(rows,{x:-14,autoAlpha:0,duration:.18,stagger:.03,ease:'power2.in'})
+        .to(bigs,{y:10,autoAlpha:0,duration:.18,stagger:.04,ease:'power2.in'},'<')
+        .to(fact,{autoAlpha:0,duration:.15},'<')
+        .add(swap)
+        .fromTo(rows,{x:18,autoAlpha:0},{x:0,autoAlpha:1,duration:.34,stagger:.05,ease:'back.out(1.6)'})
+        .fromTo(bigs,{y:-12,autoAlpha:0},{y:0,autoAlpha:1,duration:.4,stagger:.06,ease:'back.out(1.8)'},'<')
+        .fromTo(fact,{y:6,autoAlpha:0},{y:0,autoAlpha:1,duration:.3},'<.1')
+        .fromTo(card,{scale:1.012},{scale:1,duration:.5,ease:'power2.out'},0);
+    }
+    if(hasGsap){
+      chapters.forEach(function(ch,i){
+        ScrollTrigger.create({trigger:ch,start:'top 55%',end:'bottom 55%',onEnter:function(){apply(i);},onEnterBack:function(){apply(i);}});
+      });
+    } else {
+      var cio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) apply([].indexOf.call(chapters,e.target)); }); },{rootMargin:'-45% 0px -45% 0px'});
+      chapters.forEach(function(c){ cio.observe(c); });
+    }
+    apply(0);
+
+    /* the card tilts to the pointer — a held object, not a flat image */
+    if(hasGsap&&!reduce&&matchMedia('(hover:hover)').matches){
+      var rx=gsap.quickTo(card,'rotationX',{duration:.6,ease:'power3'}), ry=gsap.quickTo(card,'rotationY',{duration:.6,ease:'power3'});
+      gsap.set(card,{transformPerspective:1100});
+      var col=walk.querySelector('.card-col');
+      col.addEventListener('pointermove',function(e){
+        var r=card.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        ry((px-.5)*14); rx((.5-py)*10);
+        card.style.setProperty('--gx',(px*100)+'%'); card.style.setProperty('--gy',(py*100)+'%');
+      });
+      col.addEventListener('pointerleave',function(){ ry(0); rx(0); });
+    }
+  });
+
+  /* deep links into the landing's case overlays travel as hashes;
+     nothing to do here — index.html reads #case-<slug> on load. */
+})();
+</script>
+</body>
+</html>
