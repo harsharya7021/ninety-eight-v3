@@ -1051,75 +1051,6 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 }
 }
 
-/* ============ THE THREE VERTICALS — stacked cards ========================
-   madewithgsap effect 031. Each card is pinned for one screen while it
-   rotates back (rotationX 40, scale .7, a random roll of +/-5) and fades, so
-   the cards recede like they are being dealt away rather than scrolling off.
-
-   The content is #services, moved up here rather than rewritten: it already
-   named the three verticals, numbered them 01-03 and explained each in the
-   right register. It was sitting two thirds of the way down a 2,200-word
-   page where nobody reached it.
-
-   The reference sets its titles at 10.5vw, which works for one word
-   ("Innovation"). "Talent & Branding" is seventeen characters and would run
-   off the card, so titles here are clamped and allowed to wrap. */
-.mwg031{position:relative;padding:0 0 100vh;overflow:hidden;background:var(--bg)}
-.mwg031 .v-slide{height:100vh}
-.mwg031 .v-wrap{width:100%;height:100%;perspective:250vw}
-.mwg031 .v-card{position:absolute;inset:0;transform-style:preserve-3d;
-  transform-origin:50% 10%;padding:clamp(18px,3vw,44px) clamp(20px,3.4vw,54px) clamp(28px,4vw,56px);
-  display:flex;flex-direction:column;justify-content:space-between;
-  background:var(--vcbg,var(--bg));border-top:2px solid var(--vc,var(--line))}
-.mwg031 .v-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
-.mwg031 .v-top h2{font-weight:750;font-stretch:112%;text-transform:uppercase;
-  font-size:clamp(2rem,6.4vw,5.6rem);letter-spacing:-.035em;line-height:.92;max-width:15ch}
-.mwg031 .v-top .beta{font-size:.28em;color:var(--vc,var(--red));vertical-align:super;letter-spacing:.1em}
-/* Colour is carried by the furniture — the rule, the mark, the numeral — not
-   by the card ground. Three full-bleed screens of saturated red, green and
-   blue would drown the photograph on each card and shout far louder than the
-   press rail, which is 370px of colour against a whole viewport of it here.
-
-   The three are the logo's own two plus one: green and red are the 8 and the 9,
-   given to the two verticals that already have a history, and blue goes to the
-   product that doesn't. Blue is the lifted #5278C2 rather than the true
-   #0039A6 — on carbon the true blue is 2.0:1, which is a numeral nobody can
-   read; lifted it clears 4.5:1. Same correction the flywheel rooms needed. */
-.mwg031 .v-spark{flex:0 0 auto;width:clamp(30px,3.6vw,58px);height:auto;color:var(--vc,var(--red))}
-.mwg031 .v-bottom{display:flex;justify-content:space-between;align-items:flex-end;
-  gap:clamp(20px,4vw,60px)}
-.mwg031 .v-text{max-width:34vw;font-size:clamp(.95rem,1.5vw,1.5rem);line-height:1.32;
-  letter-spacing:-.02em;color:var(--ink)}
-.mwg031 .v-subs{display:flex;flex-wrap:wrap;gap:.35rem .5rem;margin-top:1.1rem}
-.mwg031 .v-subs span{font-family:'Space Mono',ui-monospace,monospace;font-size:9px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
-  border:1px solid var(--line);border-radius:2px;padding:.35em .6em}
-.mwg031 .v-go{display:inline-block;margin-top:1.3rem;background:none;border:0;padding:0 0 2px;
-  cursor:pointer;font-family:'Space Mono',ui-monospace,monospace;font-size:9.5px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--vc,var(--red));
-  border-bottom:1px solid currentColor}
-.mwg031 .v-go:hover{color:var(--ink)}
-.mwg031 .v-fig{display:flex;align-items:flex-end;gap:clamp(12px,1.8vw,26px)}
-.mwg031 .v-num{font-weight:750;font-stretch:112%;font-size:clamp(2.4rem,7.4vw,7rem);
-  line-height:.86;letter-spacing:-.05em;color:var(--vc,var(--dim))}
-.mwg031 .v-fig img{width:clamp(150px,22vw,340px);aspect-ratio:1;object-fit:cover;
-  border-radius:3px;display:block;background:var(--bg2)}
-
-@media (max-aspect-ratio:1/1){
-  .mwg031 .v-card{justify-content:flex-start;gap:22px}
-  .mwg031 .v-bottom{flex-direction:column;align-items:stretch;margin-top:18px}
-  .mwg031 .v-text{max-width:100%;order:2}
-  .mwg031 .v-num{display:none}
-  .mwg031 .v-fig img{width:100%}
-}
-/* the pin and the recede are the effect; with no motion the cards are simply
-   three stacked screens of copy, which still reads */
-@media (prefers-reduced-motion:reduce){
-  .mwg031{padding-bottom:0}
-  .mwg031 .v-slide{height:auto}
-  .mwg031 .v-card{position:relative;inset:auto}
-}
-
 /* ============ PRESS — effect 087, Staggered Card Motion =================
    Six press quotes ride a horizontally pinned rail; each card is nudged back
    by the scroll velocity as it enters and eases to rest, so the run has the
@@ -1221,6 +1152,122 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 .t041 .letter{display:inline-block;will-change:transform}
 .t041.rolling .letter{pointer-events:none}
 @media(hover:none){ .t041 .t041-hidden{display:none} }
+
+/* ===== THE ABOUT SEQUENCE (v3.34) =======================================
+   Six references, in the order Harsh set them: the story gathers (097), the
+   two verticals turn (110), the testimonial line rides a morphing wire
+   (104), the work flies past (083), the brand line surfaces out of fog
+   (067) and the brands themselves flip away (074).
+
+   One rule holds across all six: the CSS ships the READABLE state and each
+   script adds .fx to its own root before it installs the effect. Nothing
+   here is an entrance, so a machine without GSAP — or a reader with motion
+   reduced — gets a plain, legible section rather than a blank pinned one. */
+
+/* ---- 097: the story gathers ---- */
+.mwg097{position:relative;background:var(--bg);overflow:hidden;padding:clamp(6rem,18vh,12rem) var(--pad) clamp(6rem,18vh,12rem)}
+.mwg097 .a97-header{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding-bottom:1.2rem;border-bottom:1px solid var(--line);margin-bottom:clamp(3rem,10vh,7rem)}
+.mwg097 .content{max-width:min(60vw,52rem);margin:0 auto}
+.mwg097 .content p{font-size:max(18px,2.3vw);line-height:1.24;letter-spacing:-.02em;color:var(--ink)}
+.mwg097 p.title{color:var(--dim);font-family:'Space Mono',ui-monospace,monospace;
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;line-height:1.4;margin:clamp(3rem,7vh,5rem) 0 1.1rem}
+.mwg097 p.title:first-child{margin-top:0}
+/* the gather only ever moves x, so the column is legible before it runs */
+.mwg097 .line{width:max-content;max-width:none}
+.mwg097 .word{will-change:transform}
+@media (max-width:820px){ .mwg097 .content{max-width:none} .mwg097 .content p{font-size:max(17px,4.4vw)} }
+
+/* ---- 110: the two verticals turn ---- */
+.mwg110{position:relative;background:var(--bg)}
+.mwg110 .v110-head{padding:clamp(4rem,12vh,8rem) var(--pad) 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+/* readable state: the two cards side by side, faces stacked, verso showing */
+.mwg110 .container{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;padding:clamp(2rem,6vh,4rem) var(--pad) clamp(4rem,12vh,8rem)}
+.mwg110 .card{width:min(88vw,340px);aspect-ratio:.82;position:relative;border-radius:.8vw;overflow:hidden}
+.mwg110 .face{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
+.mwg110 .face .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.mwg110 .face.verso{background:var(--vc,var(--green))}
+.mwg110 .face.recto{z-index:1}
+.mwg110 .content{position:relative;z-index:1;width:100%;text-align:center;color:#0A0A0B;text-transform:uppercase;padding:4vw 2vw 0}
+.mwg110 .title{font-weight:800;font-stretch:112%;font-size:2.4vw;line-height:.92;letter-spacing:-.02em}
+.mwg110 .description{padding-top:1.2vw;font-family:'Space Mono',ui-monospace,monospace;font-size:.72vw;line-height:1.5;
+  letter-spacing:.04em;text-transform:none;color:rgba(10,10,11,.82)}
+/* the effect: the reference's own geometry, installed by the script */
+.mwg110.fx .pin-height{height:360vh}
+.mwg110.fx .container{display:grid;align-items:center;height:100vh;perspective:200vw;overflow:hidden;padding:0;gap:0}
+.mwg110.fx .card{width:22vw;position:absolute;left:100%;transform-style:preserve-3d;border-radius:0;overflow:visible}
+.mwg110.fx .face.recto{z-index:auto}
+.mwg110.fx .face.verso{transform:translateZ(-2px) rotateY(180deg)}
+@media (max-width:767px){
+  .mwg110.fx .container{perspective:500vw}
+  .mwg110.fx .card{width:280px}
+  .mwg110 .face .media{border-radius:14px}
+  .mwg110.fx .face.verso{transform:translateZ(-1px) rotateY(180deg)}
+  .mwg110 .content{padding:60px 25px 0}
+  .mwg110 .title{font-size:24px}
+  .mwg110 .description{font-size:11px;padding-top:18px}
+}
+
+/* ---- 104: the line that rides a morphing wire ---- */
+.mwg104{position:relative;background:var(--bg)}
+.mwg104 .fallback{padding:clamp(5rem,14vh,9rem) var(--pad);font-weight:800;font-stretch:112%;text-transform:uppercase;
+  letter-spacing:-.02em;line-height:.95;font-size:clamp(2rem,6vw,5.4rem);max-width:16ch}
+.mwg104 .container,.mwg104 .pin-height{display:none}
+.mwg104.fx .fallback{display:none}
+.mwg104.fx .pin-height{display:block;height:800vh}
+.mwg104.fx .container{display:flex;height:100vh;align-items:center;overflow:hidden}
+.mwg104 svg{display:block;width:120%;height:auto;overflow:visible;margin:8vw 0 0 -10%}
+.mwg104 #track text{font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:112%;letter-spacing:-.03em}
+.mwg104 #line{stroke:none;fill:none}
+
+/* ---- 083: the work flies past ---- */
+.mwg083{position:relative;background:var(--bg)}
+.mwg083 .w83-head{padding:clamp(4rem,12vh,8rem) var(--pad) 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.mwg083 .container{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;padding:clamp(2rem,6vh,4rem) var(--pad) clamp(4rem,12vh,8rem)}
+.mwg083 .media{width:min(28vw,190px);aspect-ratio:1;object-fit:contain;display:block}
+.mwg083.fx .pin-height{height:400vh}
+.mwg083.fx .container{display:block;height:100vh;padding:0;overflow:hidden;position:relative}
+.mwg083.fx .media{position:absolute;top:0;left:0;width:20vw}
+@media (max-width:768px){ .mwg083.fx .media{width:40vw} }
+
+/* ---- 067: the brand line out of the fog ---- */
+.mwg067{position:relative;background:var(--bg)}
+.mwg067 .container{padding:clamp(5rem,14vh,9rem) var(--pad);display:grid;place-content:center}
+.mwg067 .text{font-weight:800;font-stretch:112%;text-transform:uppercase;letter-spacing:-.04em;
+  font-size:max(5.4vw,30px);line-height:1.02;text-align:center;color:var(--ink)}
+.mwg067 .text .l{display:block}
+.mwg067.fx .pin-height{height:400vh}
+.mwg067.fx .container{height:100vh;overflow:hidden;place-content:center;padding:0;perspective:60vw;
+  mask-image:linear-gradient(transparent 0%,transparent 25%,#000 40%,#000 60%,transparent 75%,transparent 100%);
+  -webkit-mask-image:linear-gradient(transparent 0%,transparent 25%,#000 40%,#000 60%,transparent 75%,transparent 100%)}
+.mwg067.fx .text{transform-style:preserve-3d}
+.mwg067.fx .text .l{display:flex;justify-content:center;transform-style:preserve-3d}
+.mwg067.fx .text .char{transform-style:preserve-3d}
+.mwg067.fx .text .char span{display:inline-block}
+@media (max-width:768px){
+  .mwg067.fx .container{mask-image:linear-gradient(transparent 0%,transparent 35%,#000 40%,#000 60%,transparent 65%,transparent 100%);
+    -webkit-mask-image:linear-gradient(transparent 0%,transparent 35%,#000 40%,#000 60%,transparent 65%,transparent 100%)}
+}
+
+/* ---- 074: the brands flip away ---- */
+.mwg074{position:relative;background:var(--bg)}
+.mwg074 .header{padding:0 var(--pad) clamp(2rem,5vh,3rem);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.mwg074 .container{display:flex;justify-content:center;padding:0 var(--pad) clamp(5rem,14vh,9rem)}
+.mwg074 .medias{position:relative;width:max(200px,24vw);aspect-ratio:1}
+.mwg074 .card{position:absolute;inset:0;border-radius:.6vw;transform-origin:50% 101%}
+.mwg074 .card-face{position:absolute;inset:0;border-radius:inherit;overflow:hidden;backface-visibility:hidden}
+.mwg074 .card-face img{width:100%;height:100%;object-fit:cover;display:block}
+.mwg074 .card-face-back{transform:rotateX(180deg) translate3d(0,0,2px)}
+.mwg074.fx .pin-height{height:400vh}
+.mwg074.fx .container{display:grid;place-items:center;height:100vh;perspective:100vw;padding:0}
+.mwg074.fx .medias{transform-style:preserve-3d}
+.mwg074.fx .card{transform-style:preserve-3d}
+@media (max-width:768px){
+  .mwg074.fx .container{perspective:170vw}
+  .mwg074 .card{border-radius:2.2vw}
+  .mwg074 .card-face-back{transform:rotateX(180deg) translate3d(0,0,1px)}
+}
+
 </style>
 </head>
 <body>
@@ -1340,13 +1387,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   <!-- Sep 8 call: 98 Studio comes off the hero - a beta product next to the
        two verticals diluted the argument. It survives as the quiet line in
        the corner below (and as a menu row). The two verticals now land on
-       their own cards (#v-talent / #v-marketing); each will get its own page
+       their own cards (the 110 cards at #verticals); each will get its own page
        later - see NOTES FOR UX.md. Hover: image today, film when a file
        exists at data-video (assets/practice/talent.mp4 / marketing.mp4). -->
   <nav class="practice" id="practice" aria-label="The practice">
     <span class="plabel mono rev" style="--d:.55s">Two verticals of scale</span>
     <a class="rev" style="--d:.63s" href="talent.html" data-img="assets/practice/talent.jpg" data-video="assets/practice/talent.mp4" data-cap="Talent Management &amp; Personal Branding — exclusive contracts · editorial · individuals built into brands">Talent &amp; Branding</a>
-    <a class="rev" style="--d:.7s" href="#v-marketing" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — launch · amplify · convert · retain · events">Marketing</a>
+    <a class="rev" style="--d:.7s" href="#verticals" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — launch · amplify · convert · retain · events">Marketing</a>
   </nav>
 
   <span class="nudge-l" aria-hidden="true"></span>
@@ -1394,18 +1441,93 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
 
 
-<!-- ============ THE THREE VERTICALS ============ -->
+<!-- ============ ABOUT — effect 097, the story gathers ======================
+     Every line arrives justified across the column — its words pushed out to
+     both edges — and pulls back into natural text as it rises from the bottom
+     of the screen to 60% of it. The reference's own numbers (power2.out,
+     scrub 0.2, reversible); the measure is the column the text sits in. -->
+<section class="mwg097" id="about" aria-label="About Ninety-Eight">
+  <div class="a97-header mono">
+    <p>About Ninety-Eight</p>
+    <p>Founded 1 January 2020</p>
+  </div>
+  <div class="container">
+    <div class="content">
+      <p class="title">01 — The first night</p>
+      <p>Ninety-Eight was founded on 1 January 2020 — the first day of the decade — and closed its first client the same night: a Delhi nightclub, pitched in person, to a friend&rsquo;s father. Six years on, that is still the method.</p>
+      <p class="title">02 — What we are</p>
+      <p>We are a creative and strategic firm that works as a business partner, not a vendor.</p>
+      <p class="title">03 — What sits under it</p>
+      <p>Two verticals sit under that.</p>
+    </div>
+  </div>
+</section>
 
-<section class="mwg031" id="verticals" aria-label="What we do — three verticals">
-  <div class="v-slide" id="v-talent"><div class="v-wrap"><div class="v-card" style="--vc:#00933C;--vcbg:#092415"><div class="v-top"><h2>Talent &amp; Branding</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Management and representation — athletes, creators, founders — and the practice that sits with it: building individuals into brands worth betting on, plus brand identity for businesses.</p><div class="v-subs"><span>Exclusive contracts</span><span>Editorial &amp; podcasts</span><span>Deal flow</span><span>Personal brands</span><span>Brand identity</span></div><a class="v-go" href="talent.html">Enter the vertical ↗</a> <button class="v-go" type="button" data-case="ishant" style="margin-left:1.2rem">Proof — the Ishant Sharma contract ↗</button></div><div class="v-fig"><p class="v-num">(01)</p><img src="assets/practice/talent.jpg" alt="" loading="lazy"></div></div></div></div></div>
-  <div class="v-slide" id="v-marketing"><div class="v-wrap"><div class="v-card" style="--vc:#EE352E;--vcbg:#341312"><div class="v-top"><h2>Marketing</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Five rooms named for what they get you, not for what we call them internally. Production sits inside Retain, because a shoot is a channel we own, not a service we sell apart from it.</p><div class="v-subs"><span>Launch — PR &amp; coverage</span><span>Amplify — creator marketing</span><span>Convert — SEO &amp; performance</span><span>Retain — production, social, design</span><span>Events — activations</span></div><button class="v-go" type="button" data-wheel="1">Open the flywheel ↗</button></div><div class="v-fig"><p class="v-num">(02)</p><img src="assets/practice/hospitality.jpg" alt="" loading="lazy"></div></div></div></div></div>
-  <div class="v-slide" id="v-madai"><div class="v-wrap"><div class="v-card" style="--vc:#5278C2;--vcbg:#181F2D"><div class="v-top"><h2>98 Studio<sup class="beta">Beta</sup></h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Our AI product — an AI-first studio where token-based pricing meters human hours and compute hours apart, and the savings from every model advance pass to you, not us. In beta, in the building.</p><div class="v-subs"><span>AI-first</span><span>Token-based pricing</span><span>Human + compute — metered apart</span></div><button class="v-go" type="button" data-film="1">Watch the first film ↗</button></div><div class="v-fig"><p class="v-num">(03)</p><img src="assets/98-studio.jpg" alt="" loading="lazy"></div></div></div></div></div>
+<!-- ============ THE TWO VERTICALS — effect 110, the turning cards =========
+     Each card enters from the right edge, crosses the screen on the
+     reference's CustomEase, dips and recovers its scale, pushes toward the
+     reader and back, and turns 180 degrees on the way — so the face that
+     arrives is the picture and the face that leaves is the writing. The
+     runway is 360vh rather than the zip's 600: the zip runs four cards and
+     we run two, and what its 600vh actually encodes is the pace per card,
+     which this keeps exactly. -->
+<section class="mwg110" id="verticals" aria-label="The two verticals">
+  <div class="v110-head">
+    <p class="mono"><b>Two verticals</b></p>
+    <p class="mono">Talent &amp; Branding &middot; Marketing</p>
+  </div>
+  <div class="pin-height">
+    <div class="container">
+      <div class="card" style="--vc:#00933C">
+        <div class="face recto"><img class="media" src="assets/practice/talent.jpg" alt=""></div>
+        <div class="face verso">
+          <div class="content">
+            <p class="title">Talent &amp;<br>Branding</p>
+            <p class="description">Athletes, creators and founders, represented as agency of record — and the same operating system run on businesses: positioning that reads like a point of view, an identity that survives the feed, and, when we believe in the outcome, equity instead of fees.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="--vc:#EE352E">
+        <div class="face recto"><img class="media" src="assets/practice/brands.jpg" alt=""></div>
+        <div class="face verso">
+          <div class="content">
+            <p class="title">Marketing</p>
+            <p class="description">Five rooms, named for what they get you — Launch, Amplify, Convert, Retain, Events. 6.9M reach with nothing paid. 6.18M out of a single venue. 23.7M views on a channel we rebuilt, up 156% on the same audience. Thirty-five documented cases sit behind them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ TICKER ============ -->
 
 
 
+
+<!-- ============ WHAT THEY SAY — effect 104, the line on a wire =========
+     The sentence is a train of segments running along an SVG path that is
+     dead straight at rest and morphs into a wave in proportion to how hard
+     you are scrolling — the amplitude is scroll velocity, quickTo'd back to
+     nothing 66ms after you stop. The quotes themselves follow, unchanged. -->
+<section class="mwg104" id="saidbehind" aria-label="This is what they say behind our backs">
+  <h2 class="fallback">This is what they say behind our backs</h2>
+  <div class="pin-height">
+    <div class="container">
+      <svg width="2577" height="391" viewBox="0 0 2577 391" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><clipPath id="s104-clip" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx=".08" ry=".08"/></clipPath></defs>
+        <path id="line" d="M0 195H644H1288H1932H2576"/>
+        <path id="wave" d="M0.21875 190.5C0.21875 190.5 382.004 0.5 644.219 0.5C906.434 0.5 1051.3 78.1239 1288.22 190.5C1531.72 306 1668.87 390.5 1932.22 390.5C2195.57 390.5 2576.22 190.5 2576.22 190.5" stroke="#FFF" style="opacity:0;"/>
+        <g id="track">
+          <text class="segment" fill="#F4F4F2" font-size="350"><textPath href="#line" text-anchor="start">This is what they say</textPath></text>
+          <image class="segment" href="assets/covers/slay.jpg" height="300" clip-path="url(#s104-clip)"/>
+          <text class="segment" fill="#F4F4F2" font-size="350"><textPath href="#line" text-anchor="start">behind our backs</textPath></text>
+          <image class="segment" href="assets/covers/hardrock.jpg" height="300" clip-path="url(#s104-clip)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
 
 <!-- ============ THE PARADE — effect 069, inchworm scroll ============ -->
 <section class="mwg069" id="voices" aria-label="In their words — quotes and work from the archive">
@@ -1432,6 +1554,94 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
 <!-- ============ SERVICES ============ -->
 <!-- #services became #verticals, the stacked cards below the hero. -->
+
+<!-- ============ THE WORK GOES PAST — effect 083, four lanes ============
+     PLACEHOLDER IMAGERY. Harsh is sending the real set (the work either side
+     of hyper-local influencer marketing); until it lands these are covers,
+     the Gurls frames and montage stills, so the lane maths can be tuned
+     against real weights. Swap the <img> list, nothing else. -->
+<section class="mwg083" id="madework" aria-label="The work">
+  <div class="w83-head">
+    <p class="mono"><b>The work</b></p>
+    <p class="mono">Placeholders &middot; the real set is coming</p>
+  </div>
+  <div class="pin-height">
+    <div class="container">
+      <img class="media" src="assets/covers/slay.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/hardrock.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/bayroute.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/monet.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/sneakerfest.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/andreas.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/fig.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/butterroom.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/skylantern.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/covers/maibao.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g07.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/gurls/g11.webp" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/montage/m5.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/montage/m7.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/montage/m9.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/practice/hospitality.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/practice/lifestyle.jpg" alt="" loading="lazy" decoding="async">
+      <img class="media" src="assets/practice/production.jpg" alt="" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BRAND LINE — effect 067, out of the fog =============
+     Every letter starts face-down at 60 degrees, rolls flat as the pin takes
+     it and rolls away to -60, on a random 0.03 stagger, seen through a mask
+     that keeps only the middle band of the screen — so the sentence surfaces
+     rather than arrives. Three lines rather than the zip's one: the zip
+     carries seventeen characters at 14.5vw and this carries fifty-two, which
+     at that size would be four screens wide. -->
+<section class="mwg067" id="brandline" aria-label="Some of the brands who have been lucky to work with us">
+  <div class="pin-height">
+    <div class="container">
+      <p class="text"><span class="l">Some of the brands</span><span class="l">who have been lucky</span><span class="l">to work with us</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BRANDS — effect 074, the deck flips away ============
+     One stack, every card rotating a full -360 on X about a point just below
+     its own bottom edge, on a -0.2 stagger so the deck peels from the front.
+     PLACEHOLDER SET: the cover tiles, two brands per card (front and back),
+     until the real brand wall lands. -->
+<section class="mwg074" id="brands" aria-label="Brands">
+  <div class="header">
+    <p class="mono"><b>Brands</b></p>
+    <p class="mono">Placeholders &middot; 70+ on the index</p>
+  </div>
+  <div class="pin-height">
+    <div class="container">
+      <div class="medias">
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/slay.jpg" alt="slay"></div><div class="card-face card-face-back"><img src="assets/covers/hardrock.jpg" alt="hardrock"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/hardrock.jpg" alt="hardrock"></div><div class="card-face card-face-back"><img src="assets/covers/farzi.jpg" alt="farzi"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/farzi.jpg" alt="farzi"></div><div class="card-face card-face-back"><img src="assets/covers/tbsp.jpg" alt="tbsp"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/tbsp.jpg" alt="tbsp"></div><div class="card-face card-face-back"><img src="assets/covers/bayroute.jpg" alt="bayroute"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/bayroute.jpg" alt="bayroute"></div><div class="card-face card-face-back"><img src="assets/covers/monet.jpg" alt="monet"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/monet.jpg" alt="monet"></div><div class="card-face card-face-back"><img src="assets/covers/sneakerfest.jpg" alt="sneakerfest"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/sneakerfest.jpg" alt="sneakerfest"></div><div class="card-face card-face-back"><img src="assets/covers/andreas.jpg" alt="andreas"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/andreas.jpg" alt="andreas"></div><div class="card-face card-face-back"><img src="assets/covers/fig.jpg" alt="fig"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/fig.jpg" alt="fig"></div><div class="card-face card-face-back"><img src="assets/covers/butterroom.jpg" alt="butterroom"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/butterroom.jpg" alt="butterroom"></div><div class="card-face card-face-back"><img src="assets/covers/skylantern.jpg" alt="skylantern"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/skylantern.jpg" alt="skylantern"></div><div class="card-face card-face-back"><img src="assets/covers/maibao.jpg" alt="maibao"></div></div>
+      <div class="card"><div class="card-face card-face-front"><img src="assets/covers/maibao.jpg" alt="maibao"></div><div class="card-face card-face-back"><img src="assets/covers/slay.jpg" alt="slay"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ PRESS ============ -->
 <section class="section wrap io" id="press">
@@ -1932,6 +2142,8 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
      adblocked. GSAP 3.15 — the version the mwg references ship. -->
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/CustomEase.min.js"></script>
+<script src="assets/vendor/MorphSVGPlugin.min.js"></script>
 <script src="assets/vendor/SplitText.min.js"></script>
 <script src="assets/vendor/matter.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
@@ -3284,119 +3496,9 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   });
 })();
 
-/* ===== the handoff: the first vertical rises as the line leaves ============
-   This is the reason the block earns its place. The old pitch screen simply
-   preceded the verticals; this one hands off to them. The rise runs from the
-   section touching the bottom of the viewport to its top reaching the top,
-   which is exactly where card one's own pin begins — so the two never
-   overlap, and it touches only y while the effect 031 tween owns rotation,
-   scale and alpha on the same card. */
-(function(){
-  var first = document.querySelector('.mwg031 .v-slide .v-card');
-  if(!first || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  gsap.from(first, {
-    yPercent:100, ease:'none',
-    scrollTrigger:{
-      trigger:first.closest('.v-slide'), start:'top bottom', end:'top top',
-      scrub:true, invalidateOnRefresh:true
-    }
-  });
-})();
 
-/* ===== the three verticals: stacked cards ==================================
-   madewithgsap effect 031, ported. Each card pins for one screen while it
-   rotates back and fades; the next card is already behind it, so the stack
-   recedes rather than scrolls.
 
-   Two things the effect's own source leaves out, which matter on a real page:
 
-   Lenis and ScrollTrigger have to be introduced to each other. Lenis drives
-   scroll from its own rAF loop, so ScrollTrigger never hears about it and the
-   pins drift out of sync with the page. lenis.on('scroll', ScrollTrigger.update)
-   is the wiring; without it the effect looks broken in a way that reads as a
-   GSAP bug rather than a missing line.
-
-   And the end distances are computed from innerHeight at build time, so a
-   resize leaves every trigger measuring against the old viewport. Giving them
-   invalidateOnRefresh and a function-valued end makes them re-measure. */
-(function(){
-  var root = document.querySelector('.mwg031');
-  if(!root || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  if (typeof Lenis !== 'undefined'){
-    var lenis = new Lenis({ autoRaf:true });
-    window.__lenis = lenis;
-
-    /* Every overlay locks the body; Lenis has to be locked with it, and simply
-       calling stop() is not enough. Lenis eases toward a target, so a flick
-       followed by opening a drawer leaves an animation in flight — it finishes
-       underneath the open overlay and the page is somewhere else when you close
-       it. Snapping the target to the current position first kills the momentum,
-       then stop() holds it there. */
-    window.__scrollLock = function(on){
-      var l = window.__lenis; if(!l) return;
-      if(on){ l.scrollTo(l.scroll, {immediate:true, force:true}); l.stop(); }
-      else  { l.start(); }
-    };
-    lenis.on('scroll', ScrollTrigger.update);
-
-    /* Lenis does not reliably emit a native scroll event, and everything on
-       this page that predates it listens for one: the header's progress bar
-       and nav state, the chapter parallax, and the assembling line's whole
-       scrub. All of them simply stopped updating — which is most of what
-       "scroll is behaving weird" actually was. Re-emitting one native event
-       per Lenis frame revives every existing listener without touching any of
-       them, and is what a smooth-scroll library is expected to shim. */
-    var relaying = false;
-    lenis.on('scroll', function(){
-      /* Lenis listens for native scroll itself, so the event dispatched here
-         comes straight back in as another Lenis 'scroll' and the two feed each
-         other until the stack blows — RangeError on the first real flick.
-         Dispatch is synchronous, so a re-entrancy flag is enough to break it. */
-      if (relaying) return;
-      relaying = true;
-      try { window.dispatchEvent(new Event('scroll')); }
-      finally { relaying = false; }
-    });
-  }
-
-  root.querySelectorAll('.v-slide').forEach(function(slide){
-    var wrap = slide.querySelector('.v-wrap');
-    var card = slide.querySelector('.v-card');
-    /* the opening slide carries the claim, not a card, and owns its own pin */
-    if(!card || !wrap) return;
-
-    gsap.to(card, {
-      rotationZ:(Math.random()-0.5)*10,   /* a roll of -5 to 5, per the effect */
-      scale:0.7,
-      rotationX:40,
-      ease:'power1.in',
-      scrollTrigger:{
-        pin:wrap, trigger:slide,
-        start:'top 0%',
-        end:function(){ return '+=' + window.innerHeight; },
-        scrub:true,
-        invalidateOnRefresh:true
-      }
-    });
-
-    gsap.to(card, {
-      autoAlpha:0,
-      ease:'power1.in',
-      scrollTrigger:{
-        trigger:card,
-        start:'top -80%',
-        end:function(){ return '+=' + (0.2*window.innerHeight); },
-        scrub:true,
-        invalidateOnRefresh:true
-      }
-    });
-  });
-})();
 
 /* ===== press: effect 087 ====================================================
    The rail's length is the cards' width minus one viewport, so the pinned run
@@ -3610,5 +3712,240 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 })();
 </script>
 
+
+<script>
+/* ===== THE ABOUT SEQUENCE — drivers (v3.34) ===============================
+   Six references, each in its own IIFE, each following the same discipline:
+   bail without GSAP or with motion reduced (the CSS already ships a readable
+   section), add .fx to the root so the effect's own layout applies, force a
+   reflow, then measure and build. Built after fonts.ready where a measure
+   depends on type. */
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ok = (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reduce);
+  function arm(root){ root.classList.add('fx'); void root.offsetHeight; }
+
+  /* ---- 097: every line gathers from justified to natural ---------------- */
+  (function(){
+    var root = document.querySelector('.mwg097'); if(!root || !ok) return;
+    if (typeof SplitText === 'undefined') return;
+    var container = root.querySelector('.container');
+    document.fonts.ready.then(function(){
+      var paras = container.querySelectorAll('.content p');
+      [].forEach.call(paras, function(el){
+        SplitText.create(el, {type:'lines, words', linesClass:'line', wordsClass:'word'});
+      });
+      var cw = container.clientWidth, cr = container.getBoundingClientRect();
+      root.querySelectorAll('.line').forEach(function(line){
+        var words = [].slice.call(line.querySelectorAll('.word'));
+        var total = words.reduce(function(a,w){ return a + w.getBoundingClientRect().width; }, 0);
+        var gaps = words.length - 1, free = Math.max(cw - total, 0), gap = gaps > 0 ? free/gaps : 0;
+        var left = 0;
+        words.forEach(function(w,i){
+          var r = w.getBoundingClientRect();
+          gsap.set(w, {x: left - (r.left - cr.left)});
+          left += r.width + (i < words.length-1 ? gap : 0);
+        });
+        gsap.to(words, {x:0, ease:'power2.out',
+          scrollTrigger:{trigger:line, start:'top bottom', end:'top 60%', scrub:0.2}});
+      });
+      ScrollTrigger.refresh();
+    });
+  })();
+
+  /* ---- 110: the two cards cross, turn, and leave ----------------------- */
+  (function(){
+    var root = document.querySelector('.mwg110'); if(!root || !ok) return;
+    if (typeof CustomEase === 'undefined') return;
+    arm(root);
+    var pinHeight = root.querySelector('.pin-height');
+    var container = root.querySelector('.container');
+    var cards = root.querySelectorAll('.card');
+    var moveEase = CustomEase.create('mwg110move', 'M0,0 C0.199,0 0.198,0.701 0.5,0.5 0.8,0.299 0.805,1 1,1 ');
+    var stagger = window.innerWidth < 768 ? 6.2 : 5.1;
+    var master = gsap.timeline({scrollTrigger:{trigger:pinHeight, start:'top top', end:'bottom bottom',
+      pin:container, scrub:true, invalidateOnRefresh:true}});
+    [].forEach.call(cards, function(card, i){
+      var tl = gsap.timeline();
+      tl.to(card, {xPercent:-100, x:function(){ return -window.innerWidth; }, duration:10, ease:moveEase});
+      tl.from(card, {scale:0.9, duration:3, ease:'power1.in'}, '<');
+      tl.to(card, {scale:0.9, duration:3, delay:7, ease:'power1.out'}, '<');
+      tl.to(card, {rotationY:180, duration:8, ease:'power1.inOut'}, 1);
+      tl.to(card, {z:function(){ return 0.2 * window.innerWidth; }, duration:3.5, yoyo:true, repeat:1, ease:'power1.inOut'}, '<');
+      master.add(tl, i * stagger);
+    });
+  })();
+
+  /* ---- 104: the sentence rides a wire that waves with your scroll ------- */
+  (function(){
+    var root = document.querySelector('.mwg104'); if(!root || !ok) return;
+    if (typeof MorphSVGPlugin === 'undefined') return;
+    arm(root);
+    var pinHeight = root.querySelector('.pin-height');
+    var container = root.querySelector('.container');
+    var svgPath = root.querySelector('#line');
+    var track = root.querySelector('#track');
+    var GAP = 90, IMG_HEIGHT = 310;
+    var segments = [], totalLength = 0, scrollProgress = 0, ready = false;
+    var wheelTimeout, prevScroll = null;
+
+    var morphTl = gsap.timeline({paused:true}).to(svgPath, {morphSVG: root.querySelector('#wave'), duration:1, ease:'none'});
+    var amplitude = {value:0};
+    var amplitudeTo = gsap.quickTo(amplitude, 'value', {duration:1, ease:'power2', onUpdate:function(){
+      morphTl.progress(gsap.utils.clamp(0,1, amplitude.value/50)); update();
+    }});
+
+    function sizeImages(){
+      return Promise.all([].map.call(track.querySelectorAll('image.segment'), function(img){
+        return new Promise(function(resolve){
+          var probe = new Image();
+          var apply = function(){
+            img.setAttribute('width', Math.round(IMG_HEIGHT * probe.naturalWidth / probe.naturalHeight));
+            img.setAttribute('height', IMG_HEIGHT); resolve();
+          };
+          probe.onload = apply; probe.onerror = resolve;
+          probe.src = img.getAttribute('href');
+          if (probe.complete) apply();
+        });
+      }));
+    }
+    function measureTextWidth(textEl, content){
+      var fontSize = parseFloat(textEl.getAttribute('font-size')) || 350;
+      var canvas = measureTextWidth._c || (measureTextWidth._c = document.createElement('canvas'));
+      var ctx = canvas.getContext('2d');
+      var cs = getComputedStyle(textEl);
+      ctx.font = cs.fontWeight + ' ' + fontSize + 'px ' + cs.fontFamily;
+      return ctx.measureText(content).width;
+    }
+    function measureSegments(){
+      segments = [].map.call(track.children, function(el){
+        if (el.tagName === 'image'){
+          var w = +el.getAttribute('width'), h = +el.getAttribute('height');
+          return {type:'image', el:el, size:w, width:w, height:h};
+        }
+        var tp = el.querySelector('textPath');
+        return {type:'text', el:el, textPath:tp, size:measureTextWidth(el, tp.textContent)};
+      });
+      totalLength = segments.reduce(function(sum, seg, i){
+        return sum + seg.size + (i < segments.length-1 ? GAP : 0); }, 0);
+    }
+    function placeImageOnPath(el, len, width, height){
+      var pl = svgPath.getTotalLength();
+      if (len < -width || len > pl + width){ el.style.opacity = 0; return; }
+      el.style.opacity = 1;
+      var clamped = gsap.utils.clamp(0, pl, len);
+      var pt = svgPath.getPointAtLength(clamped);
+      var next = svgPath.getPointAtLength(gsap.utils.clamp(0, pl, clamped + 1));
+      var angle = Math.atan2(next.y - pt.y, next.x - pt.x) * 180 / Math.PI;
+      el.setAttribute('x', pt.x - width/2);
+      el.setAttribute('y', pt.y - height);
+      el.setAttribute('transform', 'rotate(' + angle + ' ' + pt.x + ' ' + pt.y + ')');
+    }
+    function update(){
+      if(!ready) return;
+      var pl = svgPath.getTotalLength();
+      var cursor = pl + totalLength - scrollProgress * (pl + totalLength);
+      for (var i = segments.length - 1; i >= 0; i--){
+        var seg = segments[i];
+        cursor -= seg.size;
+        if (seg.type === 'image') placeImageOnPath(seg.el, cursor + seg.size/2, seg.width, seg.height);
+        else {
+          seg.textPath.setAttribute('startOffset', ((cursor/pl)*100) + '%');
+          seg.el.style.opacity = (cursor >= pl || cursor + seg.size <= 0) ? 0 : 1;
+        }
+        cursor -= GAP;
+      }
+    }
+    function bump(amount){
+      amplitudeTo(Math.abs(amount));
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(function(){ amplitudeTo(0); }, 66);
+    }
+    function onWheel(e){ bump(e.deltaY); }
+
+    Promise.all([document.fonts.ready, sizeImages()]).then(function(){
+      measureSegments(); ready = true; update();
+      ScrollTrigger.create({
+        trigger:pinHeight, start:'top top', end:'bottom bottom', pin:container, scrub:true,
+        invalidateOnRefresh:true,
+        onRefresh:function(){ measureSegments(); update(); },
+        onUpdate:function(self){
+          var sc = self.scroll();
+          if (prevScroll != null) bump(sc - prevScroll);
+          prevScroll = sc;
+          scrollProgress = self.progress;
+          update();
+        }
+      });
+      root.addEventListener('wheel', onWheel, {passive:true});
+      ScrollTrigger.refresh();
+    });
+  })();
+
+  /* ---- 083: four lanes of work, right to left ------------------------- */
+  (function(){
+    var root = document.querySelector('.mwg083'); if(!root || !ok) return;
+    arm(root);
+    var pinHeight = root.querySelector('.pin-height');
+    var container = root.querySelector('.container');
+    var medias = root.querySelectorAll('.media');
+    var eases = ['ease-1','ease-2','ease-3','ease-4'];
+    [].forEach.call(medias, function(media, index){
+      var cls = eases[index % eases.length];
+      media.classList.add(cls);
+      var randomY = Math.random();
+      gsap.set(media, {y: randomY * window.innerHeight, yPercent: -randomY * 100, zIndex: parseInt(cls.split('-')[1], 10)});
+    });
+    ['power1.inOut','power2.inOut','power3.inOut','power4.inOut'].forEach(function(ease, i){
+      var sel = root.querySelectorAll('.ease-' + (i+1));
+      if(!sel.length) return;
+      gsap.fromTo(sel, {x:function(){ return window.innerWidth; }, xPercent:10},
+        {x:0, xPercent:-110, stagger:0.04, ease:ease,
+         scrollTrigger: i === 0
+           ? {trigger:pinHeight, start:'top top', end:'bottom bottom', pin:container, scrub:true, invalidateOnRefresh:true}
+           : {trigger:pinHeight, start:'top top', end:'bottom bottom', scrub:true, invalidateOnRefresh:true}});
+    });
+  })();
+
+  /* ---- 067: the brand line surfaces out of the fog --------------------- */
+  (function(){
+    var root = document.querySelector('.mwg067'); if(!root || !ok) return;
+    arm(root);
+    var pinHeight = root.querySelector('.pin-height');
+    var container = root.querySelector('.container');
+    /* the zip wraps every letter twice — the outer span carries the roll,
+       the inner one the push back in depth, so the two never fight */
+    root.querySelectorAll('.text .l').forEach(function(line){
+      line.innerHTML = line.textContent.split('').map(function(ch){
+        return ch === ' ' ? '<span><span>&nbsp;</span></span>'
+                          : '<span class="char"><span>' + ch + '</span></span>';
+      }).join('');
+    });
+    var chars = root.querySelectorAll('.text .char');
+    gsap.set(chars, {rotateX:60});
+    gsap.set(root.querySelectorAll('.text .char span'), {z:'-50vh'});
+    var tl = gsap.timeline({
+      scrollTrigger:{trigger:pinHeight, start:'top top', end:'bottom bottom', pin:container, scrub:true, invalidateOnRefresh:true},
+      defaults:{stagger:{each:0.03, from:'random'}}
+    });
+    tl.to(chars, {rotateX:0, ease:'power3.out'});
+    tl.to(chars, {rotateX:-60, ease:'power3.in'});
+  })();
+
+  /* ---- 074: the deck peels away --------------------------------------- */
+  (function(){
+    var root = document.querySelector('.mwg074'); if(!root || !ok) return;
+    arm(root);
+    var pinHeight = root.querySelector('.pin-height');
+    var container = root.querySelector('.container');
+    gsap.to(root.querySelectorAll('.card'), {
+      rotationX:-360, stagger:-0.2, ease:'power3.in',
+      scrollTrigger:{trigger:pinHeight, start:'top top', end:'bottom bottom', pin:container, scrub:true, invalidateOnRefresh:true}
+    });
+  })();
+
+  if(ok) addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
 </body>
 </html>
