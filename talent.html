@@ -47,30 +47,17 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 #progress{position:fixed;top:0;left:0;height:2px;background:var(--green);width:0;z-index:101}
 
 /* ---------- hero: effect 086 ---------- */
-#top{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem var(--pad) 5rem;overflow:hidden;background:var(--bg)}
-#top .bg{position:absolute;inset:0;z-index:0}
-#top .bg img{width:100%;height:100%;object-fit:cover;opacity:.3;filter:saturate(.7)}
-#top .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.45) 0%,rgba(11,11,12,.7) 55%,var(--bg) 100%)}
-#top>*{position:relative;z-index:2}
-.thesis-line{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.15rem,1.9vw,1.6rem);color:var(--ink);display:flex;align-items:center;gap:1.2rem;margin-bottom:clamp(1.5rem,4vh,3rem)}
-.thesis-line .mono{display:inline-flex;align-items:center;gap:.6rem}
-.thesis-line .mono i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green)}
+#top{position:relative;min-height:100vh;display:grid;place-items:center;padding:6rem var(--pad) 5rem;overflow:hidden;background:var(--bg)}
 .verts{list-style:none;display:flex;flex-direction:column;align-items:center;font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.012em;font-size:clamp(2.2rem,6.2vw,6.8rem);line-height:1.34}
 .verts li{position:relative}
-.verts .text{width:max-content;cursor:pointer;color:var(--ink);transition:color .3s}
-.verts li:nth-child(1) .text.hovered{color:var(--green)}
-.verts li:nth-child(2) .text.hovered{color:var(--green)}
-.verts li:nth-child(3) .text.hovered{color:var(--red)}
+.verts .text{width:max-content;cursor:pointer;color:var(--ink)}
 .verts .letter{display:inline-block;will-change:transform}
-.verts .media{position:absolute;width:17vw;min-width:150px;aspect-ratio:1.47;top:0;left:0;object-fit:cover;pointer-events:none;clip-path:inset(0% 50% round 1vw);z-index:3}
-#top .lede{margin-top:clamp(1.5rem,4vh,3rem);max-width:40rem;font-size:clamp(1rem,1.35vw,1.25rem);line-height:1.45;color:rgba(244,244,242,.75)}
+.verts .media{position:absolute;width:calc(1.3em * 1.47);aspect-ratio:1.47;top:0;left:0;object-fit:cover;pointer-events:none;clip-path:inset(0% 50% round 1vw);z-index:3}
 #top .nudge{position:absolute;left:var(--pad);bottom:1.6rem;z-index:2;width:1px;height:46px;background:rgba(244,244,242,.2);overflow:hidden}
 #top .nudge::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:drip 2.1s var(--ease) infinite}
 @keyframes drip{0%{top:-100%}60%,100%{top:100%}}
 @media (max-width:820px){
   .verts{font-size:clamp(1.7rem,8.6vw,3rem);line-height:1.4}
-  .verts .media{width:34vw;min-width:0}
-  .thesis-line{flex-direction:column;gap:.6rem;font-size:1.1rem}
 }
 
 /* ---------- section furniture ---------- */
@@ -222,17 +209,15 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
 
 <!-- ============ HERO ============ -->
 <section id="top" class="in mwg086">
-  <div class="bg" aria-hidden="true"><img src="assets/ishant-hero.jpg" alt=""></div>
-  <p class="thesis-line rev"><span class="mono"><i></i>Vertical 01</span> We don&rsquo;t manage talent. We run a brand.</p>
-  <!-- effect 086: the three practices inside the vertical. Hover a word and
-       it splits where the pointer is; that practice's image opens between
-       the letters (clip-path inset, expo.inOut 0.4s, letters ±0.086vw). -->
-  <ul class="verts rev" style="--d:.1s" aria-label="Inside this vertical">
+  <!-- effect 086: the three practices inside the vertical, alone on the
+       first screen. Hover a word and it splits where the pointer is; that
+       practice's image opens between the letters (clip-path inset,
+       expo.inOut 0.4s, letters ±0.086vw). Click lands on the section. -->
+  <ul class="verts rev" aria-label="Inside this vertical">
     <li><p class="text" data-href="#ishant">Talent representation</p><img class="media" src="assets/practice/talent.jpg" alt=""></li>
     <li><p class="text" data-href="#ishant">Personal branding</p><img class="media" src="assets/covers/ishant.jpg" alt=""></li>
     <li><p class="text" data-href="#business">Branding for business</p><img class="media" src="assets/covers/slay.jpg" alt=""></li>
   </ul>
-  <p class="lede rev" style="--d:.25s">One operating system &mdash; deal flow, editorial and equity &mdash; run first on a person, then on a business.</p>
   <span class="nudge" aria-hidden="true"></span>
 </section>
 
