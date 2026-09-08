@@ -114,10 +114,12 @@ button.hnav{background:none;border:0;cursor:pointer;padding:0}
    shows through as it goes: menu -> scroll -> back on the first screen.
    The header sits above it (z 500 > 400) so the dots button carries over. */
 .nav035{position:fixed;inset:0;z-index:400;background:var(--bg);
-  visibility:hidden;transform:translate3d(0,-100%,0);will-change:transform,opacity;
-  transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease,visibility 0s .6s}
-.nav035.open{visibility:visible;transform:none;opacity:1;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease}
-.nav035.dragging{transition:none}
+  visibility:hidden;transform:translate3d(0,-100%,0);will-change:transform,opacity}
+.nav035.open{visibility:visible}
+/* motion is JS-owned (one eased number on the GSAP ticker); these transitions
+   only serve the no-GSAP / reduced-motion fallback */
+.nav035.nofx{transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease,visibility 0s .6s}
+.nav035.nofx.open{transform:none;opacity:1;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease}
 .n35-top,.n35-bottom{flex:1 1 0;min-height:0;display:flex;align-items:center;padding:0 var(--pad)}
 .n35-top{padding-top:3.2rem}
 .n35-bottom{align-items:flex-end;justify-content:center;padding-bottom:1.6rem}
@@ -2790,33 +2792,58 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     gsap.set(wletters,{x:0,rotation:0,scale:1,clearProps:'transform'});
   }
 
-  /* ---- the curtain's scroll-to-dismiss ---- */
-  var lift=0;                 /* 0 = fully down, 1 = gone */
+  /* ---- the curtain's motion: one number, eased ----
+     Everything the curtain does is driven off `lift` (0 = fully down,
+     1 = gone), and lift never jumps: gestures move a TARGET, and a
+     Lenis-style lerp on the GSAP ticker chases it every frame (0.09 per
+     frame at 60fps ~ Lenis's own default), so wheel notches read as one
+     continuous glide instead of steps. Open and close are GSAP tweens on the
+     same number (expo.inOut over 0.9s), so the curtain, its fade and the
+     dots button all move on the same curve, whichever way it was sent. */
+  var lift=0, target=0, ticking=false, settleT=null, curtainTween=null;
   var RUN=function(){ return window.innerHeight*0.5; };
-  var settleT=null;
+  var proxy={v:0};
   function paint(){
-    root.style.transform='translate3d(0,'+(-lift*100)+'%,0)';
-    root.style.opacity=String(1-lift*0.85);
+    var v=lift;
+    root.style.transform='translate3d(0,'+(-v*100)+'%,0)';
+    root.style.opacity=String(1-v*0.85);
     /* the dots step aside while rows pass under them */
-    btn.style.opacity=String(Math.max(0,1-lift*2.5));
+    btn.style.opacity=String(Math.max(0,1-v*2.5));
   }
   function resetPaint(){ root.style.transform=''; root.style.opacity=''; btn.style.opacity=''; root.classList.remove('dragging'); }
+  function tick(){
+    var d=target-lift;
+    if(Math.abs(d)<0.002){ lift=target; paint(); stopTick(); if(isOpen&&lift>=1) closeMenu(true); return; }
+    lift+=d*(fx?0.11:1);
+    paint();
+  }
+  function startTick(){ if(ticking) return; ticking=true; if(fx) gsap.ticker.add(tick); else { lift=target; paint(); ticking=false; } }
+  function stopTick(){ if(!ticking) return; ticking=false; if(fx) gsap.ticker.remove(tick); }
+  function killTween(){ if(curtainTween){ curtainTween.kill(); curtainTween=null; } }
   function settle(){
     /* the gesture stopped: past halfway it finishes leaving, short of it
-       the curtain eases back down */
-    if(lift>0.5){ closeMenu(true); return; }
-    root.classList.remove('dragging');
-    lift=0; root.style.transform=''; root.style.opacity=''; btn.style.opacity='';
+       the curtain eases back down - either way on a curve with a real end,
+       not the lerp's asymptote */
+    var to=(target>0.5||lift>0.5)?1:0;
+    slide(to,0.7,'power3.out',function(){ if(to>=1&&isOpen) closeMenu(true); });
   }
   function nudge(dy){
     if(!isOpen) return;
-    if(dy<=0&&lift<=0) return;
-    clearTimeout(settleT);
+    if(dy<=0&&target<=0&&lift<=0) return;
+    clearTimeout(settleT); killTween();
     root.classList.add('dragging');
-    lift=Math.max(0,Math.min(1,lift+dy/RUN()));
-    paint();
-    if(lift>=1){ closeMenu(true); return; }
-    settleT=setTimeout(settle,420);
+    target=Math.max(0,Math.min(1,target+dy/RUN()));
+    startTick();
+    settleT=setTimeout(settle,380);
+  }
+  /* open / close ride the same number through a tween */
+  function slide(to,dur,ease,done){
+    stopTick(); killTween(); clearTimeout(settleT);
+    if(!fx){ lift=target=to; paint(); if(done) done(); return; }
+    proxy.v=lift; target=to;
+    curtainTween=gsap.to(proxy,{v:to,duration:dur,ease:ease,overwrite:true,
+      onUpdate:function(){ lift=proxy.v; paint(); },
+      onComplete:function(){ curtainTween=null; lift=to; paint(); if(done) done(); }});
   }
   /* on the window, not the curtain: once it has risen, the pointer is over
      the film beneath it and the curtain would never hear the next notch */
@@ -2836,10 +2863,14 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
   function openMenu(){
     if(isOpen) return; isOpen=true;
-    clearTimeout(settleT); lift=0; resetPaint();
+    clearTimeout(settleT);
     document.body.style.overflow='hidden';
     if(window.__scrollLock) window.__scrollLock(true);
     root.classList.add('open');
+    /* drop from wherever it is (fully up, first time) to down, on the curve */
+    if(lift<=0||lift>1) lift=1;
+    paint();
+    slide(0,0.9,'expo.inOut');
     root.setAttribute('aria-hidden','false');
     btn.setAttribute('aria-expanded','true');
     btn.setAttribute('aria-label','Close menu');
@@ -2859,22 +2890,26 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   function closeMenu(viaScroll){
     if(!isOpen) return; isOpen=false;
     clearTimeout(settleT);
-    if(viaScroll){
-      /* the gesture already carried it off - let the CSS transition take
-         over from wherever the drag left it, no snap */
-      root.classList.remove('dragging');
-      root.style.transform=''; root.style.opacity=''; btn.style.opacity='';
-    } else { resetPaint(); }
-    lift=0;
-    root.classList.remove('open');
-    root.setAttribute('aria-hidden','true');
-    btn.setAttribute('aria-expanded','false');
-    btn.setAttribute('aria-label','Menu');
-    if(txt) txt.textContent='Menu';
-    if(hdr) hdr.classList.remove('menu-open');
+    root.classList.remove('dragging');
+    var finish=function(){
+      root.classList.remove('open'); lift=1; resetPaint();
+      root.setAttribute('aria-hidden','true');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Menu');
+      if(txt) txt.textContent='Menu';
+      if(hdr) hdr.classList.remove('menu-open');
+      resetWord();
+    };
     document.body.style.overflow='';
     if(window.__scrollLock) window.__scrollLock(false);
-    setTimeout(resetWord,650);
+    if(viaScroll){
+      /* the gesture already carried it off - it is at 1 (or the tick is
+         about to land there); just let it go */
+      stopTick(); lift=1; paint(); finish();
+    } else {
+      /* sent up by the button or a key: the same curve as the way down */
+      slide(1,0.8,'expo.inOut',finish);
+    }
   }
   window.__closeMenu=closeMenu;
 
