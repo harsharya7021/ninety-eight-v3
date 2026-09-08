@@ -258,10 +258,11 @@ h1{
 .mwg094 .card{position:relative;width:min(12vw,calc((48vh - 118px)/1.46));height:auto;
   display:block;border-radius:.5vw;will-change:transform}
 .mwg094 .card:nth-child(7){aspect-ratio:564/648;object-fit:cover;object-position:50% 100%}
-/* the line's stage lives inside the pinned container now — same curve, same
-   camera, no section of its own and no un-pin between the two thoughts */
-.mwg094 .p059-stage{position:absolute;inset:0;z-index:3;opacity:0;visibility:hidden;
-  background:none;pointer-events:none;overflow:hidden}
+/* the line's stage lives inside the pinned container — no section of its own
+   and no un-pin between the two thoughts; it is the flex box the sentence is
+   centred in, and it clips the sentence's travel to the screen */
+.mwg094 .p079-stage{position:absolute;inset:0;z-index:3;opacity:0;visibility:hidden;
+  background:none;pointer-events:none;overflow:hidden;display:flex;align-items:center}
 @media (max-width:768px){
   .mwg094 .card{width:min(30vw,calc((48vh - 118px)/1.46))}
 }
@@ -1018,44 +1019,35 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   .pc-row2{grid-template-columns:1fr}
 }
 
-/* ===== the line — effect 059, Path text camera ==========================
-   The sentence writes itself along a curve while the camera — the SVG viewBox
-   — pans to keep the letter being written in the middle of the screen, so the
-   reader travels along the line rather than watching it arrive.
-
-   This is back after a spell as a flat slide-left. That version kept the
-   stage pinned through the handover to the cards, which was the brief at the
-   time, but it threw away the shape and the curl that were the point. The pin
-   is the price of having them: this is its own section again, so the verticals
-   begin after it rather than under it. */
-/* No border-top. Every other section on this page carries one, and copying
-   that convention here was the whole seam: a 13%-white hairline reads as a
-   rule between two dark sections, but under a full-bleed film it reads as the
-   edge of the film. The divider stays on the sections that sit between flat
-   surfaces. */
-.mwg059{position:relative;background:var(--bg)}
-.mwg059 .pin-height{height:500vh}
-.mwg059 .container{height:100vh;overflow:hidden;position:relative}
-/* Three viewports wide and parked left: the camera pans the viewBox along this,
-   so the artwork has to be much larger than the window it is seen through. */
-.mwg059 svg{width:300vw;height:auto;display:block;position:absolute;left:0;top:50%;transform:translate(0,-50%);overflow:visible}
-.mwg059 #p059-path{fill:none;stroke:none}
-.mwg059 #p059-tp{fill:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:118%;letter-spacing:-.03em}
-.p059-scroll{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
-  font-family:'Space Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--dim)}
-/* the heading is drawn by the SVG, so the real one is taken out of the paint
-   but left in the document */
-.p059-head{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-/* Nothing here is an entrance — with motion reduced the sentence would never
-   type itself at all. Drop the SVG and the scroll runway, show the heading. */
+/* ===== the line: effect 079, the weight wave =============================
+   One line of the house face, parked off the right edge by its own padding
+   and dragged the full width of itself across the held screen while every
+   letter thickens and thins in a wave that runs ahead of the reading eye.
+   The padding is 70vw a side rather than the reference's 100: the beat is
+   measured 1:1 against the text's own width, so the padding IS the runway,
+   and 100vw a side would have cost the introduction two extra screens. */
+.mwg079{position:relative;background:var(--bg)}
+.mwg079 .text{padding:0 70vw;font-family:'Archivo',Helvetica,Arial,sans-serif;
+  font-size:max(52px,10vw);line-height:1;letter-spacing:-.03em;color:var(--ink);
+  width:max-content;white-space:nowrap;will-change:transform}
+/* The wave rides the weight axis itself, not a font-weight swap: Archivo is
+   the variable face this page already loads (wght 100..900, wdth 62..125), so
+   the zip's 250 -> 750 lands inside its range untouched and the width axis is
+   pinned at the house 112 so nothing but the weight moves. Note that
+   font-variation-settings beats font-weight, so weight is never set on this
+   element anywhere else. */
+.mwg079 .char{--wght:250;font-variation-settings:'wght' var(--wght),'wdth' 112}
+/* the sentence is drawn by the animated line, so the real heading is taken
+   out of the paint but left in the document */
+.p079-head{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+/* Nothing here is an entrance — with motion reduced the wave would never run
+   and the sentence would never arrive. Drop the stage, show the heading. */
 @media(prefers-reduced-motion:reduce){
-  .mwg059 .pin-height{display:none}
-  .p059-scroll{display:none}
-  .p059-head{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal;
+  .p079-stage{display:none}
+  .p079-head{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal;
     padding:14vh clamp(18px,5vw,64px);font-weight:800;font-stretch:120%;
     font-size:clamp(2.4rem,7vw,6rem);line-height:1;letter-spacing:-.03em;text-transform:uppercase}
-  .p059-head .accent{color:var(--red)}
+  .p079-head .accent{color:var(--red)}
 }
 }
 
@@ -1375,15 +1367,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
       <p class="c94-phase"><b>Built by Gen Z,</b><span>for the dreamers running the next generation’s businesses.</span></p>
     </div>
     <!-- The pact, written in the same held screen: once the strip has scrubbed
-         past and the centre lines have faded, the 059 camera types this along
-         its curve without the page ever un-pinning. The h1 is the real text —
-         screen readers and reduced motion get it; the SVG is presentation. -->
-    <h1 class="p059-head">Business partners for hire — to help you scale.</h1>
-    <div class="p059-stage mwg059" aria-hidden="true">
-      <svg id="p059" fill="none" viewBox="0 0 3898 891" xmlns="http://www.w3.org/2000/svg">
-        <path id="p059-path" d="M0.398438 611.016C175.398 377.517 857.398 -285.484 1461.4 139.638C1911.53 456.46 2114.4 805.516 2679.4 611.016C3088.4 470.219 3704.54 -33.3124 4354.9 781.516C4700.9 1215.02 5305.6 1466.52 6108.4 328.516"/>
-        <text id="p059-text"><textPath id="p059-tp" href="#p059-path" text-anchor="start" font-size="250">Business partners for hire — to help you scale.</textPath></text>
-      </svg>
+         past and the centre lines have faded, this sentence crosses the screen
+         with the 079 weight wave running through it, and the page never
+         un-pins. The h1 is the real text — screen readers and reduced motion
+         get it; the line below is presentation. -->
+    <h1 class="p079-head">Business partners for hire — to help you scale.</h1>
+    <div class="p079-stage mwg079" aria-hidden="true">
+      <p class="text">Business partners for hire — to help you scale.</p>
     </div>
     <div class="cards">
         <img class="card" loading="eager" src="assets/gurls/g01.webp" alt="">
@@ -3067,74 +3057,83 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
 
 
-/* ===== the line: effect 059, Path text camera ==============================
-   No section and no pin of its own any more: the sentence lives inside the
-   culture pin's held screen and types along its curve once the strip has
-   scrubbed past — the camera maths and the textContent reveal are the zip's,
-   unchanged; only the driver moved. This block measures once the fonts land
-   and exposes window.__line059 = { alpha, render } for the culture trigger
-   to drive. */
+/* ===== the line: effect 079, the weight wave ==============================
+   No section and no pin of its own: the sentence lives inside the culture
+   pin's held screen and is dragged across it once the strip has scrubbed
+   past, each letter swelling 250 -> 750 -> 250 as the wave reaches it — the
+   zip's numbers exactly (half a second each way, six letters lit at once, so
+   the stagger is the letter's whole life over six).
+
+   Two departures from the zip, both forced by living inside another pin.
+   It owns no ScrollTrigger: the wave is a PAUSED timeline the culture
+   trigger scrubs by hand through render(), which is also why the travel is
+   a plain gsap.set on x rather than a tween. And it publishes the runway it
+   wants — travel() is the text's width less the screen, the zip's 1:1 —
+   because the culture pin has to add that to its own end before it can be
+   measured. Refreshes ScrollTrigger once, when the fonts land and the split
+   is real, so the pin picks the number up. Exposes
+   window.__line079 = { travel, alpha, render }. */
 (function(){
-  var stage = document.querySelector('.p059-stage');
-  var svg   = document.getElementById('p059');
-  var path  = document.getElementById('p059-path');
-  var tp    = document.getElementById('p059-tp');
-  if(!stage || !svg || !path || !tp) return;
-  if (typeof gsap === 'undefined') return;
+  var stage = document.querySelector('.p079-stage');
+  var text  = stage && stage.querySelector('.text');
+  if(!stage || !text) return;
+  if (typeof gsap === 'undefined' || typeof SplitText === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-  var points=[], totalChars=0, chars=[], vbW=0, vbH=0, scaleFactor=1, ready=false;
-  var position={x:0,y:0};
-  var updateViewBox=function(){ svg.setAttribute('viewBox', position.x+' '+position.y+' '+vbW+' '+vbH); };
-  var tweenOpts={duration:0.2,ease:'power1',onUpdate:updateViewBox};
-  var xTo=gsap.quickTo(position,'x',tweenOpts);
-  var yTo=gsap.quickTo(position,'y',tweenOpts);
+  var travelPx = 0, wave = null, ready = false, refreshed = false;
+
+  function measure(){
+    /* the text is width:max-content, so this is the sentence plus its two
+       screens of padding; the stage is the window it crosses */
+    travelPx = Math.max(1, text.clientWidth - stage.clientWidth);
+  }
 
   document.fonts.ready.then(function(){
-    var vb=svg.viewBox.baseVal; vbW=vb.width; vbH=vb.height;
-    svg.style.aspectRatio=vbW+'/'+vbH;
-    var svgCssW=svg.getBoundingClientRect().width;
-    var visibleW=stage.getBoundingClientRect().width;
-    scaleFactor=svgCssW?(visibleW/svgCssW):1;
+    SplitText.create(text, { type:'chars', charsClass:'char' });
+    var chars = text.querySelectorAll('.char');
 
-    var str=tp.textContent.trim();
-    chars=str.split(''); totalChars=chars.length;
-    tp.textContent=str;
-    var textLen=tp.getComputedTextLength();
-    tp.textContent='';
+    var duration = 0.5, letterTotal = duration * 2, simultaneousLetters = 6;
+    var offset = letterTotal / simultaneousLetters;
 
-    var stepCount=1000;
-    for(var i=0;i<stepCount;i++){
-      var p=path.getPointAtLength((i/(stepCount-1))*textLen);
-      points.push({x:p.x,y:p.y});
+    wave = gsap.timeline({ paused:true });
+    [].forEach.call(chars, function(char, i){
+      var tl = gsap.timeline();
+      tl.to(char, { '--wght': 750, duration: duration, ease: 'power1.inOut' })
+        .to(char, { '--wght': 250, duration: duration, ease: 'power1.inOut' });
+      wave.add(tl, i * offset);
+    });
+
+    measure();
+    ready = true;
+    if(!refreshed && typeof ScrollTrigger !== 'undefined'){
+      refreshed = true; ScrollTrigger.refresh();
     }
-    ready=true;
   });
 
-  window.__line059={
-    alpha:function(a){ gsap.set(stage,{autoAlpha:a}); },
-    render:function(prog){
+  addEventListener('resize', function(){ if(ready) measure(); });
+
+  window.__line079 = {
+    travel: function(){ return ready ? travelPx : 0; },
+    alpha:  function(a){ gsap.set(stage, {autoAlpha:a}); },
+    render: function(prog){
       if(!ready) return;
-      prog=Math.max(0,Math.min(1,prog));
-      var idx=Math.floor(prog*(points.length-1));
-      var p=points[idx];
-      xTo(p.x-(vbW*scaleFactor)/2);
-      yTo(p.y-vbH/2-60);
-      var next=chars.slice(0,Math.floor(prog*totalChars)).join('');
-      if(tp.textContent!==next) tp.textContent=next;
+      prog = Math.max(0, Math.min(1, prog));
+      gsap.set(text, { x: -travelPx * prog });
+      wave.progress(prog);
     }
   };
 })();
-/* ===== the introduction: 094 + 059, one held screen ========================
+/* ===== the introduction: 094 + 079, one held screen ========================
    The culture strip and the pact line are one pinned section now, at Harsh's
    call: the photographs scrub past while the two centre lines trade places
    ("Not just a company…" holds to 55% of the strip, then "Built by Gen Z…");
    when the last cards leave, the centre text fades and — without the page
-   un-pinning — the 059 camera types "Business partners for hire — to help
-   you scale." along its curve in the same screen. Then the verticals.
+   un-pinning — "Business partners for hire — to help you scale." crosses the
+   same screen with the 079 wave running through it. Then the verticals.
 
    One master trigger owns the pin and deals its progress out: the strip's
-   share is its travel at the 0.62 scrub, the line's share is four screens.
+   share is its travel at the 0.62 scrub, the line's share is the runway the
+   line itself asks for (079 scrubs 1:1 against the sentence's own width).
    The card arcs are the reference's own numbers (90vw→10vw crossing, yoyo
    power1.inOut, back.inOut(3) swell), driven directly off the strip's x —
    containerAnimation went with the second pin. Arcs still build only once
@@ -3178,7 +3177,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     dist=Math.max(1, lefts[cards.length-1]+ws[cards.length-1]+24); /* +24: no rounding sliver at the edge */
     stripPx=Math.round(dist*SPEED);
     fadePx=Math.round(window.innerHeight*FADE_SCREENS);
-    linePx=Math.round(window.innerHeight*LINE_SCREENS);
+    /* 079 crosses at 1:1, so its beat is the sentence's own width less the
+       screen — not a fixed number of screens. Until the fonts land and it can
+       measure, hold the old three-and-a-half screens; the driver refreshes
+       once it knows, and this re-runs. */
+    var lineApi=window.__line079;
+    var want=(lineApi&&lineApi.travel)?lineApi.travel():0;
+    linePx=want>0?want:Math.round(window.innerHeight*LINE_SCREENS);
     var total=stripPx+fadePx+linePx;
     A=stripPx/total; B=(stripPx+fadePx)/total;
   }
@@ -3221,7 +3226,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
       renderCards(x);
       setPhase(sp<0.55?0:1);
       if(linesBox) gsap.set(linesBox,{autoAlpha:1-fadeT, y:-18*fadeT});
-      var api=window.__line059;
+      var api=window.__line079;
       if(api){
         api.alpha(Math.max(0,Math.min(1,lp/0.06)));
         api.render(lp);
