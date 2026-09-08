@@ -118,7 +118,18 @@ button.hnav{background:none;border:0;cursor:pointer;padding:0}
   transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease,visibility 0s .6s}
 .nav035.open{visibility:visible;transform:none;opacity:1;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease}
 .nav035.dragging{transition:none}
-.n35-hint{position:absolute;left:0;right:0;bottom:1.6rem;text-align:center;color:var(--dim);opacity:.7;animation:npulse 2.8s ease-in-out infinite}
+.n35-top,.n35-bottom{flex:1 1 0;min-height:0;display:flex;align-items:center;padding:0 var(--pad)}
+.n35-top{padding-top:3.2rem}
+.n35-bottom{align-items:flex-end;justify-content:center;padding-bottom:1.6rem}
+.n35-hint{color:var(--dim);opacity:.7;animation:npulse 2.8s ease-in-out infinite}
+/* effect 093 - the word */
+.n35-word{display:flex;font-weight:800;font-stretch:118%;text-transform:uppercase;line-height:.9;letter-spacing:-.02em;
+  font-size:clamp(3.4rem,10vw,11rem);color:var(--ink);margin:0;user-select:none}
+.n35-word .letter{position:relative;display:inline-block;cursor:default}
+.n35-word .letter:has(.n35-cm){color:transparent}
+.n35-wmedias{position:absolute;top:0;left:0;pointer-events:none}
+.n35-wmedia{width:1px;height:1px;visibility:hidden;position:absolute}
+.n35-cm{position:absolute;width:9vw;min-width:64px;height:auto;aspect-ratio:1;object-fit:cover;top:50%;left:50%;border-radius:1vw;pointer-events:none}
 .n35-name .beta{font-size:.55em;font-weight:600;color:var(--red);letter-spacing:.1em;vertical-align:super;margin-left:.5em}
 #hdr.menu-open{z-index:500;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
 /* the dots: three points that read as a menu; while open, the middle one
@@ -132,7 +143,7 @@ button.hnav{background:none;border:0;cursor:pointer;padding:0}
 .mdots[aria-expanded="true"] .md-dots i:nth-child(1){transform:translateX(4.5px)}
 .mdots[aria-expanded="true"] .md-dots i:nth-child(3){transform:translateX(-4.5px)}
 .md-txt{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
-.n35-inner{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.n35-inner{height:100vh;display:flex;flex-direction:column;justify-content:center}
 .n35-label{padding:0 0 40px var(--pad)}
 .nav035 ul{width:100%;border-bottom:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;list-style:none;margin:0;padding:0}
 .nav035 ul li{flex:1 1 45px;align-items:center;border-top:1px solid rgba(255,255,255,.3);width:100%;padding:0 var(--pad);display:flex;justify-content:space-between;position:relative;overflow:hidden}
@@ -1244,6 +1255,22 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
      points to - a table of contents, not an exit ramp. -->
 <div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="n35-inner">
+    <!-- effect 093: the word in the empty upper room. Hover a letter and a
+         photograph from the site takes its place for a beat, the neighbours
+         stepping aside; then the letter pops back. -->
+    <div class="n35-top">
+      <p class="n35-word" aria-hidden="true">Menu</p>
+      <div class="n35-wmedias" aria-hidden="true">
+        <img class="n35-wmedia" src="assets/gurls/g06.webp" alt="">
+        <img class="n35-wmedia" src="assets/covers/ishant.jpg" alt="">
+        <img class="n35-wmedia" src="assets/gurls/g07.webp" alt="">
+        <img class="n35-wmedia" src="assets/covers/slay.jpg" alt="">
+        <img class="n35-wmedia" src="assets/gurls/g08.webp" alt="">
+        <img class="n35-wmedia" src="assets/covers/one8.jpg" alt="">
+        <img class="n35-wmedia" src="assets/gurls/g09.webp" alt="">
+        <img class="n35-wmedia" src="assets/covers/hardrock.jpg" alt="">
+      </div>
+    </div>
     <p class="n35-label mono">Everything that isn&rsquo;t on the first screen.</p>
     <ul>
       <li><a href="#culture">
@@ -1299,7 +1326,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
         </span>
       </a></li>
     </ul>
-    <p class="n35-hint mono" aria-hidden="true">Scroll &darr; to go back to the film</p>
+    <div class="n35-bottom"><p class="n35-hint mono" aria-hidden="true">Scroll &darr; to go back to the film</p></div>
   </div>
 </div>
 
@@ -2714,6 +2741,56 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     });
   }
 
+  /* ---- effect 093: the word ----
+     The reference's numbers kept: each letter wrapped in a span; on hover an
+     image is born in its place (xPercent/yPercent -50, from a random +-10deg
+     roll at 1.05, back.out(2) over 0.3s), the letters either side are pushed
+     out by half the image's overflow on back.out(3), and 1.2s later the
+     image goes and the letter pops back with the same roll. Media are the
+     site's own: the Gurls set and four covers, cycled in order. */
+  var word=root.querySelector('.n35-word');
+  var wletters=[], woverflows=[], wsrcs=[], wIndex=0, wcalls=[];
+  if(word&&fx){
+    wsrcs=[].map.call(root.querySelectorAll('.n35-wmedia'),function(el){ return el.getAttribute('src'); });
+    word.innerHTML=word.textContent.split('').map(function(ch){ return ch===' '?'<span>&nbsp;</span>':'<span class="letter">'+ch+'</span>'; }).join('');
+    wletters=[].slice.call(word.querySelectorAll('.letter'));
+    woverflows=wletters.map(function(){ return 0; });
+    var mediaWidth=function(){ return Math.max(64,0.095*window.innerWidth); };
+    var applyOffsets=function(){
+      var sumLeft=0, targets=woverflows.map(function(ov,i){
+        var sumRight=0; for(var j=i+1;j<woverflows.length;j++) sumRight+=woverflows[j];
+        var x=sumLeft-sumRight; sumLeft+=ov; return x;
+      });
+      gsap.to(wletters,{x:function(i){ return targets[i]; },duration:0.3,ease:'back.out(3)',overwrite:'auto'});
+    };
+    var createMedia=function(letter){
+      var img=document.createElement('img');
+      img.src=wsrcs[wIndex]; img.className='n35-cm'; letter.appendChild(img);
+      gsap.set(img,{yPercent:-50,xPercent:-50});
+      gsap.from(img,{rotation:(Math.random()-0.5)*20,scale:1.05,duration:0.3,ease:'back.out(2)'});
+      wIndex=(wIndex+1)%wsrcs.length;
+      var index=wletters.indexOf(letter);
+      woverflows[index]=Math.max(woverflows[index],Math.max(0,(mediaWidth()-letter.getBoundingClientRect().width)/2));
+      applyOffsets();
+      var dc=gsap.delayedCall(1.2,function(){
+        var idx=wletters.indexOf(img.parentElement);
+        if(idx!==-1) woverflows[idx]=0;
+        img.remove(); applyOffsets();
+        gsap.from(letter,{rotation:(Math.random()-0.5)*20,scale:1.05,duration:0.3,ease:'back.out(2)'});
+      });
+      wcalls.push(dc);
+    };
+    wletters.forEach(function(letter){
+      letter.addEventListener('mouseenter',function(){ if(letter.children.length===0) createMedia(letter); });
+    });
+  }
+  function resetWord(){
+    if(!wletters.length) return;
+    wcalls.forEach(function(dc){ dc.kill(); }); wcalls=[];
+    wletters.forEach(function(l,i){ woverflows[i]=0; var im=l.querySelector('.n35-cm'); if(im) im.remove(); });
+    gsap.set(wletters,{x:0,rotation:0,scale:1,clearProps:'transform'});
+  }
+
   /* ---- the curtain's scroll-to-dismiss ---- */
   var lift=0;                 /* 0 = fully down, 1 = gone */
   var RUN=function(){ return window.innerHeight*0.5; };
@@ -2798,6 +2875,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     if(hdr) hdr.classList.remove('menu-open');
     document.body.style.overflow='';
     if(window.__scrollLock) window.__scrollLock(false);
+    setTimeout(resetWord,650);
   }
   window.__closeMenu=closeMenu;
 
