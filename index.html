@@ -2676,6 +2676,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     var UNIT=Math.round(vh*0.8);
     var total=6+HOLD+POP;
     pinH.style.height=(vh+Math.round(total*UNIT))+'px';
+    /* the runway is a function of the viewport, so it is re-measured on every
+       refresh — a rotation, a phone's address bar, a pane that laid out at
+       zero height before the page had a size (v3.36) */
+    ScrollTrigger.addEventListener('refreshInit', function(){
+      var h2=window.innerHeight; if(!h2) return;
+      pinH.style.height=(h2+Math.round(total*Math.round(h2*0.8)))+'px';
+    });
 
     var master=gsap.timeline({
       scrollTrigger:{ trigger:pinH, start:'top top', end:'bottom bottom',
@@ -3214,7 +3221,10 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     var root = document.querySelector('.mwg097'); if(!root || !ok) return;
     if(typeof SplitText === 'undefined') return;
     var container = root.querySelector('.container');
-    document.fonts.ready.then(function(){
+    document.fonts.ready.then(function go(){
+      /* lines are split once, so never against a page that has no width yet
+         (a hidden pane, a pre-rendered tab): wait for a real layout */
+      if(!container.clientWidth){ setTimeout(go, 250); return; }
       /* the About column measures against its container, as the zip does;
          everything else on the page that carries data-gather measures against
          its own box, so a headline's words spread across the headline, not
