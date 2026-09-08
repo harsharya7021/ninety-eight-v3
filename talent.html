@@ -66,6 +66,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 
 /* ---------- section furniture ---------- */
 .sec{position:relative;padding:clamp(5rem,14vh,10rem) 0}
+#ishant.sec{padding-top:0}
 .sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line);margin-bottom:clamp(2.5rem,6vh,4.5rem)}
 .sec-head h2{font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;font-size:clamp(2rem,5.2vw,4.8rem)}
 .sec-head h2 small{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:.42em;color:var(--dim);margin-top:.5rem}
@@ -109,7 +110,10 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 
 /* chapters */
 .chapter{min-height:78vh;display:flex;flex-direction:column;justify-content:center;padding:6vh 0;border-top:1px solid var(--line)}
-.chapter:first-child{border-top:0;min-height:60vh}
+.intro-space{height:100vh}
+.intro-space+.chapter{border-top:0}
+.card-col .under .hint{display:block;margin-top:.5rem;color:var(--dim)}
+.card-col .under b{color:var(--ink);font-weight:400}
 .chapter .num{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
 .chapter .num i{display:inline-block;height:1px;width:34px;background:var(--dim)}
 .chapter h3{font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:.96;font-size:clamp(1.8rem,3.8vw,3.6rem);margin-bottom:1.3rem}
@@ -192,6 +196,7 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
   .tcard .nick{display:none}
   .tcard .big b{font-size:1.2rem}
   .card-col .under{display:none}
+  .intro-space{height:0}
   .chapter{min-height:0;padding:3.5rem 0}
   .chapters{padding-top:1rem}
 }
@@ -226,13 +231,11 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
 </section>
 
 <!-- ============ THE WALK — ISHANT ============ -->
+<!-- The card arrives alone first: centred on its own screen straight after
+     the three lines, then docks to the left column as the first chapter
+     rises, and keeps score from there. -->
 <section class="sec wrap" id="ishant">
-  <div class="sec-head rev">
-    <h2>Proof, walked.<small>Ishant Sharma · exclusive contract · 2022 &rarr;</small></h2>
-    <p class="mono">ISH&mdash;2020 &middot; Talent &middot; Personal brand</p>
-  </div>
-
-  <div class="walk">
+  <div class="walk" data-intro>
     <div class="card-col">
       <div class="tcard" id="card-ishant" data-band="#00933C">
         <div class="band">
@@ -254,10 +257,11 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
         </div>
         <div class="gloss"></div>
       </div>
-      <p class="under mono">The card keeps score as you read &darr;</p>
+      <p class="under mono" data-caption><b>Ishant Sharma</b> &middot; ISH&mdash;2020 &middot; exclusive contract &middot; 2022 &rarr;<br><span class="hint">Scroll &darr; the card keeps score</span></p>
     </div>
 
     <div class="chapters g97" data-chapters>
+      <div class="intro-space" aria-hidden="true"></div>
 
       <article class="chapter" data-tag="The name"
         data-stats='[["Tests","105"],["Wickets","311"],["India career","13 yrs"],["Brand deals","11"]]'
@@ -353,55 +357,6 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
         <p style="margin-top:1.6rem"><a class="bridge mono" href="index.html#case-ishant"><b>Open the full case file</b> &rarr;</a></p>
       </article>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============ PRATIMA ============ -->
-<section class="sec wrap" id="pratima">
-  <div class="sec-head rev">
-    <h2>Where there was silence.<small>Pratima Singh &middot; captain, Indian basketball</small></h2>
-    <p class="mono">PSG&mdash;2021 &middot; Talent &middot; Sports</p>
-  </div>
-  <div class="walk">
-    <div class="card-col">
-      <div class="tcard" id="card-pratima" data-band="#EE352E" style="--band:#EE352E">
-        <div class="band">
-          <img class="mark" src="assets/98-graffiti.png" alt="">
-          <div class="spine"><small>India &middot; basketball</small>Pratima<br>Singh</div>
-        </div>
-        <div class="photo"><div class="mono-photo">PS</div></div>
-        <span class="tag mono" data-tag>Career</span>
-        <div class="nick" aria-hidden="true"><span>Captain</span></div>
-        <div class="ladder" data-ladder>
-          <div class="row"><span>Role</span><b>Captain, India</b></div>
-          <div class="row"><span>Era</span><b>2016 &rarr; 2020</b></div>
-          <div class="big" data-big>
-            <div><b>5&times;</b><span>Nationals</span></div>
-            <p class="no">No. 002</p>
-            <div><b>1st</b><span>Brand book</span></div>
-          </div>
-          <p class="fact" data-fact><b>Fact:</b> Where cricket has an industry, women&rsquo;s basketball had silence.</p>
-        </div>
-        <div class="gloss"></div>
-      </div>
-    </div>
-    <div class="chapters g97" data-chapters>
-      <article class="chapter" data-tag="The silence"
-        data-stats='[["Nationals","5×"],["Industry","0"],["Role","Captain, India"],["Era","2016 → 2020"]]'
-        data-fact="Where cricket has an industry, women&rsquo;s basketball had silence.">
-        <p class="num mono"><i></i>01 &middot; The room</p>
-        <h3>A captain <em>without an industry.</em></h3>
-        <p>Five-time national player, captain of India. Where cricket has sponsors, agents and a media machine, women&rsquo;s basketball had none of it. No template to follow &mdash; which meant one had to be written.</p>
-      </article>
-      <article class="chapter" data-tag="The brand book"
-        data-stats='[["Brand book","1st"],["Nationals","5×"],["Positioning · partnerships","Written"],["Channel","The practice court"]]'
-        data-fact="The first brand book in Indian women&rsquo;s basketball: positioning, partnerships, and the practice court as a media channel.">
-        <p class="num mono"><i></i>02 &middot; The work</p>
-        <h3>The first brand book <em>in the sport.</em></h3>
-        <p>98 wrote the first brand book in Indian women&rsquo;s basketball: positioning, partnerships, and the case that the practice court itself is a media channel &mdash; that the work of becoming good is content before the game is.</p>
-        <blockquote class="pull" style="margin-top:1.4rem;font-size:clamp(1.3rem,2.4vw,2.2rem)">&ldquo;They saw the practice before they saw the player.&rdquo;<cite class="mono">Pratima Singh</cite></blockquote>
-      </article>
     </div>
   </div>
 </section>
@@ -542,6 +497,26 @@ footer{padding:2rem var(--pad) 2.2rem;border-top:1px solid var(--line);display:f
       chapters.forEach(function(c){ cio.observe(c); });
     }
     apply(0);
+
+    /* the arrival: centred on its own screen, then docked left as the
+       first chapter rises. The card's resting place is the sticky column;
+       the intro state is an offset from it to the viewport's centre,
+       scrubbed back to zero across the intro spacer. */
+    var space=walk.querySelector('.intro-space'), cap=walk.querySelector('[data-caption]');
+    if(hasGsap&&space&&space.offsetHeight>0){
+      var dock=gsap.timeline({scrollTrigger:{trigger:space,start:'top top',end:'bottom top',scrub:0.5,invalidateOnRefresh:true}});
+      var off=function(){
+        var r=card.getBoundingClientRect(); var col=walk.querySelector('.card-col');
+        /* measure against the untransformed card: undo current x/y/scale */
+        var cx=(gsap.getProperty(card,'x')||0), cy=(gsap.getProperty(card,'y')||0), sc=(gsap.getProperty(card,'scale')||1);
+        var w=r.width/sc, h=r.height/sc, left=r.left-cx-(r.width-w)/2, top=r.top-cy-(r.height-h)/2;
+        return {x:window.innerWidth/2-(left+w/2), y:Math.max(0,(window.innerHeight-h*1.12)/2-top+ (h*1.12-h)/2)};
+      };
+      dock.fromTo(card,{x:function(){return off().x;},y:function(){return off().y;},scale:1.12},{x:0,y:0,scale:1,ease:'none',immediateRender:true},0);
+      if(cap) dock.fromTo(cap,{x:function(){return off().x;},y:function(){return off().y+18;}},{x:0,y:0,ease:'none',immediateRender:true},0);
+      /* the flip in, once, as the card's screen arrives */
+      if(!reduce) gsap.from(card,{rotationY:-70,autoAlpha:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:walk,start:'top 60%',once:true}});
+    }
 
     /* effect 077: the card is a held object. Pointer anywhere over the walk
        drives it - rotationY ±40 / rotationX ±30 from the pointer's place in
