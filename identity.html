@@ -42,32 +42,40 @@ document.documentElement.classList.add('js');})();
 .strip .datas .label{font-weight:800;font-stretch:112%;text-transform:uppercase}
 .strip .datas .year{font-size:var(--fs);line-height:var(--lh);letter-spacing:-.01em;display:flex;gap:1.2em;flex-wrap:wrap;margin-top:.4rem;opacity:var(--faint)}
 .strip .datas .year a{opacity:1}
-.strip .media{display:block;margin:15px;width:calc(100% - 30px);aspect-ratio:4/3;overflow:hidden;background:#111;position:relative}
+/* every cover in the strip is a poster: 1080x1920, the shape the showcase
+   files are cut to. The three that have one carry it; the four still to be
+   made hold a placeholder in the same frame. Same box for all of them —
+   the strip's travel is measured once, so a cover of a different width
+   would make the slide drift. */
+.strip .media{display:block;margin:15px;width:calc(100% - 30px);aspect-ratio:1080/1920;overflow:hidden;background:var(--bg);position:relative;
+  outline:1px solid var(--line);outline-offset:-1px}
 .strip .media img{width:100%;height:100%;object-fit:cover;display:block}
-/* the three showcase posters are 9:16 and composed to be seen whole, so
-   they stand on their own ground rather than being cropped to the box.
-   height:100% + width:auto makes the img box the poster itself, which is
-   what the hairline is drawn around. */
-.strip .media.poster{background:var(--ground);display:flex;align-items:center;justify-content:center;aspect-ratio:1080/1920}
-.strip .media.poster img{width:auto;height:100%;object-fit:contain}
-/* the mount, not the poster, carries the edge: every cover in the strip has
-   to keep the same box width or the strip's travel (measured once) drifts */
-.strip .media.poster{outline-color:var(--edge)}
+.strip .media.ph{display:grid;place-items:center;align-content:center;gap:6px;text-align:center}
+.strip .media.ph b{font-weight:800;font-stretch:112%;font-size:clamp(48px,7vw,120px);line-height:.9;letter-spacing:-.03em;
+  text-transform:uppercase;opacity:.12}
+.strip .media.ph span{opacity:var(--faint)}
+a.media.ph:hover b{opacity:.2}
 .strip .project:not(:first-child){border-top:1px solid var(--line)}
 @media(min-width:901px){
-  html.js .strip .pin{height:300vh}
+  /* with a poster-shaped cover the row fits the screen, so there is nothing
+     to slide: the closed shoulders share the slack instead, and the runway
+     is only as long as the seven covers need to change (about 40vh each).
+     If the row ever overflows again the script's travel takes over. */
+  html.js .strip .pin{height:240vh}
   html.js .strip .container{position:sticky;top:0;height:100vh;display:flex;white-space:nowrap;width:max-content;min-width:100%;
     border-top:1px solid var(--line);border-bottom:1px solid var(--line);will-change:transform;background:var(--bg)}
   html.js .strip .project{height:100%;min-width:5vw;border-top:0}
+  html.js .strip .project:not(.on){flex:1 1 auto}
+  html.js .strip .project.on{flex:0 0 auto}
   html.js .strip .project:not(:last-child){border-right:1px solid var(--line)}
   html.js .strip .project .datas{position:absolute;bottom:0;left:2vw;margin:0;font-size:2vw;line-height:2.6vw;transform:rotate(-90deg);transform-origin:0 50%;
     width:calc(100vh - 2.6vw);display:flex;justify-content:space-between;align-items:center;white-space:nowrap;transition:opacity .3s}
   html.js .strip .project:not(.on) .datas{opacity:var(--faint)}
   html.js .strip .datas .year{margin:0;flex-wrap:nowrap;opacity:1}
   html.js .strip .project:not(.on) .year,html.js .strip .project:not(.on) .media{display:none}
-  html.js .strip .media{display:inline-block;vertical-align:top;height:calc(100% - 2.6vw);aspect-ratio:auto;
-    width:max(calc(100vw - var(--n,9) * 5vw - 1.3vw),calc(100vh - 2.6vw));margin:1.3vw 1.3vw 0 5vw;outline:1px solid var(--line);outline-offset:-1px}
-  html.js .strip .media.poster{display:inline-flex;aspect-ratio:auto}
+  html.js .strip .media{display:inline-block;vertical-align:top;height:calc(100% - 2.6vw);width:auto;
+    aspect-ratio:1080/1920;margin:1.3vw 1.3vw 0 5vw}
+  html.js .strip .media.ph{display:inline-grid}
 }
 /* the one line this page adds to the shared system: the room's own tag */
 .roomtag{display:inline-block;border:1px solid var(--room);color:var(--room);padding:2px 7px;line-height:16px}
@@ -152,38 +160,38 @@ document.documentElement.classList.add('js');})();
 <div class="g kick" id="work">
   <span class="n faint" style="--i:0">03</span>
   <span class="t" style="--i:1">The work</span>
-  <span class="s faint" style="--i:2">Seven pieces, three with a showcase &mdash; the shoulder nearest your scroll opens</span>
+  <span class="s faint" style="--i:2">Seven pieces, three with a poster &mdash; the shoulder nearest your scroll opens</span>
 </div>
 <section class="strip" id="strip" aria-label="Identity work">
   <div class="pin">
     <div class="container" id="strip-c">
       <div class="project">
         <div class="datas"><p class="label">Bunta Bar Express</p><p class="year"><span>Brand identity &amp; visual system &middot; 2021</span><a href="showcase-bunta-bar.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media poster" style="--ground:#0C0B0B;--edge:rgba(252,254,239,.22)" href="showcase-bunta-bar.html"><img src="assets/showcase/poster_bunta.webp" alt="Bunta Bar Express — the showcase poster" loading="lazy" decoding="async"></a>
+        <a class="media" href="showcase-bunta-bar.html"><img src="assets/showcase/poster_bunta.webp" alt="Bunta Bar Express — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">Burger Now</p><p class="year"><span>Brand identity, two directions &middot; 2021</span><a href="showcase-burger-now.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media poster" style="--ground:#FCFEEF;--edge:rgba(12,11,11,.22)" href="showcase-burger-now.html"><img src="assets/showcase/poster_burger.webp" alt="Burger Now — the showcase poster" loading="lazy" decoding="async"></a>
+        <a class="media" href="showcase-burger-now.html"><img src="assets/showcase/poster_burger.webp" alt="Burger Now — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">JD Jewellers</p><p class="year"><span>Logo, lockups, reveal film &middot; 2026</span><a href="showcase-jd-jewellers.html">Showcase &rarr;</a><a href="talent.html#made">On the reel &rarr;</a></p></div>
-        <a class="media poster" style="--ground:#0C0B0B;--edge:rgba(252,254,239,.22)" href="showcase-jd-jewellers.html"><img src="assets/showcase/poster_jd.webp" alt="JD Jewellers — the showcase poster" loading="lazy" decoding="async"></a>
+        <a class="media" href="showcase-jd-jewellers.html"><img src="assets/showcase/poster_jd.webp" alt="JD Jewellers — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">Noidawery</p><p class="year"><span>Brewery &amp; restaurant &mdash; banner &middot; 2023</span><a href="talent.html#made">On the reel &rarr;</a></p></div>
-        <a class="media" href="talent.html#made"><img src="assets/retain/id/noidawery.webp" alt="Noidawery — banner" loading="lazy" decoding="async"></a>
+        <a class="media ph" href="talent.html#made"><b>N</b><span>Poster to come</span></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">CHNKRS</p><p class="year"><span>Sneaker reselling platform &mdash; app concept &middot; 2022</span><a href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener"><img src="assets/retain/id/chnkrs.webp" alt="CHNKRS — app concept" loading="lazy" decoding="async"></a>
+        <a class="media ph" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener"><b>C</b><span>Poster to come</span></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">Ruto</p><p class="year"><span>Travel app &mdash; concept &middot; 2022</span><a href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener"><img src="assets/retain/id/ruto.webp" alt="Ruto — app concept" loading="lazy" decoding="async"></a>
+        <a class="media ph" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener"><b>R</b><span>Poster to come</span></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">Search</p><p class="year"><span>Home-finding app &mdash; concept &middot; 2022</span><a href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener"><img src="assets/retain/id/search.webp" alt="Search — app concept" loading="lazy" decoding="async"></a>
+        <a class="media ph" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener"><b>S</b><span>Poster to come</span></a>
       </div>
     </div>
   </div>
