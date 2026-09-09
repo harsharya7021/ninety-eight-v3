@@ -1102,7 +1102,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   letter-spacing:.18em;text-transform:uppercase;color:var(--vc,var(--red));
   border-bottom:1px solid currentColor}
 .mwg031 .v-go:hover{color:var(--ink)}
-.mwg031 .v-fig{display:flex;align-items:flex-end;gap:clamp(12px,1.8vw,26px)}
+/* Sep 9: the card's two halves are flex items with the default min-width:auto,
+   so the text column grew to its content and squeezed the figure - whose image
+   is a clamp(), not a percentage - out past the card, and the document picked
+   up a horizontal scroll on desktop (57px before the new chip labels, 108px
+   after). Let the text column shrink; hold the figure at its natural size. */
+.mwg031 .v-bottom > div:first-child{min-width:0;flex:1 1 auto}
+.mwg031 .v-fig{display:flex;align-items:flex-end;gap:clamp(12px,1.8vw,26px);flex:0 0 auto}
 .mwg031 .v-num{font-weight:750;font-stretch:112%;font-size:clamp(2.4rem,7.4vw,7rem);
   line-height:.86;letter-spacing:-.05em;color:var(--vc,var(--dim))}
 .mwg031 .v-fig img{width:clamp(150px,22vw,340px);aspect-ratio:1;object-fit:cover;
@@ -1279,8 +1285,8 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
           <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
-      <li><a href="#wheel" data-action="wheel">
-        <span class="n35-name">The flywheel &middot; 35 cases</span>
+      <li><a href="marketing.html">
+        <span class="n35-name">Marketing &middot; the five rooms &middot; 35 cases</span>
         <span class="n35-medias" aria-hidden="true">
           <img class="n35-media" src="assets/covers/bayroute.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
@@ -1310,6 +1316,14 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
         <span class="n35-name">In the building <sup class="beta">98 Studio &middot; beta</sup></span>
         <span class="n35-medias" aria-hidden="true">
           <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="blog/index.html">
+        <span class="n35-name">The journal</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/menu/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/tbsp.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="#contact">
@@ -1349,7 +1363,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   <nav class="practice" id="practice" aria-label="The practice">
     <span class="plabel mono rev" style="--d:.55s">Two verticals of scale</span>
     <a class="rev" style="--d:.63s" href="talent.html" data-img="assets/practice/talent.jpg" data-video="assets/practice/talent.mp4" data-cap="Talent Management &amp; Personal Branding — exclusive contracts · editorial · individuals built into brands">Talent &amp; Branding</a>
-    <a class="rev" style="--d:.7s" href="#v-marketing" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — launch · amplify · convert · retain · events">Marketing</a>
+    <a class="rev" style="--d:.7s" href="marketing.html" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — the opening · the noise · the return · the habit · the night">Marketing</a>
   </nav>
 
   <span class="nudge-l" aria-hidden="true"></span>
@@ -1401,7 +1415,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
 <section class="mwg031" id="verticals" aria-label="What we do — three verticals">
   <div class="v-slide" id="v-talent"><div class="v-wrap"><div class="v-card" style="--vc:#00933C;--vcbg:#092415"><div class="v-top"><h2>Talent &amp; Branding</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Management and representation — athletes, creators, founders — and the practice that sits with it: building individuals into brands worth betting on, plus brand identity for businesses.</p><div class="v-subs"><span>Exclusive contracts</span><span>Editorial &amp; podcasts</span><span>Deal flow</span><span>Personal brands</span><span>Brand identity</span></div><a class="v-go" href="talent.html">Enter the vertical ↗</a> <button class="v-go" type="button" data-case="ishant" style="margin-left:1.2rem">Proof — the Ishant Sharma contract ↗</button></div><div class="v-fig"><p class="v-num">(01)</p><img src="assets/practice/talent.jpg" alt="" loading="lazy"></div></div></div></div></div>
-  <div class="v-slide" id="v-marketing"><div class="v-wrap"><div class="v-card" style="--vc:#EE352E;--vcbg:#341312"><div class="v-top"><h2>Marketing</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Five rooms named for what they get you, not for what we call them internally. Production sits inside Retain, because a shoot is a channel we own, not a service we sell apart from it.</p><div class="v-subs"><span>Launch — PR &amp; coverage</span><span>Amplify — creator marketing</span><span>Convert — SEO &amp; performance</span><span>Retain — production, social, design</span><span>Events — activations</span></div><button class="v-go" type="button" data-wheel="1">Open the flywheel ↗</button></div><div class="v-fig"><p class="v-num">(02)</p><img src="assets/practice/hospitality.jpg" alt="" loading="lazy"></div></div></div></div></div>
+  <div class="v-slide" id="v-marketing"><div class="v-wrap"><div class="v-card" style="--vc:#EE352E;--vcbg:#341312"><div class="v-top"><h2>Marketing</h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Five rooms, in the order the work actually happens: the identity and the opening, the noise, the return, the habit, and the night people talk about afterwards. Named for what they get you, not for what we call them internally.</p><div class="v-subs"><span>The Opening — identity, launch &amp; PR</span><span>The Noise — creators &amp; media</span><span>The Return — paid media &amp; search</span><span>The Habit — the channels you own</span><span>The Night — events &amp; experiential</span></div><a class="v-go" href="marketing.html">Enter the vertical ↗</a> <button class="v-go" type="button" data-wheel="1" style="margin-left:1.2rem">The flywheel ↗</button></div><div class="v-fig"><p class="v-num">(02)</p><img src="assets/practice/hospitality.jpg" alt="" loading="lazy"></div></div></div></div></div>
   <div class="v-slide" id="v-madai"><div class="v-wrap"><div class="v-card" style="--vc:#5278C2;--vcbg:#181F2D"><div class="v-top"><h2>98 Studio<sup class="beta">Beta</sup></h2><svg class="v-spark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0 L58 42 L100 50 L58 58 L50 100 L42 58 L0 50 L42 42 Z" fill="currentColor"/></svg></div><div class="v-bottom"><div><p class="v-text">Our AI product — an AI-first studio where token-based pricing meters human hours and compute hours apart, and the savings from every model advance pass to you, not us. In beta, in the building.</p><div class="v-subs"><span>AI-first</span><span>Token-based pricing</span><span>Human + compute — metered apart</span></div><button class="v-go" type="button" data-film="1">Watch the first film ↗</button></div><div class="v-fig"><p class="v-num">(03)</p><img src="assets/98-studio.jpg" alt="" loading="lazy"></div></div></div></div></div>
 </section>
 
@@ -2931,6 +2945,11 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
   [].forEach.call(root.querySelectorAll('ul li a'),function(a){
     a.addEventListener('click',function(e){
+      /* Sep 9: rows can now point at real pages (marketing.html, the
+         journal). Those are left to the browser - only in-page anchors and
+         the two overlay actions are handled here. */
+      var h0=a.getAttribute('href');
+      if(h0 && h0.charAt(0)!=='#') return;
       e.preventDefault();
       /* the drum binds its own glide to a[href="#contact"] later; this
          listener registered first, and the menu jumps instead */
