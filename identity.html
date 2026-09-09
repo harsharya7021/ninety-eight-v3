@@ -242,7 +242,12 @@ document.documentElement.classList.add('js');})();
   strip.style.setProperty('--n', n);
   var wide=matchMedia('(min-width:901px)'), cur=-1, dist=0, raf=0;
   function open(i){ if(i===cur) return; if(cur>=0) projects[cur].classList.remove('on'); projects[i].classList.add('on'); cur=i; }
-  function measure(){ if(!wide.matches){ dist=0; return; } projects.forEach(function(p){ p.classList.remove('on'); }); cur=-1; open(0);
+  /* a viewport with no width measures nothing — some panes lay out at 0x0
+     until they are shown, and a travel measured there is stale forever.
+     Wait, a frame at a time, until there is a width to measure against. */
+  function measure(){ if(!wide.matches){ dist=0; return; }
+    if(!innerWidth || !c.scrollWidth){ setTimeout(function(){ measure(); update(); }, 250); return; }
+    projects.forEach(function(p){ p.classList.remove('on'); }); cur=-1; open(0);
     dist=Math.max(0, c.scrollWidth-innerWidth); }
   function update(){ raf=0; if(!wide.matches){ return; }
     var r=pin.getBoundingClientRect(), run=pin.offsetHeight-innerHeight; if(run<=0) return;
