@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Identity &amp; design — the room before the launch · Ninety-Eight</title>
-<meta name="description" content="The identity work at Ninety-Eight: naming, marks, lockups, visual systems and app concepts — nine pieces, and the room they belong to. The first of Marketing's five rooms.">
+<meta name="description" content="The identity work at Ninety-Eight: naming, marks, lockups, visual systems and app concepts — seven pieces, and the room they belong to. The first of Marketing's five rooms.">
 <meta property="og:title" content="Identity &amp; design · Ninety-Eight">
-<meta property="og:description" content="A name is a promise somebody has to keep. Nine pieces of identity work, and the room they belong to.">
+<meta property="og:description" content="A name is a promise somebody has to keep. Seven pieces of identity work, and the room they belong to.">
 <meta property="og:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,7 @@ document.documentElement.classList.add('js');})();
    01 The pieces — the directory, beside the headline.
    02 The room   — what identity is for, and the launches it fed.
    03 The work   — effect 038, the pinned strip of shoulders, one open at a
-                   time. Nine pieces, moved here whole from retain.html.
+                   time. Seven pieces, moved here whole from retain.html; the first three open a showcase.
    Shared rules in assets/room.css; the 038 strip is below.
    ========================================================================= */
 :root{ --room:#5278C2; }   /* The Opening's colour on the flywheel */
@@ -44,6 +44,15 @@ document.documentElement.classList.add('js');})();
 .strip .datas .year a{opacity:1}
 .strip .media{display:block;margin:15px;width:calc(100% - 30px);aspect-ratio:4/3;overflow:hidden;background:#111;position:relative}
 .strip .media img{width:100%;height:100%;object-fit:cover;display:block}
+/* the three showcase posters are 9:16 and composed to be seen whole, so
+   they stand on their own ground rather than being cropped to the box.
+   height:100% + width:auto makes the img box the poster itself, which is
+   what the hairline is drawn around. */
+.strip .media.poster{background:var(--ground);display:flex;align-items:center;justify-content:center;aspect-ratio:1080/1920}
+.strip .media.poster img{width:auto;height:100%;object-fit:contain}
+/* the mount, not the poster, carries the edge: every cover in the strip has
+   to keep the same box width or the strip's travel (measured once) drifts */
+.strip .media.poster{outline-color:var(--edge)}
 .strip .project:not(:first-child){border-top:1px solid var(--line)}
 @media(min-width:901px){
   html.js .strip .pin{height:300vh}
@@ -58,6 +67,7 @@ document.documentElement.classList.add('js');})();
   html.js .strip .project:not(.on) .year,html.js .strip .project:not(.on) .media{display:none}
   html.js .strip .media{display:inline-block;vertical-align:top;height:calc(100% - 2.6vw);aspect-ratio:auto;
     width:max(calc(100vw - var(--n,9) * 5vw - 1.3vw),calc(100vh - 2.6vw));margin:1.3vw 1.3vw 0 5vw;outline:1px solid var(--line);outline-offset:-1px}
+  html.js .strip .media.poster{display:inline-flex;aspect-ratio:auto}
 }
 /* the one line this page adds to the shared system: the room's own tag */
 .roomtag{display:inline-block;border:1px solid var(--room);color:var(--room);padding:2px 7px;line-height:16px}
@@ -83,21 +93,19 @@ document.documentElement.classList.add('js');})();
 <div class="g kick first" id="pieces">
   <span class="n faint" style="--i:0">01</span>
   <span class="t" style="--i:1">The pieces</span>
-  <span class="s faint" style="--i:2">Marks, lockups, systems and concepts &mdash; nine pieces, 2021&ndash;2026</span>
+  <span class="s faint" style="--i:2">Marks, lockups, systems and concepts &mdash; seven pieces, 2021&ndash;2026</span>
 </div>
 <section class="g hero" aria-label="Identity — the directory">
   <div class="dir">
     <div class="hd"><span class="faint">Number:</span><span class="faint">Project:</span></div>
-    <a class="row" style="--i:0" href="showcase-bunta-bar.html" data-img="assets/retain/id/bunta-brand.webp" title="Brand identity &middot; the showcase"><span>01</span><span>Bunta Bar Express / 2021</span></a>
-    <a class="row" style="--i:1" href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener" data-img="assets/retain/id/bunta-visual.webp" title="Visual identity"><span>02</span><span>Bunta Bar &mdash; visual system / 2021</span></a>
-    <a class="row" style="--i:2" href="showcase-burger-now.html" data-img="assets/retain/id/burger-a.webp" title="Brand identity, first direction &middot; the showcase"><span>03</span><span>Burger Now &mdash; identity I / 2021</span></a>
-    <a class="row" style="--i:3" href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener" data-img="assets/retain/id/burger-b.webp" title="Brand identity, second direction"><span>04</span><span>Burger Now &mdash; identity II / 2021</span></a>
-    <a class="row" style="--i:4" href="showcase-jd-jewellers.html" data-img="assets/retain/id/jd.webp" title="Logo, lockups, reveal film &middot; the showcase"><span>05</span><span>JD Jewellers / 2026</span></a>
-    <a class="row" style="--i:5" href="talent.html#made" data-img="assets/retain/id/noidawery.webp" title="Brewery &amp; restaurant — banner"><span>06</span><span>Noidawery / 2023</span></a>
-    <a class="row" style="--i:6" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener" data-img="assets/retain/id/chnkrs.webp" title="Sneaker reselling platform — app concept"><span>07</span><span>CHNKRS / 2022</span></a>
-    <a class="row" style="--i:7" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener" data-img="assets/retain/id/ruto.webp" title="Travel app — concept"><span>08</span><span>Ruto / 2022</span></a>
-    <a class="row" style="--i:8" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener" data-img="assets/retain/id/search.webp" title="Home-finding app — concept"><span>09</span><span>Search / 2022</span></a>
-  </div>
+    <a class="row" style="--i:0" href="showcase-bunta-bar.html" data-img="assets/retain/id/bunta-brand.webp" title="Brand identity &amp; visual system &middot; the showcase"><span>01</span><span>Bunta Bar Express / 2021</span></a>
+    <a class="row" style="--i:1" href="showcase-burger-now.html" data-img="assets/retain/id/burger-a.webp" title="Brand identity, two directions &middot; the showcase"><span>02</span><span>Burger Now / 2021</span></a>
+    <a class="row" style="--i:2" href="showcase-jd-jewellers.html" data-img="assets/retain/id/jd.webp" title="Logo, lockups, reveal film &middot; the showcase"><span>03</span><span>JD Jewellers / 2026</span></a>
+    <a class="row" style="--i:3" href="talent.html#made" data-img="assets/retain/id/noidawery.webp" title="Brewery &amp; restaurant — banner"><span>04</span><span>Noidawery / 2023</span></a>
+    <a class="row" style="--i:4" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener" data-img="assets/retain/id/chnkrs.webp" title="Sneaker reselling platform — app concept"><span>05</span><span>CHNKRS / 2022</span></a>
+    <a class="row" style="--i:5" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener" data-img="assets/retain/id/ruto.webp" title="Travel app — concept"><span>06</span><span>Ruto / 2022</span></a>
+    <a class="row" style="--i:6" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener" data-img="assets/retain/id/search.webp" title="Home-finding app — concept"><span>07</span><span>Search / 2022</span></a>
+</div>
   <h1 class="head" aria-label="A name is a promise somebody has to keep.">
     <span class="ln c" style="--i:0"><i>A name</i></span><span class="hl"></span>
     <span class="ln c" style="--i:1"><i>is a promise</i></span><span class="hl"></span>
@@ -125,7 +133,7 @@ document.documentElement.classList.add('js');})();
   <div class="txt" style="--i:2">
     <div class="lbl faint"><span class="roomtag">Room 01 &mdash; The Opening</span></div>
     <p>Marketing at Ninety-Eight is five rooms, and this is the first of them. Before a brand can be launched, amplified, converted, retained or thrown a party, somebody has to decide what it means &mdash; the name, the position, the mark, the lockups, the type, the colour, the system that has to survive a feed it was never designed for.</p>
-    <p>We do that work, and then we open the doors with it. The identity is not a deck that gets signed off and filed; it is the thing the press cycle, the creator brief and the menu photograph all have to agree with six months later. Nine pieces are below &mdash; two bar identities, two directions for one burger brand, a jeweller&rsquo;s mark and reveal film, a brewery banner, and three product concepts we designed for the practice of it.</p>
+    <p>We do that work, and then we open the doors with it. The identity is not a deck that gets signed off and filed; it is the thing the press cycle, the creator brief and the menu photograph all have to agree with six months later. Seven pieces are below &mdash; a bar identity and its visual system, two directions for one burger brand, a jeweller&rsquo;s mark and reveal film, a brewery banner, and three product concepts we designed for the practice of it. The first three open a showcase of their own.</p>
     <p>Four cases in the archive were opened with work from this room. They are listed underneath.</p>
     <a class="more" href="marketing.html#opening">The Opening &mdash; the room in the story &rarr;</a>
   </div>
@@ -144,30 +152,22 @@ document.documentElement.classList.add('js');})();
 <div class="g kick" id="work">
   <span class="n faint" style="--i:0">03</span>
   <span class="t" style="--i:1">The work</span>
-  <span class="s faint" style="--i:2">Nine pieces, three with a showcase &mdash; the shoulder nearest your scroll opens</span>
+  <span class="s faint" style="--i:2">Seven pieces, three with a showcase &mdash; the shoulder nearest your scroll opens</span>
 </div>
 <section class="strip" id="strip" aria-label="Identity work">
   <div class="pin">
     <div class="container" id="strip-c">
       <div class="project">
-        <div class="datas"><p class="label">Bunta Bar Express</p><p class="year"><span>Brand identity &middot; 2021</span><a href="showcase-bunta-bar.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media" href="showcase-bunta-bar.html"><img src="assets/retain/id/bunta-brand.webp" alt="Bunta Bar Express — brand identity" loading="lazy" decoding="async"></a>
+        <div class="datas"><p class="label">Bunta Bar Express</p><p class="year"><span>Brand identity &amp; visual system &middot; 2021</span><a href="showcase-bunta-bar.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media poster" style="--ground:#0C0B0B;--edge:rgba(252,254,239,.22)" href="showcase-bunta-bar.html"><img src="assets/showcase/poster_bunta.webp" alt="Bunta Bar Express — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
-        <div class="datas"><p class="label">Bunta Bar &mdash; visual system</p><p class="year"><span>Visual identity &middot; 2021</span><a href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener">Behance &nearr;</a><a href="showcase-bunta-bar.html">Showcase &rarr;</a></p></div>
-        <a class="media" href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener"><img src="assets/retain/id/bunta-visual.webp" alt="Bunta Bar Express — visual system" loading="lazy" decoding="async"></a>
-      </div>
-      <div class="project">
-        <div class="datas"><p class="label">Burger Now &mdash; I</p><p class="year"><span>Brand identity, first direction &middot; 2021</span><a href="showcase-burger-now.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
-        <a class="media" href="showcase-burger-now.html"><img src="assets/retain/id/burger-a.webp" alt="Burger Now — identity, first direction" loading="lazy" decoding="async"></a>
-      </div>
-      <div class="project">
-        <div class="datas"><p class="label">Burger Now &mdash; II</p><p class="year"><span>Brand identity, second direction &middot; 2021</span><a href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener">Behance &nearr;</a><a href="showcase-burger-now.html">Showcase &rarr;</a></p></div>
-        <a class="media" href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener"><img src="assets/retain/id/burger-b.webp" alt="Burger Now — identity, second direction" loading="lazy" decoding="async"></a>
+        <div class="datas"><p class="label">Burger Now</p><p class="year"><span>Brand identity, two directions &middot; 2021</span><a href="showcase-burger-now.html">Showcase &rarr;</a><a href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media poster" style="--ground:#FCFEEF;--edge:rgba(12,11,11,.22)" href="showcase-burger-now.html"><img src="assets/showcase/poster_burger.webp" alt="Burger Now — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">JD Jewellers</p><p class="year"><span>Logo, lockups, reveal film &middot; 2026</span><a href="showcase-jd-jewellers.html">Showcase &rarr;</a><a href="talent.html#made">On the reel &rarr;</a></p></div>
-        <a class="media" href="showcase-jd-jewellers.html"><img src="assets/retain/id/jd.webp" alt="JD Jewellers — logo mark" loading="lazy" decoding="async"></a>
+        <a class="media poster" style="--ground:#0C0B0B;--edge:rgba(252,254,239,.22)" href="showcase-jd-jewellers.html"><img src="assets/showcase/poster_jd.webp" alt="JD Jewellers — the showcase poster" loading="lazy" decoding="async"></a>
       </div>
       <div class="project">
         <div class="datas"><p class="label">Noidawery</p><p class="year"><span>Brewery &amp; restaurant &mdash; banner &middot; 2023</span><a href="talent.html#made">On the reel &rarr;</a></p></div>
