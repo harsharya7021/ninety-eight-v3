@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retain — the room's directory · Ninety-Eight</title>
+<meta name="description" content="The Retain room of Ninety-Eight's Marketing practice — production, social and the design studio — as a directory: the floor's archive of shoots, identities and creatives, and the eight cases filed under Retain.">
+<meta property="og:title" content="Retain — the room's directory · Ninety-Eight">
+<meta property="og:description" content="The channels we build and hold: shoots, films, the feed, the design system. The floor's archive and the cases filed under Retain.">
+<meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<script>
+/* the ground is remembered per browser; read it before first paint so the
+   page never flashes the other one. Falls back to white. */
+(function(){try{var t=localStorage.getItem('98-retain-ground');if(t==='carbon')document.documentElement.setAttribute('data-ground','carbon');}catch(e){}
+document.documentElement.classList.add('js');})();
+</script>
+<style>
+/* =========================================================================
+   RETAIN — the room's directory (v3.38, Sep 2026)
+   A directory page after Obys's Experiment Space "About": one 12-column
+   grid with 10px gutters and 10px margins, one small size of the house
+   face for everything that is a row or a label, hairlines at 20%, the
+   labels at 20%, and one big headline composed line by line across the
+   grid — centre, right, half-left — so it reads as a staircase against
+   the list. White by default (the room with the lights on); a "White /
+   Carbon" switch in the header puts it back in the house's dark ground.
+   No scroll effects. The only motion: the lines and rows rise in once on
+   load, a preview still follows the pointer over the archive rows, and
+   the clock ticks.
+   ========================================================================= */
+:root{
+  --bg:#FFFFFF; --ink:#000000;
+  --line:rgba(0,0,0,.2); --faint:.2;       /* labels, links at rest */
+  --room:#FF6319;                          /* Retain's own colour on the flywheel */
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gap:10px; --m:10px;
+  --fs:13px; --lh:20px;
+}
+html[data-ground="carbon"]{
+  --bg:#0B0B0C; --ink:#F4F4F2; --line:rgba(244,244,242,.2); --faint:.32;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-size:var(--fs);line-height:var(--lh);letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;transition:background .35s,color .35s}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;letter-spacing:inherit}
+::selection{background:var(--room);color:#000}
+
+/* ---------- the grid ---------- */
+.g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);margin-left:var(--m);margin-right:var(--m)}
+.faint{opacity:var(--faint)}
+.hair{height:1px;background:var(--line)}
+
+/* ---------- header meta ---------- */
+.meta{margin-top:var(--m);align-items:start;position:relative;z-index:5}
+.meta .left{grid-column:1/4;display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--gap)}
+.meta .nav{grid-column:1/3;white-space:nowrap}
+.meta .nav a{position:relative;padding-bottom:1px}
+.meta .nav a.now::after,.meta .ground b.on::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:1px;background:var(--ink)}
+.meta .nav a:hover{opacity:.5}
+.meta .ground{grid-column:3/4;white-space:nowrap}
+.meta .ground b{font-weight:400;position:relative;cursor:pointer;padding-bottom:1px}
+.meta .ground b:not(.on):hover{opacity:.5}
+.meta .centre{grid-column:5/9;display:flex;justify-content:center;align-items:flex-start;padding-top:2px}
+.meta .centre img{height:34px;width:auto;filter:invert(1)}
+html[data-ground="carbon"] .meta .centre img{filter:none}
+.meta .right{grid-column:10/13;display:grid;grid-template-columns:2fr 1fr;column-gap:var(--gap)}
+.meta .right .clock{white-space:nowrap}
+.meta .right a{text-align:right}
+.meta .right a:hover{opacity:.5}
+
+/* ---------- the hero: directory left, headline right ---------- */
+.hero{margin-top:calc(var(--lh) * 2);align-items:start}
+.dir{grid-column:1/4}
+.dir .hd{display:grid;grid-template-columns:1fr 2fr;column-gap:var(--gap);margin-bottom:3px}
+.row{display:grid;grid-template-columns:1fr 2fr;column-gap:var(--gap);height:21px;line-height:var(--lh);border-bottom:1px solid var(--line);white-space:nowrap}
+.row span:last-child{overflow:hidden;text-overflow:ellipsis}
+a.row{transition:opacity .25s}
+.dir:hover a.row:not(:hover){opacity:.35}
+.head{grid-column:4/13;padding-top:2px}
+.ln{display:block;overflow:hidden;line-height:.9;height:.94em;font-size:clamp(38px,6.6vw,120px);font-weight:800;font-stretch:112%;
+  text-transform:uppercase;letter-spacing:-.03em;white-space:nowrap}
+.ln + .ln{margin-top:.02em}
+.ln i{display:block;font-style:normal;transform:translateY(0)}
+.ln.c{text-align:center}
+.ln.r{text-align:right}
+.ln.l{text-align:left}
+.ln.half{margin-left:50%}          /* the reference's "works" indent */
+.ln.w66{width:66.6%}               /* right-aligned inside two thirds */
+.ln.w83{width:83.3%}
+
+/* ---------- second movement ---------- */
+.spacer{height:clamp(120px,22vh,260px)}
+.second{margin-left:var(--m);margin-right:var(--m)}
+.essay{margin-top:var(--lh)}
+.essay .txt{grid-column:7/10}
+.essay .lbl{margin-top:var(--m);line-height:1.05em}
+.essay p{margin-top:calc(var(--lh) * .75)}
+.essay p + p{margin-top:var(--lh)}
+.gap{height:40px}
+
+/* ---------- the cases: number col 6, project cols 7–8, link cols 11–12 ---------- */
+.cases{margin-top:var(--lh)}
+.cases .hd{grid-column:1/13;display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);margin-bottom:3px}
+.cases .hd .n{grid-column:6/7}
+.cases .hd .p{grid-column:7/9}
+.cases .hd .k{grid-column:11/13;text-align:right;letter-spacing:-.05em}
+a.crow{grid-column:1/13;display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);height:21px;line-height:var(--lh);white-space:nowrap;position:relative}
+a.crow::after{content:"";position:absolute;left:calc((100% + var(--gap)) * 5 / 12);right:0;bottom:0;height:1px;background:var(--line)}
+a.crow .n{grid-column:6/7}
+a.crow .p{grid-column:7/11;overflow:hidden;text-overflow:ellipsis}
+a.crow .k{grid-column:11/13;text-align:right;opacity:var(--faint);transition:opacity .25s}
+a.crow:hover .k{opacity:1}
+.cases:hover a.crow:not(:hover) .p{opacity:.35}
+a.crow .p{transition:opacity .25s}
+
+/* ---------- footer meta ---------- */
+.foot{margin-top:clamp(120px,22vh,260px);margin-bottom:var(--m);align-items:start}
+.foot .col{display:flex;flex-direction:column}
+.foot .c1{grid-column:1/3}
+.foot .c2{grid-column:4/7}
+.foot .c3{grid-column:7/10}
+.foot .c4{grid-column:10/13}
+.foot a:hover{opacity:.5}
+.foot .rights{grid-column:1/13;margin-top:calc(var(--lh) * 3);display:flex;justify-content:space-between;gap:var(--gap)}
+.foot .rights .faint{opacity:var(--faint)}
+
+/* ---------- the preview that follows the pointer ---------- */
+.peek{position:fixed;left:0;top:0;width:280px;pointer-events:none;z-index:50;opacity:0;transform:translate(-9999px,-9999px);transition:opacity .25s}
+.peek img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#111}
+.peek.on{opacity:1}
+@media(hover:none){.peek{display:none}}
+
+/* ---------- the entrance: lines rise, rows fade ---------- */
+html.js .ln i{transform:translateY(110%);transition:transform 1s var(--ease);transition-delay:calc(.08s + var(--i,0) * .07s)}
+html.js .row,html.js a.crow,html.js .essay .txt,html.js .foot > *{opacity:0;transition:opacity .8s var(--ease);transition-delay:calc(.25s + var(--i,0) * .03s)}
+html.js.in .ln i{transform:none}
+html.js.in .row,html.js.in a.crow,html.js.in .essay .txt,html.js.in .foot > *{opacity:1}
+html.js.in .dir:hover a.row:not(:hover){opacity:.35}
+html.js.in a.crow{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  html.js .ln i,html.js .row,html.js a.crow,html.js .essay .txt,html.js .foot > *{transition:none;transform:none;opacity:1}
+}
+
+/* ---------- narrow screens: everything stacks, the staircase relaxes ---------- */
+@media(max-width:900px){
+  .meta .left{grid-column:1/8}
+  .meta .centre{display:none}
+  .meta .right{grid-column:8/13;grid-template-columns:1fr auto}
+  .hero{display:flex;flex-direction:column;margin-top:calc(var(--lh) * 1.5)}
+  .head{order:-1;padding:0 0 calc(var(--lh) * 2)}
+  .ln{font-size:clamp(30px,9.6vw,72px)}
+  .ln.c,.ln.r,.ln.l{text-align:left}
+  .ln.half{margin-left:0}
+  .ln.w66,.ln.w83{width:auto}
+  .dir{margin-top:var(--lh);width:100%}
+  .row{grid-template-columns:44px 1fr}
+  .dir .hd{grid-template-columns:44px 1fr}
+  .essay .txt{grid-column:1/13}
+  .cases .hd .n,a.crow .n{grid-column:1/2}
+  .cases .hd .p,a.crow .p{grid-column:2/9}
+  .cases .hd .k,a.crow .k{grid-column:9/13}
+  a.crow::after{left:0}
+  .foot .c1{grid-column:1/7}.foot .c2{grid-column:7/13}.foot .c3{grid-column:1/7;margin-top:var(--lh)}.foot .c4{grid-column:7/13;margin-top:var(--lh)}
+  .foot .rights{flex-direction:column;gap:2px}
+}
+@media(max-width:520px){
+  .meta .left{grid-column:1/9;grid-template-columns:auto auto;column-gap:16px}
+  .meta .nav,.meta .ground{grid-column:auto}
+  .meta .right{grid-column:9/13;grid-template-columns:1fr}
+  .meta .right .clock{display:none}
+  .cases .hd .p,a.crow .p{grid-column:2/8}
+  .cases .hd .k,a.crow .k{grid-column:8/13}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ header meta ============ -->
+<header class="g meta">
+  <div class="left">
+    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="talent.html">Talent</a>,&nbsp;<a href="retain.html" class="now" aria-current="page">Retain</a></nav>
+    <div class="ground" role="group" aria-label="Ground"><b class="on" data-ground="white">White</b> / <b data-ground="carbon">Carbon</b></div>
+  </div>
+  <a class="centre" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""></a>
+  <div class="right">
+    <div class="clock" id="clock" aria-live="off">IST —</div>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<!-- ============ the hero: directory left, headline right ============ -->
+<section class="g hero" aria-label="The floor's archive">
+  <div class="dir">
+    <div class="hd"><span class="faint">Number:</span><span class="faint">Project:</span></div>
+    <a class="row" style="--i:0" href="https://www.behance.net/gallery/136994279/x" target="_blank" rel="noopener" data-img="assets/retain/spice.webp" title="Social media creatives"><span>01</span><span>Spice Station / 2021</span></a>
+    <a class="row" style="--i:1" href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener" data-img="assets/retain/bunta-brand.webp" title="Brand identity"><span>02</span><span>Bunta Bar — identity / 2021</span></a>
+    <a class="row" style="--i:2" href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener" data-img="assets/retain/bunta-visual.webp" title="Visual identity"><span>03</span><span>Bunta Bar — visual system / 2021</span></a>
+    <a class="row" style="--i:3" href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener" data-img="assets/retain/burger-a.webp" title="Brand identity, first direction"><span>04</span><span>Burger Now — identity I / 2021</span></a>
+    <a class="row" style="--i:4" href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener" data-img="assets/retain/burger-b.webp" title="Brand identity, second direction"><span>05</span><span>Burger Now — identity II / 2021</span></a>
+    <a class="row" style="--i:5" href="talent.html#made" data-img="assets/retain/jd.webp" title="Logo, lockups, reveal film"><span>06</span><span>JD Jewellers / 2026</span></a>
+    <a class="row" style="--i:6" href="talent.html#made" data-img="assets/retain/noidawery.webp" title="Brewery &amp; restaurant — banner"><span>07</span><span>Noidawery / 2023</span></a>
+    <a class="row" style="--i:7" href="talent.html#made" data-img="assets/retain/doozy.webp" title="Influencer shoot"><span>08</span><span>Miss Doozy / 2023</span></a>
+    <a class="row" style="--i:8" href="talent.html#made" data-img="assets/retain/aarushi.webp" title="F&amp;B photography"><span>09</span><span>Aarushi Jain shoot / 2026</span></a>
+    <a class="row" style="--i:9" href="https://www.behance.net/gallery/136993089/x" target="_blank" rel="noopener" data-img="assets/retain/studio-xo.webp" title="Social media creatives"><span>10</span><span>Studio Xo / 2022</span></a>
+    <a class="row" style="--i:10" href="https://www.behance.net/gallery/136995099/x" target="_blank" rel="noopener" data-img="assets/retain/dillusion.webp" title="Creatives"><span>11</span><span>Dillusion / 2022</span></a>
+    <a class="row" style="--i:11" href="https://www.behance.net/gallery/136992699/x" target="_blank" rel="noopener" data-img="assets/retain/esquire.webp" title="Social media creatives"><span>12</span><span>Esquire Club / 2022</span></a>
+    <a class="row" style="--i:12" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener" data-img="assets/retain/ruto.webp" title="Travel app — concept"><span>13</span><span>Ruto / 2022</span></a>
+    <a class="row" style="--i:13" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener" data-img="assets/retain/chnkrs.webp" title="Sneaker reselling platform — concept"><span>14</span><span>CHNKRS / 2022</span></a>
+    <a class="row" style="--i:14" href="https://www.behance.net/gallery/136992923/x" target="_blank" rel="noopener" data-img="assets/retain/darzi.webp" title="Bar &amp; kitchen — creatives"><span>15</span><span>Darzi Bar &amp; Kitchen / 2022</span></a>
+    <a class="row" style="--i:15" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener" data-img="assets/retain/search.webp" title="Home-finding app — concept"><span>16</span><span>Search / 2022</span></a>
+  </div>
+  <h1 class="head" aria-label="Retain is the room where the channels we build are held.">
+    <span class="ln c" style="--i:0"><i>Retain</i></span>
+    <span class="ln c" style="--i:1"><i>is the room</i></span>
+    <span class="ln c" style="--i:2"><i>where</i></span>
+    <span class="ln r" style="--i:3"><i>the channels</i></span>
+    <span class="ln r" style="--i:4"><i>we build</i></span>
+    <span class="ln l half" style="--i:5"><i>are held</i></span>
+  </h1>
+</section>
+
+<div class="spacer" aria-hidden="true"></div>
+
+<!-- ============ second movement: the room's own sentence ============ -->
+<section class="second" aria-label="A shoot is a channel we own">
+  <h2 aria-label="A shoot is a channel we own, not a service sold apart from it.">
+    <span class="ln l" style="--i:6"><i>A shoot</i></span>
+    <span class="ln l" style="--i:7"><i>is a channel</i></span>
+    <span class="ln r w66" style="--i:8"><i>we own,</i></span>
+    <span class="ln r w66" style="--i:9"><i>not a service</i></span>
+    <span class="ln r w83" style="--i:10"><i>sold apart</i></span>
+    <span class="ln r w83" style="--i:11"><i>from it</i></span>
+  </h2>
+</section>
+
+<section class="g essay" aria-label="About the room">
+  <div class="txt" style="--i:2">
+    <div class="lbl faint">Production, in-house:</div>
+    <p>Retain is the fourth of Marketing&rsquo;s five rooms &mdash; Launch, Amplify, Convert, Retain, Events &mdash; and the one the studio lives in. The channels we build for a brand are held here week after week: the shoots, the films, the feed, the design system. A shoot is a channel we own, not a service sold apart from it.</p>
+    <p>This directory is the floor&rsquo;s own archive &mdash; social creatives, identities, app concepts, shoots &mdash; the fragments behind the documented cases rather than the cases themselves. The eight cases filed under Retain follow below; each opens its full write-up on the landing page.</p>
+  </div>
+</section>
+
+<div class="gap" aria-hidden="true"></div>
+
+<!-- ============ the cases filed under Retain ============ -->
+<section class="g cases" aria-label="Cases filed under Retain">
+  <div class="hd"><span class="n faint">Number:</span><span class="p faint">Project:</span><span class="k faint">Link:</span></div>
+  <a class="crow" style="--i:0" href="index.html#case-ishant"><span class="n">01</span><span class="p">Ishant Sharma / 2020</span><span class="k">#case-ishant</span></a>
+  <a class="crow" style="--i:1" href="index.html#case-andreas"><span class="n">02</span><span class="p">Andrea&rsquo;s Eatery / 2021</span><span class="k">#case-andreas</span></a>
+  <a class="crow" style="--i:2" href="index.html#case-one8-commune"><span class="n">03</span><span class="p">One8 Commune / 2022</span><span class="k">#case-one8-commune</span></a>
+  <a class="crow" style="--i:3" href="index.html#case-borges"><span class="n">04</span><span class="p">Borges India / 2023</span><span class="k">#case-borges</span></a>
+  <a class="crow" style="--i:4" href="index.html#case-arista-vault"><span class="n">05</span><span class="p">Arista Vault / 2023</span><span class="k">#case-arista-vault</span></a>
+  <a class="crow" style="--i:5" href="index.html#case-tablespoon"><span class="n">06</span><span class="p">Tablespoon / 2023</span><span class="k">#case-tablespoon</span></a>
+  <a class="crow" style="--i:6" href="index.html#case-tickled-pink"><span class="n">07</span><span class="p">Tickled Pink</span><span class="k">#case-tickled-pink</span></a>
+  <a class="crow" style="--i:7" href="index.html#case-rizq"><span class="n">08</span><span class="p">RIZQ</span><span class="k">#case-rizq</span></a>
+</section>
+</main>
+
+<!-- ============ footer meta ============ -->
+<footer class="g foot">
+  <div class="col c1" style="--i:0">
+    <span class="faint">Socials:</span>
+    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
+    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="col c2" style="--i:1">
+    <span class="faint">The rooms:</span>
+    <a href="index.html#v-marketing">Launch, Amplify, Convert, Retain, Events</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="talent.html#made">Made here &mdash; the reel</a>
+  </div>
+  <div class="col c3" style="--i:2">
+    <span class="faint">Typography:</span>
+    <span>Archivo, by Omnibus-Type</span>
+  </div>
+  <div class="col c4" style="--i:3">
+    <span class="faint">Contact:</span>
+    <a href="mailto:contact@ninety-eight.in" id="mail" data-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
+    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
+  </div>
+  <div class="rights" style="--i:4">
+    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
+    <span class="faint">Delhi NCR &middot; est. 01.01.2020</span>
+  </div>
+</footer>
+
+<div class="peek" id="peek" aria-hidden="true"><img alt="" id="peek-img"></div>
+
+<script>
+(function(){
+  var doc=document.documentElement;
+
+  /* the entrance, once the face is in */
+  var go=function(){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ doc.classList.add('in'); }); }); };
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(go); setTimeout(go,1800); } else { go(); }
+
+  /* the ground: White / Carbon, remembered */
+  var sw=document.querySelectorAll('.ground b');
+  function setGround(g){
+    if(g==='carbon') doc.setAttribute('data-ground','carbon'); else doc.removeAttribute('data-ground');
+    sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')===g); });
+    try{ localStorage.setItem('98-retain-ground', g); }catch(e){}
+  }
+  sw.forEach(function(b){ b.addEventListener('click', function(){ setGround(b.getAttribute('data-ground')); }); });
+  if(doc.getAttribute('data-ground')==='carbon') sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')==='carbon'); });
+
+  /* the clock, Delhi */
+  var clock=document.getElementById('clock');
+  function tick(){
+    try{ clock.textContent='IST '+new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){}
+  }
+  tick(); setInterval(tick, 15000);
+
+  /* the mail line copies itself on click, then goes back to being a link */
+  var mail=document.getElementById('mail');
+  mail.addEventListener('click', function(e){
+    if(!navigator.clipboard) return;
+    e.preventDefault();
+    navigator.clipboard.writeText(mail.getAttribute('data-mail')).then(function(){
+      var t=mail.textContent; mail.textContent='Copied'; setTimeout(function(){ mail.textContent=t; }, 1400);
+    }, function(){ location.href=mail.href; });
+  });
+
+  /* a still follows the pointer across the archive rows */
+  if(matchMedia('(hover:hover)').matches){
+    var peek=document.getElementById('peek'), img=document.getElementById('peek-img');
+    var x=0,y=0,on=false;
+    var dir=document.querySelector('.dir');
+    function place(){ var W=peek.offsetWidth,H=peek.offsetHeight, right=dir.getBoundingClientRect().right;
+      var px=Math.max(x+18, right+16), py=y-Math.round(H*0.35);
+      if(px+W>innerWidth-10) px=innerWidth-10-W; if(py+H>innerHeight-10) py=innerHeight-10-H; if(py<10) py=10;
+      peek.style.transform='translate('+px+'px,'+py+'px)'; }
+    document.querySelectorAll('.dir a.row').forEach(function(row){
+      row.addEventListener('mouseenter', function(e){
+        img.src=row.getAttribute('data-img');
+        x=e.clientX; y=e.clientY; place(); peek.classList.add('on'); on=true;
+      });
+      row.addEventListener('mousemove', function(e){ x=e.clientX; y=e.clientY; if(on) place(); });
+      row.addEventListener('mouseleave', function(){ peek.classList.remove('on'); on=false; });
+    });
+    /* warm the stills after the page has settled */
+    addEventListener('load', function(){ setTimeout(function(){
+      document.querySelectorAll('.dir a.row').forEach(function(r){ var i=new Image(); i.src=r.getAttribute('data-img'); });
+    }, 1200); });
+  }
+})();
+</script>
+</body>
+</html>
