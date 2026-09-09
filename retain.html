@@ -4,226 +4,64 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Retain — the room's directory · Ninety-Eight</title>
-<meta name="description" content="The Retain room of Ninety-Eight's Marketing practice — production, social and the design studio — as a directory: the floor's archive of shoots, identities and creatives, and the eight cases filed under Retain.">
+<meta name="description" content="The Retain room of Ninety-Eight's Marketing practice as a directory in three sections: the social media work, the room and its cases, and the identity work. Production has a page of its own.">
 <meta property="og:title" content="Retain — the room's directory · Ninety-Eight">
-<meta property="og:description" content="The channels we build and hold: shoots, films, the feed, the design system. The floor's archive and the cases filed under Retain.">
+<meta property="og:description" content="The channels we build and hold: the feed, the design system, the shoots. Social media, the room's cases, and the identity work — as a directory.">
 <meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script>
 /* the ground is remembered per browser; read it before first paint so the
    page never flashes the other one. Falls back to white. */
 (function(){try{var t=localStorage.getItem('98-retain-ground');if(t==='carbon')document.documentElement.setAttribute('data-ground','carbon');}catch(e){}
 document.documentElement.classList.add('js');})();
 </script>
+<link rel="stylesheet" href="assets/room.css">
 <style>
 /* =========================================================================
-   RETAIN — the room's directory (v3.38, Sep 2026)
-   A directory page after Obys's Experiment Space "About": one 12-column
-   grid with 10px gutters and 10px margins, one small size of the house
-   face for everything that is a row or a label, hairlines at 20%, the
-   labels at 20%, and one big headline composed line by line across the
-   grid — centre, right, half-left — so it reads as a staircase against
-   the list. White by default (the room with the lights on); a "White /
-   Carbon" switch in the header puts it back in the house's dark ground.
-   No scroll effects. The only motion: the lines and rows rise in once on
-   load, a preview still follows the pointer over the archive rows, and
-   the clock ticks.
+   RETAIN — the room's directory, in three sections (v3.39, Sep 2026)
+   01 Social media — the directory, beside the headline.
+   02 The room — the second headline, the text, the cases filed under
+      Retain, and the door to Production (a page of its own).
+   03 Identity — the design studio's identity work as effect 038 at the
+      foot of the page: a strip of shoulders held for three screens, the
+      one nearest the scroll open to full height.
+   Shared rules in assets/room.css; the 038 strip is below.
    ========================================================================= */
-:root{
-  --bg:#FFFFFF; --ink:#000000;
-  --line:rgba(0,0,0,.2); --faint:.2;       /* labels, links at rest */
-  --room:#FF6319;                          /* Retain's own colour on the flywheel */
-  --ease:cubic-bezier(.16,1,.3,1);
-  --gap:10px; --m:10px;
-  --fs:13px; --lh:20px;
-}
-html[data-ground="carbon"]{
-  --bg:#0B0B0C; --ink:#F4F4F2; --line:rgba(244,244,242,.2); --faint:.32;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--bg)}
-body{background:var(--bg);color:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-size:var(--fs);line-height:var(--lh);letter-spacing:-.01em;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;transition:background .35s,color .35s}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;letter-spacing:inherit}
-::selection{background:var(--room);color:#000}
 
-/* ---------- the grid ---------- */
-.g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);margin-left:var(--m);margin-right:var(--m)}
-.faint{opacity:var(--faint)}
-.hair{height:1px;background:var(--line)}
-
-/* ---------- header meta ---------- */
-.meta{margin-top:var(--m);align-items:start;position:relative;z-index:5}
-.meta .left{grid-column:1/4;display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--gap)}
-.meta .nav{grid-column:1/3;white-space:nowrap}
-.meta .nav a{position:relative;padding-bottom:1px}
-.meta .nav a.now::after,.meta .ground b.on::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:1px;background:var(--ink)}
-.meta .nav a:hover{opacity:.5}
-.meta .ground{grid-column:3/4;white-space:nowrap}
-.meta .ground b{font-weight:400;position:relative;cursor:pointer;padding-bottom:1px}
-.meta .ground b:not(.on):hover{opacity:.5}
-.meta .centre{grid-column:5/9;display:flex;justify-content:center;align-items:flex-start;padding-top:2px}
-.meta .centre img{height:34px;width:auto;filter:invert(1)}
-html[data-ground="carbon"] .meta .centre img{filter:none}
-.meta .right{grid-column:10/13;display:grid;grid-template-columns:2fr 1fr;column-gap:var(--gap)}
-.meta .right .clock{white-space:nowrap}
-.meta .right a{text-align:right}
-.meta .right a:hover{opacity:.5}
-
-/* ---------- the hero: directory left, headline right ---------- */
-.hero{margin-top:calc(var(--lh) * 2);align-items:start}
-.dir{grid-column:1/4}
-.dir .hd{display:grid;grid-template-columns:1fr 2fr;column-gap:var(--gap);margin-bottom:3px}
-.row{display:grid;grid-template-columns:1fr 2fr;column-gap:var(--gap);height:21px;line-height:var(--lh);border-bottom:1px solid var(--line);white-space:nowrap}
-.row span:last-child{overflow:hidden;text-overflow:ellipsis}
-a.row{transition:opacity .25s}
-.dir:hover a.row:not(:hover){opacity:.35}
-.head{grid-column:4/13;padding-top:2px}
-.ln{display:block;overflow:hidden;line-height:.9;height:.94em;font-size:clamp(38px,6.6vw,120px);font-weight:800;font-stretch:112%;
-  text-transform:uppercase;letter-spacing:-.03em;white-space:nowrap}
-.ln i{display:block;font-style:normal;transform:translateY(0)}
-/* the reference draws a hairline under every headline line — the text
-   rises from under it. Full grid width whatever the line's own box. */
-.hl{display:block;height:1px;background:var(--line);margin:.055em 0 .03em}
-.ln.c{text-align:center}
-.ln.r{text-align:right}
-.ln.l{text-align:left}
-.ln.half{margin-left:50%}          /* the reference's "works" indent */
-.ln.w66{width:66.6%}               /* right-aligned inside two thirds */
-.ln.w83{width:83.3%}
-
-/* ---------- production: the wheel (MWG 106, from the Ambrosia site) ----------
-   A flat 3D disc of one frame per shoot, tilted toward the reader. The
-   cursor tilts it, the page's own scroll spins it (no wheel hijack — this
-   is a section inside a scrolling page, not a room of its own), and it
-   turns slowly by itself the rest of the time. Ported from
-   demo.ninety-eight.in/ambrosia — map.html?s=production — without GSAP:
-   the same targets, eased by hand in one requestAnimationFrame loop that
-   only runs while the section is on screen. */
-.prod{margin-top:clamp(120px,22vh,260px)}
-.prod .ph{align-items:start}
-.prod .ph .lbl{grid-column:1/4}
-.prod .ph .d{grid-column:4/9;max-width:44ch}
-.prod .ph .credit{grid-column:10/13;text-align:right}
-.wheel{position:relative;height:clamp(460px,78vh,760px);margin-top:calc(var(--lh) * 1.5);overflow:hidden;perspective:100vw;
-  background-image:radial-gradient(circle at 50% 50%,var(--dot) .6px,transparent .7px);background-size:12px 12px}
-:root{--dot:rgba(0,0,0,.16)}
-html[data-ground="carbon"]{--dot:rgba(244,244,242,.13)}
-.wheel::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 92% 78% at 50% 50%,transparent 42%,var(--bg) 100%);opacity:.9}
-.wheel .w-container,.wheel .w-medias{position:absolute;inset:0;transform-style:preserve-3d}
-.wheel .w-medias{z-index:2}
-.wheel .plate{position:absolute;top:calc(50% - 7vw);left:calc(50% - 5.5vw);width:11vw;height:14vw;transform-style:preserve-3d;will-change:transform;display:block}
-.wheel .plate img{width:100%;height:100%;object-fit:cover;display:block;background:var(--bg);
-  outline:1px solid rgba(0,0,0,.16);outline-offset:-1px;box-shadow:0 10px 26px rgba(14,14,16,.13),0 2px 6px rgba(14,14,16,.07);
-  transition:outline-color .3s,box-shadow .3s}
-.wheel .plate:hover img{outline-color:rgba(0,0,0,.62);box-shadow:0 16px 40px rgba(14,14,16,.2),0 3px 8px rgba(14,14,16,.1)}
-html[data-ground="carbon"] .wheel .plate img{outline-color:rgba(233,234,228,.14);box-shadow:none}
-html[data-ground="carbon"] .wheel .plate:hover img{outline-color:rgba(233,234,228,.65)}
-a.plate{cursor:pointer}
-.wheel .tip{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;
-  background:var(--bg);padding:0 6px;line-height:var(--lh)}
-.wheel .tip.on{opacity:1}
-.wheel .tip .faint{margin-left:.6em}
-.prod .pf{margin-top:var(--lh);align-items:baseline}
-.prod .pf .l{grid-column:1/7}
-.prod .pf .r{grid-column:7/13;text-align:right}
-@media(max-width:900px){
-  .prod .ph .lbl{grid-column:1/13}.prod .ph .d{grid-column:1/13;margin-top:4px}.prod .ph .credit{grid-column:1/13;text-align:left;margin-top:4px}
-  .wheel{height:clamp(320px,54vh,460px)}
-  .wheel .plate{top:calc(50% - 16vw);left:calc(50% - 12.5vw);width:25vw;height:32vw}
-  .prod .pf .l,.prod .pf .r{grid-column:1/13;text-align:left}
-}
-@media(hover:none){.wheel .tip{display:none}}
-
-/* ---------- second movement ---------- */
-.spacer{height:clamp(120px,22vh,260px)}
-.second{margin-left:var(--m);margin-right:var(--m)}
-.essay{margin-top:var(--lh)}
-.essay .txt{grid-column:7/10}
-.essay .lbl{margin-top:var(--m);line-height:1.05em}
-.essay p{margin-top:calc(var(--lh) * .75)}
-.essay p + p{margin-top:var(--lh)}
-.gap{height:40px}
-
-/* ---------- the cases: number col 6, project cols 7–8, link cols 11–12 ---------- */
-.cases{margin-top:var(--lh)}
-.cases .hd{grid-column:1/13;display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);margin-bottom:3px}
-.cases .hd .n{grid-column:6/7}
-.cases .hd .p{grid-column:7/9}
-.cases .hd .k{grid-column:11/13;text-align:right;letter-spacing:-.05em}
-a.crow{grid-column:1/13;display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);height:21px;line-height:var(--lh);white-space:nowrap;position:relative}
-a.crow::after{content:"";position:absolute;left:calc((100% + var(--gap)) * 5 / 12);right:0;bottom:0;height:1px;background:var(--line)}
-a.crow .n{grid-column:6/7}
-a.crow .p{grid-column:7/11;overflow:hidden;text-overflow:ellipsis}
-a.crow .k{grid-column:11/13;text-align:right;opacity:var(--faint);transition:opacity .25s}
-a.crow:hover .k{opacity:1}
-.cases:hover a.crow:not(:hover) .p{opacity:.35}
-a.crow .p{transition:opacity .25s}
-
-/* ---------- footer meta ---------- */
-.foot{margin-top:clamp(120px,22vh,260px);margin-bottom:var(--m);align-items:start}
-.foot .col{display:flex;flex-direction:column}
-.foot .c1{grid-column:1/3}
-.foot .c2{grid-column:4/7}
-.foot .c3{grid-column:7/10}
-.foot .c4{grid-column:10/13}
-.foot a:hover{opacity:.5}
-.foot .rights{grid-column:1/13;margin-top:calc(var(--lh) * 3);display:flex;justify-content:space-between;gap:var(--gap)}
-.foot .rights .faint{opacity:var(--faint)}
-
-/* ---------- the preview that follows the pointer ---------- */
-.peek{position:fixed;left:0;top:0;width:280px;pointer-events:none;z-index:50;opacity:0;transform:translate(-9999px,-9999px);transition:opacity .25s}
-.peek img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#111}
-.peek.on{opacity:1}
-@media(hover:none){.peek{display:none}}
-
-/* ---------- the entrance: lines rise, rows fade ---------- */
-html.js .ln i{transform:translateY(110%);transition:transform 1s var(--ease);transition-delay:calc(.08s + var(--i,0) * .07s)}
-html.js .row,html.js a.crow,html.js .essay .txt,html.js .foot > *{opacity:0;transition:opacity .8s var(--ease);transition-delay:calc(.25s + var(--i,0) * .03s)}
-html.js.in .ln i{transform:none}
-html.js.in .row,html.js.in a.crow,html.js.in .essay .txt,html.js.in .foot > *{opacity:1}
-html.js.in .dir:hover a.row:not(:hover){opacity:.35}
-html.js.in a.crow{opacity:1}
-@media(prefers-reduced-motion:reduce){
-  html.js .ln i,html.js .row,html.js a.crow,html.js .essay .txt,html.js .foot > *{transition:none;transform:none;opacity:1}
-}
-
-/* ---------- narrow screens: everything stacks, the staircase relaxes ---------- */
-@media(max-width:900px){
-  .meta .left{grid-column:1/8}
-  .meta .centre{display:none}
-  .meta .right{grid-column:8/13;grid-template-columns:1fr auto}
-  .hero{display:flex;flex-direction:column;margin-top:calc(var(--lh) * 1.5)}
-  .head{order:-1;padding:0 0 calc(var(--lh) * 2)}
-  .ln{font-size:clamp(30px,9.6vw,72px)}
-  .ln.c,.ln.r,.ln.l{text-align:left}
-  .ln.half{margin-left:0}
-  .ln.w66,.ln.w83{width:auto}
-  .dir{margin-top:var(--lh);width:100%}
-  .row{grid-template-columns:44px 1fr}
-  .dir .hd{grid-template-columns:44px 1fr}
-  .essay .txt{grid-column:1/13}
-  .cases .hd .n,a.crow .n{grid-column:1/2}
-  .cases .hd .p,a.crow .p{grid-column:2/9}
-  .cases .hd .k,a.crow .k{grid-column:9/13}
-  a.crow::after{left:0}
-  .foot .c1{grid-column:1/7}.foot .c2{grid-column:7/13}.foot .c3{grid-column:1/7;margin-top:var(--lh)}.foot .c4{grid-column:7/13;margin-top:var(--lh)}
-  .foot .rights{flex-direction:column;gap:2px}
-}
-@media(max-width:520px){
-  .meta .left{grid-column:1/9;grid-template-columns:auto auto;column-gap:16px}
-  .meta .nav,.meta .ground{grid-column:auto}
-  .meta .right{grid-column:9/13;grid-template-columns:1fr}
-  .meta .right .clock{display:none}
-  .cases .hd .p,a.crow .p{grid-column:2/8}
-  .cases .hd .k,a.crow .k{grid-column:8/13}
+/* ---------- 03: the identity strip, effect 038 ----------
+   Reference numbers, as on talent.html: a 300vh runway, 5vw shoulders, the
+   name set up the spine at 2vw/2.6vw rotated −90° from 0 50%, the open
+   cover at 100% − 2.6vw high with 1.3vw 1.3vw 0 5vw margins, .3-alpha
+   rules and dim names when closed. Held with position:sticky rather than a
+   pin, and driven by the page's scroll by hand — no library. Nine pieces,
+   not the reference's twenty-four, so the open cover is sized to fill what
+   the shoulders leave (never narrower than square). */
+.strip{margin-top:var(--lh);overflow-x:clip}   /* clip, not hidden: hidden would make .strip the scroller and kill the sticky */
+.strip .project{position:relative}
+.strip .datas{margin:30px 15px 15px;font-size:28px;line-height:30px;letter-spacing:-.03em}
+.strip .datas .label{font-weight:800;font-stretch:112%;text-transform:uppercase}
+.strip .datas .year{font-size:var(--fs);line-height:var(--lh);letter-spacing:-.01em;display:flex;gap:1.2em;flex-wrap:wrap;margin-top:.4rem;opacity:var(--faint)}
+.strip .datas .year a{opacity:1}
+.strip .media{display:block;margin:15px;width:calc(100% - 30px);aspect-ratio:4/3;overflow:hidden;background:#111;position:relative}
+.strip .media img{width:100%;height:100%;object-fit:cover;display:block}
+.strip .project:not(:first-child){border-top:1px solid var(--line)}
+@media(min-width:901px){
+  html.js .strip .pin{height:300vh}
+  html.js .strip .container{position:sticky;top:0;height:100vh;display:flex;white-space:nowrap;width:max-content;min-width:100%;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);will-change:transform;background:var(--bg)}
+  html.js .strip .project{height:100%;min-width:5vw;border-top:0}
+  html.js .strip .project:not(:last-child){border-right:1px solid var(--line)}
+  html.js .strip .project .datas{position:absolute;bottom:0;left:2vw;margin:0;font-size:2vw;line-height:2.6vw;transform:rotate(-90deg);transform-origin:0 50%;
+    width:calc(100vh - 2.6vw);display:flex;justify-content:space-between;align-items:center;white-space:nowrap;transition:opacity .3s}
+  html.js .strip .project:not(.on) .datas{opacity:var(--faint)}
+  html.js .strip .datas .year{margin:0;flex-wrap:nowrap;opacity:1}
+  html.js .strip .project:not(.on) .year,html.js .strip .project:not(.on) .media{display:none}
+  html.js .strip .media{display:inline-block;vertical-align:top;height:calc(100% - 2.6vw);aspect-ratio:auto;
+    width:max(calc(100vw - var(--n,9) * 5vw - 1.3vw),calc(100vh - 2.6vw));margin:1.3vw 1.3vw 0 5vw;outline:1px solid var(--line);outline-offset:-1px}
 }
 </style>
 </head>
@@ -232,7 +70,7 @@ html.js.in a.crow{opacity:1}
 <!-- ============ header meta ============ -->
 <header class="g meta">
   <div class="left">
-    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="talent.html">Talent</a>,&nbsp;<a href="retain.html" class="now" aria-current="page">Retain</a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="talent.html">Talent</a>,&nbsp;<a href="retain.html" class="now" aria-current="page">Retain</a>,&nbsp;<a href="production.html">Production</a></nav>
     <div class="ground" role="group" aria-label="Ground"><b class="on" data-ground="white">White</b> / <b data-ground="carbon">Carbon</b></div>
   </div>
   <a class="centre" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""></a>
@@ -243,26 +81,26 @@ html.js.in a.crow{opacity:1}
 </header>
 
 <main>
-<!-- ============ the hero: directory left, headline right ============ -->
-<section class="g hero" aria-label="The floor's archive">
+<!-- ============ 01 — social media ============ -->
+<div class="g kick first" id="social">
+  <span class="n faint" style="--i:0">01</span>
+  <span class="t" style="--i:1">Social media</span>
+  <span class="s faint" style="--i:2">The feed, the stories, the posts &mdash; eleven pieces, 2021&ndash;2023</span>
+</div>
+<section class="g hero" aria-label="Social media — the directory">
   <div class="dir">
     <div class="hd"><span class="faint">Number:</span><span class="faint">Project:</span></div>
     <a class="row" style="--i:0" href="https://www.behance.net/gallery/136994279/x" target="_blank" rel="noopener" data-img="assets/retain/spice.webp" title="Social media creatives"><span>01</span><span>Spice Station / 2021</span></a>
-    <a class="row" style="--i:1" href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener" data-img="assets/retain/bunta-brand.webp" title="Brand identity"><span>02</span><span>Bunta Bar — identity / 2021</span></a>
-    <a class="row" style="--i:2" href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener" data-img="assets/retain/bunta-visual.webp" title="Visual identity"><span>03</span><span>Bunta Bar — visual system / 2021</span></a>
-    <a class="row" style="--i:3" href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener" data-img="assets/retain/burger-a.webp" title="Brand identity, first direction"><span>04</span><span>Burger Now — identity I / 2021</span></a>
-    <a class="row" style="--i:4" href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener" data-img="assets/retain/burger-b.webp" title="Brand identity, second direction"><span>05</span><span>Burger Now — identity II / 2021</span></a>
-    <a class="row" style="--i:5" href="talent.html#made" data-img="assets/retain/jd.webp" title="Logo, lockups, reveal film"><span>06</span><span>JD Jewellers / 2026</span></a>
-    <a class="row" style="--i:6" href="talent.html#made" data-img="assets/retain/noidawery.webp" title="Brewery &amp; restaurant — banner"><span>07</span><span>Noidawery / 2023</span></a>
-    <a class="row" style="--i:7" href="talent.html#made" data-img="assets/retain/doozy.webp" title="Influencer shoot"><span>08</span><span>Miss Doozy / 2023</span></a>
-    <a class="row" style="--i:8" href="talent.html#made" data-img="assets/retain/aarushi.webp" title="F&amp;B photography"><span>09</span><span>Aarushi Jain shoot / 2026</span></a>
-    <a class="row" style="--i:9" href="https://www.behance.net/gallery/136993089/x" target="_blank" rel="noopener" data-img="assets/retain/studio-xo.webp" title="Social media creatives"><span>10</span><span>Studio Xo / 2022</span></a>
-    <a class="row" style="--i:10" href="https://www.behance.net/gallery/136995099/x" target="_blank" rel="noopener" data-img="assets/retain/dillusion.webp" title="Creatives"><span>11</span><span>Dillusion / 2022</span></a>
-    <a class="row" style="--i:11" href="https://www.behance.net/gallery/136992699/x" target="_blank" rel="noopener" data-img="assets/retain/esquire.webp" title="Social media creatives"><span>12</span><span>Esquire Club / 2022</span></a>
-    <a class="row" style="--i:12" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener" data-img="assets/retain/ruto.webp" title="Travel app — concept"><span>13</span><span>Ruto / 2022</span></a>
-    <a class="row" style="--i:13" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener" data-img="assets/retain/chnkrs.webp" title="Sneaker reselling platform — concept"><span>14</span><span>CHNKRS / 2022</span></a>
-    <a class="row" style="--i:14" href="https://www.behance.net/gallery/136992923/x" target="_blank" rel="noopener" data-img="assets/retain/darzi.webp" title="Bar &amp; kitchen — creatives"><span>15</span><span>Darzi Bar &amp; Kitchen / 2022</span></a>
-    <a class="row" style="--i:15" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener" data-img="assets/retain/search.webp" title="Home-finding app — concept"><span>16</span><span>Search / 2022</span></a>
+    <a class="row" style="--i:1" href="index.html#case-fast-up" data-img="assets/retain/fastup.webp" title="Instagram stories — creator unboxings"><span>02</span><span>Fast &amp; Up &mdash; stories / 2021</span></a>
+    <a class="row" style="--i:2" href="index.html#case-one8-commune" data-img="assets/retain/one8.webp" title="Posts"><span>03</span><span>One8 Commune / 2022</span></a>
+    <div class="row" style="--i:3" data-img="assets/retain/skyhouse.webp" title="Live-music posts"><span>04</span><span>Sky House / 2022</span></div>
+    <div class="row" style="--i:4" data-img="assets/retain/baris.webp" title="Arabian Night — event creatives"><span>05</span><span>Baris / 2022</span></div>
+    <a class="row" style="--i:5" href="https://www.behance.net/gallery/136993089/x" target="_blank" rel="noopener" data-img="assets/retain/studio-xo.webp" title="Social media creatives"><span>06</span><span>Studio Xo / 2022</span></a>
+    <a class="row" style="--i:6" href="https://www.behance.net/gallery/136992699/x" target="_blank" rel="noopener" data-img="assets/retain/esquire.webp" title="Social media creatives"><span>07</span><span>Esquire Club / 2022</span></a>
+    <a class="row" style="--i:7" href="https://www.behance.net/gallery/136995099/x" target="_blank" rel="noopener" data-img="assets/retain/dillusion.webp" title="Creatives"><span>08</span><span>Dillusion / 2022</span></a>
+    <a class="row" style="--i:8" href="https://www.behance.net/gallery/136992923/x" target="_blank" rel="noopener" data-img="assets/retain/darzi.webp" title="Bar &amp; kitchen — creatives"><span>09</span><span>Darzi Bar &amp; Kitchen / 2022</span></a>
+    <a class="row" style="--i:9" href="index.html#case-ishant" data-img="assets/retain/ishant-social.webp" title="Posts, festival posts, reels"><span>10</span><span>Ishant Sharma &mdash; posts &amp; reels / 2023</span></a>
+    <div class="row" style="--i:10" data-img="assets/retain/velvett.webp" title="Posts"><span>11</span><span>Velvett Spa / 2023</span></div>
   </div>
   <h1 class="head" aria-label="Retain is the room where the channels we build are held.">
     <span class="ln c" style="--i:0"><i>Retain</i></span><span class="hl"></span>
@@ -274,67 +112,31 @@ html.js.in a.crow{opacity:1}
   </h1>
 </section>
 
-<div class="spacer" aria-hidden="true"></div>
-
-<!-- ============ production: the wheel ============ -->
-<section class="prod" id="production" aria-label="Production — the wheel">
-  <div class="g ph">
-    <div class="lbl faint">Production:</div>
-    <p class="d">Shoot craft across food and hospitality: menus, ranges, rooms, people. Fourteen shoots, one frame each &mdash; the disc turns as you scroll, and tilts under the pointer.</p>
-    <p class="credit faint">Produced by 98 Entertainment &middot; food photography by Chitra by RK</p>
-  </div>
-  <div class="wheel" id="wheel">
-    <div class="w-container"><div class="w-medias" id="plates">
-      <div class="plate" data-code="THEO" data-name="Theobroma" data-kind="Patisserie · premium retail" aria-label="Theobroma"><img src="assets/retain/prod/theobroma.webp" alt="Theobroma" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="NATR" data-name="Naturelo" data-kind="Ice cream · frozen dessert" aria-label="Naturelo"><img src="assets/retain/prod/naturelo.webp" alt="Naturelo" loading="lazy" decoding="async" draggable="false"></div>
-      <a class="plate" href="index.html#case-andreas" data-code="ANDR" data-name="Andrea&rsquo;s Eatery" data-kind="Hospitality · Saket · relaunch" aria-label="Andrea&rsquo;s Eatery"><img src="assets/retain/prod/andreas.webp" alt="Andrea&rsquo;s Eatery" loading="lazy" decoding="async" draggable="false"></a>
-      <div class="plate" data-code="COST" data-name="Costa Coffee" data-kind="Global cafe chain · the everyday occasion" aria-label="Costa Coffee"><img src="assets/retain/prod/costa.webp" alt="Costa Coffee" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="TILT" data-name="TILT" data-kind="Beverage · people, parties, celebration" aria-label="TILT"><img src="assets/retain/prod/tilt.webp" alt="TILT" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="TWIG" data-name="Twigly" data-kind="Everyday delivery food · menu system" aria-label="Twigly"><img src="assets/retain/prod/twigly.webp" alt="Twigly" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="AMST" data-name="Cafe Amsterdam" data-kind="All-day cafe · brunch &amp; plating" aria-label="Cafe Amsterdam"><img src="assets/retain/prod/amsterdam.webp" alt="Cafe Amsterdam" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="DECA" data-name="De Casa" data-kind="Cold-pressed beverages · product &amp; lifestyle" aria-label="De Casa"><img src="assets/retain/prod/decasa.webp" alt="De Casa" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="BIKK" data-name="Bikkgane Biryani" data-kind="QSR chain · menu photography" aria-label="Bikkgane Biryani"><img src="assets/retain/prod/bikkgane.webp" alt="Bikkgane Biryani" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="NYCP" data-name="NYC Pie" data-kind="Pizza · menu &amp; hero photography" aria-label="NYC Pie"><img src="assets/retain/prod/nycpie.webp" alt="NYC Pie" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="UBER" data-name="Street Food Trail" data-kind="UberEats · on location · Delhi" aria-label="Street Food Trail"><img src="assets/retain/prod/streetfood.webp" alt="Street Food Trail" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="CLUB" data-name="Club Cafe" data-kind="Cafe · beverages &amp; small plates" aria-label="Club Cafe"><img src="assets/retain/prod/clubcafe.webp" alt="Club Cafe" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="ARAA" data-name="Araana" data-kind="Wellness food · natural-light product" aria-label="Araana"><img src="assets/retain/prod/araana.webp" alt="Araana" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="plate" data-code="AYUR" data-name="Ayurnosh" data-kind="Health cookies · pack &amp; product" aria-label="Ayurnosh"><img src="assets/retain/prod/ayurnosh.webp" alt="Ayurnosh" loading="lazy" decoding="async" draggable="false"></div>
-    </div></div>
-    <div class="tip" id="tip" aria-hidden="true"></div>
-  </div>
-  <div class="g pf">
-    <span class="l faint">Production &middot; 14 shoots &middot; food &amp; hospitality</span>
-    <span class="r faint">The plates keep facing you; the disc turns.</span>
-  </div>
-</section>
-
-<div class="spacer" aria-hidden="true"></div>
-
-<!-- ============ second movement: the room's own sentence ============ -->
-<section class="second" aria-label="A shoot is a channel we own">
-  <h2 aria-label="A shoot is a channel we own, not a service sold apart from it.">
-    <span class="ln l" style="--i:6"><i>A shoot</i></span><span class="hl"></span>
-    <span class="ln l" style="--i:7"><i>is a channel</i></span><span class="hl"></span>
-    <span class="ln r w66" style="--i:8"><i>we own,</i></span><span class="hl"></span>
-    <span class="ln r w66" style="--i:9"><i>not a service</i></span><span class="hl"></span>
-    <span class="ln r w83" style="--i:10"><i>sold apart</i></span><span class="hl"></span>
-    <span class="ln r w83" style="--i:11"><i>from it</i></span><span class="hl"></span>
+<!-- ============ 02 — the room ============ -->
+<div class="g kick" id="room">
+  <span class="n faint" style="--i:0">02</span>
+  <span class="t" style="--i:1">The room</span>
+  <span class="s faint" style="--i:2">What Retain is, and the eight cases filed under it</span>
+</div>
+<section class="second" aria-label="The feed is held week after week">
+  <h2 aria-label="The feed is held week after week.">
+    <span class="ln l" style="--i:6"><i>The feed</i></span><span class="hl"></span>
+    <span class="ln l" style="--i:7"><i>is held</i></span><span class="hl"></span>
+    <span class="ln r w66" style="--i:8"><i>week</i></span><span class="hl"></span>
+    <span class="ln r w83" style="--i:9"><i>after week</i></span><span class="hl"></span>
   </h2>
 </section>
-
 <section class="g essay" aria-label="About the room">
   <div class="txt" style="--i:2">
-    <div class="lbl faint">Production, in-house:</div>
-    <p>Retain is the fourth of Marketing&rsquo;s five rooms &mdash; Launch, Amplify, Convert, Retain, Events &mdash; and the one the studio lives in. The channels we build for a brand are held here week after week: the shoots, the films, the feed, the design system. A shoot is a channel we own, not a service sold apart from it.</p>
-    <p>This directory is the floor&rsquo;s own archive &mdash; social creatives, identities, app concepts, shoots &mdash; the fragments behind the documented cases rather than the cases themselves. The eight cases filed under Retain follow below; each opens its full write-up on the landing page.</p>
+    <div class="lbl faint">The room:</div>
+    <p>Retain is the fourth of Marketing&rsquo;s five rooms &mdash; Launch, Amplify, Convert, Retain, Events &mdash; and the one the studio lives in. The channels we build for a brand are held here week after week: the feed, the design system, the shoots. Three kinds of work, three parts to this page.</p>
+    <p>The feed is above &mdash; social creatives, stories and posts for eleven brands. The identity work is at the foot of the page. The shoots have a page of their own, because a shoot is a channel we own, not a service sold apart from it.</p>
+    <a class="more" href="production.html">Production &mdash; the shoots, on their own page &rarr;</a>
   </div>
 </section>
-
 <div class="gap" aria-hidden="true"></div>
-
-<!-- ============ the cases filed under Retain ============ -->
 <section class="g cases" aria-label="Cases filed under Retain">
-  <div class="hd"><span class="n faint">Number:</span><span class="p faint">Project:</span><span class="k faint">Link:</span></div>
+  <div class="hd"><span class="n faint">Number:</span><span class="p faint">Case:</span><span class="k faint">Link:</span></div>
   <a class="crow" style="--i:0" href="index.html#case-ishant"><span class="n">01</span><span class="p">Ishant Sharma / 2020</span><span class="k">#case-ishant</span></a>
   <a class="crow" style="--i:1" href="index.html#case-andreas"><span class="n">02</span><span class="p">Andrea&rsquo;s Eatery / 2021</span><span class="k">#case-andreas</span></a>
   <a class="crow" style="--i:2" href="index.html#case-one8-commune"><span class="n">03</span><span class="p">One8 Commune / 2022</span><span class="k">#case-one8-commune</span></a>
@@ -343,6 +145,55 @@ html.js.in a.crow{opacity:1}
   <a class="crow" style="--i:5" href="index.html#case-tablespoon"><span class="n">06</span><span class="p">Tablespoon / 2023</span><span class="k">#case-tablespoon</span></a>
   <a class="crow" style="--i:6" href="index.html#case-tickled-pink"><span class="n">07</span><span class="p">Tickled Pink</span><span class="k">#case-tickled-pink</span></a>
   <a class="crow" style="--i:7" href="index.html#case-rizq"><span class="n">08</span><span class="p">RIZQ</span><span class="k">#case-rizq</span></a>
+</section>
+
+<!-- ============ 03 — identity, as effect 038 ============ -->
+<div class="g kick" id="identity">
+  <span class="n faint" style="--i:0">03</span>
+  <span class="t" style="--i:1">Identity &amp; design</span>
+  <span class="s faint" style="--i:2">Nine pieces &mdash; the shoulder nearest your scroll opens</span>
+</div>
+<section class="strip" id="strip" aria-label="Identity work">
+  <div class="pin">
+    <div class="container" id="strip-c">
+      <div class="project">
+        <div class="datas"><p class="label">Bunta Bar Express</p><p class="year"><span>Brand identity &middot; 2021</span><a href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/131444675/x" target="_blank" rel="noopener"><img src="assets/retain/id/bunta-brand.webp" alt="Bunta Bar Express — brand identity" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Bunta Bar &mdash; visual system</p><p class="year"><span>Visual identity &middot; 2021</span><a href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/131444919/x" target="_blank" rel="noopener"><img src="assets/retain/id/bunta-visual.webp" alt="Bunta Bar Express — visual system" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Burger Now &mdash; I</p><p class="year"><span>Brand identity, first direction &middot; 2021</span><a href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/131444327/x" target="_blank" rel="noopener"><img src="assets/retain/id/burger-a.webp" alt="Burger Now — identity, first direction" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Burger Now &mdash; II</p><p class="year"><span>Brand identity, second direction &middot; 2021</span><a href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/131444473/x" target="_blank" rel="noopener"><img src="assets/retain/id/burger-b.webp" alt="Burger Now — identity, second direction" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">JD Jewellers</p><p class="year"><span>Logo, lockups, reveal film &middot; 2026</span><a href="talent.html#made">On the reel &rarr;</a></p></div>
+        <a class="media" href="talent.html#made"><img src="assets/retain/id/jd.webp" alt="JD Jewellers — logo mark" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Noidawery</p><p class="year"><span>Brewery &amp; restaurant &mdash; banner &middot; 2023</span><a href="talent.html#made">On the reel &rarr;</a></p></div>
+        <a class="media" href="talent.html#made"><img src="assets/retain/id/noidawery.webp" alt="Noidawery — banner" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">CHNKRS</p><p class="year"><span>Sneaker reselling platform &mdash; app concept &middot; 2022</span><a href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener"><img src="assets/retain/id/chnkrs.webp" alt="CHNKRS — app concept" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Ruto</p><p class="year"><span>Travel app &mdash; concept &middot; 2022</span><a href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener"><img src="assets/retain/id/ruto.webp" alt="Ruto — app concept" loading="lazy" decoding="async"></a>
+      </div>
+      <div class="project">
+        <div class="datas"><p class="label">Search</p><p class="year"><span>Home-finding app &mdash; concept &middot; 2022</span><a href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener">Behance &nearr;</a></p></div>
+        <a class="media" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener"><img src="assets/retain/id/search.webp" alt="Search — app concept" loading="lazy" decoding="async"></a>
+      </div>
+    </div>
+  </div>
 </section>
 </main>
 
@@ -355,14 +206,17 @@ html.js.in a.crow{opacity:1}
     <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
   </div>
   <div class="col c2" style="--i:1">
-    <span class="faint">The rooms:</span>
-    <a href="index.html#v-marketing">Launch, Amplify, Convert, Retain, Events</a>
-    <a href="talent.html">Talent &amp; Branding</a>
-    <a href="talent.html#made">Made here &mdash; the reel</a>
+    <span class="faint">This room:</span>
+    <a href="#social">01 &mdash; Social media</a>
+    <a href="#room">02 &mdash; The room</a>
+    <a href="#identity">03 &mdash; Identity &amp; design</a>
+    <a href="production.html">Production &mdash; its own page &rarr;</a>
   </div>
   <div class="col c3" style="--i:2">
-    <span class="faint">Typography:</span>
-    <span>Archivo, by Omnibus-Type</span>
+    <span class="faint">Elsewhere:</span>
+    <a href="index.html#v-marketing">The five rooms</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="talent.html#made">Made here &mdash; the reel</a>
   </div>
   <div class="col c4" style="--i:3">
     <span class="faint">Contact:</span>
@@ -371,130 +225,39 @@ html.js.in a.crow{opacity:1}
   </div>
   <div class="rights" style="--i:4">
     <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
-    <span class="faint">Delhi NCR &middot; est. 01.01.2020</span>
+    <span class="faint">Archivo, by Omnibus-Type &middot; Delhi NCR &middot; est. 01.01.2020</span>
   </div>
 </footer>
 
-<div class="peek" id="peek" aria-hidden="true"><img alt="" id="peek-img"></div>
+<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
 
+<script src="assets/room.js"></script>
 <script>
+/* ---- 03: the identity strip, effect 038, driven by hand ----
+   The container is held by position:sticky for the pin's 300vh; the page's
+   scroll through that runway is the progress, the project nearest it is the
+   open one, and the strip slides left by its overflow — measured once, as
+   the reference does — times the progress. */
 (function(){
-  var doc=document.documentElement;
-
-  /* the entrance, once the face is in */
-  var go=function(){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ doc.classList.add('in'); }); }); };
-  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(go); setTimeout(go,1800); } else { go(); }
-
-  /* the ground: White / Carbon, remembered */
-  var sw=document.querySelectorAll('.ground b');
-  function setGround(g){
-    if(g==='carbon') doc.setAttribute('data-ground','carbon'); else doc.removeAttribute('data-ground');
-    sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')===g); });
-    try{ localStorage.setItem('98-retain-ground', g); }catch(e){}
-  }
-  sw.forEach(function(b){ b.addEventListener('click', function(){ setGround(b.getAttribute('data-ground')); }); });
-  if(doc.getAttribute('data-ground')==='carbon') sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')==='carbon'); });
-
-  /* the clock, Delhi */
-  var clock=document.getElementById('clock');
-  function tick(){
-    try{ clock.textContent='IST '+new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){}
-  }
-  tick(); setInterval(tick, 15000);
-
-  /* the mail line copies itself on click, then goes back to being a link */
-  var mail=document.getElementById('mail');
-  mail.addEventListener('click', function(e){
-    if(!navigator.clipboard) return;
-    e.preventDefault();
-    navigator.clipboard.writeText(mail.getAttribute('data-mail')).then(function(){
-      var t=mail.textContent; mail.textContent='Copied'; setTimeout(function(){ mail.textContent=t; }, 1400);
-    }, function(){ location.href=mail.href; });
-  });
-
-  /* ---- production: the wheel (106), eased by hand ---- */
-  (function(){
-    var wheel=document.getElementById('wheel'), holder=document.getElementById('plates'), tip=document.getElementById('tip');
-    if(!wheel||!holder) return;
-    var plates=[].slice.call(holder.querySelectorAll('.plate')), n=plates.length; if(!n) return;
-    var REDUCED=matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var base=plates.map(function(_,i){ return (i/n)*Math.PI*2; });
-    var W=1,H=1,layout={};
-    function measure(){ W=wheel.clientWidth||innerWidth; H=wheel.clientHeight||innerHeight;
-      var small=innerWidth<=900;
-      layout= small ? {radiusDivisor:2.75, minDivisor:2.3, wheelRadiusFactor:0.06, translateZ:-40}
-                    : {radiusDivisor:3.5, minDivisor:2.2, wheelRadiusFactor:0.12, translateZ:-26}; }
-    measure();
-    /* targets and their eased shadows — quickTo, without the library */
-    var T={rx:82,ry:0,rz:1}, C={rx:82,ry:0,rz:1};
-    var spinT=0, spin=0, intT=0, inten=0, auto=0, last=performance.now(), lastY=scrollY, live=false, raf=0;
-    var hovering=false, autoScale=1;
-    function render(){
-      holder.style.transform='translate3d(0,0,'+layout.translateZ+'vw) rotateX('+C.rx+'deg) rotateY('+C.ry+'deg) rotateZ('+C.rz+'deg)';
-      var radius=W/Math.max(layout.minDivisor, layout.radiusDivisor-inten*layout.wheelRadiusFactor);
-      var off=auto+spin;
-      for(var i=0;i<n;i++){ var a=off+base[i];
-        plates[i].style.transform='translate3d('+(Math.sin(a)*radius).toFixed(2)+'px,'+(Math.cos(a)*radius).toFixed(2)+'px,0) rotateX('+(-C.rx)+'deg) rotateY('+(-C.ry)+'deg) rotateZ('+(-C.rz)+'deg)'; }
-      wheel.style.perspective=(100+inten*30)+'vw';
-    }
-    function step(now){
-      var dt=Math.min(64, now-last)/1000; last=now;
-      var k=1-Math.pow(0.001, dt*1.6);          /* ~ power3, .55s */
-      C.rx+=(T.rx-C.rx)*k; C.ry+=(T.ry-C.ry)*k; C.rz+=(T.rz-C.rz)*k;
-      spin+=(spinT-spin)*(1-Math.pow(0.001, dt*2));
-      inten+=(intT-inten)*(1-Math.pow(0.001, dt*0.9));
-      /* the standing rotation — 36 s a lap, held still under the cursor */
-      autoScale+=((hovering?0:1)-autoScale)*(1-Math.pow(0.001, dt*2));
-      if(!REDUCED) auto+=(Math.PI*2/36)*dt*autoScale;
-      render();
-      if(live) raf=requestAnimationFrame(step); else raf=0;
-    }
-    function wake(){ if(!raf){ last=performance.now(); raf=requestAnimationFrame(step); } }
-    /* only runs while on screen */
-    new IntersectionObserver(function(en){ live=en[0].isIntersecting; if(live) wake(); },{threshold:0}).observe(wheel);
-    /* the page's scroll turns the disc */
-    addEventListener('scroll', function(){ if(!live) return; var d=scrollY-lastY; lastY=scrollY;
-      spinT+=d*0.0022; intT=Math.min(6, Math.abs(d)/12); clearTimeout(wake._t); wake._t=setTimeout(function(){ intT=0; }, 120); wake(); }, {passive:true});
-    /* the cursor tilts it — half the demo's sway, so plates never flee the pointer */
-    function tilt(cx,cy){ var r=wheel.getBoundingClientRect(); var x=(cx-r.left)/r.width, y=(cy-r.top)/r.height;
-      T.ry=x*20-10; T.rx=y*16-8+82; T.rz=-x*5+2.5; }
-    wheel.addEventListener('mousemove', function(e){ tilt(e.clientX,e.clientY);
-      var r=wheel.getBoundingClientRect(); tip.style.transform='translate(-50%,0) translate('+(e.clientX-r.left)+'px,'+(e.clientY-r.top+26)+'px)'; wake(); });
-    wheel.addEventListener('mouseleave', function(){ T.rx=82; T.ry=0; T.rz=1; hovering=false; tip.classList.remove('on'); wake(); });
-    function onTouch(e){ if(e.touches&&e.touches[0]) { tilt(e.touches[0].clientX,e.touches[0].clientY); wake(); } }
-    wheel.addEventListener('touchstart', onTouch, {passive:true}); wheel.addEventListener('touchmove', onTouch, {passive:true});
-    plates.forEach(function(p){
-      p.addEventListener('mouseenter', function(){ hovering=true;
-        tip.innerHTML='<b style="font-weight:400">'+p.getAttribute('data-code')+' &mdash; '+p.getAttribute('data-name')+'</b><span class="faint">'+p.getAttribute('data-kind')+(p.tagName==='A'?' &middot; open the case &nearr;':'')+'</span>';
-        tip.classList.add('on'); });
-      p.addEventListener('mouseleave', function(){ hovering=false; tip.classList.remove('on'); });
-    });
-    addEventListener('resize', function(){ measure(); wake(); });
-    render();
-  })();
-
-  /* a still follows the pointer across the archive rows */
-  if(matchMedia('(hover:hover)').matches){
-    var peek=document.getElementById('peek'), img=document.getElementById('peek-img');
-    var x=0,y=0,on=false;
-    var dir=document.querySelector('.dir');
-    function place(){ var W=peek.offsetWidth,H=peek.offsetHeight, right=dir.getBoundingClientRect().right;
-      var px=Math.max(x+18, right+16), py=y-Math.round(H*0.35);
-      if(px+W>innerWidth-10) px=innerWidth-10-W; if(py+H>innerHeight-10) py=innerHeight-10-H; if(py<10) py=10;
-      peek.style.transform='translate('+px+'px,'+py+'px)'; }
-    document.querySelectorAll('.dir a.row').forEach(function(row){
-      row.addEventListener('mouseenter', function(e){
-        img.src=row.getAttribute('data-img');
-        x=e.clientX; y=e.clientY; place(); peek.classList.add('on'); on=true;
-      });
-      row.addEventListener('mousemove', function(e){ x=e.clientX; y=e.clientY; if(on) place(); });
-      row.addEventListener('mouseleave', function(){ peek.classList.remove('on'); on=false; });
-    });
-    /* warm the stills after the page has settled */
-    addEventListener('load', function(){ setTimeout(function(){
-      document.querySelectorAll('.dir a.row').forEach(function(r){ var i=new Image(); i.src=r.getAttribute('data-img'); });
-    }, 1200); });
-  }
+  var strip=document.getElementById('strip'), pin=strip&&strip.querySelector('.pin'), c=document.getElementById('strip-c');
+  if(!strip||!c) return;
+  var projects=[].slice.call(c.querySelectorAll('.project')), n=projects.length; if(!n) return;
+  strip.style.setProperty('--n', n);
+  var wide=matchMedia('(min-width:901px)'), cur=-1, dist=0, raf=0;
+  function open(i){ if(i===cur) return; if(cur>=0) projects[cur].classList.remove('on'); projects[i].classList.add('on'); cur=i; }
+  function measure(){ if(!wide.matches){ dist=0; return; } projects.forEach(function(p){ p.classList.remove('on'); }); cur=-1; open(0);
+    dist=Math.max(0, c.scrollWidth-innerWidth); }
+  function update(){ raf=0; if(!wide.matches){ return; }
+    var r=pin.getBoundingClientRect(), run=pin.offsetHeight-innerHeight; if(run<=0) return;
+    var p=Math.min(1, Math.max(0, -r.top/run));
+    open(Math.round(p*(n-1)));
+    c.style.transform='translate3d('+(-dist*p).toFixed(1)+'px,0,0)'; }
+  function onScroll(){ if(!raf) raf=requestAnimationFrame(update); }
+  measure(); update();
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', function(){ measure(); update(); });
+  wide.addEventListener('change', function(){ measure(); if(!wide.matches){ c.style.transform=''; projects.forEach(function(p){ p.classList.remove('on'); }); cur=-1; } update(); });
+  addEventListener('load', function(){ measure(); update(); });
 })();
 </script>
 </body>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Production — the shoots · Ninety-Eight</title>
+<meta name="description" content="Production at Ninety-Eight: shoot craft across food and hospitality — menus, ranges, rooms, people. Sixteen shoots on a wheel, and the directory.">
+<meta property="og:title" content="Production — the shoots · Ninety-Eight">
+<meta property="og:description" content="A shoot is a channel we own, not a service sold apart from it. Sixteen shoots, one frame each.">
+<meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<script>
+(function(){try{var t=localStorage.getItem('98-retain-ground');if(t==='carbon')document.documentElement.setAttribute('data-ground','carbon');}catch(e){}
+document.documentElement.classList.add('js');})();
+</script>
+<link rel="stylesheet" href="assets/room.css">
+<style>
+/* =========================================================================
+   PRODUCTION — the shoots, on their own page (v3.39, Sep 2026)
+   Retain's third part, moved out at Harsh's call: the directory of shoots
+   beside the room's own sentence, then the wheel — MWG 106 from the
+   Ambrosia site — one frame per shoot on a disc tilted toward the reader.
+   Shared rules in assets/room.css; the wheel is below.
+   ========================================================================= */
+.prod{margin-top:clamp(120px,22vh,260px)}
+.prod .ph{align-items:start}
+.prod .ph .lbl{grid-column:1/4}
+.prod .ph .d{grid-column:4/9;max-width:44ch}
+.prod .ph .credit{grid-column:10/13;text-align:right}
+.wheel{position:relative;height:clamp(460px,78vh,760px);margin-top:calc(var(--lh) * 1.5);overflow:hidden;perspective:100vw;
+  background-image:radial-gradient(circle at 50% 50%,var(--dot) .6px,transparent .7px);background-size:12px 12px}
+.wheel::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 92% 78% at 50% 50%,transparent 42%,var(--bg) 100%);opacity:.9}
+.wheel .w-container,.wheel .w-medias{position:absolute;inset:0;transform-style:preserve-3d}
+.wheel .w-medias{z-index:2}
+.wheel .plate{position:absolute;top:calc(50% - 7vw);left:calc(50% - 5.5vw);width:11vw;height:14vw;transform-style:preserve-3d;will-change:transform;display:block}
+.wheel .plate img{width:100%;height:100%;object-fit:cover;display:block;background:var(--bg);
+  outline:1px solid rgba(0,0,0,.16);outline-offset:-1px;box-shadow:0 10px 26px rgba(14,14,16,.13),0 2px 6px rgba(14,14,16,.07);
+  transition:outline-color .3s,box-shadow .3s}
+.wheel .plate:hover img{outline-color:rgba(0,0,0,.62);box-shadow:0 16px 40px rgba(14,14,16,.2),0 3px 8px rgba(14,14,16,.1)}
+html[data-ground="carbon"] .wheel .plate img{outline-color:rgba(233,234,228,.14);box-shadow:none}
+html[data-ground="carbon"] .wheel .plate:hover img{outline-color:rgba(233,234,228,.65)}
+a.plate{cursor:pointer}
+.wheel .tip{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;
+  background:var(--bg);padding:0 6px;line-height:var(--lh)}
+.wheel .tip.on{opacity:1}
+.wheel .tip .faint{margin-left:.6em}
+.prod .pf{margin-top:var(--lh);align-items:baseline}
+.prod .pf .l{grid-column:1/7}
+.prod .pf .r{grid-column:7/13;text-align:right}
+@media(max-width:900px){
+  .prod .ph .lbl{grid-column:1/13}.prod .ph .d{grid-column:1/13;margin-top:4px}.prod .ph .credit{grid-column:1/13;text-align:left;margin-top:4px}
+  .wheel{height:clamp(320px,54vh,460px)}
+  .wheel .plate{top:calc(50% - 16vw);left:calc(50% - 12.5vw);width:25vw;height:32vw}
+  .prod .pf .l,.prod .pf .r{grid-column:1/13;text-align:left}
+}
+@media(hover:none){.wheel .tip{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ header meta ============ -->
+<header class="g meta">
+  <div class="left">
+    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="talent.html">Talent</a>,&nbsp;<a href="retain.html">Retain</a>,&nbsp;<a href="production.html" class="now" aria-current="page">Production</a></nav>
+    <div class="ground" role="group" aria-label="Ground"><b class="on" data-ground="white">White</b> / <b data-ground="carbon">Carbon</b></div>
+  </div>
+  <a class="centre" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""></a>
+  <div class="right">
+    <div class="clock" id="clock" aria-live="off">IST —</div>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<!-- ============ the shoots, beside the room's sentence ============ -->
+<div class="g kick first" id="shoots">
+  <span class="n faint" style="--i:0">Retain</span>
+  <span class="t" style="--i:1">Production &mdash; the shoots</span>
+  <span class="s faint" style="--i:2">Sixteen shoots, food &amp; hospitality &middot; produced by 98 Entertainment</span>
+</div>
+<section class="g hero" aria-label="The shoots — the directory">
+  <div class="dir">
+    <div class="hd"><span class="faint">Number:</span><span class="faint">Shoot:</span></div>
+    <div class="row" style="--i:0" data-img="assets/retain/prod/theobroma.webp" title="Patisserie · premium retail"><span>01</span><span>Theobroma / patisserie</span></div>
+    <div class="row" style="--i:1" data-img="assets/retain/prod/naturelo.webp" title="Ice cream · frozen dessert"><span>02</span><span>Naturelo / frozen dessert</span></div>
+    <a class="row" style="--i:2" href="index.html#case-andreas" data-img="assets/retain/prod/andreas.webp" title="Hospitality · Saket · relaunch"><span>03</span><span>Andrea&rsquo;s Eatery / relaunch</span></a>
+    <div class="row" style="--i:3" data-img="assets/retain/prod/costa.webp" title="Global cafe chain · the everyday occasion"><span>04</span><span>Costa Coffee / everyday occasion</span></div>
+    <div class="row" style="--i:4" data-img="assets/retain/prod/tilt.webp" title="Beverage · people, parties, celebration"><span>05</span><span>TILT / people &amp; lifestyle</span></div>
+    <div class="row" style="--i:5" data-img="assets/retain/prod/twigly.webp" title="Everyday delivery food · menu system"><span>06</span><span>Twigly / menu system</span></div>
+    <div class="row" style="--i:6" data-img="assets/retain/prod/amsterdam.webp" title="All-day cafe · brunch &amp; plating"><span>07</span><span>Cafe Amsterdam / all-day menu</span></div>
+    <div class="row" style="--i:7" data-img="assets/retain/prod/decasa.webp" title="Cold-pressed beverages · product &amp; lifestyle"><span>08</span><span>De Casa / beverage range</span></div>
+    <div class="row" style="--i:8" data-img="assets/retain/prod/bikkgane.webp" title="QSR chain · menu photography"><span>09</span><span>Bikkgane Biryani / menu</span></div>
+    <div class="row" style="--i:9" data-img="assets/retain/prod/nycpie.webp" title="Pizza · menu &amp; hero photography"><span>10</span><span>NYC Pie / menu &amp; hero</span></div>
+    <div class="row" style="--i:10" data-img="assets/retain/prod/streetfood.webp" title="UberEats · on location · Delhi"><span>11</span><span>Street Food Trail / UberEats</span></div>
+    <div class="row" style="--i:11" data-img="assets/retain/prod/clubcafe.webp" title="Cafe · beverages &amp; small plates"><span>12</span><span>Club Cafe / cafe</span></div>
+    <div class="row" style="--i:12" data-img="assets/retain/prod/araana.webp" title="Wellness food · natural-light product"><span>13</span><span>Araana / product</span></div>
+    <div class="row" style="--i:13" data-img="assets/retain/prod/ayurnosh.webp" title="Health cookies · pack &amp; product"><span>14</span><span>Ayurnosh / pack &amp; product</span></div>
+    <a class="row" style="--i:14" href="talent.html#made" data-img="assets/retain/prod/doozy.webp" title="Influencer shoot"><span>15</span><span>Miss Doozy / influencer shoot &middot; 2023</span></a>
+    <a class="row" style="--i:15" href="talent.html#made" data-img="assets/retain/prod/aarushi.webp" title="F&amp;B photography"><span>16</span><span>Aarushi Jain / F&amp;B shoot &middot; 2026</span></a>
+  </div>
+  <h1 class="head" aria-label="A shoot is a channel we own, not a service sold apart from it.">
+    <span class="ln c" style="--i:0"><i>A shoot</i></span><span class="hl"></span>
+    <span class="ln c" style="--i:1"><i>is a channel</i></span><span class="hl"></span>
+    <span class="ln c" style="--i:2"><i>we own,</i></span><span class="hl"></span>
+    <span class="ln r" style="--i:3"><i>not a service</i></span><span class="hl"></span>
+    <span class="ln r" style="--i:4"><i>sold apart</i></span><span class="hl"></span>
+    <span class="ln l half" style="--i:5"><i>from it</i></span><span class="hl"></span>
+  </h1>
+</section>
+
+<!-- ============ the wheel ============ -->
+<section class="prod" id="wheel-section" aria-label="Production — the wheel">
+  <div class="g ph">
+    <div class="lbl faint">Production:</div>
+    <p class="d">Shoot craft across food and hospitality: menus, ranges, rooms, people. Sixteen shoots, one frame each &mdash; the disc turns as you scroll, and tilts under the pointer.</p>
+    <p class="credit faint">Produced by 98 Entertainment &middot; food photography by Chitra by RK</p>
+  </div>
+  <div class="wheel" id="wheel">
+    <div class="w-container"><div class="w-medias" id="plates">
+      <div class="plate" data-code="THEO" data-name="Theobroma" data-kind="Patisserie · premium retail" aria-label="Theobroma"><img src="assets/retain/prod/theobroma.webp" alt="Theobroma" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="NATR" data-name="Naturelo" data-kind="Ice cream · frozen dessert" aria-label="Naturelo"><img src="assets/retain/prod/naturelo.webp" alt="Naturelo" loading="lazy" decoding="async" draggable="false"></div>
+      <a class="plate" href="index.html#case-andreas" data-code="ANDR" data-name="Andrea&rsquo;s Eatery" data-kind="Hospitality · Saket · relaunch" aria-label="Andrea&rsquo;s Eatery"><img src="assets/retain/prod/andreas.webp" alt="Andrea&rsquo;s Eatery" loading="lazy" decoding="async" draggable="false"></a>
+      <div class="plate" data-code="COST" data-name="Costa Coffee" data-kind="Global cafe chain · the everyday occasion" aria-label="Costa Coffee"><img src="assets/retain/prod/costa.webp" alt="Costa Coffee" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="TILT" data-name="TILT" data-kind="Beverage · people, parties, celebration" aria-label="TILT"><img src="assets/retain/prod/tilt.webp" alt="TILT" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="TWIG" data-name="Twigly" data-kind="Everyday delivery food · menu system" aria-label="Twigly"><img src="assets/retain/prod/twigly.webp" alt="Twigly" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="AMST" data-name="Cafe Amsterdam" data-kind="All-day cafe · brunch &amp; plating" aria-label="Cafe Amsterdam"><img src="assets/retain/prod/amsterdam.webp" alt="Cafe Amsterdam" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="DECA" data-name="De Casa" data-kind="Cold-pressed beverages · product &amp; lifestyle" aria-label="De Casa"><img src="assets/retain/prod/decasa.webp" alt="De Casa" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="BIKK" data-name="Bikkgane Biryani" data-kind="QSR chain · menu photography" aria-label="Bikkgane Biryani"><img src="assets/retain/prod/bikkgane.webp" alt="Bikkgane Biryani" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="NYCP" data-name="NYC Pie" data-kind="Pizza · menu &amp; hero photography" aria-label="NYC Pie"><img src="assets/retain/prod/nycpie.webp" alt="NYC Pie" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="UBER" data-name="Street Food Trail" data-kind="UberEats · on location · Delhi" aria-label="Street Food Trail"><img src="assets/retain/prod/streetfood.webp" alt="Street Food Trail" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="CLUB" data-name="Club Cafe" data-kind="Cafe · beverages &amp; small plates" aria-label="Club Cafe"><img src="assets/retain/prod/clubcafe.webp" alt="Club Cafe" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="ARAA" data-name="Araana" data-kind="Wellness food · natural-light product" aria-label="Araana"><img src="assets/retain/prod/araana.webp" alt="Araana" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="plate" data-code="AYUR" data-name="Ayurnosh" data-kind="Health cookies · pack &amp; product" aria-label="Ayurnosh"><img src="assets/retain/prod/ayurnosh.webp" alt="Ayurnosh" loading="lazy" decoding="async" draggable="false"></div>
+      <a class="plate" href="talent.html#made" data-code="DOOZ" data-name="Miss Doozy" data-kind="Influencer shoot · 2023" aria-label="Miss Doozy"><img src="assets/retain/prod/doozy.webp" alt="Miss Doozy" loading="lazy" decoding="async" draggable="false"></a>
+      <a class="plate" href="talent.html#made" data-code="AJ" data-name="Aarushi Jain" data-kind="F&amp;B photography · 2026" aria-label="Aarushi Jain"><img src="assets/retain/prod/aarushi.webp" alt="Aarushi Jain shoot" loading="lazy" decoding="async" draggable="false"></a>
+    </div></div>
+    <div class="tip" id="tip" aria-hidden="true"></div>
+  </div>
+  <div class="g pf">
+    <span class="l faint">Production &middot; 16 shoots &middot; food &amp; hospitality</span>
+    <span class="r faint">The plates keep facing you; the disc turns.</span>
+  </div>
+</section>
+
+<section class="g essay" aria-label="About production">
+  <div class="txt" style="--i:2">
+    <div class="lbl faint">Production, in-house:</div>
+    <p>Production lives in Retain, the room where the channels we build for a brand are held week after week. A shoot is one of those channels &mdash; the menus, the ranges, the rooms and the people that the feed is made of &mdash; and it is run here, not bought in.</p>
+    <p>Fourteen of these were shot for food and hospitality houses with Chitra by RK behind the camera; the last two are from the talent practice&rsquo;s floor. The reel on the talent page cuts the floor to nineteen seconds.</p>
+    <a class="more" href="retain.html">Retain &mdash; the room&rsquo;s directory &rarr;</a>
+  </div>
+</section>
+</main>
+
+<!-- ============ footer meta ============ -->
+<footer class="g foot">
+  <div class="col c1" style="--i:0">
+    <span class="faint">Socials:</span>
+    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
+    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="col c2" style="--i:1">
+    <span class="faint">The room:</span>
+    <a href="retain.html#social">01 &mdash; Social media</a>
+    <a href="retain.html#room">02 &mdash; The room</a>
+    <a href="retain.html#identity">03 &mdash; Identity &amp; design</a>
+    <a href="production.html" aria-current="page">Production &mdash; this page</a>
+  </div>
+  <div class="col c3" style="--i:2">
+    <span class="faint">Elsewhere:</span>
+    <a href="index.html#v-marketing">The five rooms</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="talent.html#made">Made here &mdash; the reel</a>
+  </div>
+  <div class="col c4" style="--i:3">
+    <span class="faint">Contact:</span>
+    <a href="mailto:contact@ninety-eight.in" id="mail" data-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
+    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
+  </div>
+  <div class="rights" style="--i:4">
+    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
+    <span class="faint">Archivo, by Omnibus-Type &middot; Delhi NCR &middot; est. 01.01.2020</span>
+  </div>
+</footer>
+
+<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
+
+<script src="assets/room.js"></script>
+<script>
+/* ---- the wheel (MWG 106), eased by hand ----
+   Ported from demo.ninety-eight.in/ambrosia — map.html?s=production —
+   without GSAP: the same targets (quickTo's rotateX/Y/Z on the disc, the
+   counter-rotation on every plate so the frames keep facing the viewer,
+   the radius that opens under speed), eased in one requestAnimationFrame
+   loop that only runs while the section is on screen. One deliberate
+   change: on the pitch site the scroll wheel spins the disc because the
+   wheel is the whole page; here the page's own scroll turns it. */
+(function(){
+  var wheel=document.getElementById('wheel'), holder=document.getElementById('plates'), tip=document.getElementById('tip');
+  if(!wheel||!holder) return;
+  var plates=[].slice.call(holder.querySelectorAll('.plate')), n=plates.length; if(!n) return;
+  var REDUCED=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var base=plates.map(function(_,i){ return (i/n)*Math.PI*2; });
+  var W=1,H=1,layout={};
+  function measure(){ W=wheel.clientWidth||innerWidth; H=wheel.clientHeight||innerHeight;
+    var small=innerWidth<=900;
+    layout= small ? {radiusDivisor:2.75, minDivisor:2.3, wheelRadiusFactor:0.06, translateZ:-40}
+                  : {radiusDivisor:3.5, minDivisor:2.2, wheelRadiusFactor:0.12, translateZ:-26}; }
+  measure();
+  var T={rx:82,ry:0,rz:1}, C={rx:82,ry:0,rz:1};
+  var spinT=0, spin=0, intT=0, inten=0, auto=0, last=performance.now(), lastY=scrollY, live=false, raf=0;
+  var hovering=false, autoScale=1;
+  function render(){
+    holder.style.transform='translate3d(0,0,'+layout.translateZ+'vw) rotateX('+C.rx+'deg) rotateY('+C.ry+'deg) rotateZ('+C.rz+'deg)';
+    var radius=W/Math.max(layout.minDivisor, layout.radiusDivisor-inten*layout.wheelRadiusFactor);
+    var off=auto+spin;
+    for(var i=0;i<n;i++){ var a=off+base[i];
+      plates[i].style.transform='translate3d('+(Math.sin(a)*radius).toFixed(2)+'px,'+(Math.cos(a)*radius).toFixed(2)+'px,0) rotateX('+(-C.rx)+'deg) rotateY('+(-C.ry)+'deg) rotateZ('+(-C.rz)+'deg)'; }
+    wheel.style.perspective=(100+inten*30)+'vw';
+  }
+  function step(now){
+    var dt=Math.min(64, now-last)/1000; last=now;
+    var k=1-Math.pow(0.001, dt*1.6);
+    C.rx+=(T.rx-C.rx)*k; C.ry+=(T.ry-C.ry)*k; C.rz+=(T.rz-C.rz)*k;
+    spin+=(spinT-spin)*(1-Math.pow(0.001, dt*2));
+    inten+=(intT-inten)*(1-Math.pow(0.001, dt*0.9));
+    autoScale+=((hovering?0:1)-autoScale)*(1-Math.pow(0.001, dt*2));
+    if(!REDUCED) auto+=(Math.PI*2/36)*dt*autoScale;
+    render();
+    if(live) raf=requestAnimationFrame(step); else raf=0;
+  }
+  function wake(){ if(!raf){ last=performance.now(); raf=requestAnimationFrame(step); } }
+  new IntersectionObserver(function(en){ live=en[0].isIntersecting; if(live) wake(); },{threshold:0}).observe(wheel);
+  addEventListener('scroll', function(){ if(!live) return; var d=scrollY-lastY; lastY=scrollY;
+    spinT+=d*0.0022; intT=Math.min(6, Math.abs(d)/12); clearTimeout(wake._t); wake._t=setTimeout(function(){ intT=0; }, 120); wake(); }, {passive:true});
+  function tilt(cx,cy){ var r=wheel.getBoundingClientRect(); var x=(cx-r.left)/r.width, y=(cy-r.top)/r.height;
+    T.ry=x*20-10; T.rx=y*16-8+82; T.rz=-x*5+2.5; }
+  wheel.addEventListener('mousemove', function(e){ tilt(e.clientX,e.clientY);
+    var r=wheel.getBoundingClientRect(); tip.style.transform='translate(-50%,0) translate('+(e.clientX-r.left)+'px,'+(e.clientY-r.top+26)+'px)'; wake(); });
+  wheel.addEventListener('mouseleave', function(){ T.rx=82; T.ry=0; T.rz=1; hovering=false; tip.classList.remove('on'); wake(); });
+  function onTouch(e){ if(e.touches&&e.touches[0]) { tilt(e.touches[0].clientX,e.touches[0].clientY); wake(); } }
+  wheel.addEventListener('touchstart', onTouch, {passive:true}); wheel.addEventListener('touchmove', onTouch, {passive:true});
+  plates.forEach(function(p){
+    p.addEventListener('mouseenter', function(){ hovering=true;
+      tip.innerHTML='<b style="font-weight:400">'+p.getAttribute('data-code')+' &mdash; '+p.getAttribute('data-name')+'</b><span class="faint">'+p.getAttribute('data-kind')+(p.tagName==='A'?' &middot; open &nearr;':'')+'</span>';
+      tip.classList.add('on'); });
+    p.addEventListener('mouseleave', function(){ hovering=false; tip.classList.remove('on'); });
+  });
+  addEventListener('resize', function(){ measure(); wake(); });
+  render();
+})();
+</script>
+</body>
+</html>
