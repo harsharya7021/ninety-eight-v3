@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Identity &amp; design — the room before the launch · Ninety-Eight</title>
-<meta name="description" content="The identity work at Ninety-Eight: naming, marks, lockups, visual systems and app concepts — seven pieces, and the room they belong to. The first of Marketing's five rooms.">
+<meta name="description" content="The identity work at Ninety-Eight: naming, marks, lockups, visual systems and app concepts — seven pieces. The first of Marketing's five rooms.">
 <meta property="og:title" content="Identity &amp; design · Ninety-Eight">
-<meta property="og:description" content="A name is a promise somebody has to keep. Seven pieces of identity work, and the room they belong to.">
+<meta property="og:description" content="A name is a promise somebody has to keep. Seven pieces of identity work.">
 <meta property="og:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,11 +32,16 @@ document.documentElement.classList.add('js');})();
    03 The work   — effect 038, the pinned strip of shoulders, one open at a
                    time. Seven pieces, moved here whole from retain.html; the first three open a showcase.
    Shared rules in assets/room.css; the 038 strip is below.
+
+   v3.49, Sep 10: at Harsh's call the strip is the whole page. 01, 02,
+   the kickers, the header and the footer are gone; the strip starts at
+   the top and its own runway is the page's scroll.
    ========================================================================= */
 :root{ --room:#5278C2; }   /* The Opening's colour on the flywheel */
 
 /* ---------- 03: the identity strip, effect 038 ---------- */
-.strip{margin-top:var(--lh);overflow-x:clip}
+.strip{overflow-x:clip}   /* v3.49: the page's only section, so nothing above it to clear */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's heading, for screen readers: the strip has no visible title */
 .strip .project{position:relative}
 .strip .datas{margin:30px 15px 15px;font-size:28px;line-height:30px;letter-spacing:-.03em}
 .strip .datas .label{font-weight:800;font-stretch:112%;text-transform:uppercase}
@@ -77,91 +82,13 @@ a.media.ph:hover b{opacity:.2}
     aspect-ratio:1080/1920;margin:1.3vw 1.3vw 0 5vw}
   html.js .strip .media.ph{display:inline-grid}
 }
-/* the one line this page adds to the shared system: the room's own tag */
-.roomtag{display:inline-block;border:1px solid var(--room);color:var(--room);padding:2px 7px;line-height:16px}
 </style>
 </head>
 <body>
 
-<!-- ============ header meta ============ -->
-<header class="g meta">
-  <div class="left">
-    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="talent.html">Talent</a>,&nbsp;<a href="marketing.html">Marketing</a>,&nbsp;<a href="identity.html" class="now" aria-current="page">Identity</a></nav>
-    <div class="ground" role="group" aria-label="Ground"><b class="on" data-ground="white">White</b> / <b data-ground="carbon">Carbon</b></div>
-  </div>
-  <a class="centre" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""></a>
-  <div class="right">
-    <div class="clock" id="clock" aria-live="off">IST —</div>
-    <a href="index.html#contact">Contact</a>
-  </div>
-</header>
-
 <main>
-<!-- ============ 01 — the pieces ============ -->
-<div class="g kick first" id="pieces">
-  <span class="n faint" style="--i:0">01</span>
-  <span class="t" style="--i:1">The pieces</span>
-  <span class="s faint" style="--i:2">Marks, lockups, systems and concepts &mdash; seven pieces, 2021&ndash;2026</span>
-</div>
-<section class="g hero" aria-label="Identity — the directory">
-  <div class="dir">
-    <div class="hd"><span class="faint">Number:</span><span class="faint">Project:</span></div>
-    <a class="row" style="--i:0" href="showcase-bunta-bar.html" data-img="assets/retain/id/bunta-brand.webp" title="Brand identity &amp; visual system &middot; the showcase"><span>01</span><span>Bunta Bar Express / 2021</span></a>
-    <a class="row" style="--i:1" href="showcase-burger-now.html" data-img="assets/retain/id/burger-a.webp" title="Brand identity, two directions &middot; the showcase"><span>02</span><span>Burger Now / 2021</span></a>
-    <a class="row" style="--i:2" href="showcase-jd-jewellers.html" data-img="assets/retain/id/jd.webp" title="Logo, lockups, reveal film &middot; the showcase"><span>03</span><span>JD Jewellers / 2026</span></a>
-    <a class="row" style="--i:3" href="talent.html#made" data-img="assets/retain/id/noidawery.webp" title="Brewery &amp; restaurant — banner"><span>04</span><span>Noidawery / 2023</span></a>
-    <a class="row" style="--i:4" href="https://www.behance.net/gallery/135300689/x" target="_blank" rel="noopener" data-img="assets/retain/id/chnkrs.webp" title="Sneaker reselling platform — app concept"><span>05</span><span>CHNKRS / 2022</span></a>
-    <a class="row" style="--i:5" href="https://www.behance.net/gallery/135300883/x" target="_blank" rel="noopener" data-img="assets/retain/id/ruto.webp" title="Travel app — concept"><span>06</span><span>Ruto / 2022</span></a>
-    <a class="row" style="--i:6" href="https://www.behance.net/gallery/135301101/x" target="_blank" rel="noopener" data-img="assets/retain/id/search.webp" title="Home-finding app — concept"><span>07</span><span>Search / 2022</span></a>
-</div>
-  <h1 class="head" aria-label="A name is a promise somebody has to keep.">
-    <span class="ln c" style="--i:0"><i>A name</i></span><span class="hl"></span>
-    <span class="ln c" style="--i:1"><i>is a promise</i></span><span class="hl"></span>
-    <span class="ln r" style="--i:2"><i>somebody</i></span><span class="hl"></span>
-    <span class="ln r w66" style="--i:3"><i>has to</i></span><span class="hl"></span>
-    <span class="ln l half" style="--i:4"><i>keep</i></span><span class="hl"></span>
-  </h1>
-</section>
-
-<!-- ============ 02 — the room ============ -->
-<div class="g kick" id="room">
-  <span class="n faint" style="--i:0">02</span>
-  <span class="t" style="--i:1">The room</span>
-  <span class="s faint" style="--i:2">Why identity comes first, and the launches it fed</span>
-</div>
-<section class="second" aria-label="Identity is the first room, not a deliverable">
-  <h2 aria-label="Identity is the first room, not the last deliverable.">
-    <span class="ln l" style="--i:6"><i>Identity is</i></span><span class="hl"></span>
-    <span class="ln l" style="--i:7"><i>the first room</i></span><span class="hl"></span>
-    <span class="ln r w66" style="--i:8"><i>not the last</i></span><span class="hl"></span>
-    <span class="ln r w83" style="--i:9"><i>deliverable</i></span><span class="hl"></span>
-  </h2>
-</section>
-<section class="g essay" aria-label="About the room">
-  <div class="txt" style="--i:2">
-    <div class="lbl faint"><span class="roomtag">Room 01 &mdash; The Opening</span></div>
-    <p>Marketing at Ninety-Eight is five rooms, and this is the first of them. Before a brand can be launched, amplified, converted, retained or thrown a party, somebody has to decide what it means &mdash; the name, the position, the mark, the lockups, the type, the colour, the system that has to survive a feed it was never designed for.</p>
-    <p>We do that work, and then we open the doors with it. The identity is not a deck that gets signed off and filed; it is the thing the press cycle, the creator brief and the menu photograph all have to agree with six months later. Seven pieces are below &mdash; a bar identity and its visual system, two directions for one burger brand, a jeweller&rsquo;s mark and reveal film, a brewery banner, and three product concepts we designed for the practice of it. The first three open a showcase of their own.</p>
-    <p>Four cases in the archive were opened with work from this room. They are listed underneath.</p>
-    <a class="more" href="marketing.html#opening">The Opening &mdash; the room in the story &rarr;</a>
-  </div>
-</section>
-<div class="gap" aria-hidden="true"></div>
-<section class="g cases" aria-label="Cases filed under The Opening">
-  <div class="hd"><span class="n faint">Number:</span><span class="p faint">Case:</span><span class="k faint">Link:</span></div>
-  <a class="crow" style="--i:0" href="index.html#case-yyc-group"><span class="n">01</span><span class="p">Yum Yum Cha Group &mdash; three awards in a year / 2023</span><span class="k">#case-yyc-group</span></a>
-  <a class="crow" style="--i:1" href="index.html#case-andreas"><span class="n">02</span><span class="p">Andrea&rsquo;s Eatery &mdash; the relaunch / 2021</span><span class="k">#case-andreas</span></a>
-  <a class="crow" style="--i:2" href="index.html#case-khubani"><span class="n">03</span><span class="p">Khubani &mdash; the afternoon nobody was selling</span><span class="k">#case-khubani</span></a>
-  <a class="crow" style="--i:3" href="index.html#case-happy-dent"><span class="n">04</span><span class="p">Happydent &middot; Sparkling Smile</span><span class="k">#case-happy-dent</span></a>
-  <a class="crow" style="--i:4" href="index.html#case-ishant"><span class="n">05</span><span class="p">Ishant Sharma &mdash; a name into a property / 2020</span><span class="k">#case-ishant</span></a>
-</section>
-
-<!-- ============ 03 — the work, as effect 038 ============ -->
-<div class="g kick" id="work">
-  <span class="n faint" style="--i:0">03</span>
-  <span class="t" style="--i:1">The work</span>
-  <span class="s faint" style="--i:2">Seven pieces, three with a poster &mdash; the shoulder nearest your scroll opens</span>
-</div>
+<!-- ============ the work, as effect 038 — the page's only section since v3.49 ============ -->
+<h1 class="vh">Identity &amp; design</h1>
 <section class="strip" id="strip" aria-label="Identity work">
   <div class="pin">
     <div class="container" id="strip-c">
@@ -198,45 +125,6 @@ a.media.ph:hover b{opacity:.2}
 </section>
 </main>
 
-<!-- ============ footer meta ============ -->
-<footer class="g foot">
-  <div class="col c1" style="--i:0">
-    <span class="faint">Socials:</span>
-    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
-    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
-  </div>
-  <div class="col c2" style="--i:1">
-    <span class="faint">This room:</span>
-    <a href="#pieces">01 &mdash; The pieces</a>
-    <a href="#room">02 &mdash; The room</a>
-    <a href="#work">03 &mdash; The work</a>
-    <a href="showcase-bunta-bar.html">Showcase &mdash; Bunta Bar</a>
-    <a href="showcase-burger-now.html">Showcase &mdash; Burger Now</a>
-    <a href="showcase-jd-jewellers.html">Showcase &mdash; JD Jewellers</a>
-  </div>
-  <div class="col c3" style="--i:2">
-    <span class="faint">The other rooms:</span>
-    <a href="marketing.html">Marketing &mdash; all five</a>
-    <a href="amplify.html">The creator floor</a>
-    <a href="retain.html">Retain &mdash; the directory</a>
-    <a href="events.html">The night floor</a>
-  </div>
-  <div class="col c4" style="--i:3">
-    <span class="faint">Contact:</span>
-    <a href="mailto:contact@ninety-eight.in" id="mail" data-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
-    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
-    <a href="blog/index.html">The journal</a>
-  </div>
-  <div class="rights" style="--i:4">
-    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
-    <span class="faint">Archivo, by Omnibus-Type &middot; Delhi NCR &middot; est. 01.01.2020</span>
-  </div>
-</footer>
-
-<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
-
-<script src="assets/room.js"></script>
 <script>
 /* ---- 03: the identity strip, effect 038, driven by hand ----
    The container is held by position:sticky for the pin's 300vh; the page's
