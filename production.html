@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Production — the shoots · Ninety-Eight</title>
-<meta name="description" content="Production at Ninety-Eight: shoot craft across food and hospitality — menus, ranges, rooms, people. Sixteen shoots on a wheel, and the directory.">
+<meta name="description" content="Production at Ninety-Eight: shoot craft across food and hospitality — menus, ranges, rooms, people. Sixteen shoots on a wheel.">
 <meta property="og:title" content="Production — the shoots · Ninety-Eight">
 <meta property="og:description" content="A shoot is a channel we own, not a service sold apart from it. Sixteen shoots, one frame each.">
 <meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
@@ -25,8 +25,15 @@ document.documentElement.classList.add('js');})();
    beside the room's own sentence, then the wheel — MWG 106 from the
    Ambrosia site — one frame per shoot on a disc tilted toward the reader.
    Shared rules in assets/room.css; the wheel is below.
+
+   v3.48, Sep 10: at Harsh's call the wheel is the whole page. The header,
+   the directory and its headline, the essay and the footer are gone, and
+   the section fills the screen: labels along the top, the disc in
+   between, the captions along the foot.
    ========================================================================= */
-.prod{margin-top:clamp(120px,22vh,260px)}
+.prod{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:var(--m) 0}   /* v3.48: one screen, top to foot */
+.prod .wheel{flex:1 1 auto;height:auto;min-height:460px}   /* the disc takes whatever the labels leave */
+.prod .ph h1{font:inherit}   /* the page's heading is the section's own label, set as the label was */
 .prod .ph{align-items:start}
 .prod .ph .lbl{grid-column:1/4}
 .prod .ph .d{grid-column:4/9;max-width:44ch}
@@ -59,64 +66,16 @@ a.plate{cursor:pointer}
   .prod .pf .l,.prod .pf .r{grid-column:1/13;text-align:left}
 }
 @media(hover:none){.wheel .tip{display:none}}
+@media(max-width:900px){.prod .wheel{min-height:320px}}
 </style>
 </head>
 <body>
 
-<!-- ============ header meta ============ -->
-<header class="g meta">
-  <div class="left">
-    <nav class="nav" aria-label="Pages"><a href="index.html">Home</a>,&nbsp;<a href="marketing.html">Marketing</a>,&nbsp;<a href="retain.html">Retain</a>,&nbsp;<a href="production.html" class="now" aria-current="page">Production</a></nav>
-    <div class="ground" role="group" aria-label="Ground"><b class="on" data-ground="white">White</b> / <b data-ground="carbon">Carbon</b></div>
-  </div>
-  <a class="centre" href="index.html" aria-label="Ninety-Eight — home"><img src="assets/98-graffiti.png" alt=""></a>
-  <div class="right">
-    <div class="clock" id="clock" aria-live="off">IST —</div>
-    <a href="index.html#contact">Contact</a>
-  </div>
-</header>
-
 <main>
-<!-- ============ the shoots, beside the room's sentence ============ -->
-<div class="g kick first" id="shoots">
-  <span class="n faint" style="--i:0">Retain</span>
-  <span class="t" style="--i:1">Production &mdash; the shoots</span>
-  <span class="s faint" style="--i:2">Sixteen shoots, food &amp; hospitality &middot; produced by 98 Entertainment</span>
-</div>
-<section class="g hero" aria-label="The shoots — the directory">
-  <div class="dir">
-    <div class="hd"><span class="faint">Number:</span><span class="faint">Shoot:</span></div>
-    <div class="row" style="--i:0" data-img="assets/retain/prod/theobroma.webp" title="Patisserie · premium retail"><span>01</span><span>Theobroma / patisserie</span></div>
-    <div class="row" style="--i:1" data-img="assets/retain/prod/naturelo.webp" title="Ice cream · frozen dessert"><span>02</span><span>Naturelo / frozen dessert</span></div>
-    <a class="row" style="--i:2" href="index.html#case-andreas" data-img="assets/retain/prod/andreas.webp" title="Hospitality · Saket · relaunch"><span>03</span><span>Andrea&rsquo;s Eatery / relaunch</span></a>
-    <div class="row" style="--i:3" data-img="assets/retain/prod/costa.webp" title="Global cafe chain · the everyday occasion"><span>04</span><span>Costa Coffee / everyday occasion</span></div>
-    <div class="row" style="--i:4" data-img="assets/retain/prod/tilt.webp" title="Beverage · people, parties, celebration"><span>05</span><span>TILT / people &amp; lifestyle</span></div>
-    <div class="row" style="--i:5" data-img="assets/retain/prod/twigly.webp" title="Everyday delivery food · menu system"><span>06</span><span>Twigly / menu system</span></div>
-    <div class="row" style="--i:6" data-img="assets/retain/prod/amsterdam.webp" title="All-day cafe · brunch &amp; plating"><span>07</span><span>Cafe Amsterdam / all-day menu</span></div>
-    <div class="row" style="--i:7" data-img="assets/retain/prod/decasa.webp" title="Cold-pressed beverages · product &amp; lifestyle"><span>08</span><span>De Casa / beverage range</span></div>
-    <div class="row" style="--i:8" data-img="assets/retain/prod/bikkgane.webp" title="QSR chain · menu photography"><span>09</span><span>Bikkgane Biryani / menu</span></div>
-    <div class="row" style="--i:9" data-img="assets/retain/prod/nycpie.webp" title="Pizza · menu &amp; hero photography"><span>10</span><span>NYC Pie / menu &amp; hero</span></div>
-    <div class="row" style="--i:10" data-img="assets/retain/prod/streetfood.webp" title="UberEats · on location · Delhi"><span>11</span><span>Street Food Trail / UberEats</span></div>
-    <div class="row" style="--i:11" data-img="assets/retain/prod/clubcafe.webp" title="Cafe · beverages &amp; small plates"><span>12</span><span>Club Cafe / cafe</span></div>
-    <div class="row" style="--i:12" data-img="assets/retain/prod/araana.webp" title="Wellness food · natural-light product"><span>13</span><span>Araana / product</span></div>
-    <div class="row" style="--i:13" data-img="assets/retain/prod/ayurnosh.webp" title="Health cookies · pack &amp; product"><span>14</span><span>Ayurnosh / pack &amp; product</span></div>
-    <a class="row" style="--i:14" href="talent.html#made" data-img="assets/retain/prod/doozy.webp" title="Influencer shoot"><span>15</span><span>Miss Doozy / influencer shoot &middot; 2023</span></a>
-    <a class="row" style="--i:15" href="talent.html#made" data-img="assets/retain/prod/aarushi.webp" title="F&amp;B photography"><span>16</span><span>Aarushi Jain / F&amp;B shoot &middot; 2026</span></a>
-  </div>
-  <h1 class="head" aria-label="A shoot is a channel we own, not a service sold apart from it.">
-    <span class="ln c" style="--i:0"><i>A shoot</i></span><span class="hl"></span>
-    <span class="ln c" style="--i:1"><i>is a channel</i></span><span class="hl"></span>
-    <span class="ln c" style="--i:2"><i>we own,</i></span><span class="hl"></span>
-    <span class="ln r" style="--i:3"><i>not a service</i></span><span class="hl"></span>
-    <span class="ln r" style="--i:4"><i>sold apart</i></span><span class="hl"></span>
-    <span class="ln l half" style="--i:5"><i>from it</i></span><span class="hl"></span>
-  </h1>
-</section>
-
 <!-- ============ the wheel ============ -->
 <section class="prod" id="wheel-section" aria-label="Production — the wheel">
   <div class="g ph">
-    <div class="lbl faint">Production:</div>
+    <h1 class="lbl faint">Production:</h1>
     <p class="d">Shoot craft across food and hospitality: menus, ranges, rooms, people. Sixteen shoots, one frame each &mdash; the disc turns as you scroll, and tilts under the pointer.</p>
     <p class="credit faint">Produced by 98 Entertainment &middot; food photography by Chitra by RK</p>
   </div>
@@ -147,53 +106,8 @@ a.plate{cursor:pointer}
   </div>
 </section>
 
-<section class="g essay" aria-label="About production">
-  <div class="txt" style="--i:2">
-    <div class="lbl faint">Production, in-house:</div>
-    <p>Production lives in Retain, the room where the channels we build for a brand are held week after week. A shoot is one of those channels &mdash; the menus, the ranges, the rooms and the people that the feed is made of &mdash; and it is run here, not bought in.</p>
-    <p>Fourteen of these were shot for food and hospitality houses with Chitra by RK behind the camera; the last two are from the talent practice&rsquo;s floor. The reel on the talent page cuts the floor to nineteen seconds.</p>
-    <a class="more" href="retain.html">Retain &mdash; the room&rsquo;s directory &rarr;</a>
-  </div>
-</section>
 </main>
 
-<!-- ============ footer meta ============ -->
-<footer class="g foot">
-  <div class="col c1" style="--i:0">
-    <span class="faint">Socials:</span>
-    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
-    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
-  </div>
-  <div class="col c2" style="--i:1">
-    <span class="faint">The room:</span>
-    <a href="retain.html#social">01 &mdash; Social media</a>
-    <a href="retain.html#room">02 &mdash; The room</a>
-    <a href="identity.html">03 &mdash; Identity &amp; design</a>
-    <a href="production.html" aria-current="page">Production &mdash; this page</a>
-  </div>
-  <div class="col c3" style="--i:2">
-    <span class="faint">Elsewhere:</span>
-    <a href="marketing.html">Marketing &mdash; all five rooms</a>
-    <a href="identity.html">Identity &amp; design</a>
-    <a href="blog/index.html">The journal</a>
-    <a href="talent.html">Talent &amp; Branding</a>
-    <a href="talent.html#made">Made here &mdash; the reel</a>
-  </div>
-  <div class="col c4" style="--i:3">
-    <span class="faint">Contact:</span>
-    <a href="mailto:contact@ninety-eight.in" id="mail" data-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
-    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
-  </div>
-  <div class="rights" style="--i:4">
-    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
-    <span class="faint">Archivo, by Omnibus-Type &middot; Delhi NCR &middot; est. 01.01.2020</span>
-  </div>
-</footer>
-
-<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
-
-<script src="assets/room.js"></script>
 <script>
 /* ---- the wheel (MWG 106), eased by hand ----
    Ported from demo.ninety-eight.in/ambrosia — map.html?s=production —
@@ -239,8 +153,17 @@ a.plate{cursor:pointer}
   }
   function wake(){ if(!raf){ last=performance.now(); raf=requestAnimationFrame(step); } }
   new IntersectionObserver(function(en){ live=en[0].isIntersecting; if(live) wake(); },{threshold:0}).observe(wheel);
-  addEventListener('scroll', function(){ if(!live) return; var d=scrollY-lastY; lastY=scrollY;
-    spinT+=d*0.0022; intT=Math.min(6, Math.abs(d)/12); clearTimeout(wake._t); wake._t=setTimeout(function(){ intT=0; }, 120); wake(); }, {passive:true});
+  /* v3.48: the wheel is the whole page again, so the pitch site's own behaviour returns: when the page has
+     nowhere to scroll, the mouse wheel and a swipe turn the disc; when it does scroll (a short screen), the
+     page's scroll turns it as before. Never both, so a turn is never counted twice. */
+  function still(){ return document.documentElement.scrollHeight - innerHeight < 2; }
+  function nudge(d){ spinT+=d*0.0022; intT=Math.min(6, Math.abs(d)/12); clearTimeout(wake._t); wake._t=setTimeout(function(){ intT=0; }, 120); wake(); }
+  addEventListener('scroll', function(){ var d=scrollY-lastY; lastY=scrollY; if(live && !still()) nudge(d); }, {passive:true});
+  addEventListener('wheel', function(e){ if(!live || e.ctrlKey || !still()) return; nudge(e.deltaMode===1 ? e.deltaY*16 : e.deltaY); }, {passive:true});
+  var ty=null;
+  addEventListener('touchstart', function(e){ ty=e.touches.length===1 ? e.touches[0].clientY : null; }, {passive:true});
+  addEventListener('touchmove', function(e){ if(ty===null || e.touches.length!==1 || !live || !still()) return;
+    var y=e.touches[0].clientY; nudge(ty-y); ty=y; }, {passive:true});
   function tilt(cx,cy){ var r=wheel.getBoundingClientRect(); var x=(cx-r.left)/r.width, y=(cy-r.top)/r.height;
     T.ry=x*20-10; T.rx=y*16-8+82; T.rz=-x*5+2.5; }
   wheel.addEventListener('mousemove', function(e){ tilt(e.clientX,e.clientY);
