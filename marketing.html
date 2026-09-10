@@ -237,8 +237,9 @@ svg{display:block}
 
    The CSS ships the READABLE state (the sentence as plain type); the script
    adds .fx before it installs anything, so no GSAP or reduced motion gets a
-   legible line, never a blank pinned one. The two tiles are PLACEHOLDERS,
-   dashed because that is how this page says "not yet" (see .door.dead).
+   legible line, never a blank pinned one. The two tiles are emoji, 📈 then
+   🚀, set as text so each device draws them in its own emoji font (Apple's on
+   a Mac or an iPhone). Each keeps the zip's 310-unit tile box.
    ========================================================================= */
 .mwg104{position:relative}
 .w104-say{padding:clamp(6.5rem,16vh,9rem) var(--pad) 0 calc(var(--pad) + var(--rail) + 2vw);
@@ -257,9 +258,7 @@ svg{display:block}
 .mwg104 text.segment{fill:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:118%;letter-spacing:-.035em;
   stroke:var(--ink);stroke-width:2px;stroke-linejoin:round}   /* at -.035em some pairs abut (the r-t in start) and anti-aliasing draws a hairline seam where they meet; a 2-unit stroke in the fill colour closes it */
 .mwg104 text.segment .stop{fill:var(--red);stroke:var(--red)}
-.mwg104 .ph-box{fill:rgba(244,244,242,.035);stroke:rgba(244,244,242,.34);stroke-width:1;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
-.mwg104 .ph-mark{fill:var(--ink);fill-opacity:.1;font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:118%;font-size:128px;letter-spacing:-.04em}
-.mwg104 .ph-cap{fill:var(--dim);font-family:'Space Mono',monospace;font-size:17px;letter-spacing:.2em}
+.mwg104 .emo{font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji','Twemoji Mozilla',sans-serif;font-size:280px;fill:var(--ink)}   /* fill only shows if a device has no colour emoji font */
 .mwg104.fx .w104-cue{display:flex;flex-direction:column;align-items:center;gap:.85rem;
   position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none}
 .w104-cue i{display:block;width:1px;height:34px;background:var(--line);position:relative;overflow:hidden}
@@ -301,8 +300,9 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
 
 <main>
 <!-- ============ THE OPENER — effect 104, the line on a wire (v3.45) ============
-     The two tiles are PLACEHOLDERS. To put a real picture in, replace its
-       <g class="segment tile ph">…</g>
+     The two tiles are emoji (📈, 🚀), drawn by each device's own emoji
+     font. To put a picture in instead, replace a
+       <g class="segment tile">…</g>
      with
        <image class="segment" href="assets/…" height="300" clip-path="url(#w104-clip)"/>
      and nothing else changes: the driver sizes an image from its own aspect
@@ -320,9 +320,9 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
         <path id="w104-wave" d="M0.21875 190.5C0.21875 190.5 382.004 0.5 644.219 0.5C906.434 0.5 1051.3 78.1239 1288.22 190.5C1531.72 306 1668.87 390.5 1932.22 390.5C2195.57 390.5 2576.22 190.5 2576.22 190.5" stroke="#FFF" style="opacity:0;"/>
         <g id="w104-track">
           <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">Full-scale</textPath></text>
-          <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
+          <g class="segment tile" data-w="310" data-h="310"><text class="emo" x="155" y="155" text-anchor="middle" dominant-baseline="central">📈</text></g>
           <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">marketing practice,</textPath></text>
-          <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
+          <g class="segment tile" data-w="310" data-h="310"><text class="emo" x="155" y="155" text-anchor="middle" dominant-baseline="central">🚀</text></g>
           <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">from start to finish<tspan class="stop">.</tspan></textPath></text>
         </g>
       </svg>
@@ -544,7 +544,7 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
     }
   });
 
-  function sizeImages(){                        /* real pictures, once they replace the placeholders */
+  function sizeImages(){                        /* pictures, if one ever replaces an emoji tile */
     return Promise.all([].map.call(track.querySelectorAll('image.segment'), function(img){
       return new Promise(function(resolve){
         var probe = new Image();
@@ -603,7 +603,7 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
       el.setAttribute('x', pt.x - width / 2);
       el.setAttribute('y', pt.y - height);
       el.setAttribute('transform', rot);
-    } else {                                    /* a placeholder group has no x/y of its own */
+    } else {                                    /* an emoji tile is a group: no x/y of its own */
       el.setAttribute('transform', rot + ' translate(' + (pt.x - width / 2) + ' ' + (pt.y - height) + ')');
     }
   }
