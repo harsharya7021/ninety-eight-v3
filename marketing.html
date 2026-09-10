@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Marketing — Ninety-Eight</title>
-<meta name="description" content="A full-scale marketing practice, start to finish. Five rooms — the opening, the noise, the return, the habit, the night. 35 documented cases across 70+ brands.">
+<meta name="description" content="Five problems founders arrive with, and the seven instruments we use on them — branding, PR, creators, paid, social, production, events. 35 records across 70+ brands.">
 <meta property="og:title" content="Marketing — Ninety-Eight">
-<meta property="og:description" content="From a name nobody knows to a night the city talks about. Five rooms, and we run all five.">
+<meta property="og:description" content="Whatever you arrived with, the instruments are the same seven. Here is which ones your problem uses.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,349 +19,399 @@
 <script>document.documentElement.classList.add('js');</script>
 <style>
 /* =========================================================================
-   MARKETING — vertical 02 (v3.43, Sep 2026)
+   MARKETING — vertical 02 (v3.44, Sep 2026)  ·  THE PROBLEM SPINE
 
-   Rebuilt against the Amaterasu reference Harsh sent on Sep 9. The note was
-   "too cluttered, and not enough happening" — which are the same complaint.
-   The reference is not busier than us; it is far emptier, and the one thing
-   that moves is enormous and behind everything.
+   The axis changed. It was five funnel stages named for what we call them
+   internally; it is now five problems named in the founder's own words, with
+   the capabilities underneath as seven recognisable NOUNS — Branding, PR,
+   Creators, Paid, Social, Production, Events. Noun labels are found roughly
+   twice as fast as verb labels, and "The Habit" was neither.
 
-   So: seven screens, one idea each. A room screen carries five things and
-   nothing else — its number, its name, one sentence, one attributed figure,
-   and one door. The three preview cards per room that used to sit beside
-   them are gone; the room pages already list every case, which is where
-   somebody who clicked actually wants them.
+   Why the change is evidence-led, not fashion: re-tagged from what each case
+   record actually says rather than which flywheel room it was filed in,
+   100% of the 35 cases are multi-discipline (creators 34, social 32,
+   production 17, events 17, branding 13, PR 9, paid 4). The old five-room
+   tree forced each case into one box; the work has never been shaped that
+   way. assets/facets.json holds the tags and is meant to be corrected.
 
-   The ground is assets/field.js — one WebGL canvas of domain-warped noise
-   blooming a single brand colour into carbon. Its colour crossfades over
-   four seconds as you enter each room, so the flywheel is no longer a thing
-   you hover, it is the weather you are standing in: blue at The Opening,
-   red by The Night, and you never catch it changing.
+   THE SPINE — the one device that stops this becoming a mosaic of effects:
+   a fixed left rail of the five problems that fills as you scroll, and a
+   fixed bar of the seven instrument chips that re-light under every problem
+   that uses them. The chips never move and never change shape; only their
+   state changes. That is the argument made visible — Events is not a stage,
+   it is an instrument, and you watch it light again and again.
 
-   The chrome is fixed and never grows: the wordmark, the five dots, the
-   room's own kicker bottom-left, and the button that takes you one screen
-   on. Everything else on this page is either type or air.
+   Architecture constant, design variable — the designer's rule from the
+   Sep 10 call: "the structuring is the same, but the design is different…
+   when you change design but there's no anchor point to hold on to, they get
+   lost." Every problem screen has the same skeleton (number, problem, one
+   sentence, one figure, one door) and each varies its interior alignment.
+
+   The ground is assets/field.js, unchanged, blooming the lead instrument's
+   colour. Crossfade slowed from 4s to 7s — "it's changing themes way faster
+   than it should", same call.
    ========================================================================= */
 :root{
   --bg:#0B0B0C; --ink:#F4F4F2; --dim:#8E8E88; --faint:#6E6E68;
   --line:rgba(244,244,242,.14); --hair:rgba(244,244,242,.07);
-  --red:#EE352E; --green:#00933C; --blue:#5278C2; --yellow:#FCCC0A; --orange:#FF6319;
-  --pad:clamp(1.25rem,5vw,5.5rem);
+  --red:#EE352E; --pad:clamp(1.25rem,5vw,5rem);
   --ease:cubic-bezier(.16,1,.3,1);
+  --rail:clamp(0px,13vw,190px);
   --room:#5278C2;
 }
+.c-branding{--chip:#5278C2}
+.c-pr{--chip:#0039A6}
+.c-creators{--chip:#00933C}
+.c-paid{--chip:#FCCC0A}
+.c-social{--chip:#FF6319}
+.c-production{--chip:#996633}
+.c-events{--chip:#EE352E}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;
-  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden}
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
 ::selection{background:var(--room);color:#0B0B0C}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 svg{display:block}
-
 .mono{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
-.serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400}
 
-/* ---------- the fixed chrome ---------- */
-.chrome{position:fixed;inset:0;z-index:40;pointer-events:none;padding:1.4rem var(--pad)}
+/* ---------- fixed chrome ---------- */
+.chrome{position:fixed;inset:0;z-index:40;pointer-events:none}
 .chrome > *{pointer-events:auto}
-.mark{position:absolute;top:1.4rem;left:50%;transform:translateX(-50%);
-  font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink);opacity:.9}
-.back{position:absolute;top:1.4rem;left:var(--pad);transition:opacity .3s}
+.back{position:absolute;top:1.3rem;left:var(--pad)}
 .back:hover{opacity:.55}
-.rooms{position:absolute;top:1.35rem;right:var(--pad);display:flex;align-items:flex-start;gap:1rem}
-.rooms .lbl{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink);text-align:right;line-height:1.45;min-width:9.5rem}
-.rooms .lbl i{display:block;font-style:normal;color:var(--faint);font-size:.6rem;letter-spacing:.14em}
-.dots{display:grid;gap:7px;padding-top:3px}
-.dots button{width:7px;height:7px;border-radius:50%;border:1px solid var(--line);background:none;
-  transition:background .5s var(--ease),border-color .5s var(--ease),transform .5s var(--ease)}
-.dots button[aria-current="true"]{background:var(--room);border-color:var(--room);transform:scale(1.5)}
-.dots button:hover{border-color:var(--ink)}
-.foot-l{position:absolute;bottom:1.5rem;left:var(--pad);display:flex;align-items:center;gap:.55rem;
-  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.foot-l .pip{width:5px;height:5px;border-radius:50%;background:var(--room);transition:background .8s var(--ease)}
-.next{position:absolute;bottom:1.3rem;right:var(--pad);width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--line);display:grid;place-items:center;transition:border-color .4s,background .4s,transform .4s}
-.next:hover{border-color:var(--ink);background:rgba(244,244,242,.06)}
-.next svg{width:13px;height:13px;stroke:var(--ink);stroke-width:1.5;fill:none;transition:transform .5s var(--ease)}
-.next:hover svg{transform:translateY(2px)}
-.next.up svg{transform:rotate(180deg)}
-.next.up:hover svg{transform:rotate(180deg) translateY(2px)}
-@media(max-width:760px){
-  .rooms .lbl{display:none}
-  .foot-l{font-size:.56rem;letter-spacing:.12em;max-width:60vw}
+.mark{position:absolute;top:1.3rem;left:50%;transform:translateX(-50%);
+  font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;opacity:.9}
+.tonav{position:absolute;top:1.3rem;right:var(--pad);display:flex;gap:1.1rem}
+.tonav a:hover{color:var(--ink)}
+
+/* THE RAIL — five problems, always there, filling as you go */
+.rail{position:absolute;left:var(--pad);top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:1.05rem;max-width:var(--rail)}
+.rail button{display:grid;grid-template-columns:22px 1fr;gap:.6rem;align-items:start;text-align:left;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);transition:color .5s var(--ease)}
+.rail button b{font-weight:400;color:var(--faint);transition:color .5s var(--ease)}
+.rail button span{line-height:1.35;opacity:0;max-height:0;overflow:hidden;
+  transition:opacity .5s var(--ease),max-height .5s var(--ease)}
+.rail button[aria-current="true"]{color:var(--ink)}
+.rail button[aria-current="true"] b{color:var(--room)}
+.rail button[aria-current="true"] span{opacity:1;max-height:4rem}
+.rail button:hover{color:var(--ink)}
+.railbar{position:absolute;left:calc(var(--pad) - 14px);top:50%;transform:translateY(-50%);
+  width:1px;height:clamp(150px,32vh,260px);background:var(--hair)}
+.railbar i{position:absolute;left:0;top:0;width:1px;height:0;background:var(--room);
+  transition:height .6s var(--ease),background 1.4s var(--ease)}
+@media(max-width:900px){ .rail,.railbar{display:none} }
+
+/* THE CHIPS — seven instruments, fixed, never move, only re-light */
+.chips{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.4rem;padding:.9rem var(--pad) 1.1rem;
+  background:linear-gradient(0deg,rgba(11,11,12,.92),rgba(11,11,12,.55) 60%,transparent);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.chip{--chip:var(--dim);display:inline-flex;align-items:center;gap:.45rem;
+  border:1px solid var(--hair);border-radius:999px;padding:.42rem .8rem;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--faint);transition:color .6s var(--ease),border-color .6s var(--ease),background .6s var(--ease)}
+.chip i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.45;
+  transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.chip.lit{color:var(--chip);border-color:color-mix(in srgb,var(--chip) 45%,transparent)}
+.chip.lit i{opacity:1}
+.chip.lead{background:color-mix(in srgb,var(--chip) 14%,transparent);color:#fff;
+  border-color:color-mix(in srgb,var(--chip) 75%,transparent)}
+.chip.lead i{transform:scale(1.5);background:var(--chip);opacity:1}
+.chip:hover{color:var(--ink);border-color:var(--line)}
+@supports not (color:color-mix(in srgb,red 50%,transparent)){
+  .chip.lit{border-color:var(--line)} .chip.lead{background:rgba(244,244,242,.08);color:#fff}
 }
+@media(max-width:620px){ .chips{gap:.3rem;padding:.6rem .6rem .75rem} .chip{padding:.34rem .6rem;font-size:.52rem} }
 
-/* the cursor ring — desktop, fine pointers only */
-.ring{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
-  z-index:60;pointer-events:none;opacity:0;transition:opacity .4s,width .3s var(--ease),height .3s var(--ease),border-color .4s;
-  will-change:transform}
-.ring.on{opacity:1}
-.ring.grow{width:58px;height:58px;border-color:var(--room)}
-@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){ .ring{display:none} }
-
-/* ---------- a screen ---------- */
+/* ---------- screens ---------- */
 .screen{position:relative;min-height:100svh;display:flex;align-items:center;
-  padding:7rem var(--pad) 6rem;overflow:hidden}
-.screen > .body{position:relative;z-index:2;width:100%;max-width:1500px;margin:0 auto}
+  padding:6.5rem var(--pad) 7.5rem;overflow:hidden}
+.screen > .body{position:relative;z-index:2;width:100%;max-width:1180px;margin-left:calc(var(--rail) + 2vw)}
+@media(max-width:900px){ .screen > .body{margin-left:0} }
 
-/* the reveal — one vocabulary, staggered by --d */
-.rise{opacity:0;transform:translateY(30px);
-  transition:opacity 1.15s var(--ease),transform 1.15s var(--ease);transition-delay:var(--d,0s)}
+.rise{opacity:0;transform:translateY(28px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);transition-delay:var(--d,0s)}
 .on .rise{opacity:1;transform:none}
 .wipe{display:block;overflow:hidden}
-.wipe > span{display:block;transform:translateY(105%);transition:transform 1.25s var(--ease);transition-delay:var(--d,0s)}
+.wipe > span{display:block;transform:translateY(105%);transition:transform 1.2s var(--ease);transition-delay:var(--d,0s)}
 .on .wipe > span{transform:none}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .rise,.wipe>span{opacity:1;transform:none;transition:none}
-}
+@media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .rise,.wipe>span{opacity:1;transform:none;transition:none} }
 
-/* ---------- hero ---------- */
-#top .kick{margin-bottom:clamp(1.4rem,4vh,2.6rem)}
+/* hero */
 #top h1{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.035em;
-  font-size:clamp(2.7rem,9.2vw,8.4rem);line-height:.88;max-width:14ch}
+  font-size:clamp(2.5rem,8.2vw,7rem);line-height:.88;max-width:15ch}
 #top h1 em{font-style:normal;color:var(--dim)}
-#top .say{margin-top:clamp(1.8rem,5vh,3.2rem);font-family:'Instrument Serif',Georgia,serif;font-style:italic;
-  font-size:clamp(1.3rem,2.6vw,2.3rem);line-height:1.22;max-width:20ch;color:#E8E8E4}
-#top .fine{margin-top:clamp(1.2rem,3vh,2rem);max-width:34ch;color:#A9A9A3;font-size:clamp(.92rem,1.05vw,1rem)}
+#top .say{margin-top:clamp(1.6rem,4.5vh,2.8rem);font-family:'Instrument Serif',Georgia,serif;font-style:italic;
+  font-size:clamp(1.25rem,2.4vw,2.1rem);line-height:1.22;max-width:24ch;color:#E8E8E4}
+#top .fine{margin-top:1.2rem;max-width:40ch;color:#A9A9A3;font-size:clamp(.9rem,1.05vw,1rem)}
 
-/* ---------- a room ---------- */
-.room .body{display:block}
-.room .no{display:flex;align-items:center;gap:1rem;color:var(--room);
-  font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase}
-.room .no::after{content:"";height:1px;width:min(28vw,320px);background:currentColor;opacity:.4}
-.room h2{margin-top:1.1rem;font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.04em;
-  font-size:clamp(3rem,11.5vw,10.5rem);line-height:.85}
-.room .sub{margin-top:1rem;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dim)}
-.room .line{margin-top:clamp(1.6rem,4.5vh,2.8rem);font-size:clamp(1.05rem,1.7vw,1.5rem);line-height:1.4;
-  max-width:34ch;color:#D2D2CC;letter-spacing:-.01em}
-.room .line b{color:var(--ink);font-weight:600}
-
-.fig{margin-top:clamp(1.8rem,5vh,3rem);display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+/* a problem — same skeleton every time, interior alignment varies */
+.prob .pn{display:flex;align-items:center;gap:.9rem;color:var(--room);
+  font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase}
+.prob .pn i{height:1px;width:min(22vw,240px);background:currentColor;opacity:.4}
+.plead{margin-top:1rem;font-weight:800;font-stretch:118%;letter-spacing:-.035em;
+  font-size:clamp(2.1rem,6.6vw,5.4rem);line-height:.94}
+.psay{margin-top:clamp(1.4rem,4vh,2.4rem);font-size:clamp(1rem,1.55vw,1.35rem);line-height:1.45;
+  max-width:44ch;color:#CFCFC9;letter-spacing:-.008em}
+.fig{margin-top:clamp(1.6rem,4.5vh,2.6rem);display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
 .fig .n{font-weight:800;font-stretch:118%;letter-spacing:-.03em;line-height:1;
-  font-size:clamp(1.6rem,3.4vw,3rem);color:var(--room)}
-.fig .w{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.fig.none .n{font-size:clamp(1rem,1.5vw,1.25rem);font-weight:600;font-stretch:100%;letter-spacing:0;
-  text-transform:none;color:#BFBFB9}
-
-.door{margin-top:clamp(1.8rem,5vh,3rem);width:fit-content;display:inline-flex;align-items:center;gap:.9rem;
-  border:1px solid var(--line);border-radius:999px;padding:.85rem 1.5rem;
-  transition:border-color .4s,background .4s,color .4s;font-size:.92rem;font-weight:600}
-.door .t{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  font-size:clamp(1.5rem,3vw,2.6rem);color:var(--room)}
+.fig .w{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.fig.none .n{font-size:clamp(1rem,1.5vw,1.2rem);font-weight:600;font-stretch:100%;letter-spacing:0;color:#BFBFB9}
+.door{margin-top:clamp(1.6rem,4.5vh,2.6rem);width:fit-content;display:inline-flex;align-items:center;gap:.85rem;
+  border:1px solid var(--line);border-radius:999px;padding:.8rem 1.4rem;font-size:.9rem;font-weight:600;
+  transition:border-color .4s,background .4s,color .4s}
+.door .t{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;
   color:var(--dim);font-weight:400;transition:color .4s}
 .door:hover{border-color:var(--room);background:var(--room);color:#0B0B0C}
 .door:hover .t{color:rgba(11,11,12,.65)}
 .door.dead{border-style:dashed;opacity:.5;cursor:default}
 .door.dead:hover{border-color:var(--line);background:none;color:inherit}
-.door.dead:hover .t{color:var(--dim)}
 
-/* the rings sit behind, off to the right, and drift with the scroll */
-.plate{position:absolute;top:50%;right:-14vmin;transform:translateY(-50%);z-index:0;color:var(--room);
-  opacity:0;transition:opacity 1.6s var(--ease) .2s}
-.on .plate{opacity:1}
-@media(max-width:900px){ .plate{right:-40vmin;opacity:.6} .on .plate{opacity:.6} }
+/* the designer's rule: same skeleton, different skin. Only alignment moves. */
+#open .body,#money .body{margin-left:auto;margin-right:0;text-align:right}
+#open .pn,#money .pn{justify-content:flex-end;flex-direction:row-reverse}
+#open .psay,#money .psay{margin-left:auto}
+#open .fig,#money .fig{justify-content:flex-end}
+#open .door,#money .door{margin-left:auto}
+#talk .body{max-width:1320px}
+#talk .plead{font-size:clamp(2.3rem,7.6vw,6.4rem)}
+@media(max-width:900px){
+  #open .body,#money .body{text-align:left;margin-left:0}
+  #open .pn,#money .pn{justify-content:flex-start;flex-direction:row}
+  #open .psay,#money .psay,#open .door,#money .door{margin-left:0}
+  #open .fig,#money .fig{justify-content:flex-start}
+}
+
+/* ---------- the work, filtered by the same seven chips ---------- */
+#work{padding-bottom:13rem}   /* the chip bar is fixed; the grid must clear it */
+#work h2{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.03em;
+  font-size:clamp(1.7rem,4vw,3.2rem);line-height:.95}
+#work .lede{margin-top:1rem;max-width:52ch;color:#BFBFB9}
+.filters{margin-top:clamp(1.6rem,4vh,2.4rem);display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.filters .f{border:1px solid var(--hair);border-radius:999px;padding:.42rem .8rem;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
+  transition:color .35s,border-color .35s,background .35s}
+.filters .f:hover{color:var(--ink);border-color:var(--line)}
+.filters .f[aria-pressed="true"]{color:#0B0B0C;background:var(--ink);border-color:var(--ink)}
+.count{margin-top:1rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint)}
+.grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,232px),1fr));gap:1px;
+  background:var(--hair);border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+.card{background:var(--bg);padding:1.15rem 1.1rem 1.3rem;display:flex;flex-direction:column;gap:.3rem;
+  transition:background .35s,opacity .45s var(--ease);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.card:hover{background:#101113}
+.card .cn{font-weight:700;font-stretch:110%;font-size:1rem;letter-spacing:-.012em}
+.card .cs{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.card .ct{margin-top:.5rem;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+.card[hidden]{display:none}
 
 /* ---------- the ask ---------- */
-#ask .body{max-width:1100px}
 #ask h2{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.035em;
-  font-size:clamp(2.2rem,7.4vw,6.4rem);line-height:.88}
+  font-size:clamp(2rem,6.4vw,5.2rem);line-height:.9}
 #ask h2 i{font-style:normal;color:var(--red)}
-#ask .p{margin-top:1.6rem;max-width:38ch;color:#BFBFB9;font-size:clamp(.95rem,1.15vw,1.08rem)}
-.pills{margin-top:clamp(2rem,5vh,3rem);display:flex;flex-wrap:wrap;gap:.6rem}
-.pills a{border:1px solid var(--line);border-radius:999px;padding:.72rem 1.25rem;font-size:.88rem;
+#ask .p{margin-top:1.4rem;max-width:40ch;color:#BFBFB9}
+.pills{margin-top:clamp(1.8rem,4.5vh,2.6rem);display:flex;flex-wrap:wrap;gap:.55rem}
+.pills a{border:1px solid var(--line);border-radius:999px;padding:.7rem 1.2rem;font-size:.86rem;
   transition:border-color .35s,background .35s,color .35s}
 .pills a:hover{border-color:var(--ink)}
 .pills a.key:hover{background:var(--ink);color:var(--bg)}
-.book{margin-top:clamp(2.4rem,6vh,4rem);padding-top:1.2rem;border-top:1px solid var(--hair);
-  display:flex;flex-wrap:wrap;gap:.5rem 2.2rem;
-  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-.book b{color:var(--dim);font-weight:400}
-.ends{margin-top:clamp(2rem,5vh,3rem);display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;
-  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.ends a{transition:color .3s}
+.ends{margin-top:clamp(2rem,5vh,3rem);padding-top:1.1rem;border-top:1px solid var(--hair);
+  display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
 .ends a:hover{color:var(--ink)}
-
-/* progress hairline, top of the window */
-#bar{position:fixed;top:0;left:0;height:1px;width:0;background:var(--room);z-index:70;
-  transition:background 1.4s var(--ease)}
+#bar{position:fixed;top:0;left:0;height:1px;width:0;background:var(--room);z-index:70;transition:background 1.6s var(--ease)}
 </style>
 </head>
 <body>
 
 <div id="bar"></div>
 <div class="grain98" aria-hidden="true"></div>
-<div class="ring" id="ring" aria-hidden="true"></div>
 
 <div class="chrome">
   <a class="back mono" href="index.html">&larr;&nbsp; Home</a>
   <span class="mark">Ninety-Eight</span>
-  <div class="rooms">
-    <p class="lbl" id="roomlbl">The Opening<i>Room 01 of 05</i></p>
-    <div class="dots" id="dots" role="tablist" aria-label="The five rooms"></div>
+  <nav class="tonav mono" aria-label="Pages">
+    <a href="talent.html">Talent</a><a href="blog/index.html">Journal</a><a href="index.html#contact">Contact</a>
+  </nav>
+
+  <span class="railbar" aria-hidden="true"><i id="railfill"></i></span>
+  <nav class="rail" id="rail" aria-label="The five problems"></nav>
+
+  <div class="chips" id="chips" role="group" aria-label="The seven instruments">
+    <button class="chip c-branding" data-chip="branding" type="button"><i></i>Branding</button>
+    <button class="chip c-pr" data-chip="pr" type="button"><i></i>PR &amp; Media</button>
+    <button class="chip c-creators" data-chip="creators" type="button"><i></i>Creators</button>
+    <button class="chip c-paid" data-chip="paid" type="button"><i></i>Paid &amp; Search</button>
+    <button class="chip c-social" data-chip="social" type="button"><i></i>Social</button>
+    <button class="chip c-production" data-chip="production" type="button"><i></i>Production</button>
+    <button class="chip c-events" data-chip="events" type="button"><i></i>Events</button>
   </div>
-  <p class="foot-l"><span class="pip" id="pip"></span><span>Five rooms &middot; start to finish &middot; est. 01.01.2020</span></p>
-  <button class="next" id="next" type="button" aria-label="Next screen">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
-  </button>
 </div>
 
 <main>
 
-<!-- ============ 00 · the hero ============ -->
-<section class="screen" id="top" data-room="0">
+<section class="screen io" id="top" data-prob="0" data-uses="">
   <div class="body">
-    <p class="mono kick rise">Ninety-Eight &middot; vertical 02 &middot; est. 2020</p>
-    <h1 aria-label="Marketing, start to finish.">
-      <span class="wipe"><span style="--d:.06s">Marketing,</span></span>
-      <span class="wipe"><span style="--d:.15s">start to</span></span>
-      <span class="wipe"><span style="--d:.24s"><em>finish.</em></span></span>
+    <p class="mono rise">Ninety-Eight &middot; vertical 02 &middot; est. 2020</p>
+    <h1 aria-label="Whatever you arrived with, the instruments are the same seven.">
+      <span class="wipe"><span style="--d:.06s">Whatever you</span></span>
+      <span class="wipe"><span style="--d:.14s">arrived with,</span></span>
+      <span class="wipe"><span style="--d:.22s"><em>seven instruments.</em></span></span>
     </h1>
-    <p class="say rise" style="--d:.4s">Everyone sells the stop. We build the reason to stay.</p>
-    <p class="fine rise" style="--d:.5s">A brand goes from a name nobody knows to a night the city talks about afterwards. Five rooms on the way. We run all five.</p>
+    <p class="say rise" style="--d:.36s">Everyone sells the stop. We build the reason to stay.</p>
+    <p class="fine rise" style="--d:.46s">Below are five problems founders actually arrive with, and which of the seven we reach for each time. The instruments never change &mdash; only which ones light up. Watch the row at the bottom.</p>
   </div>
 </section>
 
-<!-- ============ 01 · The Opening ============ -->
-<section class="screen room" id="opening" data-room="1" style="--room:#5278C2">
-  <svg class="rings98 plate" viewBox="0 0 400 400" aria-hidden="true">
-    <g class="spin"><circle class="r-a" cx="200" cy="200" r="196"/><circle class="r-c" cx="200" cy="200" r="150"/></g>
-    <circle class="r-b" cx="200" cy="200" r="112"/>
-    <g class="spin-b"><circle class="r-c" cx="200" cy="200" r="64"/></g>
-    <circle class="r-arc" cx="200" cy="200" r="196" pathLength="100" stroke-dasharray="22 78" stroke-dashoffset="-6"/>
-  </svg>
+
+<section class="screen prob io" id="name" data-prob="01" data-uses="branding pr" style="--room:#5278C2">
   <div class="body">
-    <p class="no rise">Room 01</p>
-    <h2 aria-label="The Opening"><span class="wipe"><span style="--d:.08s">The Opening</span></span></h2>
-    <p class="sub rise" style="--d:.2s">Identity, launch &amp; earned coverage</p>
-    <p class="line rise" style="--d:.3s">Before there is a business there is a name, and somebody has to decide what it means. We build that &mdash; then <b>we open the doors</b>.</p>
+    <p class="pn rise">Problem 01 <i></i></p>
+    <h2 class="plead" aria-label="Nobody knows what we are yet">
+      <span class="wipe"><span style="--d:.06s">&ldquo;Nobody knows</span></span>
+      <span class="wipe"><span style="--d:.14s">what we are yet&rdquo;</span></span>
+    </h2>
+    <p class="psay rise" style="--d:.28s">You have a business and no language for it. We build the name, the position, the mark and the system that has to survive a feed it was never designed for.</p>
     <div class="fig rise" style="--d:.4s">
-      <span class="n">3 awards in a year</span>
-      <span class="w">Yum Yum Cha Group &middot; 2023</span>
+      <span class="n">3 awards in a year</span><span class="w">Yum Yum Cha Group · Times Food Awards &amp; UNLIMIT 2023</span>
     </div>
-    <a class="door rise" style="--d:.5s" href="identity.html" target="_blank" rel="noopener">
-      Open the room <span class="t">Nine pieces &nearr;</span>
-    </a>
+      <a class="door rise" style="--d:.5s" href="identity.html" target="_blank" rel="noopener">The identity work <span class="t">Nine pieces &nearr;</span></a>
   </div>
 </section>
 
-<!-- ============ 02 · The Noise ============ -->
-<section class="screen room" id="noise" data-room="2" style="--room:#00933C">
-  <svg class="rings98 plate" viewBox="0 0 400 400" aria-hidden="true">
-    <g class="spin-b"><circle class="r-a" cx="200" cy="200" r="196"/><circle class="r-c" cx="200" cy="200" r="168"/></g>
-    <circle class="r-b" cx="200" cy="200" r="132"/>
-    <circle class="r-c" cx="200" cy="200" r="88"/>
-    <g class="spin"><circle class="r-arc" cx="200" cy="200" r="168" pathLength="100" stroke-dasharray="34 66"/></g>
-  </svg>
+<section class="screen prob io" id="open" data-prob="02" data-uses="branding pr events production" style="--room:#0039A6">
   <div class="body">
-    <p class="no rise">Room 02</p>
-    <h2 aria-label="The Noise"><span class="wipe"><span style="--d:.08s">The Noise</span></span></h2>
-    <p class="sub rise" style="--d:.2s">Creator marketing, PR &amp; media</p>
-    <p class="line rise" style="--d:.3s"><b>One voice per audience class</b>, never five from the same shelf, inside a window tight enough that the city reads it as an arrival rather than a schedule.</p>
+    <p class="pn rise">Problem 02 <i></i></p>
+    <h2 class="plead" aria-label="We open in six weeks">
+      <span class="wipe"><span style="--d:.06s">&ldquo;We open</span></span>
+      <span class="wipe"><span style="--d:.14s">in six weeks&rdquo;</span></span>
+    </h2>
+    <p class="psay rise" style="--d:.28s">A launch that gets written about is not a stunt. It is an identity worth writing about, put in front of the right room on the right night.</p>
     <div class="fig rise" style="--d:.4s">
-      <span class="n">6.9M reach, zero paid</span>
-      <span class="w">Slay Coffee &middot; 58 creators</span>
+      <span class="n">0 paid placements</span><span class="w">Andrea&rsquo;s Eatery · discovered through creators, not advertising</span>
     </div>
-    <a class="door rise" style="--d:.5s" href="amplify.html" target="_blank" rel="noopener">
-      Open the room <span class="t">30 cases &nearr;</span>
-    </a>
+      <a class="door rise" style="--d:.5s" href="index.html#case-andreas">Read the launch <span class="t">Andrea&rsquo;s Eatery &nearr;</span></a>
   </div>
 </section>
 
-<!-- ============ 03 · The Return ============ -->
-<section class="screen room" id="return" data-room="3" style="--room:#FCCC0A">
-  <svg class="rings98 plate" viewBox="0 0 400 400" aria-hidden="true">
-    <circle class="r-a" cx="200" cy="200" r="196"/>
-    <g class="spin"><circle class="r-c" cx="200" cy="200" r="140"/></g>
-    <circle class="r-c" cx="200" cy="200" r="96" stroke-dasharray="3 9"/>
-  </svg>
+<section class="screen prob io" id="talk" data-prob="03" data-uses="creators pr social events" style="--room:#00933C">
   <div class="body">
-    <p class="no rise">Room 03</p>
-    <h2 aria-label="The Return"><span class="wipe"><span style="--d:.08s">The Return</span></span></h2>
-    <p class="sub rise" style="--d:.2s">Paid media &amp; search</p>
-    <p class="line rise" style="--d:.3s">Noise that never turns into money is a hobby. This is where spend and search are tuned until they pay back. <b>We run this room. We have not published a case from it.</b></p>
-    <div class="fig none rise" style="--d:.4s">
-      <span class="n">Live work, no case published yet.</span>
-      <span class="w">The work is running &middot; the write-up is not written</span>
-    </div>
-    <span class="door dead rise" style="--d:.5s">No room to open <span class="t">We&rsquo;ll say so until there is</span></span>
-  </div>
-</section>
-
-<!-- ============ 04 · The Habit ============ -->
-<section class="screen room" id="habit" data-room="4" style="--room:#FF6319">
-  <svg class="rings98 plate" viewBox="0 0 400 400" aria-hidden="true">
-    <g class="spin"><circle class="r-a" cx="200" cy="200" r="196"/></g>
-    <circle class="r-b" cx="200" cy="200" r="158"/>
-    <circle class="r-b" cx="200" cy="200" r="120"/>
-    <circle class="r-c" cx="200" cy="200" r="82"/>
-    <g class="spin-b"><circle class="r-arc" cx="200" cy="200" r="120" pathLength="100" stroke-dasharray="14 86"/></g>
-  </svg>
-  <div class="body">
-    <p class="no rise">Room 04</p>
-    <h2 aria-label="The Habit"><span class="wipe"><span style="--d:.08s">The Habit</span></span></h2>
-    <p class="sub rise" style="--d:.2s">The channels you own</p>
-    <p class="line rise" style="--d:.3s">Reach you rent stops the day you stop paying. This room builds the part you keep &mdash; the feed, the design system, and the shoots, because <b>a shoot is a channel we own</b>.</p>
+    <p class="pn rise">Problem 03 <i></i></p>
+    <h2 class="plead" aria-label="Nobodys talking about us">
+      <span class="wipe"><span style="--d:.06s">&ldquo;Nobody&rsquo;s talking</span></span>
+      <span class="wipe"><span style="--d:.14s">about us&rdquo;</span></span>
+    </h2>
+    <p class="psay rise" style="--d:.28s">One voice per audience class, never five from the same shelf, inside a window tight enough that the city reads it as an arrival rather than a schedule. Events live here too &mdash; every night we have run was a creator night.</p>
     <div class="fig rise" style="--d:.4s">
-      <span class="n">23.7M Reels views, +156%</span>
-      <span class="w">Ishant Sharma &middot; on nearly flat publishing</span>
+      <span class="n">6.9M reach, zero paid</span><span class="w">Slay Coffee · 58 creators, 22 verified</span>
     </div>
-    <a class="door rise" style="--d:.5s" href="retain.html" target="_blank" rel="noopener">
-      Open the room <span class="t">The directory &nearr;</span>
-    </a>
+      <a class="door rise" style="--d:.5s" href="amplify.html" target="_blank" rel="noopener">The creator floor <span class="t">30 records &nearr;</span></a>
   </div>
 </section>
 
-<!-- ============ 05 · The Night ============ -->
-<section class="screen room" id="night" data-room="5" style="--room:#EE352E">
-  <svg class="rings98 plate" viewBox="0 0 400 400" aria-hidden="true">
-    <g class="spin-b"><circle class="r-a" cx="200" cy="200" r="196"/><circle class="r-c" cx="200" cy="200" r="176"/></g>
-    <circle class="r-b" cx="200" cy="200" r="146"/>
-    <g class="spin"><circle class="r-arc" cx="200" cy="200" r="196" pathLength="100" stroke-dasharray="46 54"/></g>
-    <circle class="r-c" cx="200" cy="200" r="52"/>
-  </svg>
+<section class="screen prob io" id="money" data-prob="04" data-uses="paid social" style="--room:#FCCC0A">
   <div class="body">
-    <p class="no rise">Room 05</p>
-    <h2 aria-label="The Night"><span class="wipe"><span style="--d:.08s">The Night</span></span></h2>
-    <p class="sub rise" style="--d:.2s">Events &amp; experiential</p>
-    <p class="line rise" style="--d:.3s">A festival&rsquo;s product is the room. <b>Forty creators in the room is the campaign.</b> This is where the other four rooms get something to point at.</p>
-    <div class="fig rise" style="--d:.4s">
-      <span class="n">6.18M reach from one venue</span>
-      <span class="w">One8 Commune &middot; 36 creators, 98 frames</span>
+    <p class="pn rise">Problem 04 <i></i></p>
+    <h2 class="plead" aria-label="Attention isnt turning into money">
+      <span class="wipe"><span style="--d:.06s">&ldquo;Attention isn&rsquo;t</span></span>
+      <span class="wipe"><span style="--d:.14s">turning into money&rdquo;</span></span>
+    </h2>
+    <p class="psay rise" style="--d:.28s">Noise that never converts is a hobby. Paid media and search, tuned until they pay back. Four cases in the archive touch this and none of them lead with it &mdash; it is the youngest thing we do, and we would rather say so.</p>
+    <div class="fig rise none" style="--d:.4s">
+      <span class="n">4 of 35 cases</span><span class="w">the honest size of this practice today</span>
     </div>
-    <a class="door rise" style="--d:.5s" href="events.html" target="_blank" rel="noopener">
-      Open the room <span class="t">12 nights &nearr;</span>
-    </a>
+      <span class="door dead rise" style="--d:.5s">No room to open <span class="t">until there is a case</span></span>
   </div>
 </section>
 
-<!-- ============ 06 · the ask ============ -->
-<section class="screen" id="ask" data-room="6">
+<section class="screen prob io" id="last" data-prob="05" data-uses="social production creators" style="--room:#FF6319">
+  <div class="body">
+    <p class="pn rise">Problem 05 <i></i></p>
+    <h2 class="plead" aria-label="Were only as good as last month">
+      <span class="wipe"><span style="--d:.06s">&ldquo;We&rsquo;re only as good</span></span>
+      <span class="wipe"><span style="--d:.14s">as last month&rdquo;</span></span>
+    </h2>
+    <p class="psay rise" style="--d:.28s">Reach you rent stops the day you stop paying. The feed held week after week, the design system under it, and the shoots &mdash; because a shoot is a channel we own, not a service sold apart from it.</p>
+    <div class="fig rise" style="--d:.4s">
+      <span class="n">23.7M Reels views, +156%</span><span class="w">Ishant Sharma · on nearly flat publishing</span>
+    </div>
+      <a class="door rise" style="--d:.5s" href="retain.html" target="_blank" rel="noopener">The studio directory <span class="t">Social, cases, shoots &nearr;</span></a>
+  </div>
+</section>
+
+<section class="screen io" id="work">
+  <div class="body">
+    <h2 class="wipe"><span>The work, by instrument</span></h2>
+    <p class="lede rise" style="--d:.12s">Thirty-five records, tagged by what each one actually did rather than which stage it was filed under. Every one of them uses more than one instrument &mdash; which is the whole argument. Filter by any chip.</p>
+    <div class="filters rise" style="--d:.2s" id="filters">
+      <button class="f" type="button" data-f="all" aria-pressed="true">All</button>
+    </div>
+    <p class="count" id="count"></p>
+    <div class="grid" id="grid">
+      <a class="card" href="index.html#case-andreas" data-disc="creators paid pr production social" data-sector="Hospitality"><span class="cn">Andrea's Eatery</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Paid &amp; Search &middot; PR &amp; Media</span></a>
+      <a class="card" href="index.html#case-borges" data-disc="creators events paid pr production social" data-sector="F&B"><span class="cn">Borges India</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; Paid &amp; Search</span></a>
+      <a class="card" href="index.html#case-daryaganj" data-disc="creators events production social" data-sector="F&B"><span class="cn">Daryaganj</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
+      <a class="card" href="index.html#case-farzi-cafe" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Farzi Cafe</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
+      <a class="card" href="index.html#case-flaunt" data-disc="branding creators events social" data-sector="Hospitality"><span class="cn">Flaunt by Duty Free</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-hard-rock" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">Hard Rock Cafe</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-ishant" data-disc="branding creators paid pr production social" data-sector="Talent"><span class="cn">Ishant Sharma</span><span class="cs">Talent &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Paid &amp; Search</span></a>
+      <a class="card" href="index.html#case-khubani" data-disc="creators events pr social" data-sector="F&B"><span class="cn">Khubani</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; PR &amp; Media</span></a>
+      <a class="card" href="index.html#case-one8-commune" data-disc="branding creators events pr production social" data-sector="Hospitality"><span class="cn">One8 Commune</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-rooh" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">Rooh</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-sky-lantern" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Sky Lantern</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
+      <a class="card" href="index.html#case-tablespoon" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Tablespoon (TBSP)</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-the-weekend" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">The Weekend</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-tickled-pink" data-disc="creators events production social" data-sector="Hospitality"><span class="cn">Tickled Pink</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
+      <a class="card" href="index.html#case-yyc-group" data-disc="branding creators events pr social" data-sector="Hospitality"><span class="cn">Yum Yum Cha Group</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
+      <a class="card" href="index.html#case-arista-vault" data-disc="branding social" data-sector="D2C"><span class="cn">Arista Vault</span><span class="cs">D2C</span><span class="ct">Branding &middot; Social</span></a>
+      <a class="card" href="index.html#case-bayroute" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Bayroute</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-dejabrew" data-disc="creators social" data-sector="Hospitality"><span class="cn">Deja Brew</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-fast-up" data-disc="creators events pr social" data-sector="Lifestyle"><span class="cn">Fast & Up</span><span class="cs">Lifestyle</span><span class="ct">Creators &middot; Events &middot; PR &amp; Media</span></a>
+      <a class="card" href="index.html#case-happy-dent" data-disc="creators pr production social" data-sector="F&B"><span class="cn">Happydent · Sparkling Smile</span><span class="cs">F&B</span><span class="ct">Creators &middot; PR &amp; Media &middot; Production</span></a>
+      <a class="card" href="index.html#case-limitless" data-disc="creators events paid production social" data-sector="Hospitality"><span class="cn">Limitless</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Events &middot; Paid &amp; Search</span></a>
+      <a class="card" href="index.html#case-local" data-disc="creators production" data-sector="Hospitality"><span class="cn">Local</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production</span></a>
+      <a class="card" href="index.html#case-meta-creator" data-disc="creators production social" data-sector="Platform"><span class="cn">Meta Creator Enablement Programme</span><span class="cs">Platform</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
+      <a class="card" href="index.html#case-monet" data-disc="creators pr" data-sector="Hospitality"><span class="cn">Monet</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; PR &amp; Media</span></a>
+      <a class="card" href="index.html#case-nao" data-disc="creators social" data-sector="Hospitality"><span class="cn">Nao by Berco’s</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-ophelia" data-disc="creators events production social" data-sector="F&B"><span class="cn">Ophelia</span><span class="cs">F&B</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
+      <a class="card" href="index.html#case-poetry" data-disc="creators social" data-sector="Hospitality"><span class="cn">Poetry</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-punjab-grill" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Punjab Grill</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
+      <a class="card" href="index.html#case-rizq" data-disc="branding creators" data-sector="Hospitality"><span class="cn">RIZQ</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators</span></a>
+      <a class="card" href="index.html#case-slay-coffee" data-disc="branding creators social" data-sector="F&B"><span class="cn">Slay Coffee</span><span class="cs">F&B</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-slique" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Slique</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
+      <a class="card" href="index.html#case-tgisf" data-disc="creators events social" data-sector="Lifestyle"><span class="cn">The Great Indian Sneaker Fest</span><span class="cs">Lifestyle</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
+      <a class="card" href="index.html#case-unacademy" data-disc="creators production social" data-sector="Talent"><span class="cn">Unacademy</span><span class="cs">Talent</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
+      <a class="card" href="index.html#case-roseate" data-disc="creators production social" data-sector="Hospitality"><span class="cn">iSKATE by Roseate</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
+      <a class="card" href="index.html#case-iskate" data-disc="creators production social" data-sector="Hospitality"><span class="cn">iSKATE by Roseate</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="screen io" id="ask">
   <div class="body">
     <h2 aria-label="Tell us what you're building.">
       <span class="wipe"><span style="--d:.06s">Tell us what</span></span>
-      <span class="wipe"><span style="--d:.15s">you&rsquo;re building<i>.</i></span></span>
+      <span class="wipe"><span style="--d:.14s">you&rsquo;re building<i>.</i></span></span>
     </h2>
-    <p class="p rise" style="--d:.32s">One line from you. One usable idea back, deck-free. If it&rsquo;s worth a second conversation, we&rsquo;ll both know.</p>
-    <div class="pills rise" style="--d:.42s">
+    <p class="p rise" style="--d:.3s">One line from you. One usable idea back, deck-free. If it&rsquo;s worth a second conversation, we&rsquo;ll both know.</p>
+    <div class="pills rise" style="--d:.4s">
       <a class="key" href="index.html#contact">Send the brief &nearr;</a>
       <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp instead</a>
       <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">@98.entertainment</a>
     </div>
-    <p class="book rise" style="--d:.52s">
-      <span><b>70+</b> brands</span><span><b>35</b> documented cases</span><span><b>10</b> cities</span><span>since <b>01.01.2020</b></span>
-    </p>
-    <p class="ends rise" style="--d:.6s">
-      <a href="index.html">Home</a>
-      <a href="talent.html">Talent &amp; Branding</a>
-      <a href="blog/index.html">The journal</a>
-      <a href="index.html#archive">The archive &mdash; 35 cases</a>
-      <a href="production.html" target="_blank" rel="noopener">Production</a>
+    <p class="ends rise" style="--d:.5s">
+      <a href="index.html">Home</a><a href="talent.html">Talent &amp; Branding</a>
+      <a href="identity.html" target="_blank" rel="noopener">Identity</a>
+      <a href="amplify.html" target="_blank" rel="noopener">Creators</a>
+      <a href="retain.html" target="_blank" rel="noopener">Studio</a>
+      <a href="events.html" target="_blank" rel="noopener">Events</a>
+      <a href="blog/index.html">Journal</a><a href="index.html#archive">The archive</a>
       <a href="mailto:contact@ninety-eight.in">contact@ninety-eight.in</a>
-      <a href="privacy.html">Privacy</a>
     </p>
   </div>
 </section>
@@ -372,127 +422,124 @@ svg{display:block}
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var FACETS = {"ishant": ["branding", "creators", "paid", "pr", "production", "social"], "borges": ["creators", "events", "paid", "pr", "production", "social"], "slay-coffee": ["branding", "creators", "social"], "rooh": ["branding", "creators", "events", "production", "social"], "limitless": ["creators", "events", "paid", "production", "social"], "arista-vault": ["branding", "social"], "yyc-group": ["branding", "creators", "events", "pr", "social"], "andreas": ["creators", "paid", "pr", "production", "social"], "daryaganj": ["creators", "events", "production", "social"], "tickled-pink": ["creators", "events", "production", "social"], "ophelia": ["creators", "events", "production", "social"], "khubani": ["creators", "events", "pr", "social"], "hard-rock": ["branding", "creators", "events", "production", "social"], "roseate": ["creators", "production", "social"], "fast-up": ["creators", "events", "pr", "social"], "unacademy": ["creators", "production", "social"], "meta-creator": ["creators", "production", "social"], "happy-dent": ["creators", "pr", "production", "social"], "tgisf": ["creators", "events", "social"], "punjab-grill": ["creators", "events", "social"], "bayroute": ["branding", "creators", "social"], "dejabrew": ["creators", "social"], "rizq": ["branding", "creators"], "poetry": ["creators", "social"], "nao": ["creators", "social"], "local": ["creators", "production"], "monet": ["creators", "pr"], "slique": ["branding", "creators", "social"], "farzi-cafe": ["creators", "events", "social"], "flaunt": ["branding", "creators", "events", "social"], "iskate": ["creators", "production", "social"], "sky-lantern": ["creators", "events", "social"], "tablespoon": ["branding", "creators", "social"], "the-weekend": ["branding", "creators", "events", "production", "social"], "one8-commune": ["branding", "creators", "events", "pr", "production", "social"]};
+  var PROBS  = [{"id": "name", "uses": ["branding", "pr"], "lead": "branding", "label": "Nobody knows what we are yet"}, {"id": "open", "uses": ["branding", "pr", "events", "production"], "lead": "pr", "label": "We open in six weeks"}, {"id": "talk", "uses": ["creators", "pr", "social", "events"], "lead": "creators", "label": "Nobody\u2019s talking about us"}, {"id": "money", "uses": ["paid", "social"], "lead": "paid", "label": "Attention isn\u2019t turning into money"}, {"id": "last", "uses": ["social", "production", "creators"], "lead": "social", "label": "We\u2019re only as good as last month"}];
+  var CHIPC  = {};
+  [].forEach.call(document.querySelectorAll('.chip'), function(c){
+    CHIPC[c.dataset.chip] = getComputedStyle(c).getPropertyValue('--chip').trim();
+  });
 
-  var ROOMS = [
-    { name:'Marketing',   c:'#5278C2', f:'#2C3E60' },
-    { name:'The Opening', c:'#5278C2', f:'#2C3E60' },
-    { name:'The Noise',   c:'#00933C', f:'#074A25' },
-    { name:'The Return',  c:'#FCCC0A', f:'#54380F' },   /* yellow blooms hottest of the five, and yellow over carbon goes olive — graded hardest, and warmed toward the palette's bronze */
-    { name:'The Habit',   c:'#FF6319', f:'#743212' },
-    { name:'The Night',   c:'#EE352E', f:'#6E1E1B' },
-    { name:'Tell us what you’re building', c:'#EE352E', f:'#6E1E1B' }
-  ];
-
-  /* ---- the ground ---- */
-  if (window.Field98) {
-    Field98.mount({
-      base: '#0B0B0C',
-      colors: ROOMS.map(function(r){ return r.f; }),
-      intensity: 0.80
-    });
+  /* ---- the ground, blooming the lead instrument of the current problem ---- */
+  var order = ['#5278C2'].concat(PROBS.map(function(p){ return CHIPC[p.lead] || '#5278C2'; })).concat(['#5278C2','#EE352E']);
+  function grade(hex){                       /* atmosphere is graded; marks are not */
+    var n = parseInt(hex.slice(1), 16);
+    return '#' + [16,8,0].map(function(s){
+      return ('0' + Math.round(((n>>s)&255) * 0.42).toString(16)).slice(-2);
+    }).join('');
   }
+  if (window.Field98) Field98.mount({ base:'#0B0B0C', colors: order.map(grade), intensity: 0.86 });
 
   var screens = [].slice.call(document.querySelectorAll('.screen'));
-  var dotsBox = document.getElementById('dots');
-  var lbl = document.getElementById('roomlbl');
-  var bar = document.getElementById('bar');
-  var pip = document.getElementById('pip');
-  var nextBtn = document.getElementById('next');
-  var cur = -1;
+  var rail = document.getElementById('rail'), fill = document.getElementById('railfill');
+  var bar = document.getElementById('bar'), cur = -1;
 
-  /* ---- the five dots (rooms 1..5 only; the hero and the ask aren't rooms) ---- */
-  var dots = [];
-  for (var i = 1; i <= 5; i++) (function(i){
+  /* ---- the rail ---- */
+  PROBS.forEach(function(p, i){
     var b = document.createElement('button');
     b.type = 'button';
-    b.setAttribute('role','tab');
-    b.setAttribute('aria-label', ROOMS[i].name);
-    b.addEventListener('click', function(){ go(i); });
-    dotsBox.appendChild(b); dots.push(b);
-  })(i);
+    b.innerHTML = '<b>0' + (i+1) + '</b><span>' + p.label + '</span>';
+    b.addEventListener('click', function(){
+      document.getElementById(p.id).scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+    });
+    rail.appendChild(b);
+  });
+  var railBtns = [].slice.call(rail.children);
 
-  function go(i){
-    var el = screens[i];
-    if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+  function setScreen(el){
+    var idx = screens.indexOf(el); if (idx === cur) return; cur = idx;
+    var uses = (el.dataset.uses || '').split(' ').filter(Boolean);
+    var pi = PROBS.findIndex(function(p){ return p.id === el.id; });
+    var lead = pi > -1 ? PROBS[pi].lead : null;
+
+    document.querySelectorAll('.chip').forEach(function(c){
+      var k = c.dataset.chip;
+      c.classList.toggle('lit', uses.indexOf(k) > -1);
+      c.classList.toggle('lead', k === lead);
+    });
+    railBtns.forEach(function(b, i){ b.setAttribute('aria-current', i === pi ? 'true' : 'false'); });
+    fill.style.height = (pi > -1 ? ((pi + 1) / PROBS.length) * 100 : 0) + '%';
+
+    var c = lead ? CHIPC[lead] : '#5278C2';
+    document.documentElement.style.setProperty('--room', c);
+    if (window.Field98 && Field98.ok) Field98.to(idx);
   }
 
-  function setRoom(i){
-    if (i === cur) return;
-    cur = i;
-    var r = ROOMS[i] || ROOMS[0];
-    document.documentElement.style.setProperty('--room', r.c);
-    lbl.innerHTML = r.name + '<i>' + (i >= 1 && i <= 5 ? 'Room 0' + i + ' of 05' : '&nbsp;') + '</i>';
-    dots.forEach(function(d, k){ d.setAttribute('aria-current', (k + 1) === i ? 'true' : 'false'); });
-    if (window.Field98 && Field98.ok) Field98.to(i);
-  }
-
-  /* ---- which screen is in the middle of the window ---- */
-  if ('IntersectionObserver' in window) {
-    var reveal = new IntersectionObserver(function(es){
+  if ('IntersectionObserver' in window){
+    var rev = new IntersectionObserver(function(es){
       es.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('on'); });
-    }, { threshold: 0.12 });
-    screens.forEach(function(s){ reveal.observe(s); });
-
-    var active = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting) setRoom(parseInt(e.target.getAttribute('data-room'), 10) || 0);
-      });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-    screens.forEach(function(s){ active.observe(s); });
+    }, {threshold:.1});
+    screens.forEach(function(s){ rev.observe(s); });
+    var act = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) setScreen(e.target); });
+    }, {rootMargin:'-45% 0px -45% 0px'});
+    screens.forEach(function(s){ act.observe(s); });
   } else {
     screens.forEach(function(s){ s.classList.add('on'); });
   }
-  setRoom(0);
+  setScreen(screens[0]);
 
-  /* ---- the button walks you one screen on, and turns around at the end ---- */
-  nextBtn.addEventListener('click', function(){
-    var y = scrollY, n = screens.length;
-    var atEnd = (innerHeight + y) >= (document.documentElement.scrollHeight - 8);
-    if (atEnd) { screens[0].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
-    for (var i = 0; i < n; i++) {
-      if (screens[i].getBoundingClientRect().top > 24) { go(i); return; }
-    }
-    go(n - 1);
+  /* ---- a chip is also a filter: clicking one jumps to the work and applies it ---- */
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      applyFilter(c.dataset.chip);
+      document.getElementById('work').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+    });
   });
 
-  /* ---- the hairline, and the button flipping to "back to the top" ---- */
-  var raf = 0;
-  function frame(){
-    raf = 0;
-    var d = document.documentElement;
-    var max = d.scrollHeight - innerHeight;
-    var p = max > 0 ? scrollY / max : 0;
-    bar.style.width = (p * 100) + '%';
-    nextBtn.classList.toggle('up', p > 0.985);
-    nextBtn.setAttribute('aria-label', p > 0.985 ? 'Back to the top' : 'Next screen');
-  }
-  addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(frame); }, { passive:true });
-  frame();
-
-  /* ---- the cursor ring, and the field leaning toward the pointer ---- */
-  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    var ring = document.getElementById('ring');
-    var rx = innerWidth / 2, ry = innerHeight / 2, tx = rx, ty = ry, rraf = 0;
-    function ease(){
-      rraf = 0;
-      rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
-      ring.style.transform = 'translate3d(' + (rx - 17) + 'px,' + (ry - 17) + 'px,0)';
-      if (Math.abs(tx - rx) > 0.4 || Math.abs(ty - ry) > 0.4) rraf = requestAnimationFrame(ease);
-    }
-    addEventListener('pointermove', function(e){
-      tx = e.clientX; ty = e.clientY;
-      ring.classList.add('on');
-      if (!rraf) rraf = requestAnimationFrame(ease);
-      if (window.Field98 && Field98.ok) {
-        Field98.pointer((e.clientX / innerWidth) * 2 - 1, 1 - (e.clientY / innerHeight) * 2);
-      }
-    }, { passive:true });
-    addEventListener('pointerleave', function(){ ring.classList.remove('on'); });
-    /* the ring opens over anything you can press */
-    document.addEventListener('pointerover', function(e){
-      var t = e.target.closest && e.target.closest('a,button');
-      ring.classList.toggle('grow', !!(t && !t.classList.contains('dead')));
+  var fbox = document.getElementById('filters'), grid = document.getElementById('grid'),
+      countEl = document.getElementById('count'), cards = [].slice.call(grid.children);
+  Object.keys(CHIPC).forEach(function(k){
+    var b = document.createElement('button');
+    b.className = 'f'; b.type = 'button'; b.dataset.f = k;
+    b.textContent = document.querySelector('.chip[data-chip="' + k + '"]').textContent.trim();
+    b.setAttribute('aria-pressed', 'false');
+    fbox.appendChild(b);
+  });
+  function applyFilter(key){
+    var n = 0;
+    cards.forEach(function(card){
+      var ok = key === 'all' || (card.dataset.disc || '').split(' ').indexOf(key) > -1;
+      card.hidden = !ok; if (ok) n++;
     });
+    fbox.querySelectorAll('.f').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.f === key ? 'true' : 'false');
+    });
+    countEl.textContent = key === 'all'
+      ? n + ' records · every one uses more than one instrument'
+      : n + ' of ' + cards.length + ' records use ' + key;
+  }
+  fbox.addEventListener('click', function(e){
+    var b = e.target.closest('.f'); if (b) applyFilter(b.dataset.f);
+  });
+  applyFilter('all');
+
+  /* ---- progress hairline ---- */
+  var raf = 0;
+  addEventListener('scroll', function(){
+    if (raf) return;
+    raf = requestAnimationFrame(function(){
+      raf = 0;
+      var max = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+    });
+  }, {passive:true});
+
+  /* ---- pointer parallax on the ground ---- */
+  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    addEventListener('pointermove', function(e){
+      if (window.Field98 && Field98.ok)
+        Field98.pointer((e.clientX/innerWidth)*2 - 1, 1 - (e.clientY/innerHeight)*2);
+    }, {passive:true});
   }
 })();
 </script>

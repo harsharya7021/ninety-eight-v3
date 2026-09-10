@@ -135,7 +135,7 @@
 
   var F = {
     ok: false, _raf: 0, _gl: null, _cv: null, _u: {}, _t: 0, _last: 0,
-    _colors: [], _from: [0, 0, 0], _to: [0, 0, 0], _mix: 1, _fadeT: 0, _fadeD: 4.0,
+    _colors: [], _from: [0, 0, 0], _to: [0, 0, 0], _mix: 1, _fadeT: 0, _fadeD: 7.0,   /* Sep 10 call: "changing themes way faster than it should" */
     _ptr: [0, 0], _ptrTo: [0, 0], _amt: 1, _idx: -1, _running: false,
 
     mount: function (opt) {
