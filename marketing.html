@@ -225,6 +225,51 @@ svg{display:block}
   font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
 .ends a:hover{color:var(--ink)}
 #bar{position:fixed;top:0;left:0;height:1px;width:0;background:var(--room);z-index:70;transition:background 1.6s var(--ease)}
+/* =========================================================================
+   THE OPENER — effect 104, the line on a wire (v3.45, Sep 10 2026)
+
+   "Marketing, start to finish." rides a train of text and tiles along an SVG
+   path that is dead straight at rest and bends into a wave in proportion to
+   how hard you are scrolling. The zip's mechanism and its numbers: GAP 90,
+   tiles 310 high, the morph quickTo'd at 1s power2 and let go 66ms after the
+   last scroll. The first screen is the zip's own — the field and a Scroll cue.
+
+   The CSS ships the READABLE state (the sentence as plain type); the script
+   adds .fx before it installs anything, so no GSAP or reduced motion gets a
+   legible line, never a blank pinned one. The two tiles are PLACEHOLDERS,
+   dashed because that is how this page says "not yet" (see .door.dead).
+   ========================================================================= */
+.mwg104{position:relative}
+.w104-say{padding:clamp(6.5rem,16vh,9rem) var(--pad) 0 calc(var(--pad) + var(--rail) + 2vw);
+  font-weight:800;font-stretch:118%;letter-spacing:-.035em;line-height:.9;font-size:clamp(2.5rem,8.2vw,7rem)}
+.w104-say i{font-style:normal;color:var(--red)}
+@media(max-width:900px){ .w104-say{padding-left:var(--pad)} }
+.mwg104 .pin-height,.w104-cue{display:none}
+.mwg104.fx .w104-say{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.mwg104.fx .pin-height{display:block;height:583vh}   /* the script re-paces this to the line; 583 is it for this one */
+.mwg104 .container{height:100vh;display:flex;align-items:center;overflow:hidden}
+.mwg104 svg{display:block;width:120%;height:auto;overflow:visible;margin:8vw 0 0 -10%}
+#w104-line{fill:none;stroke:none}
+#w104-track{visibility:hidden}
+.mwg104.ready #w104-track{visibility:visible}
+.mwg104 text.segment{fill:var(--ink);font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:118%;letter-spacing:-.035em;
+  stroke:var(--ink);stroke-width:2px;stroke-linejoin:round}   /* at -.035em some pairs abut (the r-t in start) and anti-aliasing draws a hairline seam where they meet; a 2-unit stroke in the fill colour closes it */
+.mwg104 text.segment .stop{fill:var(--red);stroke:var(--red)}
+.mwg104 .ph-box{fill:rgba(244,244,242,.035);stroke:rgba(244,244,242,.34);stroke-width:1;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
+.mwg104 .ph-mark{fill:var(--ink);fill-opacity:.1;font-family:'Archivo',Helvetica,Arial,sans-serif;font-weight:800;font-stretch:118%;font-size:128px;letter-spacing:-.04em}
+.mwg104 .ph-cap{fill:var(--dim);font-family:'Space Mono',monospace;font-size:17px;letter-spacing:.2em}
+.mwg104.fx .w104-cue{display:flex;flex-direction:column;align-items:center;gap:.85rem;
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none}
+.w104-cue i{display:block;width:1px;height:34px;background:var(--line);position:relative;overflow:hidden}
+.w104-cue i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:w104drip 1.8s var(--ease) infinite}
+@keyframes w104drip{to{top:100%}}
+/* The one change to the chrome: the rail steps out while the line crosses the screen — the train is
+   full-bleed and would otherwise run under the rail's five numbers — and fades back in as the pin
+   releases onto the hero. Keyboard focus inside it still shows it. */
+.rail,.railbar{transition:opacity .7s var(--ease)}
+html.w104-live .rail,html.w104-live .railbar{opacity:0;pointer-events:none}
+html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
 </style>
 </head>
 <body>
@@ -254,6 +299,36 @@ svg{display:block}
 </div>
 
 <main>
+<!-- ============ THE OPENER — effect 104, the line on a wire (v3.45) ============
+     The two tiles are PLACEHOLDERS. To put a real picture in, replace its
+       <g class="segment tile ph">…</g>
+     with
+       <image class="segment" href="assets/…" height="300" clip-path="url(#w104-clip)"/>
+     and nothing else changes: the driver sizes an image from its own aspect
+     ratio exactly as the zip does, and re-paces the runway to the new train. -->
+<section class="mwg104" id="opener">
+  <p class="w104-say">Marketing, start to finish<i>.</i></p>
+  <p class="w104-cue mono" aria-hidden="true">Scroll<i></i></p>
+  <div class="pin-height">
+    <div class="container">
+      <svg width="2577" height="391" viewBox="0 0 2577 391" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="w104-clip" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx=".08" ry=".08"/></clipPath>
+        </defs>
+        <path id="w104-line" d="M0 195H644H1288H1932H2576"/>
+        <path id="w104-wave" d="M0.21875 190.5C0.21875 190.5 382.004 0.5 644.219 0.5C906.434 0.5 1051.3 78.1239 1288.22 190.5C1531.72 306 1668.87 390.5 1932.22 390.5C2195.57 390.5 2576.22 190.5 2576.22 190.5" stroke="#FFF" style="opacity:0;"/>
+        <g id="w104-track">
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">Marketing,</textPath></text>
+          <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">start</textPath></text>
+          <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">to finish<tspan class="stop">.</tspan></textPath></text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
 
 <section class="screen io" id="top" data-prob="0" data-uses="">
   <div class="body">
@@ -418,6 +493,211 @@ svg{display:block}
 
 </main>
 
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/MorphSVGPlugin.min.js"></script>
+<script>
+/* ---- 104: the opener rides a wire that waves with your scroll (v3.45) ------
+   The zip's driver. Three departures, each forced:
+   1. Text is measured by the SVG itself — getComputedTextLength on an
+      off-path probe — not on canvas. Canvas ignores font-stretch and
+      letter-spacing, and this page's display type uses both (118%, -.035em);
+      measured on canvas the words would overrun their gaps.
+   2. The zip's document.fonts.load('LayGrotesk') is gone: it names a face
+      this site does not have. The line waits for Archivo 800 instead.
+   3. The runway is the zip's PACE, not its length: 700vh of scroll per
+      11,835 units of path + train (its own sentence, measured in Inter 500).
+      This line is shorter, so it gets 583vh rather than 800 and crosses the
+      screen at the reference's speed instead of crawling. Change the words
+      or the tiles and the runway re-paces itself.
+   Lenis, optional in the zip, stays out: this page scrolls natively. */
+(function(){
+  var root = document.getElementById('opener'); if (!root) return;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof MorphSVGPlugin === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+  root.classList.add('fx');                    /* the stage replaces the plain line before anything measures */
+  document.documentElement.classList.add('w104-live');
+
+  var pinHeight = root.querySelector('.pin-height');
+  var container = root.querySelector('.container');
+  var svg = root.querySelector('svg');
+  var svgPath = root.querySelector('#w104-line');
+  var track = root.querySelector('#w104-track');
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  var GAP = 90, IMG_HEIGHT = 310;
+  var REF_SPAN = 11835, REF_RUN = 700;          /* the zip: 2,576 path + 9,259 train, over 700vh */
+  var segments = [], totalLength = 0, scrollProgress = 0, ready = false, tries = 0;
+  var wheelTimeout, prevScroll = null;
+
+  var morphTl = gsap.timeline({ paused: true })
+    .to(svgPath, { morphSVG: root.querySelector('#w104-wave'), duration: 1, ease: 'none' });
+
+  var amplitude = { value: 0 };
+  var amplitudeTo = gsap.quickTo(amplitude, 'value', {
+    duration: 1, ease: 'power2',
+    onUpdate: function(){
+      morphTl.progress(gsap.utils.clamp(0, 1, amplitude.value / 50));
+      update();
+    }
+  });
+
+  function sizeImages(){                        /* real pictures, once they replace the placeholders */
+    return Promise.all([].map.call(track.querySelectorAll('image.segment'), function(img){
+      return new Promise(function(resolve){
+        var probe = new Image();
+        var apply = function(){
+          img.setAttribute('width', Math.round(IMG_HEIGHT * probe.naturalWidth / probe.naturalHeight));
+          img.setAttribute('height', IMG_HEIGHT);
+          resolve();
+        };
+        probe.onload = apply; probe.onerror = resolve;
+        probe.src = img.getAttribute('href');
+        if (probe.complete && probe.naturalWidth) apply();
+      });
+    }));
+  }
+
+  function measureText(el){
+    var probe = document.createElementNS(SVGNS, 'text');
+    probe.setAttribute('class', 'segment');
+    probe.setAttribute('font-size', el.getAttribute('font-size') || '350');
+    probe.setAttribute('visibility', 'hidden');
+    probe.textContent = el.textContent;
+    svg.appendChild(probe);
+    var w = probe.getComputedTextLength();
+    svg.removeChild(probe);
+    return w;
+  }
+
+  function measureSegments(){
+    segments = [].filter.call(track.children, function(el){
+      return el.classList.contains('segment');
+    }).map(function(el){
+      var tag = el.tagName.toLowerCase();
+      if (tag === 'text') return { type: 'text', el: el, textPath: el.querySelector('textPath'), size: measureText(el) };
+      var img = tag === 'image';
+      var w = +el.getAttribute(img ? 'width' : 'data-w'), h = +el.getAttribute(img ? 'height' : 'data-h');
+      return { type: img ? 'image' : 'tile', el: el, size: w, width: w, height: h };
+    });
+    totalLength = segments.reduce(function(sum, seg, i){
+      return sum + seg.size + (i < segments.length - 1 ? GAP : 0);
+    }, 0);
+  }
+
+  function placeOnPath(seg, len){
+    var el = seg.el, width = seg.width, height = seg.height;
+    var pl = svgPath.getTotalLength();
+    if (len < -width || len > pl + width){ el.style.opacity = 0; return; }
+
+    el.style.opacity = 1;
+    var clamped = gsap.utils.clamp(0, pl, len);
+    var pt = svgPath.getPointAtLength(clamped);
+    var next = svgPath.getPointAtLength(gsap.utils.clamp(0, pl, clamped + 1));
+    var angle = Math.atan2(next.y - pt.y, next.x - pt.x) * 180 / Math.PI;
+    var rot = 'rotate(' + angle + ' ' + pt.x + ' ' + pt.y + ')';
+
+    if (seg.type === 'image'){
+      el.setAttribute('x', pt.x - width / 2);
+      el.setAttribute('y', pt.y - height);
+      el.setAttribute('transform', rot);
+    } else {                                    /* a placeholder group has no x/y of its own */
+      el.setAttribute('transform', rot + ' translate(' + (pt.x - width / 2) + ' ' + (pt.y - height) + ')');
+    }
+  }
+
+  function update(){
+    if (!ready) return;
+    var pl = svgPath.getTotalLength();
+    var cursor = pl + totalLength - scrollProgress * (pl + totalLength);
+
+    for (var i = segments.length - 1; i >= 0; i--){
+      var seg = segments[i];
+      cursor -= seg.size;
+      if (seg.type === 'text'){
+        seg.textPath.setAttribute('startOffset', ((cursor / pl) * 100) + '%');
+        seg.el.style.opacity = (cursor >= pl || cursor + seg.size <= 0) ? 0 : 1;
+      } else {
+        placeOnPath(seg, cursor + seg.size / 2);
+      }
+      cursor -= GAP;
+    }
+  }
+
+  function bumpAmplitude(amount){
+    amplitudeTo(Math.abs(amount));
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(function(){ amplitudeTo(0); }, 66);
+  }
+  function handleWheel(e){ bumpAmplitude(e.deltaY); }
+
+  function live(p){                            /* the rail is out while the line is on screen */
+    document.documentElement.classList.toggle('w104-live', p < 1);
+  }
+
+  function repace(){                            /* the zip's pace, this line's length */
+    var run = REF_RUN * (svgPath.getTotalLength() + totalLength) / REF_SPAN;
+    pinHeight.style.height = (100 + run).toFixed(1) + 'vh';
+  }
+
+  function init(){
+    measureSegments();
+    /* a pane laid out at 0x0 measures nothing — wait for a real one (v3.36's guard) */
+    if (!(segments.length && segments[0].size > 0) && tries++ < 40){ setTimeout(init, 250); return; }
+    repace();
+    ready = true;
+    update();
+    root.classList.add('ready');
+
+    gsap.to(root.querySelector('.w104-cue'), {
+      autoAlpha: 0, duration: 0.2,
+      scrollTrigger: { trigger: root, start: 'top top', end: 'top top-=1', toggleActions: 'play none reverse none' }
+    });
+
+    ScrollTrigger.create({
+      trigger: pinHeight,
+      start: 'top top',
+      end: 'bottom bottom',
+      pin: container,
+      scrub: true,
+      onRefresh: function(self){ measureSegments(); update(); live(self.progress); },
+      onUpdate: function(self){
+        var scroll = self.scroll();
+        if (prevScroll != null) bumpAmplitude(scroll - prevScroll);
+        prevScroll = scroll;
+        scrollProgress = self.progress;
+        update();
+        live(self.progress);
+      }
+    });
+
+    root.addEventListener('wheel', handleWheel, { passive: true });
+    ScrollTrigger.refresh();
+  }
+
+  /* start once the type and any pictures are in — or after 3s regardless, so a stalled font file
+     never leaves five blank screens; a face that lands later re-measures the train and re-paces it */
+  var started = false;
+  function start(){
+    if (started) return; started = true;
+    init();
+    if (document.fonts && document.fonts.addEventListener){
+      document.fonts.addEventListener('loadingdone', function(){
+        if (!ready) return;
+        measureSegments(); repace(); update(); ScrollTrigger.refresh();
+      });
+    }
+  }
+  var waits = [sizeImages()];
+  if (document.fonts){
+    waits.push(document.fonts.ready);
+    waits.push(document.fonts.load('800 350px Archivo'));
+  }
+  Promise.all(waits).then(start, start);
+  setTimeout(start, 3000);
+})();
+</script>
 <script src="assets/field.js"></script>
 <script>
 (function(){
