@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Marketing — Ninety-Eight</title>
-<meta name="description" content="Five problems founders arrive with, and the seven instruments we use on them — branding, PR, creators, paid, social, production, events. 35 records across 70+ brands.">
+<meta name="description" content="The seven instruments we use — branding, PR, creators, paid, social, production, events. 35 records across 70+ brands.">
 <meta property="og:title" content="Marketing — Ninety-Eight">
 <meta property="og:description" content="Whatever you arrived with, the instruments are the same seven. Here they are, one by one.">
 <meta property="og:type" content="website">
@@ -55,6 +55,11 @@
    chip bar and the rail of numbers. The seven now present themselves once,
    as panels straight after the hero (effect 109, #seven); the problems keep
    their skeleton, and the ground still takes each one's lead colour.
+
+   v3.47, same day: the page is the opener and the seven, nothing else. At
+   Harsh's call the hero, the five problems, the work grid and the ask are
+   gone with their CSS and script, and the seven sit centred. Most of the
+   above is history now; the ground follows whichever panel is open.
    ========================================================================= */
 :root{
   --bg:#0B0B0C; --ink:#F4F4F2; --dim:#8E8E88; --faint:#6E6E68;
@@ -105,89 +110,6 @@ svg{display:block}
 .on .wipe > span{transform:none}
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .rise,.wipe>span{opacity:1;transform:none;transition:none} }
 
-/* hero */
-#top h1{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.035em;
-  font-size:clamp(2.5rem,8.2vw,7rem);line-height:.88;max-width:15ch}
-#top h1 em{font-style:normal;color:var(--dim)}
-#top .say{margin-top:clamp(1.6rem,4.5vh,2.8rem);font-family:'Instrument Serif',Georgia,serif;font-style:italic;
-  font-size:clamp(1.25rem,2.4vw,2.1rem);line-height:1.22;max-width:24ch;color:#E8E8E4}
-#top .fine{margin-top:1.2rem;max-width:40ch;color:#A9A9A3;font-size:clamp(.9rem,1.05vw,1rem)}
-
-/* a problem — same skeleton every time, interior alignment varies */
-.prob .pn{display:flex;align-items:center;gap:.9rem;color:var(--room);
-  font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase}
-.prob .pn i{height:1px;width:min(22vw,240px);background:currentColor;opacity:.4}
-.plead{margin-top:1rem;font-weight:800;font-stretch:118%;letter-spacing:-.035em;
-  font-size:clamp(2.1rem,6.6vw,5.4rem);line-height:.94}
-.psay{margin-top:clamp(1.4rem,4vh,2.4rem);font-size:clamp(1rem,1.55vw,1.35rem);line-height:1.45;
-  max-width:44ch;color:#CFCFC9;letter-spacing:-.008em}
-.fig{margin-top:clamp(1.6rem,4.5vh,2.6rem);display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
-.fig .n{font-weight:800;font-stretch:118%;letter-spacing:-.03em;line-height:1;
-  font-size:clamp(1.5rem,3vw,2.6rem);color:var(--room)}
-.fig .w{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
-.fig.none .n{font-size:clamp(1rem,1.5vw,1.2rem);font-weight:600;font-stretch:100%;letter-spacing:0;color:#BFBFB9}
-.door{margin-top:clamp(1.6rem,4.5vh,2.6rem);width:fit-content;display:inline-flex;align-items:center;gap:.85rem;
-  border:1px solid var(--line);border-radius:999px;padding:.8rem 1.4rem;font-size:.9rem;font-weight:600;
-  transition:border-color .4s,background .4s,color .4s}
-.door .t{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--dim);font-weight:400;transition:color .4s}
-.door:hover{border-color:var(--room);background:var(--room);color:#0B0B0C}
-.door:hover .t{color:rgba(11,11,12,.65)}
-.door.dead{border-style:dashed;opacity:.5;cursor:default}
-.door.dead:hover{border-color:var(--line);background:none;color:inherit}
-
-/* the designer's rule: same skeleton, different skin. Only alignment moves. */
-#open .body,#money .body{margin-left:auto;margin-right:0;text-align:right}
-#open .pn,#money .pn{justify-content:flex-end;flex-direction:row-reverse}
-#open .psay,#money .psay{margin-left:auto}
-#open .fig,#money .fig{justify-content:flex-end}
-#open .door,#money .door{margin-left:auto}
-#talk .body{max-width:1320px}
-#talk .plead{font-size:clamp(2.3rem,7.6vw,6.4rem)}
-@media(max-width:900px){
-  #open .body,#money .body{text-align:left;margin-left:0}
-  #open .pn,#money .pn{justify-content:flex-start;flex-direction:row}
-  #open .psay,#money .psay,#open .door,#money .door{margin-left:0}
-  #open .fig,#money .fig{justify-content:flex-start}
-}
-
-/* ---------- the work, filtered by the same seven chips ---------- */
-#work h2{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.03em;
-  font-size:clamp(1.7rem,4vw,3.2rem);line-height:.95}
-#work .lede{margin-top:1rem;max-width:52ch;color:#BFBFB9}
-.filters{margin-top:clamp(1.6rem,4vh,2.4rem);display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
-.filters .f{border:1px solid var(--hair);border-radius:999px;padding:.42rem .8rem;
-  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
-  transition:color .35s,border-color .35s,background .35s}
-.filters .f:hover{color:var(--ink);border-color:var(--line)}
-.filters .f[aria-pressed="true"]{color:#0B0B0C;background:var(--ink);border-color:var(--ink)}
-.count{margin-top:1rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--faint)}
-.grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,232px),1fr));gap:1px;
-  background:var(--hair);border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
-.card{background:var(--bg);padding:1.15rem 1.1rem 1.3rem;display:flex;flex-direction:column;gap:.3rem;
-  transition:background .35s,opacity .45s var(--ease);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.card:hover{background:#101113}
-.card .cn{font-weight:700;font-stretch:110%;font-size:1rem;letter-spacing:-.012em}
-.card .cs{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.card .ct{margin-top:.5rem;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--dim)}
-.card[hidden]{display:none}
-
-/* ---------- the ask ---------- */
-#ask h2{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.035em;
-  font-size:clamp(2rem,6.4vw,5.2rem);line-height:.9}
-#ask h2 i{font-style:normal;color:var(--red)}
-#ask .p{margin-top:1.4rem;max-width:40ch;color:#BFBFB9}
-.pills{margin-top:clamp(1.8rem,4.5vh,2.6rem);display:flex;flex-wrap:wrap;gap:.55rem}
-.pills a{border:1px solid var(--line);border-radius:999px;padding:.7rem 1.2rem;font-size:.86rem;
-  transition:border-color .35s,background .35s,color .35s}
-.pills a:hover{border-color:var(--ink)}
-.pills a.key:hover{background:var(--ink);color:var(--bg)}
-.ends{margin-top:clamp(2rem,5vh,3rem);padding-top:1.1rem;border-top:1px solid var(--hair);
-  display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
-  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
-.ends a:hover{color:var(--ink)}
 #bar{position:fixed;top:0;left:0;height:1px;width:0;background:var(--room);z-index:70;transition:background 1.6s var(--ease)}
 /* =========================================================================
    THE OPENER — effect 104, the line on a wire (v3.45, Sep 10 2026)
@@ -249,6 +171,7 @@ svg{display:block}
    ========================================================================= */
 .s109-kick{font-weight:400;margin-bottom:1.1rem}
 .s109-kick span{display:none}
+#seven > .body{max-width:calc(736px + 6 * (56px + 6px));margin-inline:auto}   /* v3.47: centred. The cap is the row's full width in the driver (736 open, six 56px pills, six 6px gaps), so the row fills it and the kicker sits on its left edge; change PILL, GAP or 736 there and change this too */
 #seven.fx109 .s109-kick span{display:inline}
 .mwg109{--open:660px;--t109:min(104px,calc((var(--open) - 40px) / 6.3))}   /* "Production" sets 6.09em wide in this face */
 .mwg109 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:6px}
@@ -259,7 +182,7 @@ svg{display:block}
 .mwg109 .bottom{display:flex;flex-direction:column;gap:1rem}
 .mwg109 .media{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;border-radius:4px;background:rgba(0,0,0,.14)}
 .mwg109 .media.fig{display:flex;flex-direction:column;align-items:center;justify-content:center;background:none;
-  border:1px dashed var(--on);opacity:.9}
+  border:1px dashed var(--on);opacity:.9;margin-top:clamp(1.6rem,4.5vh,2.6rem);gap:1rem;flex-wrap:wrap}   /* v3.47: the last three came from the problems' .fig rule, which this figure had been picking up; they live here now so it sets as it did */
 .mwg109 .media.fig b{font-weight:800;font-stretch:118%;letter-spacing:-.04em;font-size:4.4rem;line-height:.9}
 .mwg109 .media.fig span{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;margin-top:.45rem}
 .mwg109 .txt p{font-size:.95rem;line-height:1.45;letter-spacing:-.005em}
@@ -317,7 +240,7 @@ svg{display:block}
      and nothing else changes: the driver sizes an image from its own aspect
      ratio exactly as the zip does, and re-paces the runway to the new train. -->
 <section class="mwg104" id="opener">
-  <p class="w104-say">Full-scale marketing practice, from start to finish<i>.</i></p>
+  <h1 class="w104-say">Full-scale marketing practice, from start to finish<i>.</i></h1>
   <p class="w104-cue mono" aria-hidden="true">Scroll<i></i></p>
   <div class="pin-height">
     <div class="container">
@@ -340,25 +263,12 @@ svg{display:block}
 </section>
 
 
-<section class="screen io" id="top" data-prob="0" data-uses="">
-  <div class="body">
-    <p class="mono rise">Ninety-Eight &middot; vertical 02 &middot; est. 2020</p>
-    <h1 aria-label="Whatever you arrived with, the instruments are the same seven.">
-      <span class="wipe"><span style="--d:.06s">Whatever you</span></span>
-      <span class="wipe"><span style="--d:.14s">arrived with,</span></span>
-      <span class="wipe"><span style="--d:.22s"><em>seven instruments.</em></span></span>
-    </h1>
-    <p class="say rise" style="--d:.36s">Everyone sells the stop. We build the reason to stay.</p>
-    <p class="fine rise" style="--d:.46s">The seven are below, one panel each, and after them the five problems founders actually arrive with.</p>
-  </div>
-</section>
-
 <!-- ============ THE SEVEN — effect 109, the instruments as panels (v3.46) ============
      One panel open, six standing as pills with their name turned up the side.
      Each paragraph is that instrument's room talking (Paid & Search, which has
      no room, borrows Problem 04), each picture comes from that room's assets,
-     and each count is recounted at load from the same FACETS the work grid
-     filters on, so the panels and the grid cannot disagree. -->
+     and each count is recounted at load from FACETS (assets/facets.json,
+     inlined). Since v3.47 this is the page's last screen, centred. -->
 <section class="screen io" id="seven" data-lead="branding" aria-labelledby="seven-h">
   <div class="body">
     <h2 class="mono s109-kick rise" id="seven-h">The seven instruments<span> &middot; open any of them</span></h2>
@@ -371,7 +281,7 @@ svg{display:block}
               <img class="media" src="assets/retain/bunta-brand.webp" alt="Bunta Bar Express, the identity" width="270" height="180" decoding="async">
               <div class="txt">
                 <p>The name, the position, the mark, and a system that has to survive a feed it was never designed for. Not a deck that gets signed off and filed, but the thing the press cycle, the creator brief and the menu photograph all have to agree with.</p>
-                <p class="meta">In <span data-count="branding">13</span> of <span data-total>35</span> records<br><a href="#work" data-filter="branding">See them &darr;</a> &middot; <a href="identity.html" target="_blank" rel="noopener">The identity work &nearr;</a></p>
+                <p class="meta">In <span data-count="branding">13</span> of <span data-total>35</span> records<br><a href="identity.html" target="_blank" rel="noopener">The identity work &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -384,7 +294,7 @@ svg{display:block}
               <img class="media" src="assets/retain/one8.webp" alt="Ninety-Eight and One8 Commune, the announcement" width="270" height="180" decoding="async" style="object-position:50% 12%">
               <div class="txt">
                 <p>The earned half of the same job: a creator makes the city talk, a journalist makes the record. Three awards in one year for one client group, and national trade press for a campaign fronted by our talent.</p>
-                <p class="meta">In <span data-count="pr">9</span> of <span data-total>35</span> records<br><a href="#work" data-filter="pr">See them &darr;</a> &middot; <a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
+                <p class="meta">In <span data-count="pr">9</span> of <span data-total>35</span> records<br><a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -397,7 +307,7 @@ svg{display:block}
               <img class="media" src="assets/gurls/g11.webp" alt="A creator frame from the culture set" width="270" height="180" decoding="async" style="object-position:50% 35%">
               <div class="txt">
                 <p>One verified voice per audience class, never five from the same shelf, landing inside a window tight enough that a city reads it as an arrival rather than a schedule. Reach is combined follower reach, not impressions, and we say so.</p>
-                <p class="meta">In <span data-count="creators">34</span> of <span data-total>35</span> records<br><a href="#work" data-filter="creators">See them &darr;</a> &middot; <a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
+                <p class="meta">In <span data-count="creators">34</span> of <span data-total>35</span> records<br><a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -410,7 +320,7 @@ svg{display:block}
               <div class="media fig" role="img" aria-label="4 of 35 records"><b data-count="paid">4</b><span>of <span data-total>35</span> records</span></div>
               <div class="txt">
                 <p>Noise that never converts is a hobby. Paid media and search, tuned until they pay back. Four records touch it and none of them lead with it. It is the youngest thing we do, and we would rather say so.</p>
-                <p class="meta"><a href="#work" data-filter="paid">See them &darr;</a> &middot; <span class="no">No room of its own yet</span></p>
+                <p class="meta"><span class="no">No room of its own yet</span></p>
               </div>
             </div>
           </div>
@@ -423,7 +333,7 @@ svg{display:block}
               <img class="media" src="assets/retain/spice.webp" alt="Spice Station, a Navratri post" width="270" height="180" decoding="async">
               <div class="txt">
                 <p>Reach you rent stops the day you stop paying; this is the part you keep. The feed held week after week and the design system under it, with social creatives, stories and posts for eleven brands in the directory.</p>
-                <p class="meta">In <span data-count="social">32</span> of <span data-total>35</span> records<br><a href="#work" data-filter="social">See them &darr;</a> &middot; <a href="retain.html" target="_blank" rel="noopener">The studio directory &nearr;</a></p>
+                <p class="meta">In <span data-count="social">32</span> of <span data-total>35</span> records<br><a href="retain.html" target="_blank" rel="noopener">The studio directory &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -436,7 +346,7 @@ svg{display:block}
               <img class="media" src="assets/retain/prod/nycpie.webp" alt="NYC Pie, shot for the menu" width="270" height="180" decoding="async">
               <div class="txt">
                 <p>A shoot is a channel we own, not a service sold apart from it. Menus, ranges, rooms and people: sixteen shoots across food and hospitality, run here, not bought in.</p>
-                <p class="meta">In <span data-count="production">17</span> of <span data-total>35</span> records<br><a href="#work" data-filter="production">See them &darr;</a> &middot; <a href="production.html" target="_blank" rel="noopener">The shoots &nearr;</a></p>
+                <p class="meta">In <span data-count="production">17</span> of <span data-total>35</span> records<br><a href="production.html" target="_blank" rel="noopener">The shoots &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -449,7 +359,7 @@ svg{display:block}
               <img class="media" src="assets/covers/sneakerfest.jpg" alt="The Great Indian Sneaker Festival" width="270" height="180" decoding="async">
               <div class="txt">
                 <p>A festival&rsquo;s product is the room. Launch parties, festival activations, venue takeovers, anniversaries: our job on the night is to make sure the right forty people are standing in it, and that what they saw survives the next morning.</p>
-                <p class="meta">In <span data-count="events">17</span> of <span data-total>35</span> records<br><a href="#work" data-filter="events">See them &darr;</a> &middot; <a href="events.html" target="_blank" rel="noopener">The night floor &nearr;</a></p>
+                <p class="meta">In <span data-count="events">17</span> of <span data-total>35</span> records<br><a href="events.html" target="_blank" rel="noopener">The night floor &nearr;</a></p>
               </div>
             </div>
           </div>
@@ -457,154 +367,6 @@ svg{display:block}
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-<section class="screen prob io" id="name" data-prob="01" data-uses="branding pr" style="--room:#5278C2">
-  <div class="body">
-    <p class="pn rise">Problem 01 <i></i></p>
-    <h2 class="plead" aria-label="Nobody knows what we are yet">
-      <span class="wipe"><span style="--d:.06s">&ldquo;Nobody knows</span></span>
-      <span class="wipe"><span style="--d:.14s">what we are yet&rdquo;</span></span>
-    </h2>
-    <p class="psay rise" style="--d:.28s">You have a business and no language for it. We build the name, the position, the mark and the system that has to survive a feed it was never designed for.</p>
-    <div class="fig rise" style="--d:.4s">
-      <span class="n">3 awards in a year</span><span class="w">Yum Yum Cha Group · Times Food Awards &amp; UNLIMIT 2023</span>
-    </div>
-      <a class="door rise" style="--d:.5s" href="identity.html" target="_blank" rel="noopener">The identity work <span class="t">Nine pieces &nearr;</span></a>
-  </div>
-</section>
-
-<section class="screen prob io" id="open" data-prob="02" data-uses="branding pr events production" style="--room:#0039A6">
-  <div class="body">
-    <p class="pn rise">Problem 02 <i></i></p>
-    <h2 class="plead" aria-label="We open in six weeks">
-      <span class="wipe"><span style="--d:.06s">&ldquo;We open</span></span>
-      <span class="wipe"><span style="--d:.14s">in six weeks&rdquo;</span></span>
-    </h2>
-    <p class="psay rise" style="--d:.28s">A launch that gets written about is not a stunt. It is an identity worth writing about, put in front of the right room on the right night.</p>
-    <div class="fig rise" style="--d:.4s">
-      <span class="n">0 paid placements</span><span class="w">Andrea&rsquo;s Eatery · discovered through creators, not advertising</span>
-    </div>
-      <a class="door rise" style="--d:.5s" href="index.html#case-andreas">Read the launch <span class="t">Andrea&rsquo;s Eatery &nearr;</span></a>
-  </div>
-</section>
-
-<section class="screen prob io" id="talk" data-prob="03" data-uses="creators pr social events" style="--room:#00933C">
-  <div class="body">
-    <p class="pn rise">Problem 03 <i></i></p>
-    <h2 class="plead" aria-label="Nobodys talking about us">
-      <span class="wipe"><span style="--d:.06s">&ldquo;Nobody&rsquo;s talking</span></span>
-      <span class="wipe"><span style="--d:.14s">about us&rdquo;</span></span>
-    </h2>
-    <p class="psay rise" style="--d:.28s">One voice per audience class, never five from the same shelf, inside a window tight enough that the city reads it as an arrival rather than a schedule. Events live here too &mdash; every night we have run was a creator night.</p>
-    <div class="fig rise" style="--d:.4s">
-      <span class="n">6.9M reach, zero paid</span><span class="w">Slay Coffee · 58 creators, 22 verified</span>
-    </div>
-      <a class="door rise" style="--d:.5s" href="amplify.html" target="_blank" rel="noopener">The creator floor <span class="t">30 records &nearr;</span></a>
-  </div>
-</section>
-
-<section class="screen prob io" id="money" data-prob="04" data-uses="paid social" style="--room:#FCCC0A">
-  <div class="body">
-    <p class="pn rise">Problem 04 <i></i></p>
-    <h2 class="plead" aria-label="Attention isnt turning into money">
-      <span class="wipe"><span style="--d:.06s">&ldquo;Attention isn&rsquo;t</span></span>
-      <span class="wipe"><span style="--d:.14s">turning into money&rdquo;</span></span>
-    </h2>
-    <p class="psay rise" style="--d:.28s">Noise that never converts is a hobby. Paid media and search, tuned until they pay back. Four cases in the archive touch this and none of them lead with it &mdash; it is the youngest thing we do, and we would rather say so.</p>
-    <div class="fig rise none" style="--d:.4s">
-      <span class="n">4 of 35 cases</span><span class="w">the honest size of this practice today</span>
-    </div>
-      <span class="door dead rise" style="--d:.5s">No room to open <span class="t">until there is a case</span></span>
-  </div>
-</section>
-
-<section class="screen prob io" id="last" data-prob="05" data-uses="social production creators" style="--room:#FF6319">
-  <div class="body">
-    <p class="pn rise">Problem 05 <i></i></p>
-    <h2 class="plead" aria-label="Were only as good as last month">
-      <span class="wipe"><span style="--d:.06s">&ldquo;We&rsquo;re only as good</span></span>
-      <span class="wipe"><span style="--d:.14s">as last month&rdquo;</span></span>
-    </h2>
-    <p class="psay rise" style="--d:.28s">Reach you rent stops the day you stop paying. The feed held week after week, the design system under it, and the shoots &mdash; because a shoot is a channel we own, not a service sold apart from it.</p>
-    <div class="fig rise" style="--d:.4s">
-      <span class="n">23.7M Reels views, +156%</span><span class="w">Ishant Sharma · on nearly flat publishing</span>
-    </div>
-      <a class="door rise" style="--d:.5s" href="retain.html" target="_blank" rel="noopener">The studio directory <span class="t">Social, cases, shoots &nearr;</span></a>
-  </div>
-</section>
-
-<section class="screen io" id="work">
-  <div class="body">
-    <h2 class="wipe"><span>The work, by instrument</span></h2>
-    <p class="lede rise" style="--d:.12s">Thirty-five records, tagged by what each one actually did rather than which stage it was filed under. Every one of them uses more than one instrument &mdash; which is the whole argument. Filter by any chip.</p>
-    <div class="filters rise" style="--d:.2s" id="filters">
-      <button class="f" type="button" data-f="all" aria-pressed="true">All</button>
-    </div>
-    <p class="count" id="count"></p>
-    <div class="grid" id="grid">
-      <a class="card" href="index.html#case-andreas" data-disc="creators paid pr production social" data-sector="Hospitality"><span class="cn">Andrea's Eatery</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Paid &amp; Search &middot; PR &amp; Media</span></a>
-      <a class="card" href="index.html#case-borges" data-disc="creators events paid pr production social" data-sector="F&B"><span class="cn">Borges India</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; Paid &amp; Search</span></a>
-      <a class="card" href="index.html#case-daryaganj" data-disc="creators events production social" data-sector="F&B"><span class="cn">Daryaganj</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
-      <a class="card" href="index.html#case-farzi-cafe" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Farzi Cafe</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
-      <a class="card" href="index.html#case-flaunt" data-disc="branding creators events social" data-sector="Hospitality"><span class="cn">Flaunt by Duty Free</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-hard-rock" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">Hard Rock Cafe</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-ishant" data-disc="branding creators paid pr production social" data-sector="Talent"><span class="cn">Ishant Sharma</span><span class="cs">Talent &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Paid &amp; Search</span></a>
-      <a class="card" href="index.html#case-khubani" data-disc="creators events pr social" data-sector="F&B"><span class="cn">Khubani</span><span class="cs">F&B &middot; full case</span><span class="ct">Creators &middot; Events &middot; PR &amp; Media</span></a>
-      <a class="card" href="index.html#case-one8-commune" data-disc="branding creators events pr production social" data-sector="Hospitality"><span class="cn">One8 Commune</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-rooh" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">Rooh</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-sky-lantern" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Sky Lantern</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
-      <a class="card" href="index.html#case-tablespoon" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Tablespoon (TBSP)</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-the-weekend" data-disc="branding creators events production social" data-sector="Hospitality"><span class="cn">The Weekend</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-tickled-pink" data-disc="creators events production social" data-sector="Hospitality"><span class="cn">Tickled Pink</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
-      <a class="card" href="index.html#case-yyc-group" data-disc="branding creators events pr social" data-sector="Hospitality"><span class="cn">Yum Yum Cha Group</span><span class="cs">Hospitality &middot; full case</span><span class="ct">Branding &middot; Creators &middot; Events</span></a>
-      <a class="card" href="index.html#case-arista-vault" data-disc="branding social" data-sector="D2C"><span class="cn">Arista Vault</span><span class="cs">D2C</span><span class="ct">Branding &middot; Social</span></a>
-      <a class="card" href="index.html#case-bayroute" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Bayroute</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-dejabrew" data-disc="creators social" data-sector="Hospitality"><span class="cn">Deja Brew</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-fast-up" data-disc="creators events pr social" data-sector="Lifestyle"><span class="cn">Fast & Up</span><span class="cs">Lifestyle</span><span class="ct">Creators &middot; Events &middot; PR &amp; Media</span></a>
-      <a class="card" href="index.html#case-happy-dent" data-disc="creators pr production social" data-sector="F&B"><span class="cn">Happydent · Sparkling Smile</span><span class="cs">F&B</span><span class="ct">Creators &middot; PR &amp; Media &middot; Production</span></a>
-      <a class="card" href="index.html#case-limitless" data-disc="creators events paid production social" data-sector="Hospitality"><span class="cn">Limitless</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Events &middot; Paid &amp; Search</span></a>
-      <a class="card" href="index.html#case-local" data-disc="creators production" data-sector="Hospitality"><span class="cn">Local</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production</span></a>
-      <a class="card" href="index.html#case-meta-creator" data-disc="creators production social" data-sector="Platform"><span class="cn">Meta Creator Enablement Programme</span><span class="cs">Platform</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
-      <a class="card" href="index.html#case-monet" data-disc="creators pr" data-sector="Hospitality"><span class="cn">Monet</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; PR &amp; Media</span></a>
-      <a class="card" href="index.html#case-nao" data-disc="creators social" data-sector="Hospitality"><span class="cn">Nao by Berco’s</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-ophelia" data-disc="creators events production social" data-sector="F&B"><span class="cn">Ophelia</span><span class="cs">F&B</span><span class="ct">Creators &middot; Events &middot; Production</span></a>
-      <a class="card" href="index.html#case-poetry" data-disc="creators social" data-sector="Hospitality"><span class="cn">Poetry</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-punjab-grill" data-disc="creators events social" data-sector="Hospitality"><span class="cn">Punjab Grill</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
-      <a class="card" href="index.html#case-rizq" data-disc="branding creators" data-sector="Hospitality"><span class="cn">RIZQ</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators</span></a>
-      <a class="card" href="index.html#case-slay-coffee" data-disc="branding creators social" data-sector="F&B"><span class="cn">Slay Coffee</span><span class="cs">F&B</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-slique" data-disc="branding creators social" data-sector="Hospitality"><span class="cn">Slique</span><span class="cs">Hospitality</span><span class="ct">Branding &middot; Creators &middot; Social</span></a>
-      <a class="card" href="index.html#case-tgisf" data-disc="creators events social" data-sector="Lifestyle"><span class="cn">The Great Indian Sneaker Fest</span><span class="cs">Lifestyle</span><span class="ct">Creators &middot; Events &middot; Social</span></a>
-      <a class="card" href="index.html#case-unacademy" data-disc="creators production social" data-sector="Talent"><span class="cn">Unacademy</span><span class="cs">Talent</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
-      <a class="card" href="index.html#case-roseate" data-disc="creators production social" data-sector="Hospitality"><span class="cn">iSKATE by Roseate</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
-      <a class="card" href="index.html#case-iskate" data-disc="creators production social" data-sector="Hospitality"><span class="cn">iSKATE by Roseate</span><span class="cs">Hospitality</span><span class="ct">Creators &middot; Production &middot; Social</span></a>
-    </div>
-  </div>
-</section>
-
-<section class="screen io" id="ask">
-  <div class="body">
-    <h2 aria-label="Tell us what you're building.">
-      <span class="wipe"><span style="--d:.06s">Tell us what</span></span>
-      <span class="wipe"><span style="--d:.14s">you&rsquo;re building<i>.</i></span></span>
-    </h2>
-    <p class="p rise" style="--d:.3s">One line from you. One usable idea back, deck-free. If it&rsquo;s worth a second conversation, we&rsquo;ll both know.</p>
-    <div class="pills rise" style="--d:.4s">
-      <a class="key" href="index.html#contact">Send the brief &nearr;</a>
-      <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp instead</a>
-      <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">@98.entertainment</a>
-    </div>
-    <p class="ends rise" style="--d:.5s">
-      <a href="index.html">Home</a><a href="talent.html">Talent &amp; Branding</a>
-      <a href="identity.html" target="_blank" rel="noopener">Identity</a>
-      <a href="amplify.html" target="_blank" rel="noopener">Creators</a>
-      <a href="retain.html" target="_blank" rel="noopener">Studio</a>
-      <a href="events.html" target="_blank" rel="noopener">Events</a>
-      <a href="blog/index.html">Journal</a><a href="index.html#archive">The archive</a>
-      <a href="mailto:contact@ninety-eight.in">contact@ninety-eight.in</a>
-    </p>
   </div>
 </section>
 
@@ -970,30 +732,24 @@ svg{display:block}
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
   var FACETS = {"ishant": ["branding", "creators", "paid", "pr", "production", "social"], "borges": ["creators", "events", "paid", "pr", "production", "social"], "slay-coffee": ["branding", "creators", "social"], "rooh": ["branding", "creators", "events", "production", "social"], "limitless": ["creators", "events", "paid", "production", "social"], "arista-vault": ["branding", "social"], "yyc-group": ["branding", "creators", "events", "pr", "social"], "andreas": ["creators", "paid", "pr", "production", "social"], "daryaganj": ["creators", "events", "production", "social"], "tickled-pink": ["creators", "events", "production", "social"], "ophelia": ["creators", "events", "production", "social"], "khubani": ["creators", "events", "pr", "social"], "hard-rock": ["branding", "creators", "events", "production", "social"], "roseate": ["creators", "production", "social"], "fast-up": ["creators", "events", "pr", "social"], "unacademy": ["creators", "production", "social"], "meta-creator": ["creators", "production", "social"], "happy-dent": ["creators", "pr", "production", "social"], "tgisf": ["creators", "events", "social"], "punjab-grill": ["creators", "events", "social"], "bayroute": ["branding", "creators", "social"], "dejabrew": ["creators", "social"], "rizq": ["branding", "creators"], "poetry": ["creators", "social"], "nao": ["creators", "social"], "local": ["creators", "production"], "monet": ["creators", "pr"], "slique": ["branding", "creators", "social"], "farzi-cafe": ["creators", "events", "social"], "flaunt": ["branding", "creators", "events", "social"], "iskate": ["creators", "production", "social"], "sky-lantern": ["creators", "events", "social"], "tablespoon": ["branding", "creators", "social"], "the-weekend": ["branding", "creators", "events", "production", "social"], "one8-commune": ["branding", "creators", "events", "pr", "production", "social"]};
-  var PROBS  = [{"id": "name", "uses": ["branding", "pr"], "lead": "branding", "label": "Nobody knows what we are yet"}, {"id": "open", "uses": ["branding", "pr", "events", "production"], "lead": "pr", "label": "We open in six weeks"}, {"id": "talk", "uses": ["creators", "pr", "social", "events"], "lead": "creators", "label": "Nobody\u2019s talking about us"}, {"id": "money", "uses": ["paid", "social"], "lead": "paid", "label": "Attention isn\u2019t turning into money"}, {"id": "last", "uses": ["social", "production", "creators"], "lead": "social", "label": "We\u2019re only as good as last month"}];
   /* v3.46: with the chip bar gone the seven are named here, and their colours are read from the .c-*
      classes, the one place they are set. (Read off the chips they came back grey: .chip's own
      --chip:var(--dim) was declared after the .c-* rules and won, so the ground had been grey too.) */
   var INSTR  = [['branding','Branding'],['pr','PR & Media'],['creators','Creators'],['paid','Paid & Search'],
                 ['social','Social'],['production','Production'],['events','Events']];
-  var CHIPC  = {}, LABEL = {};
+  var CHIPC  = {};
   INSTR.forEach(function(p){
     var probe = document.createElement('i');
     probe.className = 'c-' + p[0]; probe.hidden = true;
     document.body.appendChild(probe);
     CHIPC[p[0]] = getComputedStyle(probe).getPropertyValue('--chip').trim() || '#5278C2';
-    LABEL[p[0]] = p[1];
     probe.remove();
   });
 
-  /* ---- the ground, blooming the lead instrument of the current problem ---- */
-  /* v3.46: the seven panels (#seven) are the second screen, and their ground follows whichever panel is
-     open, so the seven colours ride at the end of the list, from LEAD0 on */
+  /* ---- the ground, blooming the open panel's colour ---- */
+  /* v3.47: #seven is the page's one screen, so the ground's list is the seven colours, in panel order */
   var SEVEN = INSTR.map(function(p){ return p[0]; });
-  var order = ['#5278C2'].concat(document.getElementById('seven') ? ['#5278C2'] : [])
-    .concat(PROBS.map(function(p){ return CHIPC[p.lead] || '#5278C2'; })).concat(['#5278C2','#EE352E']);
-  var LEAD0 = order.length;
-  order = order.concat(SEVEN.map(function(k){ return CHIPC[k] || '#5278C2'; }));
+  var order = SEVEN.map(function(k){ return CHIPC[k] || '#5278C2'; });
   function grade(hex){                       /* atmosphere is graded; marks are not */
     var n = parseInt(hex.slice(1), 16);
     return '#' + [16,8,0].map(function(s){
@@ -1007,13 +763,9 @@ svg{display:block}
 
   function setScreen(el, force){
     var idx = screens.indexOf(el); if (idx === cur && !force) return; cur = idx;
-    var pi = PROBS.findIndex(function(p){ return p.id === el.id; });
-    var lead = pi > -1 ? PROBS[pi].lead : (el.dataset.lead || null);   /* the seven panels name their own */
-
-    var c = lead ? CHIPC[lead] : '#5278C2';
-    document.documentElement.style.setProperty('--room', c);
-    var k7 = pi < 0 && el.dataset.lead ? SEVEN.indexOf(el.dataset.lead) : -1;
-    if (window.Field98 && Field98.ok) Field98.to(k7 > -1 ? LEAD0 + k7 : idx);
+    var lead = el.dataset.lead || 'branding';                /* the open panel's instrument */
+    document.documentElement.style.setProperty('--room', CHIPC[lead] || '#5278C2');
+    if (window.Field98 && Field98.ok) Field98.to(Math.max(0, SEVEN.indexOf(lead)));
   }
   /* v3.46: the seven panels call this when one opens, so the ground follows at once */
   window.Spine98 = { repaint: function(){ if (cur > -1) setScreen(screens[cur], true); } };
@@ -1032,42 +784,7 @@ svg{display:block}
   }
   setScreen(screens[0]);
 
-  /* ---- a panel's 'See them' is a filter: it applies it and jumps to the work (the chips used to) ---- */
-  document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('[data-filter]'); if (!a) return;
-    e.preventDefault();
-    applyFilter(a.dataset.filter);
-    document.getElementById('work').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
-  });
-
-  var fbox = document.getElementById('filters'), grid = document.getElementById('grid'),
-      countEl = document.getElementById('count'), cards = [].slice.call(grid.children);
-  Object.keys(CHIPC).forEach(function(k){
-    var b = document.createElement('button');
-    b.className = 'f'; b.type = 'button'; b.dataset.f = k;
-    b.textContent = LABEL[k];
-    b.setAttribute('aria-pressed', 'false');
-    fbox.appendChild(b);
-  });
-  function applyFilter(key){
-    var n = 0;
-    cards.forEach(function(card){
-      var ok = key === 'all' || (card.dataset.disc || '').split(' ').indexOf(key) > -1;
-      card.hidden = !ok; if (ok) n++;
-    });
-    fbox.querySelectorAll('.f').forEach(function(b){
-      b.setAttribute('aria-pressed', b.dataset.f === key ? 'true' : 'false');
-    });
-    countEl.textContent = key === 'all'
-      ? n + ' records · every one uses more than one instrument'
-      : n + ' of ' + cards.length + ' records use ' + (LABEL[key] || key);
-  }
-  fbox.addEventListener('click', function(e){
-    var b = e.target.closest('.f'); if (b) applyFilter(b.dataset.f);
-  });
-  applyFilter('all');
-
-  /* v3.46: the seven panels' counts, recounted from the FACETS the grid filters on */
+  /* v3.46: the seven panels' counts, recounted from FACETS at load */
   [].forEach.call(document.querySelectorAll('[data-count]'), function(el){
     var k = el.dataset.count;
     el.textContent = Object.keys(FACETS).filter(function(s){ return FACETS[s].indexOf(k) > -1; }).length;
