@@ -6,7 +6,7 @@
 <title>Marketing — Ninety-Eight</title>
 <meta name="description" content="Five problems founders arrive with, and the seven instruments we use on them — branding, PR, creators, paid, social, production, events. 35 records across 70+ brands.">
 <meta property="og:title" content="Marketing — Ninety-Eight">
-<meta property="og:description" content="Whatever you arrived with, the instruments are the same seven. Here is which ones your problem uses.">
+<meta property="og:description" content="Whatever you arrived with, the instruments are the same seven. Here they are, one by one.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,13 +50,18 @@
    The ground is assets/field.js, unchanged, blooming the lead instrument's
    colour. Crossfade slowed from 4s to 7s — "it's changing themes way faster
    than it should", same call.
+
+   v3.46, same day: the spine's two fixtures are gone at Harsh's call, the
+   chip bar and the rail of numbers. The seven now present themselves once,
+   as panels straight after the hero (effect 109, #seven); the problems keep
+   their skeleton, and the ground still takes each one's lead colour.
    ========================================================================= */
 :root{
   --bg:#0B0B0C; --ink:#F4F4F2; --dim:#8E8E88; --faint:#6E6E68;
   --line:rgba(244,244,242,.14); --hair:rgba(244,244,242,.07);
   --red:#EE352E; --pad:clamp(1.25rem,5vw,5rem);
   --ease:cubic-bezier(.16,1,.3,1);
-  --rail:clamp(0px,13vw,190px);
+  --rail:0px;   /* v3.46: the rail is gone, and so is the column it reserved */
   --room:#5278C2;
 }
 .c-branding{--chip:#5278C2}
@@ -86,46 +91,6 @@ svg{display:block}
 .tonav{position:absolute;top:1.3rem;right:var(--pad);display:flex;gap:1.1rem}
 .tonav a:hover{color:var(--ink)}
 
-/* THE RAIL — five problems, always there, filling as you go */
-.rail{position:absolute;left:var(--pad);top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:1.05rem;max-width:var(--rail)}
-.rail button{display:grid;grid-template-columns:22px 1fr;gap:.6rem;align-items:start;text-align:left;
-  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--faint);transition:color .5s var(--ease)}
-.rail button b{font-weight:400;color:var(--faint);transition:color .5s var(--ease)}
-.rail button span{line-height:1.35;opacity:0;max-height:0;overflow:hidden;
-  transition:opacity .5s var(--ease),max-height .5s var(--ease)}
-.rail button[aria-current="true"]{color:var(--ink)}
-.rail button[aria-current="true"] b{color:var(--room)}
-.rail button[aria-current="true"] span{opacity:1;max-height:4rem}
-.rail button:hover{color:var(--ink)}
-.railbar{position:absolute;left:calc(var(--pad) - 14px);top:50%;transform:translateY(-50%);
-  width:1px;height:clamp(150px,32vh,260px);background:var(--hair)}
-.railbar i{position:absolute;left:0;top:0;width:1px;height:0;background:var(--room);
-  transition:height .6s var(--ease),background 1.4s var(--ease)}
-@media(max-width:900px){ .rail,.railbar{display:none} }
-
-/* THE CHIPS — seven instruments, fixed, never move, only re-light */
-.chips{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;justify-content:center;
-  gap:.4rem;padding:.9rem var(--pad) 1.1rem;
-  background:linear-gradient(0deg,rgba(11,11,12,.92),rgba(11,11,12,.55) 60%,transparent);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.chip{--chip:var(--dim);display:inline-flex;align-items:center;gap:.45rem;
-  border:1px solid var(--hair);border-radius:999px;padding:.42rem .8rem;
-  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--faint);transition:color .6s var(--ease),border-color .6s var(--ease),background .6s var(--ease)}
-.chip i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.45;
-  transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.chip.lit{color:var(--chip);border-color:color-mix(in srgb,var(--chip) 45%,transparent)}
-.chip.lit i{opacity:1}
-.chip.lead{background:color-mix(in srgb,var(--chip) 14%,transparent);color:#fff;
-  border-color:color-mix(in srgb,var(--chip) 75%,transparent)}
-.chip.lead i{transform:scale(1.5);background:var(--chip);opacity:1}
-.chip:hover{color:var(--ink);border-color:var(--line)}
-@supports not (color:color-mix(in srgb,red 50%,transparent)){
-  .chip.lit{border-color:var(--line)} .chip.lead{background:rgba(244,244,242,.08);color:#fff}
-}
-@media(max-width:620px){ .chips{gap:.3rem;padding:.6rem .6rem .75rem} .chip{padding:.34rem .6rem;font-size:.52rem} }
 
 /* ---------- screens ---------- */
 .screen{position:relative;min-height:100svh;display:flex;align-items:center;
@@ -187,7 +152,6 @@ svg{display:block}
 }
 
 /* ---------- the work, filtered by the same seven chips ---------- */
-#work{padding-bottom:13rem}   /* the chip bar is fixed; the grid must clear it */
 #work h2{font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.03em;
   font-size:clamp(1.7rem,4vw,3.2rem);line-height:.95}
 #work .lede{margin-top:1rem;max-width:52ch;color:#BFBFB9}
@@ -264,12 +228,69 @@ svg{display:block}
 .w104-cue i{display:block;width:1px;height:34px;background:var(--line);position:relative;overflow:hidden}
 .w104-cue i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:w104drip 1.8s var(--ease) infinite}
 @keyframes w104drip{to{top:100%}}
-/* The one change to the chrome: the rail steps out while the line crosses the screen — the train is
-   full-bleed and would otherwise run under the rail's five numbers — and fades back in as the pin
-   releases onto the hero. Keyboard focus inside it still shows it. */
-.rail,.railbar{transition:opacity .7s var(--ease)}
-html.w104-live .rail,html.w104-live .railbar{opacity:0;pointer-events:none}
-html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
+/* =========================================================================
+   THE SEVEN — effect 109, the instruments as panels (v3.46, Sep 10 2026)
+
+   Straight after the hero, the seven instruments the page is built on, each
+   a panel in its own colour (the .c-* subway colours): one open (the name, a
+   picture from its room, a paragraph in that room's own words, how many of
+   the 35 records use it, its doors), the other six standing as pills with
+   the name turned up the side. The ground blooms the open panel's colour.
+   The spine's chip bar and rail of numbers went in the same change, at
+   Harsh's call, so this is now the one place the seven are named.
+
+   The zip's accordion was built for four. Sized here for seven: pills 56px
+   (the zip's 88 would leave the open panel no room), the open width is what
+   the column has left (never more than the zip's 736), and when that falls
+   under 560px the panels stack, which is the zip's own small-screen form.
+
+   CSS ships the READABLE state, a plain grid of seven open cards; the script
+   adds .fx and takes over. No GSAP or reduced motion keeps the grid.
+   ========================================================================= */
+.s109-kick{font-weight:400;margin-bottom:1.1rem}
+.s109-kick span{display:none}
+#seven.fx109 .s109-kick span{display:inline}
+.mwg109{--open:660px;--t109:min(104px,calc((var(--open) - 40px) / 6.3))}   /* "Production" sets 6.09em wide in this face */
+.mwg109 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:6px}
+.mwg109 .slide{--on:#050506;position:relative;overflow:hidden;padding:20px;border-radius:20px;background:var(--chip);color:var(--on)}
+.mwg109 .slide.c-pr,.mwg109 .slide.c-production{--on:#fff}   /* the two dark chips carry white; the rest carry black (all >= 4.5:1) */
+.mwg109 .content{display:flex;flex-direction:column;justify-content:space-between;gap:1.4rem;height:100%}
+.mwg109 .title{font-weight:800;font-stretch:118%;letter-spacing:-.03em;line-height:.85;font-size:clamp(1.9rem,3vw,2.6rem);width:min-content;outline:none}
+.mwg109 .bottom{display:flex;flex-direction:column;gap:1rem}
+.mwg109 .media{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;border-radius:4px;background:rgba(0,0,0,.14)}
+.mwg109 .media.fig{display:flex;flex-direction:column;align-items:center;justify-content:center;background:none;
+  border:1px dashed var(--on);opacity:.9}
+.mwg109 .media.fig b{font-weight:800;font-stretch:118%;letter-spacing:-.04em;font-size:4.4rem;line-height:.9}
+.mwg109 .media.fig span{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;margin-top:.45rem}
+.mwg109 .txt p{font-size:.95rem;line-height:1.45;letter-spacing:-.005em}
+.mwg109 .txt .meta{margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.95}
+.mwg109 .meta a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.mwg109 .meta a:hover{text-decoration-thickness:2px}
+.mwg109 .meta .no{opacity:.62}
+.mwg109 .small-title{display:none}
+.mwg109 a:focus-visible,.mwg109 .small-title:focus-visible{outline:2px solid var(--on);outline-offset:-6px}
+
+/* the accordion */
+.mwg109.fx .container{display:flex;align-items:center;gap:6px;height:506px}
+.mwg109.fx .slide{flex:0 0 56px;height:506px}
+.mwg109.fx .slide:not(.on){cursor:pointer}
+.mwg109.fx .content{width:calc(var(--open) - 40px)}
+.mwg109.fx .title{font-size:var(--t109)}
+.mwg109.fx .bottom{flex-direction:row;align-items:flex-end;gap:28px}
+.mwg109.fx .media{width:clamp(180px,calc(var(--open) - 370px),270px);flex:0 0 auto}
+.mwg109.fx .txt{width:290px;flex:0 0 auto}
+.mwg109.fx .small-title{display:flex;justify-content:center;position:absolute;bottom:0;left:100%;width:506px;
+  padding:20px;line-height:16px;transform:rotate(-90deg);transform-origin:0 100%;
+  font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--on)}
+/* stacked, the zip's small-screen form: pills 60px tall, each panel opening to its own height */
+.mwg109.fx.stack .container{flex-direction:column;align-items:stretch;height:auto}
+.mwg109.fx.stack .slide{flex:0 0 60px;height:auto;width:100%}
+.mwg109.fx.stack .content{width:auto;height:auto}
+.mwg109.fx.stack .bottom{flex-direction:column;align-items:stretch;gap:1rem}
+.mwg109.fx.stack .media{width:100%;max-width:480px;order:2}
+.mwg109.fx.stack .title{font-size:min(var(--t109),4.5rem)}
+.mwg109.fx.stack .txt{width:auto}
+.mwg109.fx.stack .small-title{left:0;width:100%;padding:22px 20px;transform:none;justify-content:flex-start}
 </style>
 </head>
 <body>
@@ -284,18 +305,6 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
     <a href="talent.html">Talent</a><a href="blog/index.html">Journal</a><a href="index.html#contact">Contact</a>
   </nav>
 
-  <span class="railbar" aria-hidden="true"><i id="railfill"></i></span>
-  <nav class="rail" id="rail" aria-label="The five problems"></nav>
-
-  <div class="chips" id="chips" role="group" aria-label="The seven instruments">
-    <button class="chip c-branding" data-chip="branding" type="button"><i></i>Branding</button>
-    <button class="chip c-pr" data-chip="pr" type="button"><i></i>PR &amp; Media</button>
-    <button class="chip c-creators" data-chip="creators" type="button"><i></i>Creators</button>
-    <button class="chip c-paid" data-chip="paid" type="button"><i></i>Paid &amp; Search</button>
-    <button class="chip c-social" data-chip="social" type="button"><i></i>Social</button>
-    <button class="chip c-production" data-chip="production" type="button"><i></i>Production</button>
-    <button class="chip c-events" data-chip="events" type="button"><i></i>Events</button>
-  </div>
 </div>
 
 <main>
@@ -340,7 +349,114 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
       <span class="wipe"><span style="--d:.22s"><em>seven instruments.</em></span></span>
     </h1>
     <p class="say rise" style="--d:.36s">Everyone sells the stop. We build the reason to stay.</p>
-    <p class="fine rise" style="--d:.46s">Below are five problems founders actually arrive with, and which of the seven we reach for each time. The instruments never change &mdash; only which ones light up. Watch the row at the bottom.</p>
+    <p class="fine rise" style="--d:.46s">The seven are below, one panel each, and after them the five problems founders actually arrive with.</p>
+  </div>
+</section>
+
+<!-- ============ THE SEVEN — effect 109, the instruments as panels (v3.46) ============
+     One panel open, six standing as pills with their name turned up the side.
+     Each paragraph is that instrument's room talking (Paid & Search, which has
+     no room, borrows Problem 04), each picture comes from that room's assets,
+     and each count is recounted at load from the same FACETS the work grid
+     filters on, so the panels and the grid cannot disagree. -->
+<section class="screen io" id="seven" data-lead="branding" aria-labelledby="seven-h">
+  <div class="body">
+    <h2 class="mono s109-kick rise" id="seven-h">The seven instruments<span> &middot; open any of them</span></h2>
+    <div class="mwg109 rise" id="w109" style="--d:.1s">
+      <div class="container">
+        <div class="slide c-branding" data-key="branding">
+          <div class="content" id="w109-branding">
+            <h3 class="title" tabindex="-1">Branding</h3>
+            <div class="bottom">
+              <img class="media" src="assets/retain/bunta-brand.webp" alt="Bunta Bar Express, the identity" width="270" height="180" decoding="async">
+              <div class="txt">
+                <p>The name, the position, the mark, and a system that has to survive a feed it was never designed for. Not a deck that gets signed off and filed, but the thing the press cycle, the creator brief and the menu photograph all have to agree with.</p>
+                <p class="meta">In <span data-count="branding">13</span> of <span data-total>35</span> records<br><a href="#work" data-filter="branding">See them &darr;</a> &middot; <a href="identity.html" target="_blank" rel="noopener">The identity work &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-branding" aria-expanded="true">Branding</button>
+        </div>
+        <div class="slide c-pr" data-key="pr">
+          <div class="content" id="w109-pr">
+            <h3 class="title" tabindex="-1">PR&nbsp;&amp; Media</h3>
+            <div class="bottom">
+              <img class="media" src="assets/retain/one8.webp" alt="Ninety-Eight and One8 Commune, the announcement" width="270" height="180" decoding="async" style="object-position:50% 12%">
+              <div class="txt">
+                <p>The earned half of the same job: a creator makes the city talk, a journalist makes the record. Three awards in one year for one client group, and national trade press for a campaign fronted by our talent.</p>
+                <p class="meta">In <span data-count="pr">9</span> of <span data-total>35</span> records<br><a href="#work" data-filter="pr">See them &darr;</a> &middot; <a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-pr" aria-expanded="false">PR &amp; Media</button>
+        </div>
+        <div class="slide c-creators" data-key="creators">
+          <div class="content" id="w109-creators">
+            <h3 class="title" tabindex="-1">Creators</h3>
+            <div class="bottom">
+              <img class="media" src="assets/gurls/g11.webp" alt="A creator frame from the culture set" width="270" height="180" decoding="async" style="object-position:50% 35%">
+              <div class="txt">
+                <p>One verified voice per audience class, never five from the same shelf, landing inside a window tight enough that a city reads it as an arrival rather than a schedule. Reach is combined follower reach, not impressions, and we say so.</p>
+                <p class="meta">In <span data-count="creators">34</span> of <span data-total>35</span> records<br><a href="#work" data-filter="creators">See them &darr;</a> &middot; <a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-creators" aria-expanded="false">Creators</button>
+        </div>
+        <div class="slide c-paid" data-key="paid">
+          <div class="content" id="w109-paid">
+            <h3 class="title" tabindex="-1">Paid&nbsp;&amp; Search</h3>
+            <div class="bottom">
+              <div class="media fig" role="img" aria-label="4 of 35 records"><b data-count="paid">4</b><span>of <span data-total>35</span> records</span></div>
+              <div class="txt">
+                <p>Noise that never converts is a hobby. Paid media and search, tuned until they pay back. Four records touch it and none of them lead with it. It is the youngest thing we do, and we would rather say so.</p>
+                <p class="meta"><a href="#work" data-filter="paid">See them &darr;</a> &middot; <span class="no">No room of its own yet</span></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-paid" aria-expanded="false">Paid &amp; Search</button>
+        </div>
+        <div class="slide c-social" data-key="social">
+          <div class="content" id="w109-social">
+            <h3 class="title" tabindex="-1">Social</h3>
+            <div class="bottom">
+              <img class="media" src="assets/retain/spice.webp" alt="Spice Station, a Navratri post" width="270" height="180" decoding="async">
+              <div class="txt">
+                <p>Reach you rent stops the day you stop paying; this is the part you keep. The feed held week after week and the design system under it, with social creatives, stories and posts for eleven brands in the directory.</p>
+                <p class="meta">In <span data-count="social">32</span> of <span data-total>35</span> records<br><a href="#work" data-filter="social">See them &darr;</a> &middot; <a href="retain.html" target="_blank" rel="noopener">The studio directory &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-social" aria-expanded="false">Social</button>
+        </div>
+        <div class="slide c-production" data-key="production">
+          <div class="content" id="w109-production">
+            <h3 class="title" tabindex="-1">Production</h3>
+            <div class="bottom">
+              <img class="media" src="assets/retain/prod/nycpie.webp" alt="NYC Pie, shot for the menu" width="270" height="180" decoding="async">
+              <div class="txt">
+                <p>A shoot is a channel we own, not a service sold apart from it. Menus, ranges, rooms and people: sixteen shoots across food and hospitality, run here, not bought in.</p>
+                <p class="meta">In <span data-count="production">17</span> of <span data-total>35</span> records<br><a href="#work" data-filter="production">See them &darr;</a> &middot; <a href="production.html" target="_blank" rel="noopener">The shoots &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-production" aria-expanded="false">Production</button>
+        </div>
+        <div class="slide c-events" data-key="events">
+          <div class="content" id="w109-events">
+            <h3 class="title" tabindex="-1">Events</h3>
+            <div class="bottom">
+              <img class="media" src="assets/covers/sneakerfest.jpg" alt="The Great Indian Sneaker Festival" width="270" height="180" decoding="async">
+              <div class="txt">
+                <p>A festival&rsquo;s product is the room. Launch parties, festival activations, venue takeovers, anniversaries: our job on the night is to make sure the right forty people are standing in it, and that what they saw survives the next morning.</p>
+                <p class="meta">In <span data-count="events">17</span> of <span data-total>35</span> records<br><a href="#work" data-filter="events">See them &darr;</a> &middot; <a href="events.html" target="_blank" rel="noopener">The night floor &nearr;</a></p>
+              </div>
+            </div>
+          </div>
+          <button class="small-title" type="button" aria-controls="w109-events" aria-expanded="false">Events</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -518,7 +634,6 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof MorphSVGPlugin === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
   root.classList.add('fx');                    /* the stage replaces the plain line before anything measures */
-  document.documentElement.classList.add('w104-live');
 
   var pinHeight = root.querySelector('.pin-height');
   var container = root.querySelector('.container');
@@ -633,10 +748,6 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   }
   function handleWheel(e){ bumpAmplitude(e.deltaY); }
 
-  function live(p){                            /* the rail is out while the line is on screen */
-    document.documentElement.classList.toggle('w104-live', p < 1);
-  }
-
   function repace(){                            /* the zip's pace, this line's length */
     var run = REF_RUN * (svgPath.getTotalLength() + totalLength) / REF_SPAN;
     pinHeight.style.height = (100 + run).toFixed(1) + 'vh';
@@ -662,14 +773,13 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
       end: 'bottom bottom',
       pin: container,
       scrub: true,
-      onRefresh: function(self){ measureSegments(); update(); live(self.progress); },
+      onRefresh: function(){ measureSegments(); update(); },
       onUpdate: function(self){
         var scroll = self.scroll();
         if (prevScroll != null) bumpAmplitude(scroll - prevScroll);
         prevScroll = scroll;
         scrollProgress = self.progress;
         update();
-        live(self.progress);
       }
     });
 
@@ -699,19 +809,191 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   setTimeout(start, 3000);
 })();
 </script>
+<script>
+/* ---- 109: the seven instruments as panels (v3.46) ---------------------------
+   The zip's accordion and its numbers: a pill lifts 400 -> 420 on hover (0.3s
+   back.out(2)); a click closes the open panel and opens the pill (0.5s
+   back.inOut(0.9)), the old content sliding out one side while the new comes
+   in from the other and the small title rides off the same way; the bottom
+   row fades over 0.4s. Departures, all forced by fitting seven panels in the
+   page's column:
+   - pills are 56px, not 88, and the open width is whatever the column leaves
+     (never more than the zip's 736), measured and re-measured on resize;
+   - under 560px of open panel the stack takes over, the zip's own small-screen
+     form, with each panel opening to its measured height, not a fixed 536/636;
+   - the small title is a <button>, so a keyboard opens panels too, and the
+     closed panels' content is inert;
+   - opening a panel tells the page (Spine98.repaint), so the ground blooms
+     that instrument's colour.
+   The zip's MutationObserver teardown is dropped: this page never removes the
+   section (and the teardown called a `tl` that does not exist). */
+(function(){
+  var root = document.getElementById('w109'); if (!root) return;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (typeof gsap === 'undefined') return;
+  var section = document.getElementById('seven');
+  root.classList.add('fx');
+  if (section) section.classList.add('fx109');
+
+  var container = root.querySelector('.container');
+  var slides = [].slice.call(container.querySelectorAll('.slide'));
+  var contents = slides.map(function(s){ return s.querySelector('.content'); });
+  var smallTitles = slides.map(function(s){ return s.querySelector('.small-title'); });
+  var bottoms = slides.map(function(s){ return s.querySelector('.bottom'); });
+  var N = slides.length, GAP = 6, PILL = 56, MIN_OPEN = 560, EASE = 'back.inOut(0.9)';
+  var S = null, open = 0, tries = 0;
+  var canHover = matchMedia('(hover:hover)').matches;
+
+  function measure(){
+    var cw = root.clientWidth;
+    if (!cw) return false;
+    var room = cw - (N - 1) * (PILL + GAP);
+    if (room >= MIN_OPEN){
+      S = { axis:'x', stack:false, open:Math.min(736, room), closed:PILL, radius:PILL / 2,
+            hOpen:506, hClosed:400, hHover:420, stOpen:60, cRight:70 };
+      S.cLeft = -(S.open - 16); S.stBefore = -(S.open - 16);   /* the zip's -704 leaves 32px of its 88px pill; a 56px pill needs 16 to clear */
+    } else {
+      S = { axis:'y', stack:true, open:cw, closed:60, radius:30, stOpen:60, cRight:70 };
+    }
+    root.classList.toggle('stack', S.stack);
+    root.style.setProperty('--open', S.open + 'px');
+    if (S.stack){                      /* a closed panel's content must clear the pill entirely */
+      var tallest = 0;
+      contents.forEach(function(c){ tallest = Math.max(tallest, c.offsetHeight); });
+      S.cLeft = -(tallest + 40); S.stBefore = -(tallest + 80);
+    }
+    return true;
+  }
+
+  function panelHeight(i){ return Math.ceil(contents[i].offsetHeight) + 40; }
+
+  function a11y(){
+    slides.forEach(function(s, i){
+      var on = i === open;
+      s.classList.toggle('on', on);
+      smallTitles[i].setAttribute('aria-expanded', on ? 'true' : 'false');
+      if (on){ smallTitles[i].setAttribute('inert', ''); contents[i].removeAttribute('inert'); }
+      else { smallTitles[i].removeAttribute('inert'); contents[i].setAttribute('inert', ''); }
+    });
+  }
+
+  function apply(){                    /* lay the current state down, no motion */
+    var all = slides.concat(contents, smallTitles, bottoms);
+    gsap.killTweensOf(all);
+    gsap.set(all, { clearProps:'all' });
+    slides.forEach(function(s, i){
+      var on = i === open;
+      if (S.axis === 'x'){
+        gsap.set(s, { flex:'0 0 ' + (on ? S.open : S.closed) + 'px', height:on ? S.hOpen : S.hClosed, borderRadius:on ? 20 : S.radius });
+        gsap.set(smallTitles[i], { x:on ? S.stOpen : 0, width:on ? S.hOpen : S.hClosed });
+        gsap.set(contents[i], { x:on ? 0 : S.cLeft });
+      } else {
+        gsap.set(s, { flex:'0 0 ' + (on ? panelHeight(i) : S.closed) + 'px', borderRadius:on ? 20 : S.radius });
+        gsap.set(smallTitles[i], { y:on ? S.stOpen : 0 });
+        gsap.set(contents[i], { y:on ? 0 : S.cLeft });
+      }
+      gsap.set(bottoms[i], { autoAlpha:on ? 1 : 0 });
+    });
+    a11y();
+  }
+
+  function openPanel(index){
+    if (index === open) return;
+    var isBefore = index < open, prev = open, A = S.axis, v;
+    open = index;
+
+    /* everything closes */
+    if (A === 'x'){
+      gsap.to(slides, { flex:'0 0 ' + S.closed + 'px', height:S.hClosed, borderRadius:S.radius, duration:.5, ease:EASE });
+      gsap.to(smallTitles, { x:0, width:S.hClosed, duration:.5, ease:EASE });
+    } else {
+      gsap.to(slides, { flex:'0 0 ' + S.closed + 'px', borderRadius:S.radius, duration:.5, ease:EASE });
+      gsap.to(smallTitles, { y:0, duration:.5, ease:EASE });
+    }
+    v = { duration:.5, ease:EASE }; v[A] = isBefore ? S.cLeft : S.cRight;
+    gsap.to(contents[prev], v);
+    gsap.to(bottoms, { autoAlpha:0, duration:.4, ease:'power1.inOut' });
+
+    /* ...and the chosen one opens */
+    var item = slides[index];
+    if (A === 'x') gsap.to(item, { flex:'0 0 ' + S.open + 'px', height:S.hOpen, borderRadius:20, duration:.5, ease:EASE });
+    else gsap.to(item, { flex:'0 0 ' + panelHeight(index) + 'px', borderRadius:20, duration:.5, ease:EASE });
+    var from = {}; from[A] = isBefore ? S.cRight : S.cLeft;
+    v = { duration:.5, ease:EASE }; v[A] = 0;
+    gsap.fromTo(contents[index], from, v);
+    v = { duration:.5, ease:EASE }; v[A] = isBefore ? S.stBefore : S.stOpen;
+    if (A === 'x') v.width = S.hOpen;
+    gsap.to(smallTitles[index], v);
+    gsap.to(bottoms[index], { autoAlpha:1, delay:A === 'y' ? .4 : 0, duration:.4, ease:'power1.inOut' });
+
+    a11y();
+    if (section){
+      section.dataset.lead = item.dataset.key;
+      if (window.Spine98) Spine98.repaint();
+    }
+  }
+
+  function lift(i, h){
+    if (!S || S.axis !== 'x' || i === open) return;
+    gsap.to(slides[i], { height:h, duration:.3, ease:'back.out(2)' });
+    gsap.to(smallTitles[i], { width:h, duration:.3, ease:'back.out(2)' });
+  }
+
+  slides.forEach(function(s, i){
+    if (canHover){
+      s.addEventListener('mouseenter', function(){ lift(i, S && S.hHover); });
+      s.addEventListener('mouseleave', function(){ lift(i, S && S.hClosed); });
+    }
+    s.addEventListener('click', function(e){
+      if (!S || i === open) return;                  /* links in the open panel behave as links */
+      var byKeyboard = e.detail === 0;
+      openPanel(i);
+      if (byKeyboard) contents[i].querySelector('.title').focus({ preventScroll:true });
+    });
+  });
+
+  function init(){
+    if (!measure()){ if (tries++ < 40) setTimeout(init, 250); return; }   /* v3.36's guard: wait for a real width */
+    apply();
+  }
+  var rt = 0;
+  addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ if (measure()) apply(); }, 150);
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (S && measure()) apply(); });
+  init();
+})();
+</script>
 <script src="assets/field.js"></script>
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
   var FACETS = {"ishant": ["branding", "creators", "paid", "pr", "production", "social"], "borges": ["creators", "events", "paid", "pr", "production", "social"], "slay-coffee": ["branding", "creators", "social"], "rooh": ["branding", "creators", "events", "production", "social"], "limitless": ["creators", "events", "paid", "production", "social"], "arista-vault": ["branding", "social"], "yyc-group": ["branding", "creators", "events", "pr", "social"], "andreas": ["creators", "paid", "pr", "production", "social"], "daryaganj": ["creators", "events", "production", "social"], "tickled-pink": ["creators", "events", "production", "social"], "ophelia": ["creators", "events", "production", "social"], "khubani": ["creators", "events", "pr", "social"], "hard-rock": ["branding", "creators", "events", "production", "social"], "roseate": ["creators", "production", "social"], "fast-up": ["creators", "events", "pr", "social"], "unacademy": ["creators", "production", "social"], "meta-creator": ["creators", "production", "social"], "happy-dent": ["creators", "pr", "production", "social"], "tgisf": ["creators", "events", "social"], "punjab-grill": ["creators", "events", "social"], "bayroute": ["branding", "creators", "social"], "dejabrew": ["creators", "social"], "rizq": ["branding", "creators"], "poetry": ["creators", "social"], "nao": ["creators", "social"], "local": ["creators", "production"], "monet": ["creators", "pr"], "slique": ["branding", "creators", "social"], "farzi-cafe": ["creators", "events", "social"], "flaunt": ["branding", "creators", "events", "social"], "iskate": ["creators", "production", "social"], "sky-lantern": ["creators", "events", "social"], "tablespoon": ["branding", "creators", "social"], "the-weekend": ["branding", "creators", "events", "production", "social"], "one8-commune": ["branding", "creators", "events", "pr", "production", "social"]};
   var PROBS  = [{"id": "name", "uses": ["branding", "pr"], "lead": "branding", "label": "Nobody knows what we are yet"}, {"id": "open", "uses": ["branding", "pr", "events", "production"], "lead": "pr", "label": "We open in six weeks"}, {"id": "talk", "uses": ["creators", "pr", "social", "events"], "lead": "creators", "label": "Nobody\u2019s talking about us"}, {"id": "money", "uses": ["paid", "social"], "lead": "paid", "label": "Attention isn\u2019t turning into money"}, {"id": "last", "uses": ["social", "production", "creators"], "lead": "social", "label": "We\u2019re only as good as last month"}];
-  var CHIPC  = {};
-  [].forEach.call(document.querySelectorAll('.chip'), function(c){
-    CHIPC[c.dataset.chip] = getComputedStyle(c).getPropertyValue('--chip').trim();
+  /* v3.46: with the chip bar gone the seven are named here, and their colours are read from the .c-*
+     classes, the one place they are set. (Read off the chips they came back grey: .chip's own
+     --chip:var(--dim) was declared after the .c-* rules and won, so the ground had been grey too.) */
+  var INSTR  = [['branding','Branding'],['pr','PR & Media'],['creators','Creators'],['paid','Paid & Search'],
+                ['social','Social'],['production','Production'],['events','Events']];
+  var CHIPC  = {}, LABEL = {};
+  INSTR.forEach(function(p){
+    var probe = document.createElement('i');
+    probe.className = 'c-' + p[0]; probe.hidden = true;
+    document.body.appendChild(probe);
+    CHIPC[p[0]] = getComputedStyle(probe).getPropertyValue('--chip').trim() || '#5278C2';
+    LABEL[p[0]] = p[1];
+    probe.remove();
   });
 
   /* ---- the ground, blooming the lead instrument of the current problem ---- */
-  var order = ['#5278C2'].concat(PROBS.map(function(p){ return CHIPC[p.lead] || '#5278C2'; })).concat(['#5278C2','#EE352E']);
+  /* v3.46: the seven panels (#seven) are the second screen, and their ground follows whichever panel is
+     open, so the seven colours ride at the end of the list, from LEAD0 on */
+  var SEVEN = INSTR.map(function(p){ return p[0]; });
+  var order = ['#5278C2'].concat(document.getElementById('seven') ? ['#5278C2'] : [])
+    .concat(PROBS.map(function(p){ return CHIPC[p.lead] || '#5278C2'; })).concat(['#5278C2','#EE352E']);
+  var LEAD0 = order.length;
+  order = order.concat(SEVEN.map(function(k){ return CHIPC[k] || '#5278C2'; }));
   function grade(hex){                       /* atmosphere is graded; marks are not */
     var n = parseInt(hex.slice(1), 16);
     return '#' + [16,8,0].map(function(s){
@@ -721,39 +1003,20 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   if (window.Field98) Field98.mount({ base:'#0B0B0C', colors: order.map(grade), intensity: 0.86 });
 
   var screens = [].slice.call(document.querySelectorAll('.screen'));
-  var rail = document.getElementById('rail'), fill = document.getElementById('railfill');
   var bar = document.getElementById('bar'), cur = -1;
 
-  /* ---- the rail ---- */
-  PROBS.forEach(function(p, i){
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.innerHTML = '<b>0' + (i+1) + '</b><span>' + p.label + '</span>';
-    b.addEventListener('click', function(){
-      document.getElementById(p.id).scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
-    });
-    rail.appendChild(b);
-  });
-  var railBtns = [].slice.call(rail.children);
-
-  function setScreen(el){
-    var idx = screens.indexOf(el); if (idx === cur) return; cur = idx;
-    var uses = (el.dataset.uses || '').split(' ').filter(Boolean);
+  function setScreen(el, force){
+    var idx = screens.indexOf(el); if (idx === cur && !force) return; cur = idx;
     var pi = PROBS.findIndex(function(p){ return p.id === el.id; });
-    var lead = pi > -1 ? PROBS[pi].lead : null;
-
-    document.querySelectorAll('.chip').forEach(function(c){
-      var k = c.dataset.chip;
-      c.classList.toggle('lit', uses.indexOf(k) > -1);
-      c.classList.toggle('lead', k === lead);
-    });
-    railBtns.forEach(function(b, i){ b.setAttribute('aria-current', i === pi ? 'true' : 'false'); });
-    fill.style.height = (pi > -1 ? ((pi + 1) / PROBS.length) * 100 : 0) + '%';
+    var lead = pi > -1 ? PROBS[pi].lead : (el.dataset.lead || null);   /* the seven panels name their own */
 
     var c = lead ? CHIPC[lead] : '#5278C2';
     document.documentElement.style.setProperty('--room', c);
-    if (window.Field98 && Field98.ok) Field98.to(idx);
+    var k7 = pi < 0 && el.dataset.lead ? SEVEN.indexOf(el.dataset.lead) : -1;
+    if (window.Field98 && Field98.ok) Field98.to(k7 > -1 ? LEAD0 + k7 : idx);
   }
+  /* v3.46: the seven panels call this when one opens, so the ground follows at once */
+  window.Spine98 = { repaint: function(){ if (cur > -1) setScreen(screens[cur], true); } };
 
   if ('IntersectionObserver' in window){
     var rev = new IntersectionObserver(function(es){
@@ -769,12 +1032,12 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   }
   setScreen(screens[0]);
 
-  /* ---- a chip is also a filter: clicking one jumps to the work and applies it ---- */
-  document.querySelectorAll('.chip').forEach(function(c){
-    c.addEventListener('click', function(){
-      applyFilter(c.dataset.chip);
-      document.getElementById('work').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
-    });
+  /* ---- a panel's 'See them' is a filter: it applies it and jumps to the work (the chips used to) ---- */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('[data-filter]'); if (!a) return;
+    e.preventDefault();
+    applyFilter(a.dataset.filter);
+    document.getElementById('work').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
   });
 
   var fbox = document.getElementById('filters'), grid = document.getElementById('grid'),
@@ -782,7 +1045,7 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
   Object.keys(CHIPC).forEach(function(k){
     var b = document.createElement('button');
     b.className = 'f'; b.type = 'button'; b.dataset.f = k;
-    b.textContent = document.querySelector('.chip[data-chip="' + k + '"]').textContent.trim();
+    b.textContent = LABEL[k];
     b.setAttribute('aria-pressed', 'false');
     fbox.appendChild(b);
   });
@@ -797,12 +1060,19 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
     });
     countEl.textContent = key === 'all'
       ? n + ' records · every one uses more than one instrument'
-      : n + ' of ' + cards.length + ' records use ' + key;
+      : n + ' of ' + cards.length + ' records use ' + (LABEL[key] || key);
   }
   fbox.addEventListener('click', function(e){
     var b = e.target.closest('.f'); if (b) applyFilter(b.dataset.f);
   });
   applyFilter('all');
+
+  /* v3.46: the seven panels' counts, recounted from the FACETS the grid filters on */
+  [].forEach.call(document.querySelectorAll('[data-count]'), function(el){
+    var k = el.dataset.count;
+    el.textContent = Object.keys(FACETS).filter(function(s){ return FACETS[s].indexOf(k) > -1; }).length;
+  });
+  [].forEach.call(document.querySelectorAll('[data-total]'), function(el){ el.textContent = Object.keys(FACETS).length; });
 
   /* ---- progress hairline ---- */
   var raf = 0;
