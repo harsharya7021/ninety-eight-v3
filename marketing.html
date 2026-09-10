@@ -228,11 +228,12 @@ svg{display:block}
 /* =========================================================================
    THE OPENER — effect 104, the line on a wire (v3.45, Sep 10 2026)
 
-   "Marketing, start to finish." rides a train of text and tiles along an SVG
-   path that is dead straight at rest and bends into a wave in proportion to
-   how hard you are scrolling. The zip's mechanism and its numbers: GAP 90,
-   tiles 310 high, the morph quickTo'd at 1s power2 and let go 66ms after the
-   last scroll. The first screen is the zip's own — the field and a Scroll cue.
+   "Full-scale marketing practice, from start to finish." rides a train of
+   text and tiles along an SVG path that is dead straight at rest and bends
+   into a wave in proportion to how hard you are scrolling. The zip's
+   mechanism and its numbers: GAP 90, tiles 310 high, the morph quickTo'd at
+   1s power2 and let go 66ms after the last scroll. The first screen is the
+   zip's own — the field and a Scroll cue.
 
    The CSS ships the READABLE state (the sentence as plain type); the script
    adds .fx before it installs anything, so no GSAP or reduced motion gets a
@@ -241,13 +242,13 @@ svg{display:block}
    ========================================================================= */
 .mwg104{position:relative}
 .w104-say{padding:clamp(6.5rem,16vh,9rem) var(--pad) 0 calc(var(--pad) + var(--rail) + 2vw);
-  font-weight:800;font-stretch:118%;letter-spacing:-.035em;line-height:.9;font-size:clamp(2.5rem,8.2vw,7rem)}
+  font-weight:800;font-stretch:118%;letter-spacing:-.035em;line-height:.94;font-size:clamp(2.1rem,6.6vw,5.4rem);text-wrap:balance}
 .w104-say i{font-style:normal;color:var(--red)}
 @media(max-width:900px){ .w104-say{padding-left:var(--pad)} }
 .mwg104 .pin-height,.w104-cue{display:none}
 .mwg104.fx .w104-say{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-.mwg104.fx .pin-height{display:block;height:583vh}   /* the script re-paces this to the line; 583 is it for this one */
+.mwg104.fx .pin-height{display:block;height:857vh}   /* the script re-paces this to the line; 857 is it for this one */
 .mwg104 .container{height:100vh;display:flex;align-items:center;overflow:hidden}
 .mwg104 svg{display:block;width:120%;height:auto;overflow:visible;margin:8vw 0 0 -10%}
 #w104-line{fill:none;stroke:none}
@@ -307,7 +308,7 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
      and nothing else changes: the driver sizes an image from its own aspect
      ratio exactly as the zip does, and re-paces the runway to the new train. -->
 <section class="mwg104" id="opener">
-  <p class="w104-say">Marketing, start to finish<i>.</i></p>
+  <p class="w104-say">Full-scale marketing practice, from start to finish<i>.</i></p>
   <p class="w104-cue mono" aria-hidden="true">Scroll<i></i></p>
   <div class="pin-height">
     <div class="container">
@@ -318,11 +319,11 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
         <path id="w104-line" d="M0 195H644H1288H1932H2576"/>
         <path id="w104-wave" d="M0.21875 190.5C0.21875 190.5 382.004 0.5 644.219 0.5C906.434 0.5 1051.3 78.1239 1288.22 190.5C1531.72 306 1668.87 390.5 1932.22 390.5C2195.57 390.5 2576.22 190.5 2576.22 190.5" stroke="#FFF" style="opacity:0;"/>
         <g id="w104-track">
-          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">Marketing,</textPath></text>
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">Full-scale</textPath></text>
           <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
-          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">start</textPath></text>
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">marketing practice,</textPath></text>
           <g class="segment tile ph" data-w="310" data-h="310"><rect class="ph-box" x=".5" y=".5" width="309" height="309" rx="24.8" ry="24.8"/><text class="ph-mark" x="155" y="192" text-anchor="middle">98</text><text class="ph-cap" x="157" y="274" text-anchor="middle">IMAGE TO COME</text></g>
-          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">to finish<tspan class="stop">.</tspan></textPath></text>
+          <text class="segment" font-size="350"><textPath href="#w104-line" text-anchor="start">from start to finish<tspan class="stop">.</tspan></textPath></text>
         </g>
       </svg>
     </div>
@@ -507,9 +508,9 @@ html.w104-live .rail:focus-within{opacity:1;pointer-events:auto}
       this site does not have. The line waits for Archivo 800 instead.
    3. The runway is the zip's PACE, not its length: 700vh of scroll per
       11,835 units of path + train (its own sentence, measured in Inter 500).
-      This line is shorter, so it gets 583vh rather than 800 and crosses the
-      screen at the reference's speed instead of crawling. Change the words
-      or the tiles and the runway re-paces itself.
+      This line runs a little longer than the zip's, so it gets 857vh
+      rather than 800 and crosses the screen at the reference's speed.
+      Change the words or the tiles and the runway re-paces itself.
    Lenis, optional in the zip, stays out: this page scrolls natively. */
 (function(){
   var root = document.getElementById('opener'); if (!root) return;
