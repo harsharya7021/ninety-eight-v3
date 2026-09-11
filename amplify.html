@@ -28,33 +28,32 @@ document.documentElement.classList.add('js');})();
    the middle, and tips away over the top, one after another in the board's
    order, each at its own place across the width and on one of four arm
    lengths. All of it is scrubbed to the scroll, in the zip's numbers, on
-   the room ground (White / Carbon, Archivo) with the four labels on top.
+   the room ground (White / Carbon, Archivo). The four labels that sat on
+   top came off in v3.54 at Harsh's call; the page's title is kept for
+   screen readers and search only.
 
    THE PICTURES ARE NOT EDITED HERE. They come from the Creator Wall board
    (a claude.ai artifact) through Workshop (build files)/build_creators_wall.py:
-   the board holds the pictures, their order, their alt text and the four
-   labels; a sync writes new pictures to assets/creators/ and regenerates
+   the board holds the pictures, their order, their alt text and the
+   page's title; a sync writes new pictures to assets/creators/ and regenerates
    this file from _creators_wall_template.html. Edit the template, not this.
 
-   The CSS ships the READABLE state: the labels and a plain grid of every
-   picture. The script adds .fx before it installs anything, so reduced
+   The CSS ships the READABLE state: a plain grid of every picture.
+   The script adds .fx before it installs anything, so reduced
    motion or a blocked script still shows the whole wall, never a blank pin.
    ========================================================================= */
 :root{ --room:#00933C; }   /* Creators' colour */
 
 .w054{position:relative;padding:calc(var(--m) + var(--s98-h,0px)) var(--m) calc(var(--lh) * 3)}
-.w054 .w-head{display:flex;justify-content:space-between;align-items:baseline;gap:4px var(--gap);flex-wrap:wrap}
-.w054 .w-head > *{font:inherit;margin:0}                      /* the h1 sets as the other labels do */
-.w054 .w-head > :not(:first-child){opacity:var(--faint)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's title, for screen readers and search: the wall shows none (v3.54) */
 .w054 .w-cue{display:none}
-.w054 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start;margin-top:calc(var(--lh) * 2)}
+.w054 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
 .w054 .media{display:block;width:100%;height:auto}
 
 /* the effect: the zip's layout, once the script has taken over */
 .w054.fx{padding:0;--s:min(20vw, 45vh)}                     /* a picture's box: 20vw as in the zip, capped by a very short, wide window */
 .w054.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
 .w054.fx .w-container{position:relative;height:100vh;overflow:hidden}   /* the pinned screen */
-.w054.fx .w-head{position:absolute;top:var(--s98-h,0px);left:0;right:0;padding:var(--m);z-index:10}   /* under the site header */   /* over every picture */
 .w054.fx .w-medias{display:block;position:absolute;inset:0;margin:0;perspective:300vh}
 .w054.fx .w-arm{position:absolute;transform-style:preserve-3d}      /* no width: an axle at its left, turning about the screen's middle line */
 .w054.fx .w-arm.a1{z-index:4;top:-5vh;height:110%}
@@ -79,7 +78,6 @@ document.documentElement.classList.add('js');})();
   </div>
   <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
   <div class="s98-r">
-    <span class="s98-clock" data-s98-clock>IST</span>
     <a href="index.html#contact">Contact</a>
   </div>
 </header>
@@ -174,15 +172,10 @@ document.documentElement.classList.add('js');})();
 <main>
 <!-- ============ the wall — effect 054 ============ -->
 <section class="w054" id="wall" aria-label="The creator floor, in pictures">
+  <h1 class="vh">The creator floor</h1>
   <p class="w-cue" aria-hidden="true">Scroll</p>
   <div class="w-pin">
     <div class="w-container">
-      <div class="w-head">
-    <h1>The creator floor</h1>
-    <p>Creators, PR &amp; media</p>
-    <p>Delhi NCR</p>
-    <p>Since 2020</p>
-      </div>
       <div class="w-medias">
       <img class="media" src="assets/creators/wsfbhebhgmbyfx8klhsi.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
       <img class="media" src="assets/creators/it7f7gwio2z3krs2r8ai.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">

@@ -7,7 +7,8 @@
    nothing else; each page's own look stays in its own <style>.
 
      .s98-head   the header, on every page: Menu, the four pages and the
-                 Carbon / White switch · the mark · Delhi time and Contact.
+                 Carbon / White switch · the mark · Contact. (Delhi time left
+                 the header in v3.54; the footer's last line keeps it.)
                  Fixed; clear at the very top, and a light frosted layer
                  (the designer's "layer blur") once the page moves under it.
      .nav035     the curtain menu — effect 035 with 093's word — moved here
@@ -85,7 +86,7 @@ html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not
 html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
 
 @media(max-width:760px){
-  .s98-nav,.s98-clock{display:none}
+  .s98-nav{display:none}
   .s98-l,.s98-r{gap:16px}
 }
 @media(max-width:440px){
