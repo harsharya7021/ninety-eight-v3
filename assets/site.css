@@ -6,9 +6,11 @@
    the same anchor, whichever room they are in. This file is that frame and
    nothing else; each page's own look stays in its own <style>.
 
-     .s98-head   the header, on every page: Menu, the four pages and the
-                 Carbon / White switch · the mark · Contact. (Delhi time left
-                 the header in v3.54; the footer's last line keeps it.)
+     .s98-head   the header, on every page: Menu and the Carbon / White
+                 switch on the left, the mark in the middle, and Marketing,
+                 Talent, Journal and Contact as buttons on the right (v3.56).
+                 Delhi time left it in v3.54 (the footer keeps it) and Home
+                 in v3.55: the mark is the way home.
                  Fixed; clear at the very top, and a light frosted layer
                  (the designer's "layer blur") once the page moves under it.
      .nav035     the curtain menu — effect 035 with 093's word — moved here
@@ -49,16 +51,26 @@ html{background:var(--s98-bg)}
 .s98-head *{box-sizing:border-box}
 .s98-head a,.s98-head button{color:inherit;text-decoration:none;font:inherit;letter-spacing:inherit;text-transform:none;background:none;border:0;border-radius:0;padding:0;margin:0;cursor:pointer;
   -webkit-appearance:none;appearance:none;opacity:1;transition:opacity .25s}
-.s98-l,.s98-r{display:flex;align-items:center;gap:22px;min-width:0;white-space:nowrap}
-.s98-l{justify-self:start}
-.s98-r{justify-self:end}
-.s98-nav{display:block;white-space:nowrap}
+.s98-l{display:flex;align-items:center;gap:22px;min-width:0;white-space:nowrap;justify-self:start}
 
-.s98-nav a,.s98-ground button{position:relative;padding-bottom:1px}
-.s98-nav a[aria-current="page"]::after,.s98-ground button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor}
-.s98-nav a:hover,.s98-ground button:not(.on):hover,.s98-r a:hover{opacity:.5}
+.s98-ground button{position:relative;padding-bottom:1px}
+.s98-ground button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor}
+.s98-ground button:not(.on):hover{opacity:.5}
 .s98-ground{display:block;white-space:nowrap}
 .s98-sep{margin:0 .28em}
+
+/* the pages and Contact: buttons, together on the right (v3.56). A hairline
+   pill in the header's own ink, filled for the section you are in. Ring and
+   fill are drawn by ::before in currentColor, so they follow the ink wherever
+   the header changes it (the landing's dark top on White, the open curtain);
+   ::after stretches each button's tap area to the header's full height. */
+.s98-nav{display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;justify-self:end}
+.s98-head .s98-nav a{position:relative;z-index:0;display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:13px}
+.s98-nav a::before{content:"";position:absolute;inset:0;z-index:-1;border:1px solid currentColor;border-radius:inherit;opacity:.3;transition:opacity .25s}
+.s98-nav a::after{content:"";position:absolute;inset:-7px -3px}
+.s98-nav a:hover::before,.s98-nav a:focus-visible::before{opacity:.85}
+.s98-head .s98-nav a[aria-current="page"]{color:var(--s98-bg)}
+.s98-nav a[aria-current="page"]::before{background:var(--s98-ink);border-color:var(--s98-ink);opacity:1}
 .s98-c{display:block;justify-self:center;line-height:0}
 .s98-c img{display:block;height:26px;width:auto;max-width:none;border-radius:0;box-shadow:none;filter:none;transition:opacity .35s,filter .35s}
 html[data-ground="white"] .s98-c img{filter:invert(1)}
@@ -85,13 +97,16 @@ html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not
 html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not(.s98-glass) .s98-c img{filter:none}
 html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
 
+/* where a side would run into the mark, it gives way (measured with Archivo, v3.56):
+   at 760px and below the three pages step out (the menu lists them) and Contact stays;
+   at 460px and below the mark steps out too: Menu and the switch left, Contact right */
 @media(max-width:760px){
-  .s98-nav{display:none}
-  .s98-l,.s98-r{gap:16px}
+  .s98-head .s98-nav .s98-pg{display:none}
+  .s98-l{gap:16px}
 }
-@media(max-width:440px){
+@media(max-width:460px){
   .s98-head{grid-template-columns:auto 1fr auto}
-  .s98-c{display:none}                                /* a phone: Menu, the switch and Contact are the row; the mark steps out */
+  .s98-c{display:none}
   .s98-r{grid-column:3}
 }
 @media print{ .s98-head,.nav035{display:none} }
