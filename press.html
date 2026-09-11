@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>(function(){var d=document.documentElement,g='carbon';try{if(localStorage.getItem('98-ground')==='white')g='white';}catch(e){}d.setAttribute('data-ground',g);})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The press room — PR &amp; media · Ninety-Eight</title>
+<meta name="description" content="PR &amp; media at Ninety-Eight: twelve stories our clients earned in Curly Tales, The New Indian Express, Lifestyle Asia, iDiva, Femina, GQ, Outlook, India Today, NDTV Food and Outlook Traveller.">
+<meta property="og:title" content="The press room — PR &amp; media · Ninety-Eight">
+<meta property="og:description" content="Twelve stories in ten publications, earned for our clients. Drag the row.">
+<meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/room.css">
+<style>
+/* =========================================================================
+   THE PRESS ROOM — PR & media, effect 088 (v3.57, Sep 2026)
+   PR & Media's own page, at Harsh's call: the coverage our clients earned,
+   twelve cards (publication, headline, byline) on the MWG 088 row. Drag it
+   and every card that comes on screen flies in from the edge it enters
+   by, starting at 60% of its size, and settles in 0.8s; a card that
+   leaves the screen is simply hidden until it comes back. The row follows
+   the drag through a 0.5s power4 quickTo at 1.4x the pointer (1.5x on
+   touch). The zip's numbers, on the room ground (Carbon / White, Archivo),
+   inside the site's frame. The page shows no title: it is kept for screen
+   readers and search, as on the creator floor.
+
+   To add a story: put the card in assets/press/ (a square, 1,200px WebP)
+   and copy one .media-parent line below, with the card's alt text.
+
+   The CSS ships the READABLE state: a plain grid of every card. The script
+   adds .fx before it moves anything, so reduced motion or a blocked script
+   still shows the whole room, never an empty strip.
+   ========================================================================= */
+:root{ --room:#0039A6; }   /* PR & Media's colour (the seven's .c-pr) */
+
+.w088{position:relative;padding:calc(var(--m) + var(--s98-h,0px)) var(--m) calc(var(--lh) * 3)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's title, for screen readers and search */
+.w088 .w-cue{display:none}
+.w088 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:var(--gap)}
+.w088 .media{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+
+/* the effect: the zip's layout, once the script has taken over. A card is the zip's 22vw square
+   (35vw under 768px), with departures for cards that carry type: never under 280px on a
+   computer (the zip's 22vw is 225px at 1024), min(72vw, 440px) on a phone, where the zip's
+   35vw would set a headline at 7px, and never taller than the screen under the header allows. */
+.w088.fx{min-height:100vh;min-height:100svh;padding:var(--s98-h,0px) 0 0;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+  --card:clamp(280px, 22vw, calc(100vh - var(--s98-h,0px) - 120px))}
+.w088.fx .w-stage{outline:0}
+.w088.fx .w-stage:focus-visible{outline:1px solid var(--ink);outline-offset:14px}
+.w088.fx .container{display:flex;gap:2vw;padding:0 25px;width:max-content;white-space:nowrap;cursor:grab;touch-action:pan-y}   /* pan-y: a vertical swipe still scrolls the page */
+.w088.fx .container:active{cursor:grabbing}
+.w088.fx .media-parent{flex:none;width:var(--card);transform-style:preserve-3d}
+.w088.fx .media{user-select:none;-webkit-user-select:none;-webkit-user-drag:none;transform-style:preserve-3d}
+.w088.fx .w-cue{display:block;margin:calc(var(--lh) * 1.5) 0 0;text-align:center;opacity:var(--faint);pointer-events:none;transition:opacity .6s var(--ease)}
+.w088.fx .w-cue.off{opacity:0}
+@media(max-width:768px){
+  .w088.fx{--card:min(72vw, 440px, calc(100vh - var(--s98-h,0px) - 120px))}
+  .w088.fx .container{padding:0 15px;gap:15px}
+}
+@supports (height:100svh){
+  .w088.fx{--card:clamp(280px, 22vw, calc(100svh - var(--s98-h,0px) - 120px))}
+  @media(max-width:768px){ .w088.fx{--card:min(72vw, 440px, calc(100svh - var(--s98-h,0px) - 120px))} }
+}
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!--S98:HEAD — the shared header and menu: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<header class="s98-head" id="s98-head">
+  <div class="s98-l">
+    <button class="s98-menu" id="s98-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu"><span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="md-txt">Menu</span></button>
+    <div class="s98-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="s98-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
+  </div>
+  <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
+  <nav class="s98-nav s98-r" aria-label="Pages">
+    <a class="s98-pg" href="marketing.html" aria-current="page">Marketing</a>
+    <a class="s98-pg" href="talent.html">Talent</a>
+    <a class="s98-pg" href="blog/index.html">Journal</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+<div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="n35-inner">
+    <div class="n35-top">
+      <p class="n35-word" aria-hidden="true">Menu</p>
+      <div class="n35-wmedias" aria-hidden="true">
+        <img class="n35-wmedia" src="assets/gurls/g06.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/ishant.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g07.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/slay.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g08.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/one8.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g09.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/hardrock.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+    <ul>
+      <li><a href="index.html#culture">
+        <span class="n35-name">For the culture</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="talent.html">
+        <span class="n35-name">Talent &amp; Branding</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/ishant.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/retain/ishant-social.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="marketing.html">
+        <span class="n35-name">Marketing &middot; the five rooms &middot; 35 cases</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/bayroute.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/monet.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/butterroom.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/fig.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#voices">
+        <span class="n35-name">In their words</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/hardrock.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#press">
+        <span class="n35-name">On the record</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#film" data-action="film">
+        <span class="n35-name">In the building <sup class="beta">98 Studio &middot; beta</sup></span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="blog/index.html">
+        <span class="n35-name">The journal</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/menu/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/tbsp.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#contact">
+        <span class="n35-name">Contact &mdash; tell us what you&rsquo;re building.</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/contact/envelope-green.png" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/contact/pigeon-carbon.png" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/contact/phone-yellow.png" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+    </ul>
+    <div class="n35-bottom"><p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the page</p></div>
+  </div>
+</div>
+<!--/S98:HEAD-->
+
+<main>
+<!-- ============ the row — effect 088 ============ -->
+<section class="w088" id="press" aria-labelledby="press-h">
+  <h1 class="vh" id="press-h">The press room &mdash; coverage our clients earned</h1>
+  <div class="w-stage" role="region" aria-label="Twelve stories in ten publications. Drag the row, or use the arrow keys.">
+    <div class="container">
+      <div class="media-parent"><img class="media" src="assets/press/curlytales-valentine.webp" alt="Curly Tales: &ldquo;6 Romantic Experiences To Gift A Foodie &amp; Floor Them With Taste This Valentine&rsquo;s Day&rdquo;, by Tania Tarafdar" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/tnie-khansamas.webp" alt="The New Indian Express, a food review of Pracheen: India before 1947: &ldquo;Recipes from the league of Khansamas&rdquo;, by Rajkumari Sharma Tankha" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/lifestyleasia-pracheen.webp" alt="Lifestyle Asia, on Pracheen: India before 1947: &ldquo;5 places in Delhi to try this month if you&rsquo;re craving wholesome Indian cuisine&rdquo;" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/idiva-tbsp.webp" alt="iDiva, 24 February 2023, on Tbsp. Tablespoon, DLF Avenue, Saket: &ldquo;8 Places For The Juiciest Gourmet Burgers In Delhi &amp; Mumbai&rdquo;, by Tanya Kundu" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/femina-valentine.webp" alt="Femina: &ldquo;#ValentineDining: Wine &amp; Dine At These Hotspots In Delhi and Bengaluru!&rdquo;, written by Aishwarya Acharya" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/gq-new-restaurants.webp" alt="GQ: &ldquo;The 9 best new restaurants &amp; delivery kitchens in Delhi to try right now&rdquo;, by Saumyaa Vohra" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/outlook-ivoryy.webp" alt="Outlook, a restaurant review: &ldquo;Ivoryy: A Garden of Many Delights&rdquo;, by Mallika Bhagat" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/indiatoday-mood.webp" alt="India Today: &ldquo;In the mood for food&rdquo;, by Manjari Saxena" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/curlytales-harajuku.webp" alt="Curly Tales, on Select Citywalk, Saket: &ldquo;Delhi Has A Tokyo Cafe That Offers Exclusively Crafted Japanese Desserts &amp; Boba Tea&rdquo;, by Suchismita Pal" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/ndtvfood-harajuku.webp" alt="NDTV Food: &ldquo;New In Town: This Adorable Tokyo Caf&eacute; In Delhi Has Bought The Vibrant Streets Of Harajuku To Town&rdquo;, by Aanchal Mathur" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/outlooktraveller-hearth.webp" alt="Outlook Traveller, an interview on Hearth &amp; i: &ldquo;Megha Jhunjhunwala&rsquo;s Journey from the West&rdquo;, by Simrran Gill" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/tnie-bowled-over.webp" alt="The New Indian Express, on the Buddha bowl: &ldquo;Bowled over&rdquo;, by Medha Dutta Yadav" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+    </div>
+  </div>
+  <p class="w-cue" aria-hidden="true">Drag</p>
+</section>
+</main>
+
+<!--S98:FOOT — the shared footer: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<footer class="s98-foot" id="s98-foot">
+  <div class="s98-fc s98-f1">
+    <span class="s98-faint">Socials:</span>
+    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
+    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="s98-fc s98-f2">
+    <span class="s98-faint">Pages:</span>
+    <a href="index.html">Home</a>
+    <a href="marketing.html">Marketing &mdash; the five rooms</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="blog/index.html">The journal</a>
+  </div>
+  <div class="s98-fc s98-f3">
+    <span class="s98-faint">Marketing, room by room:</span>
+    <a href="identity.html">Identity &amp; design</a>
+    <a href="press.html" aria-current="page">The press room</a>
+    <a href="amplify.html">The creator floor</a>
+    <a href="production.html">Production</a>
+    <a href="retain.html">Retain &mdash; the habit</a>
+    <a href="events.html">The night floor</a>
+  </div>
+  <div class="s98-fc s98-f4">
+    <span class="s98-faint">Contact:</span>
+    <a href="mailto:contact@ninety-eight.in" data-s98-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
+    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <div class="s98-rights">
+    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
+    <span class="s98-faint">Delhi NCR &middot; est. 01.01.2020 &middot; <span data-s98-clock>IST</span></span>
+  </div>
+</footer>
+<!--/S98:FOOT-->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/Observer.min.js"></script>
+<script>
+/* ---- 088: the row, dragged ----
+   The zip's driver, line for line where it can be: the row's x follows
+   the drag through quickTo (0.5s, power4) at 1.4x the pointer, 1.5x on a
+   touch screen, clamped between its two ends; on every step of that tween
+   each card is tested against the screen, and one that has just come on
+   is thrown in from the side the row is travelling from, from
+   4 x 100 / (1 + d / 500) px (d, the row's last step), at scale 0.6, to
+   its place in 0.8s power3.out, while one that has just gone off is
+   hidden. Departures, each forced:
+   1. The page scrolls, to the footer, so the row takes horizontal
+      gestures only (touch-action: pan-y); a vertical swipe still scrolls.
+   2. The zip measures once. Here a change of width re-measures the row
+      (a phone turned sideways, a window resized, the 768px step) and
+      keeps it as far along as it was (at the end, it stays at the end),
+      without animating anything.
+   3. At a step of 500px or more to the left the zip's formula divides by
+      zero, then flips sign, and the card would come in from the wrong
+      side; its denominator is held at 0.25 or more (a jump by keyboard
+      can take such a step on a slow frame).
+   4. Also moving the row, for anyone who can't or won't drag: a
+      trackpad's sideways swipe or shift + wheel over the row (the page's
+      own vertical scroll is left alone), and, with the row focused, the
+      arrow keys (one card), Home and End.
+   5. A faint "Drag" under the row, gone at the first move. The zip has
+      only its grab cursor, and a phone has no cursor.
+   6. Cards six to twelve load lazily in the grid, and all together once
+      the page has loaded when the row runs, so none arrives blank.
+   Nothing at all without GSAP or with reduced motion: the grid stays. */
+(function(){
+  var root = document.getElementById('press'); if (!root) return;
+  if (typeof gsap === 'undefined' || typeof Observer === 'undefined') return;
+  var stage = root.querySelector('.w-stage'), container = root.querySelector('.container'), cue = root.querySelector('.w-cue');
+  var parents = [].slice.call(root.querySelectorAll('.media-parent'));
+  if (!stage || !container || !parents.length) return;
+  gsap.registerPlugin(Observer);
+
+  gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+    root.classList.add('fx');
+    stage.setAttribute('tabindex', '0');
+
+    var vw = 0, span = 0, data = [], inView = [], total = 0, oldX = 0, rt = 0;
+    var isTouch = matchMedia('(hover: none)').matches;
+
+    function measure(){
+      vw = document.body.clientWidth;
+      span = Math.min(0, vw - container.clientWidth);        /* how far the row can travel, as a negative x */
+      data = parents.map(function(parent){
+        return { parent: parent, media: parent.querySelector('.media'), offsetLeft: parent.offsetLeft, width: parent.offsetWidth };
+      });
+    }
+    function clamp(v){ return gsap.utils.clamp(Math.min(0, document.body.clientWidth - container.clientWidth), 0, v); }
+    function hideCue(){ if (cue && !cue.classList.contains('off')) cue.classList.add('off'); }
+
+    measure();
+    data.forEach(function(d, i){
+      if (d.offsetLeft < vw && d.offsetLeft + d.width > 0) inView[i] = true;
+      else { inView[i] = false; gsap.set(d.media, { autoAlpha: 0 }); }
+    });
+
+    var xTo = gsap.quickTo(container, 'x', {
+      duration: 0.5,
+      ease: 'power4',
+      onUpdate: function(){ checkViewport(); }
+    });
+
+    function checkViewport(){
+      var currentX = gsap.getProperty(container, 'x');
+      var delta = currentX - oldX;
+      if (delta === 0) return;
+      oldX = currentX;
+      data.forEach(function(d, i){
+        var left = d.offsetLeft + currentX;
+        var isInView = left < vw && left + d.width > 0;
+        if (isInView && !inView[i]){
+          inView[i] = true;
+          var direction = Math.sign(delta);
+          var xFrom = direction * (-100 / Math.max(0.25, 1 + delta / 500));
+          gsap.fromTo(d.media, { x: xFrom * 4, scale: 0.6, autoAlpha: 1 }, { x: 0, scale: 1, duration: 0.8, ease: 'power3.out' });
+        } else if (!isInView && inView[i]){
+          inView[i] = false;
+          gsap.set(d.media, { autoAlpha: 0 });
+        }
+      });
+    }
+    function go(v){ total = clamp(v); xTo(total); hideCue(); }
+
+    Observer.create({
+      target: container,
+      type: 'touch,pointer',
+      onDrag: function(self){ go(total + (isTouch ? self.deltaX * 1.5 : self.deltaX * 1.4)); }
+    });
+
+    /* 4. sideways swipes and shift + wheel over the row; the keys once it has focus */
+    function onWheel(e){
+      var dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!dx || e.ctrlKey) return;
+      e.preventDefault();
+      go(total - dx * (e.deltaMode === 1 ? 16 : 1));
+    }
+    function onKey(e){
+      var step = data.length > 1 ? data[1].offsetLeft - data[0].offsetLeft : vw / 2;
+      if (e.key === 'ArrowRight') go(total - step);
+      else if (e.key === 'ArrowLeft') go(total + step);
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(-Infinity);
+      else return;
+      e.preventDefault();
+    }
+    stage.addEventListener('wheel', onWheel, { passive: false });
+    stage.addEventListener('keydown', onKey);
+
+    /* 2. a new width: measure again, keep the row as far along as it was, show what is on screen */
+    function relayout(){
+      if (document.body.clientWidth === vw && parents[0].offsetWidth === data[0].width) return;
+      var along = span ? total / span : 0;
+      measure();
+      total = oldX = clamp(along * span);
+      xTo(total, total);                   /* a jump, not a glide: the step it renders is 0, so nothing is thrown in */
+      data.forEach(function(d, i){
+        var left = d.offsetLeft + total, on = left < vw && left + d.width > 0;
+        if (on && !inView[i]){ inView[i] = true; gsap.set(d.media, { autoAlpha: 1, x: 0, scale: 1 }); }
+        else if (!on && inView[i]){ inView[i] = false; gsap.set(d.media, { autoAlpha: 0 }); }
+      });
+    }
+    function onResize(){ clearTimeout(rt); rt = setTimeout(relayout, 120); }
+    addEventListener('resize', onResize);
+
+    /* 6. the lazy cards, all at once when the page is in */
+    function promote(){ [].forEach.call(root.querySelectorAll('img[loading="lazy"]'), function(img){ img.loading = 'eager'; }); }
+    if (document.readyState === 'complete') promote(); else addEventListener('load', promote, { once: true });
+
+    return function(){
+      clearTimeout(rt);
+      removeEventListener('resize', onResize);
+      stage.removeEventListener('wheel', onWheel);
+      stage.removeEventListener('keydown', onKey);
+      stage.removeAttribute('tabindex');
+      root.classList.remove('fx');
+    };
+  });
+})();
+</script>
+<script src="assets/site.js"></script>
+</body>
+</html>
