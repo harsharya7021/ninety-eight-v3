@@ -50,6 +50,7 @@
     'uniform float u_mix;',
     'uniform vec2  u_ptr;',
     'uniform float u_amt;',
+    'uniform float u_light;',
 
     'vec3 mod289(vec3 x){ return x - floor(x * (1.0/289.0)) * 289.0; }',
     'vec2 mod289(vec2 x){ return x - floor(x * (1.0/289.0)) * 289.0; }',
@@ -104,10 +105,19 @@
     '  float energy = clamp(b1 * (0.60 + 0.40 * g) + b2 * 0.38 * (1.25 - g), 0.0, 1.0);',
 
     '  vec3 hue = mix(u_from, u_to, u_mix);',
-    '  vec3 col = u_base + hue * energy * u_amt;',
+    '  float vig = smoothstep(0.16, 1.18, length(p));',
 
-    /* corners stay carbon — without this the whole screen tints */
-    '  col *= 1.0 - 0.70 * smoothstep(0.16, 1.18, length(p));',
+    /* carbon: the bloom adds its colour to the dark, and the corners fall
+       back to carbon — without that the whole screen tints */
+    '  vec3 dark = (u_base + hue * energy * u_amt) * (1.0 - 0.70 * vig);',
+
+    /* white (v3.53): the same bloom laid into paper as a tint of its own
+       hue at full brightness, so it reads as a pastel of the room's colour,
+       never as grey; the corners fall back to white the same way */
+    '  vec3 vivid = hue / max(max(hue.r, hue.g), max(hue.b, 0.001));',
+    '  vec3 light = mix(vec3(1.0), vivid, clamp(energy * u_amt * 0.30, 0.0, 1.0));',
+    '  light = mix(light, vec3(1.0), 0.70 * vig);',
+    '  vec3 col = mix(dark, light, u_light);',
 
     /* ordered dither — without this a dark ramp bands into stripes */
     '  float dth = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);',
@@ -193,12 +203,17 @@
         to:   gl.getUniformLocation(pr, 'u_to'),
         mix:  gl.getUniformLocation(pr, 'u_mix'),
         ptr:  gl.getUniformLocation(pr, 'u_ptr'),
-        amt:  gl.getUniformLocation(pr, 'u_amt')
+        amt:  gl.getUniformLocation(pr, 'u_amt'),
+        light: gl.getUniformLocation(pr, 'u_light')
       };
       gl.uniform3fv(this._u.base, base);
       gl.uniform1f(this._u.amt, this._amt);
+      /* the site's ground (v3.53): white eases the field into paper over half a second */
+      this._lightTo = this._light = document.documentElement.getAttribute('data-ground') === 'white' ? 1 : 0;
+      gl.uniform1f(this._u.light, this._light);
 
       var self = this;
+      global.addEventListener('s98:ground', function (e) { self._lightTo = e.detail === 'white' ? 1 : 0; });
       cv.addEventListener('webglcontextlost', function (e) {
         e.preventDefault(); self.stop();
         document.documentElement.classList.add('field-static');
@@ -290,6 +305,11 @@
       gl.uniform3fv(this._u.to, this._to);
       gl.uniform1f(this._u.mix, this._mix);
       gl.uniform2f(this._u.ptr, this._ptr[0], this._ptr[1]);
+      if (this._light !== this._lightTo) {
+        this._light += (this._lightTo - this._light) * Math.min(1, dt * 5);
+        if (Math.abs(this._lightTo - this._light) < 0.004) this._light = this._lightTo;
+      }
+      gl.uniform1f(this._u.light, this._light);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
   };

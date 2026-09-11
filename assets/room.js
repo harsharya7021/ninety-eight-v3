@@ -12,22 +12,8 @@
   var go=function(){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ doc.classList.add('in'); }); }); };
   if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(go); setTimeout(go,1800); } else { go(); }
 
-  /* the ground: White / Carbon, remembered */
-  var sw=document.querySelectorAll('.ground b');
-  function setGround(g){
-    if(g==='carbon') doc.setAttribute('data-ground','carbon'); else doc.removeAttribute('data-ground');
-    sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')===g); });
-    try{ localStorage.setItem('98-retain-ground', g); }catch(e){}
-  }
-  sw.forEach(function(b){ b.addEventListener('click', function(){ setGround(b.getAttribute('data-ground')); }); });
-  if(doc.getAttribute('data-ground')==='carbon') sw.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-ground')==='carbon'); });
-
-  /* the clock, Delhi */
-  var clock=document.getElementById('clock');
-  function tick(){
-    try{ if(clock) clock.textContent='IST '+new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date()); }catch(e){}
-  }
-  tick(); setInterval(tick, 15000);
+  /* the ground and the Delhi clock moved to assets/site.js in v3.53, with
+     the shared header that carries them */
 
   /* the mail line copies itself on click, then goes back to being a link */
   var mail=document.getElementById('mail');

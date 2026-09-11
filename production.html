@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script>
-(function(){try{var t=localStorage.getItem('98-retain-ground');if(t==='carbon')document.documentElement.setAttribute('data-ground','carbon');}catch(e){}
+(function(){try{document.documentElement.setAttribute('data-ground',localStorage.getItem('98-ground')==='white'?'white':'carbon');}catch(e){document.documentElement.setAttribute('data-ground','carbon');}
 document.documentElement.classList.add('js');})();
 </script>
 <link rel="stylesheet" href="assets/room.css">
@@ -31,7 +31,7 @@ document.documentElement.classList.add('js');})();
    the section fills the screen: labels along the top, the disc in
    between, the captions along the foot.
    ========================================================================= */
-.prod{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:var(--m) 0}   /* v3.48: one screen, top to foot */
+.prod{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:calc(var(--m) + var(--s98-h,0px)) 0 var(--m)}   /* v3.48: one screen, top to foot */
 .prod .wheel{flex:1 1 auto;height:auto;min-height:460px}   /* the disc takes whatever the labels leave */
 .prod .ph h1{font:inherit}   /* the page's heading is the section's own label, set as the label was */
 .prod .ph{align-items:start}
@@ -49,8 +49,8 @@ document.documentElement.classList.add('js');})();
   outline:1px solid rgba(0,0,0,.16);outline-offset:-1px;box-shadow:0 10px 26px rgba(14,14,16,.13),0 2px 6px rgba(14,14,16,.07);
   transition:outline-color .3s,box-shadow .3s}
 .wheel .plate:hover img{outline-color:rgba(0,0,0,.62);box-shadow:0 16px 40px rgba(14,14,16,.2),0 3px 8px rgba(14,14,16,.1)}
-html[data-ground="carbon"] .wheel .plate img{outline-color:rgba(233,234,228,.14);box-shadow:none}
-html[data-ground="carbon"] .wheel .plate:hover img{outline-color:rgba(233,234,228,.65)}
+html:not([data-ground="white"]) .wheel .plate img{outline-color:rgba(233,234,228,.14);box-shadow:none}
+html:not([data-ground="white"]) .wheel .plate:hover img{outline-color:rgba(233,234,228,.65)}
 a.plate{cursor:pointer}
 .wheel .tip{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;
   background:var(--bg);padding:0 6px;line-height:var(--lh)}
@@ -68,8 +68,109 @@ a.plate{cursor:pointer}
 @media(hover:none){.wheel .tip{display:none}}
 @media(max-width:900px){.prod .wheel{min-height:320px}}
 </style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<!--S98:HEAD — the shared header and menu: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<header class="s98-head" id="s98-head">
+  <div class="s98-l">
+    <button class="s98-menu" id="s98-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu"><span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="md-txt">Menu</span></button>
+    <nav class="s98-nav" aria-label="Pages"><a href="index.html">Home</a>, <a href="marketing.html" aria-current="page">Marketing</a>, <a href="talent.html">Talent</a>, <a href="blog/index.html">Journal</a></nav>
+    <div class="s98-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="s98-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
+  </div>
+  <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
+  <div class="s98-r">
+    <span class="s98-clock" data-s98-clock>IST</span>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+<div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="n35-inner">
+    <div class="n35-top">
+      <p class="n35-word" aria-hidden="true">Menu</p>
+      <div class="n35-wmedias" aria-hidden="true">
+        <img class="n35-wmedia" src="assets/gurls/g06.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/ishant.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g07.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/slay.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g08.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/one8.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g09.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/hardrock.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+    <ul>
+      <li><a href="index.html#culture">
+        <span class="n35-name">For the culture</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="talent.html">
+        <span class="n35-name">Talent &amp; Branding</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/ishant.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/retain/ishant-social.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="marketing.html">
+        <span class="n35-name">Marketing &middot; the five rooms &middot; 35 cases</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/bayroute.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/monet.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/butterroom.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/fig.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#voices">
+        <span class="n35-name">In their words</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/hardrock.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#press">
+        <span class="n35-name">On the record</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#film" data-action="film">
+        <span class="n35-name">In the building <sup class="beta">98 Studio &middot; beta</sup></span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/98-studio.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="blog/index.html">
+        <span class="n35-name">The journal</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/menu/m2.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/farzi.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/menu/tbsp.jpg" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="index.html#contact">
+        <span class="n35-name">Contact &mdash; tell us what you&rsquo;re building.</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/contact/envelope-green.png" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/contact/pigeon-carbon.png" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/contact/phone-yellow.png" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+    </ul>
+    <div class="n35-bottom"><p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the page</p></div>
+  </div>
+</div>
+<!--/S98:HEAD-->
 
 <main>
 <!-- ============ the wheel ============ -->
@@ -107,6 +208,42 @@ a.plate{cursor:pointer}
 </section>
 
 </main>
+
+<!--S98:FOOT — the shared footer: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<footer class="s98-foot" id="s98-foot">
+  <div class="s98-fc s98-f1">
+    <span class="s98-faint">Socials:</span>
+    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
+    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="s98-fc s98-f2">
+    <span class="s98-faint">Pages:</span>
+    <a href="index.html">Home</a>
+    <a href="marketing.html">Marketing &mdash; the five rooms</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="blog/index.html">The journal</a>
+  </div>
+  <div class="s98-fc s98-f3">
+    <span class="s98-faint">Marketing, room by room:</span>
+    <a href="identity.html">Identity &amp; design</a>
+    <a href="amplify.html">The creator floor</a>
+    <a href="production.html" aria-current="page">Production</a>
+    <a href="retain.html">Retain &mdash; the habit</a>
+    <a href="events.html">The night floor</a>
+  </div>
+  <div class="s98-fc s98-f4">
+    <span class="s98-faint">Contact:</span>
+    <a href="mailto:contact@ninety-eight.in" data-s98-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
+    <a href="index.html#contact">Tell us what you&rsquo;re building &rarr;</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <div class="s98-rights">
+    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
+    <span class="s98-faint">Delhi NCR &middot; est. 01.01.2020 &middot; <span data-s98-clock>IST</span></span>
+  </div>
+</footer>
+<!--/S98:FOOT-->
 
 <script>
 /* ---- the wheel (MWG 106), eased by hand ----
@@ -181,5 +318,7 @@ a.plate{cursor:pointer}
   render();
 })();
 </script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>

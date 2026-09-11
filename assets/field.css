@@ -25,6 +25,16 @@ html.field-static .field98{
     var(--bg,#0B0B0C);
 }
 
+/* the white ground (v3.53): the same three radials as pastels on paper */
+html[data-ground="white"] .field98{ background:var(--bg,#FFFFFF); }
+html[data-ground="white"].field-static .field98{
+  background:
+    radial-gradient(62% 48% at 24% 20%, rgba(142,176,240,.34), transparent 72%),
+    radial-gradient(54% 46% at 80% 38%, rgba(96,210,146,.26),  transparent 74%),
+    radial-gradient(66% 54% at 50% 94%, rgba(240,128,120,.28), transparent 76%),
+    var(--bg,#FFFFFF);
+}
+
 /* content sits above the ground; the ground never traps a click */
 .field98 ~ *{ position:relative; z-index:1 }
 

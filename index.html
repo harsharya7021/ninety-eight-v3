@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>(function(){var d=document.documentElement,g='carbon';try{if(localStorage.getItem('98-ground')==='white')g='white';}catch(e){}d.setAttribute('data-ground',g);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ninety-Eight — Business partners for hire.</title>
 <meta name="description" content="Ninety-Eight is a creative powerhouse out of Delhi NCR, Bombay and Bangalore. Strategy, marketing, advertising, execution, financial modeling, market research — for founders who want a partner, not a vendor. Since 2020.">
@@ -85,91 +86,15 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 }
 #loader .count small{display:block;text-align:center;margin-top:1rem}
 
-/* ---------- header ---------- */
-#hdr{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem var(--pad);
-  transition:background .4s,border-color .4s;
-  border-bottom:1px solid transparent;
-}
-#hdr.scrolled{background:rgba(11,11,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
-.brand{display:flex;align-items:center;gap:.7rem}
-.badge{height:26px;width:auto;flex:none}
-.brand .name{font-weight:600;font-size:.82rem;letter-spacing:.05em}
-#hdr nav{display:flex;gap:1.8rem}
-#hdr nav a{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);transition:color .3s}
-#hdr nav a:hover{color:var(--ink)}
-#hdr .right{display:flex;align-items:center;gap:1.4rem}
-#clock{white-space:nowrap}
-button.hnav{background:none;border:0;cursor:pointer;padding:0}
-
-/* ---------- the menu: effect 035 ----------
-   Reference numbers kept exactly: 45px rows blooming to 122px, 92px media
-   rising from y:100% behind an overflow clip, 15px gaps, borders at .3 -
-   retyped in house Archivo/Space Mono and regrounded on carbon. */
-/* Sep 8 call: the menu is a curtain now. It drops from the top edge on a
-   solid carbon ground (not transparent - the film would fight the rows),
-   and while it is down, scrolling lifts it away again and the hero film
-   shows through as it goes: menu -> scroll -> back on the first screen.
-   The header sits above it (z 500 > 400) so the dots button carries over. */
-.nav035{position:fixed;inset:0;z-index:400;background:var(--bg);
-  visibility:hidden;transform:translate3d(0,-100%,0);will-change:transform,opacity}
-.nav035.open{visibility:visible}
-/* motion is JS-owned (one eased number on the GSAP ticker); these transitions
-   only serve the no-GSAP / reduced-motion fallback */
-.nav035.nofx{transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease,visibility 0s .6s}
-.nav035.nofx.open{transform:none;opacity:1;transition:transform .6s cubic-bezier(.76,0,.24,1),opacity .6s ease}
-.n35-top,.n35-bottom{flex:1 1 0;min-height:0;display:flex;align-items:center;padding:0 var(--pad)}
-.n35-top{padding-top:3.2rem}
-.n35-bottom{align-items:flex-end;justify-content:center;padding-bottom:1.6rem}
-.n35-hint{color:var(--dim);opacity:.7;animation:npulse 2.8s ease-in-out infinite}
-/* effect 093 - the word */
-.n35-word{display:flex;font-weight:800;font-stretch:118%;text-transform:uppercase;line-height:.9;letter-spacing:-.02em;
-  font-size:clamp(3.4rem,10vw,11rem);color:var(--ink);margin:0;user-select:none}
-.n35-word .letter{position:relative;display:inline-block;cursor:default}
-.n35-word .letter:has(.n35-cm){color:transparent}
-.n35-wmedias{position:absolute;top:0;left:0;pointer-events:none}
-.n35-wmedia{width:1px;height:1px;visibility:hidden;position:absolute}
-.n35-cm{position:absolute;width:9vw;min-width:64px;height:auto;aspect-ratio:1;object-fit:cover;top:50%;left:50%;border-radius:1vw;pointer-events:none}
-.n35-name .beta{font-size:.55em;font-weight:600;color:var(--red);letter-spacing:.1em;vertical-align:super;margin-left:.5em}
-#hdr.menu-open{z-index:500;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
-/* the dots: three points that read as a menu; while open, the middle one
-   drops out and the outer two slide together into a single mark beside Close */
-.mdots{display:inline-flex;align-items:center;gap:.6rem;color:var(--ink);transition:opacity .25s}
-.md-dots{display:inline-flex;gap:4px;align-items:center}
-.md-dots i{display:block;width:5px;height:5px;border-radius:50%;background:currentColor;transition:transform .4s var(--ease),opacity .4s var(--ease)}
-.mdots:hover .md-dots i:nth-child(1){transform:translateX(-2px)}
-.mdots:hover .md-dots i:nth-child(3){transform:translateX(2px)}
-.mdots[aria-expanded="true"] .md-dots i:nth-child(2){opacity:0;transform:scale(0)}
-.mdots[aria-expanded="true"] .md-dots i:nth-child(1){transform:translateX(4.5px)}
-.mdots[aria-expanded="true"] .md-dots i:nth-child(3){transform:translateX(-4.5px)}
-.md-txt{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
-.n35-inner{height:100vh;display:flex;flex-direction:column;justify-content:center}
-.n35-label{padding:0 0 40px var(--pad)}
-.nav035 ul{width:100%;border-bottom:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;list-style:none;margin:0;padding:0}
-.nav035 ul li{flex:1 1 45px;align-items:center;border-top:1px solid rgba(255,255,255,.3);width:100%;padding:0 var(--pad);display:flex;justify-content:space-between;position:relative;overflow:hidden}
-.nav035 ul li:first-child{flex:1 1 122px}
-.nav035 ul li a{display:flex;align-items:center;align-self:stretch;flex:1;color:var(--ink)}
-.n35-name{font-weight:800;font-stretch:118%;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;line-height:1;transition:color .3s}
-.nav035 ul li:hover .n35-name{color:var(--red)}
-.n35-medias{display:flex;gap:15px;position:absolute;right:var(--pad);top:50%;transform:translate(0,-50%);overflow:hidden}
-.n35-media{width:92px;height:92px;object-fit:cover;transform:translate(0,100%);border-radius:4%}
-.nav035.nofx .n35-media{transform:none}
-@media (max-width:768px){
-  .nav035 ul li{padding:0 15px}
-  .nav035 ul li:first-child{flex:1 1 90px}
-  .n35-medias{gap:5px;right:15px}
-  .n35-media{width:60px;height:60px}
-  .n35-media:nth-child(n+4){display:none}
-  .n35-name{font-size:.8rem}
-}
+/* ---------- header and menu ----------
+   v3.53: the header and the curtain menu are the site's shared frame now,
+   in assets/site.css and assets/site.js (Workshop/patch_site_chrome_v353.py). */
 .talk{
   font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
   border:1px solid var(--line);padding:.55em 1.1em;border-radius:99px;transition:.3s;color:var(--ink);
 }
 .talk:hover{background:var(--red);border-color:var(--red);color:#fff}
-#progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0;z-index:101}
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0;z-index:130}
 
 /* mobile menu */
 #mmenu{position:fixed;inset:0;background:var(--bg);z-index:150;display:none;flex-direction:column;justify-content:center;padding:var(--pad)}
@@ -1230,7 +1155,28 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 .t041 .letter{display:inline-block;will-change:transform}
 .t041.rolling .letter{pointer-events:none}
 @media(hover:none){ .t041 .t041-hidden{display:none} }
+
+/* ---------- the white ground (v3.53) ----------
+   The site-wide switch in the shared header can put this page on white.
+   Everything that takes the page's tokens turns over with them; the film,
+   the curtain and the overlays keep their own dark. */
+html[data-ground="white"]{
+  --bg:#FFFFFF; --bg2:#F2F2F0; --ink:#0B0B0C; --dim:#6B6B66; --line:rgba(11,11,12,.13);
+}
+/* dark on purpose, whatever the ground: the film under the hero (it sits at
+   .62 over the ground, so on white it would wash out), the three vertical
+   cards (their own dark tints), and every overlay (case file, flywheel, film) */
+html[data-ground="white"] #top,
+html[data-ground="white"] .mwg031 .v-card,
+html[data-ground="white"] #caseview,
+html[data-ground="white"] #wheelview,
+html[data-ground="white"] #filmview,
+html[data-ground="white"] #mmenu{
+  --bg:#0B0B0C; --bg2:#121214; --ink:#F4F4F2; --dim:#8E8E88; --line:rgba(244,244,242,.13); color:#F4F4F2;
+}
+html[data-ground="white"] #top{background:#0B0B0C}
 </style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
@@ -1239,39 +1185,32 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 <!-- preloader -->
 <div id="loader" aria-hidden="true"><div class="count"><span id="ln">00</span><small class="mono">Ninety-Eight · est. 2020</small></div></div>
 
-<!-- header -->
-<header id="hdr">
-  <!-- Sep 8 call: Contact leaves the header (it lives in the menu now — last
-       row — and on the postcard). The Menu button is the dots: three points
-       that carry over the open overlay and read Close while it is down. -->
-  <button class="hnav mono mdots" id="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu">
-    <span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="md-txt">Menu</span>
-  </button>
+<!--S98:HEAD — the shared header and menu: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<header class="s98-head" id="s98-head" data-s98-top="dark">
+  <div class="s98-l">
+    <button class="s98-menu" id="s98-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu"><span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="md-txt">Menu</span></button>
+    <nav class="s98-nav" aria-label="Pages"><a href="index.html" aria-current="page">Home</a>, <a href="marketing.html">Marketing</a>, <a href="talent.html">Talent</a>, <a href="blog/index.html">Journal</a></nav>
+    <div class="s98-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="s98-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
+  </div>
+  <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
+  <div class="s98-r">
+    <span class="s98-clock" data-s98-clock>IST</span>
+    <a href="#contact">Contact</a>
+  </div>
 </header>
-
-<!-- ===== the menu: effect 035 ===============================================
-     The reference is a category list: compact rows that bloom from 45px to
-     122px on hover while that row's images rise in on a random stagger and
-     the previous row's drop out at 3x speed. Here the rows are the story's
-     stops, in page order, each carrying the true imagery of the section it
-     points to - a table of contents, not an exit ramp. -->
 <div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="n35-inner">
-    <!-- effect 093: the word in the empty upper room. Hover a letter and a
-         photograph from the site takes its place for a beat, the neighbours
-         stepping aside; then the letter pops back. -->
     <div class="n35-top">
       <p class="n35-word" aria-hidden="true">Menu</p>
       <div class="n35-wmedias" aria-hidden="true">
-        <img class="n35-wmedia" src="assets/gurls/g06.webp" alt="">
-        <img class="n35-wmedia" src="assets/covers/ishant.jpg" alt="">
-        <img class="n35-wmedia" src="assets/gurls/g07.webp" alt="">
-        <img class="n35-wmedia" src="assets/covers/slay.jpg" alt="">
-        <img class="n35-wmedia" src="assets/gurls/g08.webp" alt="">
-        <img class="n35-wmedia" src="assets/covers/one8.jpg" alt="">
-        <img class="n35-wmedia" src="assets/gurls/g09.webp" alt="">
-        <img class="n35-wmedia" src="assets/covers/hardrock.jpg" alt="">
+        <img class="n35-wmedia" src="assets/gurls/g06.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/ishant.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g07.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/slay.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g08.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/one8.jpg" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/gurls/g09.webp" alt="" loading="lazy">
+        <img class="n35-wmedia" src="assets/covers/hardrock.jpg" alt="" loading="lazy">
       </div>
     </div>
     <ul>
@@ -1283,6 +1222,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
           <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
+        </span>
+      </a></li>
+      <li><a href="talent.html">
+        <span class="n35-name">Talent &amp; Branding</span>
+        <span class="n35-medias" aria-hidden="true">
+          <img class="n35-media" src="assets/covers/ishant.jpg" alt="" loading="lazy" decoding="async">
+          <img class="n35-media" src="assets/retain/ishant-social.webp" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="marketing.html">
@@ -1335,9 +1281,10 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
         </span>
       </a></li>
     </ul>
-    <div class="n35-bottom"><p class="n35-hint mono" aria-hidden="true">Scroll &darr; to go back to the film</p></div>
+    <div class="n35-bottom"><p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the film</p></div>
   </div>
 </div>
+<!--/S98:HEAD-->
 
 
 <main>
@@ -1518,10 +1465,6 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     <a class="cta-alt" href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">@98.entertainment</a>
   </p>
   <p class="cta-fine">98 Studio is in beta — a limited run of build slots at beta token pricing, and every model advance cuts your bill, not pads ours.</p>
-  <footer>
-    <span class="mono">Ninety-Eight Entertainment — est. 01.01.2020</span>
-    <span class="mono" id="ftime">—</span>
-  </footer>
       </div>
 
 
@@ -1537,6 +1480,42 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 
 
 </main>
+
+<!--S98:FOOT — the shared footer: written by Workshop/patch_site_chrome_v353.py; edit it there -->
+<footer class="s98-foot" id="s98-foot">
+  <div class="s98-fc s98-f1">
+    <span class="s98-faint">Socials:</span>
+    <a href="https://instagram.com/98.entertainment" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.behance.net/harsharya" target="_blank" rel="noopener">Behance</a>
+    <a href="https://wa.me/919711184674?text=Here%27s%20what%20I%27m%20building%3A%20" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="s98-fc s98-f2">
+    <span class="s98-faint">Pages:</span>
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="marketing.html">Marketing &mdash; the five rooms</a>
+    <a href="talent.html">Talent &amp; Branding</a>
+    <a href="blog/index.html">The journal</a>
+  </div>
+  <div class="s98-fc s98-f3">
+    <span class="s98-faint">Marketing, room by room:</span>
+    <a href="identity.html">Identity &amp; design</a>
+    <a href="amplify.html">The creator floor</a>
+    <a href="production.html">Production</a>
+    <a href="retain.html">Retain &mdash; the habit</a>
+    <a href="events.html">The night floor</a>
+  </div>
+  <div class="s98-fc s98-f4">
+    <span class="s98-faint">Contact:</span>
+    <a href="mailto:contact@ninety-eight.in" data-s98-mail="contact@ninety-eight.in">contact@ninety-eight.in</a>
+    <a href="#contact">Tell us what you&rsquo;re building &rarr;</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <div class="s98-rights">
+    <span>All rights reserved. &copy;2026 Ninety-Eight Entertainment</span>
+    <span class="s98-faint">Delhi NCR &middot; est. 01.01.2020 &middot; <span data-s98-clock>IST</span></span>
+  </div>
+</footer>
+<!--/S98:FOOT-->
 
 <script>
 (function(){
@@ -1565,7 +1544,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   var hdr = document.getElementById('hdr'), prog = document.getElementById('progress');
   function onScroll(){
     var y = window.scrollY;
-    hdr.classList.toggle('scrolled', y > 24);
+    if (hdr) hdr.classList.toggle('scrolled', y > 24);
     var h = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.width = (h > 0 ? (y/h)*100 : 0) + '%';
     parallax();
@@ -2701,225 +2680,14 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   else{ start(); }
 })();
 
-/* ===== the menu: effect 035, hung as a curtain ============================
-   The reference's category list, hired as the table of contents. Numbers
-   kept exactly: 0.04s random stagger, 0.4s power4.out rise, previous row
-   reversed at 3x speed, rows tweened between 45px and 122px of flex basis.
-   Sep 8 call, three changes on top:
-     1. It drops from the top edge (CSS transform) on solid carbon.
-     2. While it is down, a scroll gesture lifts it away again - the curtain
-        rises with the wheel/finger and fades as it goes, the hero film
-        showing through underneath. Past ~55% of a screen it lets go and the
-        page is exactly where it was (usually the first screen). Scroll back
-        up and it settles again. No page scroll happens while it is down.
-     3. The header's dots button carries over the overlay and reads Close.
-   Landing on a row is still a jump under the closing fade - an animated
-   scroll would replay every pinned scene between here and there. */
+/* ===== arriving at a section (v3.53) =======================================
+   The curtain menu moved to assets/site.js with the rest of the shared frame
+   (Workshop/patch_site_chrome_v353.py). What stays here is the landing's own
+   way of arriving at one of its sections, which the menu's rows, the
+   header's Contact and the practice words call: a jump, not a glide - an
+   animated scroll would replay every pinned scene on the way - onto a pinned
+   section's spacer top, and for #contact onto the drum's settled screen. */
 (function(){
-  var root=document.getElementById('nav035');
-  var btn=document.getElementById('menu-btn');
-  var hdr=document.getElementById('hdr');
-  if(!root||!btn) return;
-  var items=root.querySelectorAll('ul li');
-  var txt=btn.querySelector('.md-txt');
-  var fx=(typeof gsap!=='undefined')&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(!fx) root.classList.add('nofx');
-
-  var expanded=function(){ return window.innerWidth>768?122:90; };
-  var lastIndexEntered=0, tls=[], isOpen=false;
-
-  if(fx){
-    [].forEach.call(items,function(item,index){
-      var medias=item.querySelectorAll('.n35-media');
-      var tl=gsap.timeline({paused:true});
-      tl.to(medias,{
-        y:0,
-        stagger:{each:0.04,from:'random'},
-        duration:0.4,
-        ease:'power4.out'
-      });
-      tls.push(tl);
-      item.addEventListener('mouseenter',function(){
-        tls[lastIndexEntered].timeScale(3).reverse();
-        lastIndexEntered=index;
-        tls[index].timeScale(1).play();
-        gsap.to(items,{flex:'1 1 45px',duration:0.2,ease:'power2.inOut'});
-        gsap.to(item,{flex:'1 1 '+expanded()+'px',duration:0.2,ease:'power2.inOut'});
-      });
-    });
-  }
-
-  /* ---- effect 093: the word ----
-     The reference's numbers kept: each letter wrapped in a span; on hover an
-     image is born in its place (xPercent/yPercent -50, from a random +-10deg
-     roll at 1.05, back.out(2) over 0.3s), the letters either side are pushed
-     out by half the image's overflow on back.out(3), and 1.2s later the
-     image goes and the letter pops back with the same roll. Media are the
-     site's own: the Gurls set and four covers, cycled in order. */
-  var word=root.querySelector('.n35-word');
-  var wletters=[], woverflows=[], wsrcs=[], wIndex=0, wcalls=[];
-  if(word&&fx){
-    wsrcs=[].map.call(root.querySelectorAll('.n35-wmedia'),function(el){ return el.getAttribute('src'); });
-    word.innerHTML=word.textContent.split('').map(function(ch){ return ch===' '?'<span>&nbsp;</span>':'<span class="letter">'+ch+'</span>'; }).join('');
-    wletters=[].slice.call(word.querySelectorAll('.letter'));
-    woverflows=wletters.map(function(){ return 0; });
-    var mediaWidth=function(){ return Math.max(64,0.095*window.innerWidth); };
-    var applyOffsets=function(){
-      var sumLeft=0, targets=woverflows.map(function(ov,i){
-        var sumRight=0; for(var j=i+1;j<woverflows.length;j++) sumRight+=woverflows[j];
-        var x=sumLeft-sumRight; sumLeft+=ov; return x;
-      });
-      gsap.to(wletters,{x:function(i){ return targets[i]; },duration:0.3,ease:'back.out(3)',overwrite:'auto'});
-    };
-    var createMedia=function(letter){
-      var img=document.createElement('img');
-      img.src=wsrcs[wIndex]; img.className='n35-cm'; letter.appendChild(img);
-      gsap.set(img,{yPercent:-50,xPercent:-50});
-      gsap.from(img,{rotation:(Math.random()-0.5)*20,scale:1.05,duration:0.3,ease:'back.out(2)'});
-      wIndex=(wIndex+1)%wsrcs.length;
-      var index=wletters.indexOf(letter);
-      woverflows[index]=Math.max(woverflows[index],Math.max(0,(mediaWidth()-letter.getBoundingClientRect().width)/2));
-      applyOffsets();
-      var dc=gsap.delayedCall(1.2,function(){
-        var idx=wletters.indexOf(img.parentElement);
-        if(idx!==-1) woverflows[idx]=0;
-        img.remove(); applyOffsets();
-        gsap.from(letter,{rotation:(Math.random()-0.5)*20,scale:1.05,duration:0.3,ease:'back.out(2)'});
-      });
-      wcalls.push(dc);
-    };
-    wletters.forEach(function(letter){
-      letter.addEventListener('mouseenter',function(){ if(letter.children.length===0) createMedia(letter); });
-    });
-  }
-  function resetWord(){
-    if(!wletters.length) return;
-    wcalls.forEach(function(dc){ dc.kill(); }); wcalls=[];
-    wletters.forEach(function(l,i){ woverflows[i]=0; var im=l.querySelector('.n35-cm'); if(im) im.remove(); });
-    gsap.set(wletters,{x:0,rotation:0,scale:1,clearProps:'transform'});
-  }
-
-  /* ---- the curtain's motion: one number, eased ----
-     Everything the curtain does is driven off `lift` (0 = fully down,
-     1 = gone), and lift never jumps: gestures move a TARGET, and a
-     Lenis-style lerp on the GSAP ticker chases it every frame (0.09 per
-     frame at 60fps ~ Lenis's own default), so wheel notches read as one
-     continuous glide instead of steps. Open and close are GSAP tweens on the
-     same number (expo.inOut over 0.9s), so the curtain, its fade and the
-     dots button all move on the same curve, whichever way it was sent. */
-  var lift=0, target=0, ticking=false, settleT=null, curtainTween=null;
-  var RUN=function(){ return window.innerHeight*0.5; };
-  var proxy={v:0};
-  function paint(){
-    var v=lift;
-    root.style.transform='translate3d(0,'+(-v*100)+'%,0)';
-    root.style.opacity=String(1-v*0.85);
-    /* the dots step aside while rows pass under them */
-    btn.style.opacity=String(Math.max(0,1-v*2.5));
-  }
-  function resetPaint(){ root.style.transform=''; root.style.opacity=''; btn.style.opacity=''; root.classList.remove('dragging'); }
-  function tick(){
-    var d=target-lift;
-    if(Math.abs(d)<0.002){ lift=target; paint(); stopTick(); if(isOpen&&lift>=1) closeMenu(true); return; }
-    lift+=d*(fx?0.11:1);
-    paint();
-  }
-  function startTick(){ if(ticking) return; ticking=true; if(fx) gsap.ticker.add(tick); else { lift=target; paint(); ticking=false; } }
-  function stopTick(){ if(!ticking) return; ticking=false; if(fx) gsap.ticker.remove(tick); }
-  function killTween(){ if(curtainTween){ curtainTween.kill(); curtainTween=null; } }
-  function settle(){
-    /* the gesture stopped: past halfway it finishes leaving, short of it
-       the curtain eases back down - either way on a curve with a real end,
-       not the lerp's asymptote */
-    var to=(target>0.5||lift>0.5)?1:0;
-    slide(to,0.7,'power3.out',function(){ if(to>=1&&isOpen) closeMenu(true); });
-  }
-  function nudge(dy){
-    if(!isOpen) return;
-    if(dy<=0&&target<=0&&lift<=0) return;
-    clearTimeout(settleT); killTween();
-    root.classList.add('dragging');
-    target=Math.max(0,Math.min(1,target+dy/RUN()));
-    startTick();
-    settleT=setTimeout(settle,380);
-  }
-  /* open / close ride the same number through a tween */
-  function slide(to,dur,ease,done){
-    stopTick(); killTween(); clearTimeout(settleT);
-    if(!fx){ lift=target=to; paint(); if(done) done(); return; }
-    proxy.v=lift; target=to;
-    curtainTween=gsap.to(proxy,{v:to,duration:dur,ease:ease,overwrite:true,
-      onUpdate:function(){ lift=proxy.v; paint(); },
-      onComplete:function(){ curtainTween=null; lift=to; paint(); if(done) done(); }});
-  }
-  /* on the window, not the curtain: once it has risen, the pointer is over
-     the film beneath it and the curtain would never hear the next notch */
-  window.addEventListener('wheel',function(e){ if(!isOpen) return; e.preventDefault(); nudge(e.deltaY); },{passive:false});
-  var ty=null;
-  window.addEventListener('touchstart',function(e){ if(isOpen) ty=e.touches[0].clientY; },{passive:true});
-  window.addEventListener('touchmove',function(e){
-    if(!isOpen||ty===null) return;
-    var y=e.touches[0].clientY; var dy=ty-y; ty=y;
-    if(dy>0||lift>0){ e.preventDefault(); nudge(dy*1.4); }
-  },{passive:false});
-  window.addEventListener('touchend',function(){ ty=null; },{passive:true});
-  document.addEventListener('keydown',function(e){
-    if(!isOpen) return;
-    if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); closeMenu(); }
-  });
-
-  function openMenu(){
-    if(isOpen) return; isOpen=true;
-    clearTimeout(settleT);
-    document.body.style.overflow='hidden';
-    if(window.__scrollLock) window.__scrollLock(true);
-    root.classList.add('open');
-    /* drop from wherever it is (fully up, first time) to down, on the curve */
-    if(lift<=0||lift>1) lift=1;
-    paint();
-    slide(0,0.9,'expo.inOut');
-    root.setAttribute('aria-hidden','false');
-    btn.setAttribute('aria-expanded','true');
-    btn.setAttribute('aria-label','Close menu');
-    if(txt) txt.textContent='Close';
-    if(hdr) hdr.classList.add('menu-open');
-    if(fx){
-      /* the reference's load moment, replayed per open: first row expanded,
-         its media already rising, everything else shut */
-      lastIndexEntered=0;
-      for(var i=0;i<tls.length;i++) tls[i].pause(0);
-      gsap.set(items,{flex:'1 1 45px'});
-      gsap.set(items[0],{flex:'1 1 '+expanded()+'px'});
-      tls[0].timeScale(1).play();
-    }
-    btn.focus();
-  }
-  function closeMenu(viaScroll){
-    if(!isOpen) return; isOpen=false;
-    clearTimeout(settleT);
-    root.classList.remove('dragging');
-    var finish=function(){
-      root.classList.remove('open'); lift=1; resetPaint();
-      root.setAttribute('aria-hidden','true');
-      btn.setAttribute('aria-expanded','false');
-      btn.setAttribute('aria-label','Menu');
-      if(txt) txt.textContent='Menu';
-      if(hdr) hdr.classList.remove('menu-open');
-      resetWord();
-    };
-    document.body.style.overflow='';
-    if(window.__scrollLock) window.__scrollLock(false);
-    if(viaScroll){
-      /* the gesture already carried it off - it is at 1 (or the tick is
-         about to land there); just let it go */
-      stopTick(); lift=1; paint(); finish();
-    } else {
-      /* sent up by the button or a key: the same curve as the way down */
-      slide(1,0.8,'expo.inOut',finish);
-    }
-  }
-  window.__closeMenu=closeMenu;
-
   function jumpTo(href){
     var y;
     if(href==='#contact'){
@@ -2942,37 +2710,8 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     } else { window.scrollTo(0,y); }
   }
   window.__jumpTo=jumpTo;
-
-  [].forEach.call(root.querySelectorAll('ul li a'),function(a){
-    a.addEventListener('click',function(e){
-      /* Sep 9: rows can now point at real pages (marketing.html, the
-         journal). Those are left to the browser - only in-page anchors and
-         the two overlay actions are handled here. */
-      var h0=a.getAttribute('href');
-      if(h0 && h0.charAt(0)!=='#') return;
-      e.preventDefault();
-      /* the drum binds its own glide to a[href="#contact"] later; this
-         listener registered first, and the menu jumps instead */
-      e.stopImmediatePropagation();
-      var href=a.getAttribute('href'), act=a.getAttribute('data-action');
-      closeMenu();
-      if(act==='wheel'){
-        /* the flywheel has one door - the Marketing card's button */
-        var door=document.querySelector('[data-wheel]');
-        if(door) setTimeout(function(){ door.click(); },80);
-        return;
-      }
-      if(act==='film'){
-        var f=document.querySelector('[data-film]');
-        if(f) setTimeout(function(){ f.click(); },80);
-        return;
-      }
-      jumpTo(href);
-    });
-  });
-
-  btn.addEventListener('click',function(){ if(isOpen) closeMenu(); else openMenu(); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen) closeMenu(); });
+  /* from another page's menu: index.html#film opens the film */
+  if(location.hash==='#film') window.addEventListener('load',function(){ var f=document.querySelector('[data-film]'); if(f) setTimeout(function(){ f.click(); },700); });
 })();
 
 /* ===== the postcard's sway: effect 089 =====================================
@@ -3633,5 +3372,6 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 })();
 </script>
 
+<script src="assets/site.js"></script>
 </body>
 </html>
