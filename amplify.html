@@ -21,16 +21,15 @@ document.documentElement.classList.add('js');})();
 <link rel="stylesheet" href="assets/room.css">
 <style>
 /* =========================================================================
-   THE CREATOR FLOOR — effect 054, the drum (v3.52, Sep 2026)
-   At Harsh's call the wall is now MWG 054 (033 until v3.50, 084 in v3.51).
-   Every picture rides the rim of a slow drum turning away from you: it
-   comes up from below the screen edge-on, turns to face you as it passes
-   the middle, and tips away over the top, one after another in the board's
-   order, each at its own place across the width and on one of four arm
-   lengths. All of it is scrubbed to the scroll, in the zip's numbers, on
-   the room ground (White / Carbon, Archivo). The four labels that sat on
-   top came off in v3.54 at Harsh's call; the page's title is kept for
-   screen readers and search only.
+   THE CREATOR FLOOR — effect 051, the float (v3.59, Sep 2026)
+   At Harsh's call the wall is now MWG 051 (033 until v3.50, 084 in v3.51,
+   054 from v3.52 to v3.58), in the version "built for our 44" that he
+   picked on the Creator Wall Effects preview. Three pictures at a time
+   rise up the screen as you scroll, each trailing the scroll by its own
+   second (one, two, three), and as one leaves the top it is dealt the next
+   picture in the board's order and a new place across the width. On the
+   room ground (White / Carbon, Archivo), with no labels over the pictures
+   (v3.54); the page's title is kept for screen readers and search only.
 
    THE PICTURES ARE NOT EDITED HERE. They come from the Creator Wall board
    (a claude.ai artifact) through Workshop (build files)/build_creators_wall.py:
@@ -44,26 +43,21 @@ document.documentElement.classList.add('js');})();
    ========================================================================= */
 :root{ --room:#00933C; }   /* Creators' colour */
 
-.w054{position:relative;padding:calc(var(--m) + var(--s98-h,0px)) var(--m) calc(var(--lh) * 3)}
+.w051{position:relative;padding:calc(var(--m) + var(--s98-h,0px)) var(--m) calc(var(--lh) * 3)}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's title, for screen readers and search: the wall shows none (v3.54) */
-.w054 .w-cue{display:none}
-.w054 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
-.w054 .media{display:block;width:100%;height:auto}
+.w051 .w-cue{display:none}
+.w051 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
+.w051 .media{display:block;width:100%;height:auto}
 
-/* the effect: the zip's layout, once the script has taken over */
-.w054.fx{padding:0;--s:min(20vw, 45vh)}                     /* a picture's box: 20vw as in the zip, capped by a very short, wide window */
-.w054.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
-.w054.fx .w-container{position:relative;height:100vh;overflow:hidden}   /* the pinned screen */
-.w054.fx .w-medias{display:block;position:absolute;inset:0;margin:0;perspective:300vh}
-.w054.fx .w-arm{position:absolute;transform-style:preserve-3d}      /* no width: an axle at its left, turning about the screen's middle line */
-.w054.fx .w-arm.a1{z-index:4;top:-5vh;height:110%}
-.w054.fx .w-arm.a2{z-index:3;top:-10vh;height:120%}
-.w054.fx .w-arm.a3{z-index:2;top:-15vh;height:130%}
-.w054.fx .w-arm.a4{z-index:1;top:-20vh;height:140%}
-.w054.fx .media{position:absolute;left:0;bottom:0;width:calc(var(--s) * min(1, var(--ar, 1)));height:calc(var(--s) * min(1, 1 / var(--ar, 1)));max-width:none;object-fit:cover;
-  transform:translate(-50%, 50%) rotateX(90deg);box-shadow:2px 2px 30px rgba(0,0,0,.2);border-radius:1vw}   /* the zip's square, cut to the picture's own proportions */
+/* the effect, once the script has taken over */
+.w051.fx{padding:0}
+.w051.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
+.w051.fx .w-screen{position:relative;height:100vh;overflow:hidden}         /* the pinned screen */
+.w051.fx .w-medias{display:none}                                              /* the board's pictures in order: the script deals them from here */
+.w051.fx .w-slot{position:absolute;left:0;top:100%;width:25vw;aspect-ratio:.75;max-width:none;border-radius:1vw;object-fit:cover;will-change:transform}   /* the zip's .media: 25vw at 3:4, starting just below the screen */
+.w051.fx .w-slot:not([src]){visibility:hidden}                                /* a slot with nothing left to deal */
 @media(max-width:768px){
-  .w054.fx{--s:min(40vw, 45vh)}
+  .w051.fx .w-slot{width:40vw;border-radius:1.6vw}
 }
 </style>
 <link rel="stylesheet" href="assets/site.css">
@@ -172,12 +166,12 @@ document.documentElement.classList.add('js');})();
 <!--/S98:HEAD-->
 
 <main>
-<!-- ============ the wall — effect 054 ============ -->
-<section class="w054" id="wall" aria-label="The creator floor, in pictures">
+<!-- ============ the wall — effect 051 ============ -->
+<section class="w051" id="wall" aria-label="The creator floor, in pictures">
   <h1 class="vh">The creator floor</h1>
   <p class="w-cue" aria-hidden="true">Scroll</p>
   <div class="w-pin">
-    <div class="w-container">
+    <div class="w-screen">
       <div class="w-medias">
       <img class="media" src="assets/creators/wsfbhebhgmbyfx8klhsi.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
       <img class="media" src="assets/creators/it7f7gwio2z3krs2r8ai.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">
@@ -269,146 +263,152 @@ document.documentElement.classList.add('js');})();
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script>
-/* ---- 054: the drum, scrubbed to the scroll ----
-   The zip's driver and numbers: each picture hangs at the foot of an arm
-   55, 60, 65 or 70vh long (picked at random, the shorter in front), laid
-   flat; the arms turn from 0 to -180deg about the screen's middle line,
-   0.05 apart in the board's order, under a 300vh perspective, pinned and
-   scrubbed. Departures, each forced:
-   1. Lenis stays out: the site scrolls natively everywhere.
-   2. The zip drops each picture at a random place across the width. With
-      that, a picture passing the middle often has a neighbour in the
-      sequence right over it (the next one up is only 18deg behind), and on
-      a phone the 40vw pictures at the edges are cut off: measured on the
-      zip's own twenty-one, up to eleven were never seen whole on a computer
-      (the worst a fifth visible) and up to six on a phone, the fault Harsh
-      reported on 033. Here the places are still random, but a
-      picture is never put where it would cross a neighbour while either of
-      them faces you, and always where it is wholly on screen when it does.
-   3. The zip turns its drum in a fixed 500vh, right for its twenty-one; the
-      pin grows with the pictures instead, at the zip's pace (400vh for its
-      1.5 turns of the sequence), so each picture turns as slowly as there.
-   4. A picture's box is the zip's 20vw square (40vw on a phone) cut to the
-      picture's own proportions, so the rounded corners and the shadow sit
-      on the picture, not on an empty square around it.
-   5. Crossing 768px re-lays the pictures (20vw <-> 40vw), a big change of
-      the window's shape re-places them, and turning reduced motion on puts
-      the readable grid back. Nothing at all without GSAP or with reduced
-      motion: the grid stays.
-   6. Pictures are decoded a few ahead of their turn (see ahead()). */
+/* ---- 051: the float, carried by the scroll ----
+   The zip's driver and numbers: three pictures, 25vw wide at 3:4 (40vw on
+   a phone), start just below the screen and rise as you scroll, each
+   trailing the scroll through its own quickTo (one, two and three seconds,
+   power4). Each goes round its own loop (the screen and a picture's
+   height, plus 0, 200 or 400px "so they are not exactly aligned"), and as
+   it leaves the top it is dealt the next picture and a new place across
+   the width. Departures, each forced:
+   1. The zip holds its page still, listens to the wheel and loops for
+      ever, so its page has no end. Here the screen is pinned and the
+      page's own scroll carries it, a pixel for a pixel as the zip's wheel
+      does: all the pictures rise once, in the board's order, and when the
+      last has left the top the pin lets go and the footer comes up. Lenis
+      stays out, as everywhere on the site.
+   2. The zip deals whatever picture is next whenever one wraps, either
+      way. Here the whole deal is worked out first, so scrolling back
+      brings the same pictures down again in the same places, and none
+      comes round twice.
+   3. The zip drops each picture at a random place across the width, so
+      now and then one rises behind another (about one pass in five on a
+      computer, measured on the Effects preview). Built for our 44: still a
+      random place, but one clear of the pictures rising level with it (the
+      nearer in height, the more it counts), about one pass in a hundred.
+      Where three can't sit side by side (40vw on a phone), it takes the
+      least covered place.
+   4. Crossing 768px re-lays the wall (25vw <-> 40vw), a real change of the
+      window's size deals it again, and turning reduced motion on puts the
+      readable grid back. Nothing at all happens without GSAP.
+   5. Pictures are decoded a few ahead of their turn (see ahead()). */
 (function(){
   var root = document.getElementById('wall'); if (!root) return;
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-container');
-  var box = root.querySelector('.w-medias'), cue = root.querySelector('.w-cue');
-  var medias = [].slice.call(root.querySelectorAll('.media'));
-  if (!pin || !screen || !box || !medias.length) return;
+  var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-screen'), cue = root.querySelector('.w-cue');
+  var list = [].slice.call(root.querySelectorAll('.w-medias .media')), N = list.length;
+  if (!pin || !screen || !N) return;
   gsap.registerPlugin(ScrollTrigger);
-
-  var EACH = 0.05, SWING = 0.5;        /* the zip's stagger, and GSAP's default duration it relies on */
-  var PACE = 400 / 1.5;                /* vh of scroll per unit of the sequence: the zip's pace */
-  var ARMS = [55, 60, 65, 70];         /* arm lengths in vh, the zip's .media1-.media4 */
-  var TURN = 180 * EACH / SWING;       /* degrees between neighbours in the sequence: 18 */
-
-  medias.forEach(function(m){
-    var w = +m.getAttribute('width') || m.naturalWidth || 1, h = +m.getAttribute('height') || m.naturalHeight || 1;
-    m.style.setProperty('--ar', (w / h).toFixed(4));
-  });
+  var SRC = list.map(function(m){ return m.getAttribute('src'); });
+  var OFF = [0, 200, 400], DUR = [1, 2, 3];      /* the zip's offsets (px) and trails (s) for its three pictures */
 
   gsap.matchMedia().add({ phone: '(max-width: 768px)', desk: 'not all and (max-width: 768px)', still: '(prefers-reduced-motion: reduce)' }, function(ctx){
     if (ctx.conditions.still) return;
     root.classList.add('fx');
-    var n = medias.length, arms = [], cls = [], placedAt = 0;
-    medias.forEach(function(m, i){
-      cls[i] = Math.floor(Math.random() * 4);
-      var arm = document.createElement('div');
-      arm.className = 'w-arm a' + (cls[i] + 1);
-      arm.appendChild(m); box.appendChild(arm); arms.push(arm);
+    var slots = [0, 1, 2].map(function(){
+      var im = document.createElement('img');
+      im.className = 'w-slot'; im.alt = ''; im.setAttribute('aria-hidden', 'true'); im.decoding = 'async'; im.draggable = false;
+      screen.appendChild(im); return im;
     });
+    var H = 0, C = [], D = 0, sched = [], xs = [], shown = [-1, -1, -1], ready = 0, laid = [0, 0];
 
-    /* where each picture sits across the width: random, but clear of every neighbour it could meet face to face */
-    function place(){
-      var W = box.offsetWidth || innerWidth, H = box.offsetHeight || innerHeight, P = 3 * H, GAP = 0.01 * H, GX = 0.02 * W + 4, M = 0.01 * W;   /* the pinned screen, as the CSS sizes it */
-      var K = [], wv = [], hv = [], lim = [], near = [], U = [];
-      medias.forEach(function(m, i){
-        K[i] = P / (P + ARMS[cls[i]] * H / 100);                     /* its scale as it faces you */
-        wv[i] = m.offsetWidth; hv[i] = m.offsetHeight;
-        lim[i] = Math.max(0, (W / 2 - M - wv[i] * K[i] / 2) / (W * K[i]));   /* how far from the middle it can sit and still be wholly on screen */
-      });
-      function at(i, deg){                                             /* its height on screen and its projected size at a turn of deg */
-        var R = ARMS[cls[i]] * H / 100, a = deg * Math.PI / 180, k = P / (P + R * Math.sin(a));
-        return { y: R * Math.cos(a) * k, h: hv[i] * Math.sin(a) * k };
+    /* the deal: which picture each slot carries on each of its loops, and where.
+       The loops come round in a fixed order, so the whole deal can be worked
+       out first: each picture goes to the next slot that comes round, at a
+       random place across the width clear of the pictures rising level with
+       it. Where there is no clear place (three can't sit side by side on a
+       phone), that slot sits the loop out and the picture waits for the next. */
+    function deal(){
+      H = screen.clientHeight;
+      var w = slots[0].offsetWidth, h = slots[0].offsetHeight, rangeX = Math.max(0, screen.clientWidth - w);
+      C = OFF.map(function(o){ return H + h + o; });
+      sched = [[], [], []]; xs = [[], [], []];
+      var ev = [], k, n, e, next = 0, last = null;
+      for (k = 0; k < 3; k++) for (n = 0; n <= 2 * N; n++) ev.push({ k: k, n: n, at: n * C[k] });
+      ev.sort(function(a, b){ return a.at - b.at || a.k - b.k; });
+      function level(o, j, extra){                   /* the picture slot j has in the air when o comes up, if it is level with o */
+        if (extra && extra.k === j) return o.at - extra.at < h + 12 ? extra.x : null;
+        var nj = Math.floor(o.at / C[j]);
+        if (sched[j][nj] == null) return null;
+        return o.at - nj * C[j] < h + 12 ? xs[j][nj] : null;
       }
-      function meet(a, b){                                             /* can a and b (a earlier) overlap while either faces you? */
-        for (var t = -12; t <= 12; t += 4){
-          var cases = [[90 + t, 90 + t - TURN * (b - a)], [90 + t + TURN * (b - a), 90 + t]];
-          for (var q = 0; q < 2; q++){
-            var fa = cases[q][0], fb = cases[q][1];
-            if (fa <= 0 || fa >= 180 || fb <= 0 || fb >= 180) continue;
-            var A = at(a, fa), B = at(b, fb);
-            if (Math.abs(A.y - B.y) < (A.h + B.h) / 2 + GAP) return true;
+      function room(o, extra){                        /* is there a clear place left for o? */
+        var cuts = [];
+        for (var j = 0; j < 3; j++){ if (j === o.k) continue; var xj = level(o, j, extra); if (xj != null) cuts.push([xj - w - 12, xj + w + 12]); }
+        cuts.sort(function(a, b){ return a[0] - b[0]; });
+        var at = 0;
+        for (var c = 0; c < cuts.length; c++){ if (cuts[c][0] > at) return true; at = Math.max(at, cuts[c][1]); }
+        return at <= rangeX;
+      }
+      for (e = 0; e < ev.length && next < N; e++){
+        var o = ev[e], after = ev[e + 1], best = 0, bestHard = Infinity, bestTight = 1, bestSoft = Infinity;
+        for (var t = 0; t < 64; t++){
+          var x = t < 62 ? Math.random() * rangeX : (t === 62 ? 0 : rangeX), hard = 0, soft = 0;
+          for (var j = 0; j < 3; j++){
+            if (j === o.k) continue;
+            var nj = Math.floor(o.at / C[j]);
+            if (sched[j][nj] == null) continue;
+            var up = o.at - nj * C[j], over = Math.max(0, w + 12 - Math.abs(x - xs[j][nj]));   /* how far above this one's start it has risen */
+            if (up < h + 12) hard += over;                                  /* level with it: they would overlap */
+            soft += over * Math.max(0, 1 - up / (h * 2.2));                 /* near it: the scroll's trails could bring them level */
           }
+          var tight = after && after.k !== o.k && !room(after, { k: o.k, x: x, at: o.at }) ? 1 : 0;   /* would it leave the next one nowhere? */
+          if (hard < bestHard || (hard === bestHard && (tight < bestTight || (tight === bestTight && soft < bestSoft)))){ bestHard = hard; bestTight = tight; bestSoft = soft; best = x; }
+          if (hard === 0 && tight === 0 && soft === 0) break;
         }
-        return false;
+        if (bestHard > 0) continue;                                         /* no clear place: this loop is sat out */
+        sched[o.k][o.n] = next++; xs[o.k][o.n] = best; last = o;
       }
-      for (var i = 0; i < n; i++){ near[i] = []; for (var j = Math.max(0, i - 9); j < i; j++) if (meet(j, i)) near[i].push(j); }
-      function room(i, u){                                             /* least clearance, px, from the neighbours already placed */
-        var c = Infinity;
-        for (var q = 0; q < near[i].length; q++){
-          var j = near[i][q];
-          c = Math.min(c, Math.abs((u - 0.5) * W * K[i] - (U[j] - 0.5) * W * K[j]) - (wv[i] * K[i] + wv[j] * K[j]) / 2 - GX);
-        }
-        return c;
-      }
-      function leavesRoom(i, u){                                       /* and the next one still has somewhere to go */
-        if (i + 1 >= n) return true;
-        var keep = U[i]; U[i] = u;
-        for (var t = 0; t <= 24; t++) if (room(i + 1, 0.5 + (t / 12 - 1) * lim[i + 1]) >= 0){ U[i] = keep; return true; }
-        U[i] = keep; return false;
-      }
-      for (i = 0; i < n; i++){
-        var pool = [], best = 0.5, bestC = -Infinity;
-        for (var t = 0; t < 40; t++){
-          var u = 0.5 + (Math.random() * 2 - 1) * lim[i], c = room(i, u);
-          if (c >= 0 && leavesRoom(i, u)) pool.push(u);
-          if (c > bestC){ bestC = c; best = u; }
-        }
-        U[i] = pool.length ? pool[Math.floor(Math.random() * pool.length)] : best;
-        arms[i].style.left = (U[i] * 100).toFixed(3) + '%';
-      }
-      placedAt = W / H;
+      D = (last ? last.n * C[last.k] : 0) + H + h;  /* the scroll until the last picture has risen out of the top */
+      shown = [-1, -1, -1];
+      laid = [screen.clientWidth, H];
     }
-    place();
+    function ahead(i){                              /* decode pictures a few ahead of their turn */
+      var upto = Math.min(N, i + 7);
+      while (ready < upto){ var m = list[ready++]; if (m.decode) m.decode().catch(function(){}); }
+    }
+    function show(k, n){
+      shown[k] = n;
+      var i = sched[k][n];
+      if (i == null){ slots[k].removeAttribute('src'); return; }
+      slots[k].setAttribute('src', SRC[i]);
+      gsap.set(slots[k], { x: xs[k][n] });
+      ahead(i);
+    }
+    deal();
+    var to = slots.map(function(im, k){
+      return gsap.quickTo(im, 'y', { duration: DUR[k], ease: 'power4', modifiers: { y: function(v){
+        var p = Math.max(0, -parseFloat(v)), n = Math.floor(p / C[k]);
+        if (n !== shown[k]) show(k, n);
+        return -(p - n * C[k]) + 'px';
+      } } });
+    });
+    slots.forEach(function(im, k){ show(k, 0); });
 
-    pin.style.height = (100 + PACE * (SWING + (n - 1) * EACH)).toFixed(2) + 'vh';
-
+    var st = ScrollTrigger.create({
+      trigger: pin, start: 'top top', end: function(){ return '+=' + D; }, pin: screen,
+      onUpdate: function(self){ var p = Math.max(0, self.scroll() - self.start); to.forEach(function(t){ t(-p); }); }
+    });
     gsap.to(cue, {
       autoAlpha: 0, duration: 0.2,
       scrollTrigger: { trigger: root, start: 'top top', end: 'top top-=1', toggleActions: 'play none reverse none' }
-    });
-    var ready = 0;                        /* decode pictures a few ahead of their turn: they come up edge-on, so the browser */
-    function ahead(p){                    /* would otherwise decode each one only as it shows, and a fast flick flashes blank cards */
-      var upto = Math.min(n, Math.ceil(p * (SWING + (n - 1) * EACH) / EACH) + 6);
-      while (ready < upto){ var m = medias[ready++]; if (m.decode) m.decode().catch(function(){}); }
-    }
-    ahead(0);
-    gsap.to(arms, {
-      rotateX: -180, ease: 'none', duration: SWING, stagger: EACH,
-      scrollTrigger: { trigger: pin, start: 'top top', end: 'bottom bottom', pin: screen, scrub: true, onUpdate: function(self){ ahead(self.progress); } }
     });
 
     var timer = 0;
     function reshape(){
       clearTimeout(timer);
-      timer = setTimeout(function(){ if (Math.abs(box.offsetWidth / box.offsetHeight - placedAt) / placedAt > 0.15) place(); }, 200);
+      timer = setTimeout(function(){
+        if (Math.abs(screen.clientWidth - laid[0]) < 3 && Math.abs(screen.clientHeight - laid[1]) / laid[1] < 0.15) return;
+        deal(); ScrollTrigger.refresh();
+        var p = Math.max(0, st.scroll() - st.start);
+        to.forEach(function(t){ t(-p); });
+      }, 200);
     }
     addEventListener('resize', reshape);
 
-    return function(){                    /* leaving this layout: pictures back in order, arms gone */
+    return function(){                              /* leaving this layout: the slots go, the grid comes back */
       removeEventListener('resize', reshape); clearTimeout(timer);
-      medias.forEach(function(m){ box.appendChild(m); });
-      arms.forEach(function(a){ a.remove(); });
-      pin.style.height = '';
+      slots.forEach(function(im){ gsap.killTweensOf(im); im.remove(); });
       root.classList.remove('fx');
     };
   });
