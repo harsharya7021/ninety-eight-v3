@@ -21,13 +21,14 @@ document.documentElement.classList.add('js');})();
 <link rel="stylesheet" href="assets/room.css">
 <style>
 /* =========================================================================
-   THE CREATOR FLOOR — effect 033, the wall (v3.50, Sep 2026)
-   At Harsh's call the page is one effect: MWG 033, a pinned horizontal wall
-   of pictures in three rows. Each frame is thrown in from the right as its
-   left edge crosses 110% → 65% of the screen (a random roll of up to ±40°,
-   up to 150% off its line, up to 400% of its width behind) and thrown out
-   to the left as its right edge crosses 35% → −10%, all scrubbed to the
-   scroll. The zip's numbers, on the room ground (White / Carbon, Archivo).
+   THE CREATOR FLOOR — effect 084, rows through depth (v3.51, Sep 2026)
+   At Harsh's call the wall is now MWG 084 (it was 033 until v3.50.1). The
+   pictures come in rows, five across (three on a phone), each row falling
+   from far behind the top of the screen to the middle, where it stops,
+   then on toward the viewer and out at the bottom; each picture drops into
+   its row from the centre out and leaves the same way. All of it is
+   scrubbed to the scroll, in the zip's numbers, on the room ground
+   (White / Carbon, Archivo) with the four labels across the top.
 
    THE PICTURES ARE NOT EDITED HERE. They come from the Creator Wall board
    (a claude.ai artifact) through Workshop (build files)/build_creators_wall.py:
@@ -41,41 +42,43 @@ document.documentElement.classList.add('js');})();
    ========================================================================= */
 :root{ --room:#00933C; }   /* Creators' colour */
 
-.w033{position:relative;padding:var(--m) var(--m) calc(var(--lh) * 3)}
-.w033 .w-head{display:flex;justify-content:space-between;align-items:baseline;gap:4px var(--gap);flex-wrap:wrap}
-.w033 .w-head > *{font:inherit;margin:0}                      /* the h1 sets as the other labels do */
-.w033 .w-head > :not(:first-child){opacity:var(--faint)}
-.w033 .w-cue{display:none}
-.w033 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:var(--gap);margin-top:calc(var(--lh) * 2)}
-.w033 .media{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.w084{position:relative;padding:var(--m) var(--m) calc(var(--lh) * 3)}
+.w084 .w-head{display:flex;justify-content:space-between;align-items:baseline;gap:4px var(--gap);flex-wrap:wrap}
+.w084 .w-head > *{font:inherit;margin:0}                      /* the h1 sets as the other labels do */
+.w084 .w-head > :not(:first-child){opacity:var(--faint)}
+.w084 .w-cue{display:none}
+.w084 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start;margin-top:calc(var(--lh) * 2)}
+.w084 .media{display:block;width:100%;height:auto}
 
 /* the effect: the zip's layout, once the script has taken over */
-.w033.fx{height:100vh;height:100svh;overflow:hidden;padding:0}
-.w033.fx .w-head{position:absolute;top:0;left:0;right:0;padding:var(--m);z-index:2}
-.w033.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;opacity:var(--faint)}
-.w033.fx .w-container{height:100%;width:max-content;padding:0 110vw;display:flex;align-items:center;white-space:nowrap;will-change:transform}
-.w033.fx .w-medias{display:grid;grid-template-columns:none;grid-template-rows:repeat(3,auto);grid-auto-flow:column;align-items:center;gap:3vw;margin:0}
-.w033.fx .media{width:15vw;height:15vw;aspect-ratio:auto;position:relative;will-change:transform}
+.w084.fx{padding:0}
+.w084.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
+.w084.fx .w-container{position:relative;height:100vh;overflow:hidden}   /* the pinned screen; rows thrown at the viewer are clipped to it */
+.w084.fx .w-head{position:absolute;top:0;left:0;right:0;padding:var(--m);z-index:999}   /* over every row, however many */
+.w084.fx .w-medias{display:block;position:absolute;inset:0;margin:0;perspective:120vw}
+.w084.fx .w-row{display:flex;justify-content:center;align-items:center;gap:3vw;width:100%;position:absolute;top:0;left:0;transform-style:preserve-3d}
+.w084.fx .media{width:min(16vw, 52vh);transform-style:preserve-3d}    /* 16vw as in the zip; only a very short, wide window caps it, so a row always fits between the labels and the bottom */
 @media(max-width:768px){
-  .w033.fx .w-medias{gap:6vw}
-  .w033.fx .media{width:35vw;height:35vw}
+  .w084.fx .w-medias{perspective:200vw}
+  .w084.fx .media{width:28vw}
 }
 </style>
 </head>
 <body>
 
 <main>
-<!-- ============ the wall — effect 033 ============ -->
-<section class="w033" id="wall" aria-label="The creator floor, in pictures">
-  <div class="w-head">
+<!-- ============ the wall — effect 084 ============ -->
+<section class="w084" id="wall" aria-label="The creator floor, in pictures">
+  <p class="w-cue" aria-hidden="true">Scroll</p>
+  <div class="w-pin">
+    <div class="w-container">
+      <div class="w-head">
     <h1>The creator floor</h1>
     <p>Creators, PR &amp; media</p>
     <p>Delhi NCR</p>
     <p>Since 2020</p>
-  </div>
-  <p class="w-cue" aria-hidden="true">Scroll</p>
-  <div class="w-container">
-    <div class="w-medias">
+      </div>
+      <div class="w-medias">
       <img class="media" src="assets/creators/wsfbhebhgmbyfx8klhsi.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
       <img class="media" src="assets/creators/it7f7gwio2z3krs2r8ai.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">
       <img class="media" src="assets/creators/9ev5t2zpkghu8trorqzx.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
@@ -94,25 +97,33 @@ document.documentElement.classList.add('js');})();
       <img class="media" src="assets/creators/sdczihwfodv4vyqh22fk.webp" alt="" width="672" height="840" decoding="async" draggable="false">
       <img class="media" src="assets/creators/3figg80w96ghrsq2diqb.webp" alt="" width="960" height="1200" decoding="async" draggable="false">
       <img class="media" src="assets/creators/supja9vzdvd144h9ctwj.webp" alt="" width="1080" height="1080" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/xfundbbxs5cu6lpmn2as.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/i53cotmqqkej3fxrqs44.webp" alt="" width="802" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/788tysxp266fny5iemmq.webp" alt="" width="750" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/1ip1enwddwcocpc8qz4u.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/xfundbbxs5cu6lpmn2as.webp" alt="" width="960" height="1200" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/i53cotmqqkej3fxrqs44.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/788tysxp266fny5iemmq.webp" alt="" width="1050" height="1400" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/1ip1enwddwcocpc8qz4u.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/u04xmbtokoedtlceg7l1.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
       <img class="media" src="assets/creators/ljivgd0ouz3srnnsfbxh.webp" alt="" width="672" height="840" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/zgti7a43slypjdr8q66e.webp" alt="" width="801" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/ugtk1jztts9xknu34m89.webp" alt="" width="855" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/30038lilkpk58dphljqn.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/vgutinyslqczl3ex9akm.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/zgti7a43slypjdr8q66e.webp" alt="" width="1080" height="1349" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/ugtk1jztts9xknu34m89.webp" alt="" width="1080" height="1263" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/30038lilkpk58dphljqn.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/vgutinyslqczl3ex9akm.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
       <img class="media" src="assets/creators/blc344pkirg9c5dzovsy.webp" alt="" width="674" height="840" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/t7ekn0gb1l8f5sbb4rev.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/wuqp0zr0nejfgofnpxr8.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/dv3zhnwudeax6nt4uaep.webp" alt="" width="750" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/7ed7rw8j9j7b5q5gvh78.webp" alt="" width="748" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/7nvmf23m110f7rzgouvb.webp" alt="" width="799" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/0w3ofr5u0vvoiyqi7qto.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/u04xmbtokoedtlceg7l1.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/kjouw8ewjv6u3xr7sizn.webp" alt="" width="750" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/t7ekn0gb1l8f5sbb4rev.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/wuqp0zr0nejfgofnpxr8.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/dv3zhnwudeax6nt4uaep.webp" alt="" width="1050" height="1400" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/7ed7rw8j9j7b5q5gvh78.webp" alt="" width="958" height="1280" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/7nvmf23m110f7rzgouvb.webp" alt="" width="959" height="1200" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/0w3ofr5u0vvoiyqi7qto.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/kjouw8ewjv6u3xr7sizn.webp" alt="" width="936" height="1248" decoding="async" draggable="false">
       <img class="media" src="assets/creators/kugq9xrgdd3j3p9b3rb0.webp" alt="" width="942" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/4njisqicvpmx6lfgx9hf.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/fmmkbwvouaoer5e0nizj.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/kyw10nriykpvbmo0e6ye.webp" alt="" width="801" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/a1jddoipwdgdlojj4wip.webp" alt="" width="799" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/3ljd6153z6l9fye98cxy.webp" alt="" width="903" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/zjacpe20pgtj55qch0us.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/tzw6bbhofklsxzy7uo3e.webp" alt="" width="1000" height="1000" decoding="async" draggable="false">
+      </div>
     </div>
   </div>
 </section>
@@ -121,59 +132,73 @@ document.documentElement.classList.add('js');})();
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script>
-/* ---- 033: the wall, scrubbed to the scroll ----
-   The zip's driver and numbers. Departures, each forced:
+/* ---- 084: rows through depth, scrubbed to the scroll ----
+   The zip's driver and numbers: rows of five (three at 768px and under);
+   each row comes from z −80% of the screen's width, a row's height above
+   the top, to the middle at z 0 (half a crossing, power3.inOut), then
+   goes on to z +80% and a screen below (the other half); its pictures drop
+   in from 200% above, the centre one first, 0.03 apart, and leave 200%
+   down the same way. Departures, each forced:
    1. Lenis stays out: the site scrolls natively everywhere.
-   2. The travel is a function and the pin invalidates on refresh, so a
-      resize (or a phone turning) re-measures the wall instead of keeping
-      the distance it had at load; the zip measured once.
-   3. Nothing is installed until .fx is on, and nothing at all with reduced
-      motion or without GSAP: the readable grid stays. */
+   2. The zip starts its rows 1/n of a crossing apart in a fixed 500vh, which
+      is right for its three rows only: with the board's forty-odd pictures
+      (nine rows, fifteen on a phone) the rows would arrive on top of one
+      another and hide each other. Rows here start a third of a crossing
+      apart, as the zip's three do, and the pin grows with the rows instead:
+      240vh of scroll per crossing, the zip's own pace. So each row has the
+      middle of the screen to itself when it stops there; nothing covers it.
+   3. The depth is a function and the pin invalidates on refresh, so a
+      resize re-measures; crossing 768px regroups the rows (five ↔ three),
+      and turning reduced motion on puts the readable grid back.
+   4. Nothing is installed without GSAP or with reduced motion: the grid stays. */
 (function(){
   var root = document.getElementById('wall'); if (!root) return;
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  var container = root.querySelector('.w-container');
+  var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-container');
+  var box = root.querySelector('.w-medias'), cue = root.querySelector('.w-cue');
   var medias = [].slice.call(root.querySelectorAll('.media'));
-  if (!container || !medias.length) return;
+  if (!pin || !screen || !box || !medias.length) return;
   gsap.registerPlugin(ScrollTrigger);
-  root.classList.add('fx');
 
-  gsap.to(root.querySelector('.w-cue'), {
-    autoAlpha: 0, duration: 0.2,
-    scrollTrigger: { trigger: root, start: 'top top', end: 'top top-=1', toggleActions: 'play none reverse none' }
-  });
+  var STEP = 1 / 3;      /* rows start a third of a crossing apart */
+  var PACE = 240;        /* vh of scroll per crossing */
 
-  var W = innerWidth;
-  medias.forEach(function(media){
-    gsap.set(media, { x: (Math.random() - 0.5) * 0.16 * W, y: (Math.random() - 0.5) * 0.1 * W });
-  });
-
-  function distance(){ return Math.max(0, container.offsetWidth - document.documentElement.clientWidth); }
-  var scrollTween = gsap.to(container, {
-    x: function(){ return -distance(); },
-    ease: 'none',
-    scrollTrigger: {
-      trigger: root, pin: true, scrub: true, invalidateOnRefresh: true,
-      end: function(){ return '+=' + distance(); }
+  gsap.matchMedia().add({ phone: '(max-width: 768px)', desk: 'not all and (max-width: 768px)', still: '(prefers-reduced-motion: reduce)' }, function(ctx){
+    if (ctx.conditions.still) return;
+    var perRow = ctx.conditions.phone ? 3 : 5, rows = [];
+    root.classList.add('fx');
+    for (var i = 0; i < medias.length; i += perRow){
+      var row = document.createElement('div');
+      row.className = 'w-row';
+      medias.slice(i, i + perRow).forEach(function(m){ row.appendChild(m); });
+      box.appendChild(row); rows.push(row);
     }
-  });
+    pin.style.height = (100 + PACE * (1 + (rows.length - 1) * STEP)) + 'vh';
 
-  medias.forEach(function(media){
-    gsap.from(media, {
-      rotation: (Math.random() - 0.5) * 80,        /* between -40 and 40 */
-      yPercent: (Math.random() - 0.5) * 300,       /* between -150 and 150 */
-      xPercent: Math.random() * 400,               /* between 0 and 400 */
-      ease: 'power1.out',
-      scrollTrigger: { trigger: media, containerAnimation: scrollTween, start: 'left 110%', end: 'left 65%', scrub: true }
+    gsap.to(cue, {
+      autoAlpha: 0, duration: 0.2,
+      scrollTrigger: { trigger: root, start: 'top top', end: 'top top-=1', toggleActions: 'play none reverse none' }
     });
-    gsap.fromTo(media, { rotation: 0, yPercent: 0, xPercent: 0 }, {
-      rotation: (Math.random() - 0.5) * 80,
-      yPercent: (Math.random() - 0.5) * 300,
-      xPercent: -Math.random() * 400,              /* between 0 and -400 */
-      ease: 'power1.in',
-      scrollTrigger: { trigger: media, containerAnimation: scrollTween, start: 'right 35%', end: 'right -10%', scrub: true }
+
+    var master = gsap.timeline({
+      scrollTrigger: { trigger: pin, start: 'top top', end: 'bottom bottom', pin: screen, scrub: true, invalidateOnRefresh: true }
     });
+    rows.forEach(function(row, i){
+      var pics = row.querySelectorAll('.media'), tl = gsap.timeline();
+      tl.fromTo(row, { zIndex: rows.length - i, z: function(){ return -0.8 * innerWidth; }, yPercent: -100, y: 0 },
+                     { z: 0, yPercent: -50, y: '50vh', duration: 0.5, ease: 'power3.inOut' });
+      tl.fromTo(pics, { yPercent: -200 }, { yPercent: 0, stagger: { each: 0.03, from: 'center' }, duration: 0.35, ease: 'power3.inOut' }, '<');
+      tl.to(row, { z: function(){ return 0.8 * innerWidth; }, yPercent: 0, y: '100vh', duration: 0.5, ease: 'power3.inOut' });
+      tl.to(pics, { yPercent: 200, stagger: { each: 0.03, from: 'center' }, duration: 0.35, ease: 'power3.inOut' }, '<');
+      master.add(tl, i * STEP);
+    });
+
+    return function(){                    /* leaving this layout: pictures back in order, rows gone */
+      medias.forEach(function(m){ box.appendChild(m); });
+      rows.forEach(function(r){ r.remove(); });
+      pin.style.height = '';
+      root.classList.remove('fx');
+    };
   });
 })();
 </script>
