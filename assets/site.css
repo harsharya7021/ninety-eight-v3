@@ -8,7 +8,8 @@
 
      .s98-head   the header, on every page: Menu and the Carbon / White
                  switch on the left, the mark in the middle, and Marketing,
-                 Talent, Journal and Contact as buttons on the right (v3.56).
+                 Personal Branding, Journal, Case studies and Contact as
+                 buttons on the right (v3.56; the last two names v3.61).
                  Delhi time left it in v3.54 (the footer keeps it) and Home
                  in v3.55: the mark is the way home.
                  Fixed; clear at the very top, and a light frosted layer
@@ -97,17 +98,21 @@ html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not
 html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not(.s98-glass) .s98-c img{filter:none}
 html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
 
-/* where a side would run into the mark, it gives way (measured with Archivo, v3.56):
-   at 760px and below the three pages step out (the menu lists them) and Contact stays;
-   at 460px and below the mark steps out too: Menu and the switch left, Contact right */
-@media(max-width:760px){
+/* where a side would run into the mark, it gives way (measured with Archivo, v3.61):
+   at 1100px and below Marketing, Personal Branding and Journal step out (the menu
+   lists them) and Case studies and Contact stay; at 480px and below the mark steps
+   out too; at 380px and below Case studies steps out, and Contact is alone */
+@media(max-width:1100px){
   .s98-head .s98-nav .s98-pg{display:none}
   .s98-l{gap:16px}
 }
-@media(max-width:460px){
+@media(max-width:480px){
   .s98-head{grid-template-columns:auto 1fr auto}
   .s98-c{display:none}
   .s98-r{grid-column:3}
+}
+@media(max-width:380px){
+  .s98-head .s98-nav .s98-cs{display:none}
 }
 @media print{ .s98-head,.nav035{display:none} }
 
