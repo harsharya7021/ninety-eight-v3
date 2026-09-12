@@ -5,7 +5,7 @@
 <script>(function(){var d=document.documentElement,g='carbon';try{if(localStorage.getItem('98-ground')==='white')g='white';}catch(e){}d.setAttribute('data-ground',g);})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The press room — PR &amp; media · Ninety-Eight</title>
-<meta name="description" content="PR &amp; media at Ninety-Eight: media relations (twelve stories our clients earned in Curly Tales, The New Indian Express, Lifestyle Asia, iDiva, Femina, GQ, Outlook, India Today, NDTV Food and Outlook Traveller), events and experiential marketing, and digital and social PR.">
+<meta name="description" content="PR &amp; media at Ninety-Eight: media relations (twelve stories our clients earned in Curly Tales, The New Indian Express, Lifestyle Asia, iDiva, Femina, GQ, Outlook, India Today, NDTV Food and Outlook Traveller), events and experiential marketing (launches, festivals, takeovers and milestones), and digital and social PR (twenty creator posts from our campaigns).">
 <meta property="og:title" content="The press room — PR &amp; media · Ninety-Eight">
 <meta property="og:description" content="Media relations, events and experiential marketing, digital and social PR: the coverage our clients earned.">
 <meta property="og:image" content="https://harsharya7021.github.io/ninety-eight-v3/assets/og-cover.jpg">
@@ -20,7 +20,7 @@
    THE PRESS ROOM — PR & media, in three sections (v3.58, Sep 2026)
    PR & Media's own page (v3.57), grown at Harsh's call into the three
    things the practice does, each under its own title in the room pages'
-   type (the kicker row, then the headline composed line by line):
+   type, composed line by line (v3.62: no kicker rows, at Harsh's call):
 
      01 Media Relations      the twelve coverage cards on the MWG 088 row:
                              drag it, and each card that comes on screen
@@ -35,13 +35,15 @@
      03 Digital & Social PR  creators' posts from our campaigns on a second
                              088 row, each at its own proportions.
 
-   To add a press story: a square card in assets/press/ (1,200px WebP),
-   then copy a .media-parent line in 01. To add a creator post: the
-   picture in assets/social/ (long edge 1,000px, WebP) and a line in 03
-   with its --ar (width / height). To fill the events wall: replace a
-   frame in 02 with <img class="media" src="..." width="..." height="..."
-   alt="..." decoding="async" draggable="false"> (long edge 1,000px, WebP);
-   rows may hold any number, and each row keeps the zip's 8px gaps.
+   THE PICTURES ARE NOT EDITED HERE (v3.60). They come from the Press Room
+   board (a claude.ai artifact) through Workshop (build files)/build_press.py:
+   the board holds each section's pictures, their order, their alt text and
+   the line that describes each section; "sync press room" writes new pictures to
+   assets/press/, assets/events/ and assets/social/ and regenerates this
+   file from _press_template.html. Edit the template, not this. The events
+   wall splits its pictures into three rows in board order, each row as
+   close as can be to the others' width; with none, it keeps the zip's 36
+   empty frames.
 
    The CSS ships the READABLE state: plain grids. The scripts add .fx
    before they move anything, so reduced motion or a blocked script
@@ -50,7 +52,8 @@
 :root{ --room:#0039A6; }   /* PR & Media's colour (the seven's .c-pr) */
 
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's own title, for screen readers and search */
-.prs-h{margin:var(--lh) var(--m) 0}   /* a section's title: the room pages' headline lines, the full width of the page */
+.prs-h{margin:calc(clamp(120px,22vh,260px) + var(--lh) * 2) var(--m) 0}   /* a section's title: the room pages' headline lines, the full width of the page */
+#mr-h{margin-top:calc(var(--lh) * 4)}   /* the first one opens the page, under the header */
 main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before the footer's rule */
 
 /* ---------- 088: a row you drag (01 and 03) ---------- */
@@ -222,11 +225,6 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
 
 <!-- ============ 01 — Media Relations: the row, effect 088 ============ -->
 <section class="prs" id="media-relations" aria-labelledby="mr-h">
-  <div class="g kick first">
-    <span class="n faint">01</span>
-    <span class="t">The press</span>
-    <span class="s faint">Twelve stories in ten publications</span>
-  </div>
   <h2 class="prs-h" id="mr-h" aria-label="Media Relations">
     <span class="ln l"><i>Media</i></span><span class="hl"></span>
     <span class="ln r"><i>Relations</i></span><span class="hl"></span>
@@ -234,18 +232,18 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
   <div class="w088">
     <div class="w-stage" role="region" aria-label="Twelve stories in ten publications. Drag the row, or use the arrow keys.">
     <div class="container">
-      <div class="media-parent"><img class="media" src="assets/press/curlytales-valentine.webp" alt="Curly Tales: &ldquo;6 Romantic Experiences To Gift A Foodie &amp; Floor Them With Taste This Valentine&rsquo;s Day&rdquo;, by Tania Tarafdar" width="1200" height="1200" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/tnie-khansamas.webp" alt="The New Indian Express, a food review of Pracheen: India before 1947: &ldquo;Recipes from the league of Khansamas&rdquo;, by Rajkumari Sharma Tankha" width="1200" height="1200" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/lifestyleasia-pracheen.webp" alt="Lifestyle Asia, on Pracheen: India before 1947: &ldquo;5 places in Delhi to try this month if you&rsquo;re craving wholesome Indian cuisine&rdquo;" width="1200" height="1200" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/idiva-tbsp.webp" alt="iDiva, 24 February 2023, on Tbsp. Tablespoon, DLF Avenue, Saket: &ldquo;8 Places For The Juiciest Gourmet Burgers In Delhi &amp; Mumbai&rdquo;, by Tanya Kundu" width="1200" height="1200" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/femina-valentine.webp" alt="Femina: &ldquo;#ValentineDining: Wine &amp; Dine At These Hotspots In Delhi and Bengaluru!&rdquo;, written by Aishwarya Acharya" width="1200" height="1200" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/gq-new-restaurants.webp" alt="GQ: &ldquo;The 9 best new restaurants &amp; delivery kitchens in Delhi to try right now&rdquo;, by Saumyaa Vohra" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/outlook-ivoryy.webp" alt="Outlook, a restaurant review: &ldquo;Ivoryy: A Garden of Many Delights&rdquo;, by Mallika Bhagat" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/indiatoday-mood.webp" alt="India Today: &ldquo;In the mood for food&rdquo;, by Manjari Saxena" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/curlytales-harajuku.webp" alt="Curly Tales, on Select Citywalk, Saket: &ldquo;Delhi Has A Tokyo Cafe That Offers Exclusively Crafted Japanese Desserts &amp; Boba Tea&rdquo;, by Suchismita Pal" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/ndtvfood-harajuku.webp" alt="NDTV Food: &ldquo;New In Town: This Adorable Tokyo Caf&eacute; In Delhi Has Bought The Vibrant Streets Of Harajuku To Town&rdquo;, by Aanchal Mathur" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/outlooktraveller-hearth.webp" alt="Outlook Traveller, an interview on Hearth &amp; i: &ldquo;Megha Jhunjhunwala&rsquo;s Journey from the West&rdquo;, by Simrran Gill" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent"><img class="media" src="assets/press/tnie-bowled-over.webp" alt="The New Indian Express, on the Buddha bowl: &ldquo;Bowled over&rdquo;, by Medha Dutta Yadav" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/curlytales-valentine.webp" alt="Curly Tales: “6 Romantic Experiences To Gift A Foodie &amp; Floor Them With Taste This Valentine’s Day”, by Tania Tarafdar" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/tnie-khansamas.webp" alt="The New Indian Express, a food review of Pracheen: India before 1947: “Recipes from the league of Khansamas”, by Rajkumari Sharma Tankha" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/lifestyleasia-pracheen.webp" alt="Lifestyle Asia, on Pracheen: India before 1947: “5 places in Delhi to try this month if you’re craving wholesome Indian cuisine”" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/idiva-tbsp.webp" alt="iDiva, 24 February 2023, on Tbsp. Tablespoon, DLF Avenue, Saket: “8 Places For The Juiciest Gourmet Burgers In Delhi &amp; Mumbai”, by Tanya Kundu" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/femina-valentine.webp" alt="Femina: “#ValentineDining: Wine &amp; Dine At These Hotspots In Delhi and Bengaluru!”, written by Aishwarya Acharya" width="1200" height="1200" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/gq-new-restaurants.webp" alt="GQ: “The 9 best new restaurants &amp; delivery kitchens in Delhi to try right now”, by Saumyaa Vohra" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/outlook-ivoryy.webp" alt="Outlook, a restaurant review: “Ivoryy: A Garden of Many Delights”, by Mallika Bhagat" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/indiatoday-mood.webp" alt="India Today: “In the mood for food”, by Manjari Saxena" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/curlytales-harajuku.webp" alt="Curly Tales, on Select Citywalk, Saket: “Delhi Has A Tokyo Cafe That Offers Exclusively Crafted Japanese Desserts &amp; Boba Tea”, by Suchismita Pal" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/ndtvfood-harajuku.webp" alt="NDTV Food: “New In Town: This Adorable Tokyo Café In Delhi Has Bought The Vibrant Streets Of Harajuku To Town”, by Aanchal Mathur" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/outlooktraveller-hearth.webp" alt="Outlook Traveller, an interview on Hearth &amp; i: “Megha Jhunjhunwala’s Journey from the West”, by Simrran Gill" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent"><img class="media" src="assets/press/tnie-bowled-over.webp" alt="The New Indian Express, on the Buddha bowl: “Bowled over”, by Medha Dutta Yadav" width="1200" height="1200" loading="lazy" decoding="async" draggable="false"></div>
     </div>
     </div>
     <p class="w-cue" aria-hidden="true">Drag</p>
@@ -254,11 +252,6 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
 
 <!-- ============ 02 — Events & Experiential Marketing: the rows, effect 065 ============ -->
 <section class="prs" id="events-experiential" aria-labelledby="ev-h">
-  <div class="g kick">
-    <span class="n faint">02</span>
-    <span class="t">The room</span>
-    <span class="s faint">Launches, festivals, takeovers and milestones</span>
-  </div>
   <h2 class="prs-h" id="ev-h" aria-label="Events &amp; Experiential Marketing">
     <span class="ln l"><i>Events &amp;</i></span><span class="hl"></span>
     <span class="ln c"><i>Experiential</i></span><span class="hl"></span>
@@ -316,17 +309,12 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
 
 <!-- ============ 03 — Digital & Social PR: a second row, effect 088 ============ -->
 <section class="prs" id="digital-social" aria-labelledby="ds-h">
-  <div class="g kick">
-    <span class="n faint">03</span>
-    <span class="t">The feed</span>
-    <span class="s faint">Twenty creator posts from our campaigns</span>
-  </div>
   <h2 class="prs-h" id="ds-h" aria-label="Digital &amp; Social PR">
     <span class="ln l"><i>Digital &amp;</i></span><span class="hl"></span>
     <span class="ln r"><i>Social PR</i></span><span class="hl"></span>
   </h2>
   <div class="w088 social">
-    <div class="w-stage" role="region" aria-label="Twenty creator posts. Drag the row, or use the arrow keys.">
+    <div class="w-stage" role="region" aria-label="Twenty creator posts from our campaigns. Drag the row, or use the arrow keys.">
     <div class="container">
       <div class="media-parent" style="--ar:0.799"><img class="media" src="assets/social/315304326.webp" alt="A creator at Monet" width="799" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.8"><img class="media" src="assets/social/324389961.webp" alt="A creator at Tbsp. Tablespoon" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></div>
@@ -334,7 +322,7 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
       <div class="media-parent" style="--ar:1"><img class="media" src="assets/social/296148922.webp" alt="Snackstar.in, a seeding post by @sanjanas_patil" width="1000" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.8"><img class="media" src="assets/social/313485866.webp" alt="A creator at a wrought-iron gate, at night" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.8"><img class="media" src="assets/social/315005430.webp" alt="A creator at a restaurant bar" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="media-parent" style="--ar:0.799"><img class="media" src="assets/social/311786676.webp" alt="A creator&rsquo;s plate: open toasts with avocado" width="799" height="1000" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="media-parent" style="--ar:0.799"><img class="media" src="assets/social/311786676.webp" alt="A creator’s plate: open toasts with avocado" width="799" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.801"><img class="media" src="assets/social/314395520.webp" alt="A creator with a drink, on a terrace" width="801" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.903"><img class="media" src="assets/social/314996695.webp" alt="A creator on a rooftop at night" width="903" height="1000" loading="lazy" decoding="async" draggable="false"></div>
       <div class="media-parent" style="--ar:0.8"><img class="media" src="assets/social/286368495.webp" alt="A creator under a neon sign" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></div>
@@ -569,6 +557,9 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
       is a function and the pin invalidates on refresh, so a picture that
       lands late, a resize or the 768px step re-measure instead. A row
       shorter than the screen stays where it is.
+   4. The pictures load lazily, and all at once when the wall comes within
+      a screen of view: a row's far end is clipped, so the browser alone
+      would fetch those only as they slide in.
    Nothing at all without GSAP or with reduced motion: the rows wrap. */
 (function(){
   var root = document.getElementById('w065'); if (!root) return;
@@ -588,9 +579,17 @@ main{padding-bottom:clamp(80px,14vh,160px)}   /* the last row breathes before th
     });
     return function(){ root.classList.remove('fx'); };
   });
-  [].forEach.call(root.querySelectorAll('img.media'), function(img){
+  var imgs = [].slice.call(root.querySelectorAll('img.media'));
+  imgs.forEach(function(img){
     if (!img.complete) img.addEventListener('load', function(){ ScrollTrigger.refresh(); }, { once: true });
   });
+  if (imgs.length && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      if (!es[0].isIntersecting) return;
+      imgs.forEach(function(img){ img.loading = 'eager'; }); io.disconnect();
+    }, { rootMargin: '100% 0px' });
+    io.observe(root);
+  }
 })();
 </script>
 <script src="assets/site.js"></script>
