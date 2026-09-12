@@ -1,12 +1,14 @@
 /* =========================================================================
    SITE 98 — the shared frame's behaviour (v3.53, Sep 2026)
    Pairs with assets/site.css. Loaded last on every page, after GSAP where
-   the page has it. Four things:
+   the page has it. Five things:
      1. the ground — Carbon (default) / White, remembered across the site
      2. Delhi time in the header and the footer
      3. the header's frosted layer once the page moves under it, and, on the
         landing, its small mark waiting while the hero's big one is on screen
-     4. the curtain menu (effect 035 + the word, effect 093), moved here from
+     4. the nudges (a room's Scroll or Drag cue), held back until the page
+        has been still for six seconds
+     5. the curtain menu (effect 035 + the word, effect 093), moved here from
         the landing with its numbers intact, so the dots open it on every page
    Hooks a page may provide (the landing does): window.__scrollLock(on),
    window.__lenis, window.__jumpTo(hash) for in-page rows, [data-film].
@@ -82,7 +84,27 @@
     });
   }
 
-  /* ---- 4. the menu: effect 035, hung as a curtain ----
+  /* ---- 4. the nudges wait for a stillness (v3.63) ----
+     A room's Scroll or Drag cue is for someone who has stopped, not a label
+     that sits on the screen: html[data-cues] is "wait" while the page is
+     being moved or worked and turns "still" after six seconds without a
+     scroll, a press or a key; the first move sets it back. A page still has
+     its own say over whether its cue is due at all — each fades its own away
+     once its scene has started — and this only decides whether a due one is
+     on screen. Without JS the attribute is never set and the cues behave as
+     they always did (assets/site.css holds the rule). */
+  var STILL = 6000, stillTimer = 0;
+  function stirred(){
+    doc.setAttribute('data-cues', 'wait');
+    clearTimeout(stillTimer);
+    stillTimer = setTimeout(function(){ doc.setAttribute('data-cues', 'still'); }, STILL);
+  }
+  ['scroll', 'wheel', 'touchstart', 'touchmove', 'pointerdown', 'keydown'].forEach(function(t){
+    window.addEventListener(t, stirred, { passive: true, capture: true });
+  });
+  stirred();
+
+  /* ---- 5. the menu: effect 035, hung as a curtain ----
      The reference's category list, hired as the site's table of contents.
      Numbers kept exactly: 0.04s random stagger, 0.4s power4.out rise, the
      previous row reversed at 3x speed, rows tweened between 45px and 122px

@@ -201,3 +201,14 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 /* full-bleed pictures are the ground, not objects on it: the landing's
    montage frames and its hover preview stay square and flat */
 :where(.mont, .preview) img{border-radius:0;box-shadow:none}
+
+/* ---------- the nudges: only for a page that has gone still (v3.63) ----------
+   A room's Scroll or Drag cue comes up after six seconds without a scroll, a
+   press or a key (assets/site.js sets html[data-cues]), and the first move
+   takes it away again. The rooms keep their own say over whether a cue is due
+   — each fades its own out once its scene has started. Without JS the
+   attribute is never set and every cue shows as it always did. */
+.w104-cue,.w-cue,.scroll-cue{transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+html[data-cues="wait"] .w104-cue,
+html[data-cues="wait"] .w-cue,
+html[data-cues="wait"] .scroll-cue{opacity:0!important}
