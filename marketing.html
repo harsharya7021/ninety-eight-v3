@@ -181,11 +181,12 @@ svg{display:block}
 .mwg109 .content{display:flex;flex-direction:column;justify-content:space-between;gap:1.4rem;height:100%}
 .mwg109 .title{font-weight:800;font-stretch:118%;letter-spacing:-.03em;line-height:.85;font-size:clamp(1.9rem,3vw,2.6rem);width:min-content;outline:none}
 .mwg109 .bottom{display:flex;flex-direction:column;gap:1rem}
-.mwg109 .media{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;border-radius:4px;background:rgba(0,0,0,.14)}
-.mwg109 .media.fig{display:flex;flex-direction:column;align-items:center;justify-content:center;background:none;
-  border:1px dashed var(--on);opacity:.9;margin-top:clamp(1.6rem,4.5vh,2.6rem);gap:1rem;flex-wrap:wrap}   /* v3.47: the last three came from the problems' .fig rule, which this figure had been picking up; they live here now so it sets as it did */
-.mwg109 .media.fig b{font-weight:800;font-stretch:118%;letter-spacing:-.04em;font-size:4.4rem;line-height:.9}
-.mwg109 .media.fig span{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;margin-top:.45rem}
+/* the picture plate (v3.64, from Harsh's canvas): a portrait shot standing on a card
+   of its own in the panel's ink, 7px below it and 9px to its left. --ar is the plate's
+   shape (PR's shot stands a little taller), --pos the band a taller shot keeps. */
+.mwg109 .media{position:relative;display:block;width:calc(100% - 9px);height:auto;aspect-ratio:var(--ar,1131/1414);min-width:0;min-height:0}   /* the 9px is the shot's own offset: it keeps the pair inside the panel */
+.mwg109 .media i{position:absolute;left:0;top:7px;width:100%;height:100%;border-radius:7px;background:var(--on)}
+.mwg109 .media img{position:relative;left:9px;display:block;width:100%;height:100%;border-radius:7px;object-fit:cover;object-position:var(--pos,50% 50%)}
 .mwg109 .txt p{font-size:.95rem;line-height:1.45;letter-spacing:-.005em}
 .mwg109 .txt .meta{margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.95}
 .mwg109 .meta a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
@@ -200,8 +201,8 @@ svg{display:block}
 .mwg109.fx .slide:not(.on){cursor:pointer}
 .mwg109.fx .content{width:calc(var(--open) - 40px)}
 .mwg109.fx .title{font-size:var(--t109)}
-.mwg109.fx .bottom{flex-direction:row;align-items:flex-end;gap:28px}
-.mwg109.fx .media{width:clamp(180px,calc(var(--open) - 370px),270px);flex:0 0 auto}
+.mwg109.fx .bottom{flex-direction:row;align-items:flex-end;gap:28px;flex:1 1 auto;min-height:0}
+.mwg109.fx .media{width:clamp(180px,calc(var(--open) - 370px),270px);max-height:100%;flex:0 0 auto}
 .mwg109.fx .txt{width:290px;flex:0 0 auto}
 .mwg109.fx .small-title{display:flex;justify-content:center;position:absolute;bottom:0;left:100%;width:506px;
   padding:20px;line-height:16px;transform:rotate(-90deg);transform-origin:0 100%;
@@ -211,7 +212,7 @@ svg{display:block}
 .mwg109.fx.stack .slide{flex:0 0 60px;height:auto;width:100%}
 .mwg109.fx.stack .content{width:auto;height:auto}
 .mwg109.fx.stack .bottom{flex-direction:column;align-items:stretch;gap:1rem}
-.mwg109.fx.stack .media{width:100%;max-width:480px;order:2}
+.mwg109.fx.stack .media{width:calc(100% - 9px);max-width:480px;order:2}
 .mwg109.fx.stack .title{font-size:min(var(--t109),4.5rem)}
 .mwg109.fx.stack .txt{width:auto}
 .mwg109.fx.stack .small-title{left:0;width:100%;padding:22px 20px;transform:none;justify-content:flex-start}
@@ -389,7 +390,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-branding">
             <h3 class="title" tabindex="-1">Branding</h3>
             <div class="bottom">
-              <img class="media" src="assets/retain/bunta-brand.webp" alt="Bunta Bar Express, the identity" width="270" height="180" decoding="async">
+              <div class="media"><i aria-hidden="true"></i><img src="assets/retain/branding-bench.webp" alt="At the bench &mdash; drawing a mark over a reference wall, samples and swatches laid out" width="960" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>The name, the position, the mark, and a system that has to survive a feed it was never designed for. Not a deck that gets signed off and filed, but the thing the press cycle, the creator brief and the menu photograph all have to agree with.</p>
                 <p class="meta">In <span data-count="branding">13</span> of <span data-total>35</span> records<br><a href="identity.html" target="_blank" rel="noopener">The identity work &nearr;</a></p>
@@ -402,7 +403,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-pr">
             <h3 class="title" tabindex="-1">PR&nbsp;&amp; Media</h3>
             <div class="bottom">
-              <img class="media" src="assets/retain/one8.webp" alt="Ninety-Eight and One8 Commune, the announcement" width="270" height="180" decoding="async" style="object-position:50% 12%">
+              <div class="media" style="--ar:1121/1441"><i aria-hidden="true"></i><img src="assets/retain/pr-press-call.webp" alt="A publicist holding out a red telephone receiver over a spread of magazine covers" width="935" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>The earned half of the same job: a creator makes the city talk, a journalist makes the record. Three awards in one year for one client group, and national trade press for a campaign fronted by our talent.</p>
                 <p class="meta">In <span data-count="pr">9</span> of <span data-total>35</span> records<br><a href="press.html" target="_blank" rel="noopener">The press room &nearr;</a></p>
@@ -415,7 +416,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-creators">
             <h3 class="title" tabindex="-1">Creators</h3>
             <div class="bottom">
-              <img class="media" src="assets/gurls/g11.webp" alt="A creator frame from the culture set" width="270" height="180" decoding="async" style="object-position:50% 35%">
+              <div class="media"><i aria-hidden="true"></i><img src="assets/retain/creators-ring.webp" alt="One subject ringed by phone screens, every camera filming her at once" width="960" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>One verified voice per audience class, never five from the same shelf, landing inside a window tight enough that a city reads it as an arrival rather than a schedule. Reach is combined follower reach, not impressions, and we say so.</p>
                 <p class="meta">In <span data-count="creators">34</span> of <span data-total>35</span> records<br><a href="amplify.html" target="_blank" rel="noopener">The creator floor &nearr;</a></p>
@@ -428,7 +429,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-paid">
             <h3 class="title" tabindex="-1">Paid&nbsp;&amp; Search</h3>
             <div class="bottom">
-              <div class="media fig" role="img" aria-label="4 of 35 records"><b data-count="paid">4</b><span>of <span data-total>35</span> records</span></div>
+              <div class="media" style="--pos:50% 0%"><i aria-hidden="true"></i><img src="assets/retain/paid-desk.webp" alt="Working a laptop at a studio desk, pencil between the teeth" width="800" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>Noise that never converts is a hobby. Paid media and search, tuned until they pay back. Four records touch it and none of them lead with it. It is the youngest thing we do, and we would rather say so.</p>
                 <p class="meta"><span class="no">No room of its own yet</span></p>
@@ -441,7 +442,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-social">
             <h3 class="title" tabindex="-1">Social</h3>
             <div class="bottom">
-              <img class="media" src="assets/retain/spice.webp" alt="Spice Station, a Navratri post" width="270" height="180" decoding="async">
+              <div class="media" style="--pos:50% 92%"><i aria-hidden="true"></i><img src="assets/retain/social-ideas.webp" alt="Carrying the week's ideas &mdash; an armful of magazines, a notebook and two coffees" width="800" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>Reach you rent stops the day you stop paying; this is the part you keep. The feed held week after week and the design system under it, with social creatives, stories and posts for eleven brands in the directory.</p>
                 <p class="meta">In <span data-count="social">32</span> of <span data-total>35</span> records<br><a href="retain.html" target="_blank" rel="noopener">The studio directory &nearr;</a></p>
@@ -454,7 +455,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-production">
             <h3 class="title" tabindex="-1">Production</h3>
             <div class="bottom">
-              <img class="media" src="assets/retain/prod/nycpie.webp" alt="NYC Pie, shot for the menu" width="270" height="180" decoding="async">
+              <div class="media" style="--pos:50% 92%"><i aria-hidden="true"></i><img src="assets/retain/prod/studio-tripod.webp" alt="Behind the camera &mdash; a body on a tripod head, tethered, waiting on the next frame" width="800" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>A shoot is a channel we own, not a service sold apart from it. Menus, ranges, rooms and people: sixteen shoots across food and hospitality, run here, not bought in.</p>
                 <p class="meta">In <span data-count="production">17</span> of <span data-total>35</span> records<br><a href="production.html" target="_blank" rel="noopener">The shoots &nearr;</a></p>
@@ -467,7 +468,7 @@ html[data-ground="white"]{
           <div class="content" id="w109-events">
             <h3 class="title" tabindex="-1">Events</h3>
             <div class="bottom">
-              <img class="media" src="assets/covers/sneakerfest.jpg" alt="The Great Indian Sneaker Festival" width="270" height="180" decoding="async">
+              <div class="media" style="--pos:50% 0%"><i aria-hidden="true"></i><img src="assets/retain/events-desk-call.webp" alt="Working the run of show on the phone, feet up on the desk" width="800" height="1200" loading="lazy" decoding="async"></div>
               <div class="txt">
                 <p>A festival&rsquo;s product is the room. Launch parties, festival activations, venue takeovers, anniversaries: our job on the night is to make sure the right forty people are standing in it, and that what they saw survives the next morning.</p>
                 <p class="meta">In <span data-count="events">17</span> of <span data-total>35</span> records<br><a href="events.html" target="_blank" rel="noopener">The night floor &nearr;</a></p>
