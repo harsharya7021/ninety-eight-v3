@@ -32,7 +32,10 @@ document.documentElement.classList.add('js');})();
 
 .roomtag{display:inline-block;border:1px solid var(--room);color:var(--room);padding:2px 7px;line-height:16px}
 
-/* the film band — one montage, full width of the grid, no chrome */
+/* the film band — one montage, full width of the grid, no chrome.
+   v3.66: the poster is the montage's own first frame (assets/montage-poster.jpg); it was
+   assets/montage/m1.jpg, a New York subway sign from the retired flicker set, which stood
+   in for the film until it played and for good under reduced motion. */
 .film{margin-top:var(--lh)}
 .film .fr{grid-column:1/13;position:relative;aspect-ratio:16/7;overflow:hidden;background:#000;outline:1px solid var(--line);outline-offset:-1px}
 .film video{width:100%;height:100%;object-fit:cover;display:block}
@@ -198,7 +201,7 @@ document.documentElement.classList.add('js');})();
 </div>
 <section class="g film" aria-label="Montage — the nights">
   <div class="fr">
-    <video id="montage" src="assets/montage.mp4" muted loop playsinline preload="metadata" poster="assets/montage/m1.jpg" aria-label="Montage from the nights"></video>
+    <video id="montage" src="assets/montage.mp4" muted loop playsinline preload="metadata" poster="assets/montage-poster.jpg" aria-label="Montage from the nights"></video>
   </div>
   <div class="cap">
     <span class="faint">Montage &mdash; from the floor, across the twelve</span>
@@ -219,7 +222,7 @@ document.documentElement.classList.add('js');})();
     <p>This is the last of Marketing&rsquo;s five rooms and the one the other four point at. Launch parties, festival activations, venue takeovers, anniversaries, and the talent standing in the middle of them. Experiential is a long word for a short instruction: be in the room, and make the room worth being in.</p>
     <p>An event is not a campaign that happens to have catering. The room <em>is</em> the product &mdash; a sneaker fest sells the floor, not the shoes; a global brand with a local franchise sells the night, not the menu; an anniversary is a calendar item until somebody turns it into a content calendar. Our job on the night is to make sure the right forty people are standing in it, and that what they saw survives the next morning as something the brand owns.</p>
     <p>Which is why this room never travels alone. The stack that fills it is built in room 02; the feed that keeps it alive afterwards is held in room 04. The night is the spike. The rest of the page is what makes the spike worth paying for.</p>
-    <a class="more" href="marketing.html#night">The Night &mdash; the room in the story &rarr;</a>
+    <a class="more" href="marketing.html#seven">The Night &mdash; the room in the story &rarr;</a>
   </div>
 </section>
 <div class="gap" aria-hidden="true"></div>

@@ -17,7 +17,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/field.css">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+/* v3.66: the stage is decided here, before first paint, not at the foot of the body.
+   html.fx = motion allowed, so the opener's plain h1 is never painted and then yanked
+   (the 104 script removes the class again if GSAP fails to arrive, and the readable
+   line comes back); data-cues starts at "wait" so no Scroll cue shows before site.js
+   has had its say. Reduced motion adds neither and gets the readable page as before. */
+(function(){var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion:reduce)').matches)d.classList.add('fx');d.setAttribute('data-cues','wait');})();
+</script>
 <style>
 /* =========================================================================
    MARKETING — vertical 02 (v3.44, Sep 2026)  ·  THE PROBLEM SPINE
@@ -134,9 +141,12 @@ svg{display:block}
 .w104-say i{font-style:normal;color:var(--red)}
 @media(max-width:900px){ .w104-say{padding-left:var(--pad)} }
 .mwg104 .pin-height,.w104-cue{display:none}
-.mwg104.fx .w104-say{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+/* v3.66: html.fx is set in the head, so the two rules below already hold at first paint;
+   .mwg104.fx follows when the script has installed the stage (and is the state that
+   survives if the head's guess is withdrawn for want of GSAP) */
+html.fx .mwg104 .w104-say,.mwg104.fx .w104-say{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-.mwg104.fx .pin-height{display:block;height:857vh}   /* the script re-paces this to the line; 857 is it for this one */
+html.fx .mwg104 .pin-height,.mwg104.fx .pin-height{display:block;height:857vh}   /* the script re-paces this to the line; 857 is it for this one */
 .mwg104 .container{height:100vh;display:flex;align-items:center;overflow:hidden}
 .mwg104 svg{display:block;width:120%;height:auto;overflow:visible;margin:8vw 0 0 -10%}
 #w104-line{fill:none;stroke:none}
@@ -189,7 +199,8 @@ svg{display:block}
 .mwg109 .media img{position:relative;left:9px;display:block;width:100%;height:100%;border-radius:7px;object-fit:cover;object-position:var(--pos,50% 50%)}
 .mwg109 .txt p{font-size:.95rem;line-height:1.45;letter-spacing:-.005em}
 .mwg109 .txt .meta{margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.95}
-.mwg109 .meta a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.mwg109 .meta a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
+  display:inline-block;padding:.4rem 0;margin:-.4rem 0}   /* v3.66: the type stays .58rem; the target grows to ~26px without moving anything */
 .mwg109 .meta a:hover{text-decoration-thickness:2px}
 .mwg109 .meta .no{opacity:.62}
 .mwg109 .small-title{display:none}
@@ -542,8 +553,24 @@ html[data-ground="white"]{
    Lenis, optional in the zip, stays out: this page scrolls natively. */
 (function(){
   var root = document.getElementById('opener'); if (!root) return;
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof MorphSVGPlugin === 'undefined') return;
+  /* v3.66: a hash landing (events.html and two journal posts arrive at #seven). With
+     scroll-behavior:smooth the browser's own fragment jump is a glide, and the stage's
+     first ScrollTrigger.refresh() cancels a glide mid-flight, so the page stayed at the
+     top. Land by hand, instantly: once now, once more when the stage has measured. */
+  function land(){
+    var h = location.hash, el = null; if (!h || h.length < 2) return;
+    try { el = document.getElementById(decodeURIComponent(h.slice(1))); } catch (e) {}
+    if (!el) return;
+    var de = document.documentElement, was = de.style.scrollBehavior;
+    de.style.scrollBehavior = 'auto'; el.scrollIntoView(); de.style.scrollBehavior = was;
+  }
+  land();
+  /* v3.66: the head already put html.fx on for this stage; if the stage cannot be built
+     after all, take it off again so the plain line is painted instead of nothing */
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches ||
+      typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof MorphSVGPlugin === 'undefined'){
+    document.documentElement.classList.remove('fx'); return;
+  }
   gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
   root.classList.add('fx');                    /* the stage replaces the plain line before anything measures */
 
@@ -697,6 +724,7 @@ html[data-ground="white"]{
 
     root.addEventListener('wheel', handleWheel, { passive: true });
     ScrollTrigger.refresh();
+    land();
   }
 
   /* start once the type and any pictures are in — or after 3s regardless, so a stalled font file

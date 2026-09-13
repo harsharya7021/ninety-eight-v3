@@ -16,7 +16,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script>
 (function(){try{document.documentElement.setAttribute('data-ground',localStorage.getItem('98-ground')==='white'?'white':'carbon');}catch(e){document.documentElement.setAttribute('data-ground','carbon');}
-document.documentElement.classList.add('js');})();
+document.documentElement.classList.add('js');
+/* v3.66: the float is decided here, before first paint. html.fx hides the readable grid of
+   forty-four pictures that used to paint and then vanish the moment GSAP arrived (on a
+   slow line, two seconds of wall and then an empty screen); the wall's script hands over
+   to its own .fx and takes this one off, or takes it off if it cannot run. Reduced motion
+   never sets it and keeps the grid, as before. */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('fx');
+document.documentElement.setAttribute('data-cues','wait');   /* the Scroll cue waits for site.js's stillness clock rather than showing for the tick before it */})();
 </script>
 <link rel="stylesheet" href="assets/room.css">
 <style>
@@ -49,7 +56,12 @@ document.documentElement.classList.add('js');})();
 .w051 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
 .w051 .media{display:block;width:100%;height:auto}
 
-/* the effect, once the script has taken over */
+/* the effect, once the script has taken over — and, under html.fx, from first paint (v3.66):
+   no padding, the screen already a screen tall and the grid already away, so nothing is
+   painted that the script will take back */
+html.fx .w051{padding:0}
+html.fx .w051 .w-screen{height:100vh}
+html.fx .w051 .w-medias{display:none}
 .w051.fx{padding:0}
 .w051.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
 .w051.fx .w-screen{position:relative;height:100vh;overflow:hidden}         /* the pinned screen */
@@ -305,11 +317,12 @@ document.documentElement.classList.add('js');})();
       readable grid back. Nothing at all happens without GSAP.
    5. Pictures are decoded a few ahead of their turn (see ahead()). */
 (function(){
-  var root = document.getElementById('wall'); if (!root) return;
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var html = document.documentElement;                    /* v3.66: the head's html.fx is only a guess; see below */
+  var root = document.getElementById('wall'); if (!root){ html.classList.remove('fx'); return; }
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined'){ html.classList.remove('fx'); return; }
   var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-screen'), cue = root.querySelector('.w-cue');
   var list = [].slice.call(root.querySelectorAll('.w-medias .media')), N = list.length;
-  if (!pin || !screen || !N) return;
+  if (!pin || !screen || !N){ html.classList.remove('fx'); return; }
   gsap.registerPlugin(ScrollTrigger);
   var SRC = list.map(function(m){ return m.getAttribute('src'); });
   var OFF = [0, 200, 400], DUR = [1, 2, 3];      /* the zip's offsets (px) and trails (s) for its three pictures */
@@ -424,6 +437,7 @@ document.documentElement.classList.add('js');})();
       root.classList.remove('fx');
     };
   });
+  html.classList.remove('fx');                          /* v3.66: the wall's own .fx is on now (or, under reduced motion, rightly not); the head's guess steps aside in the same tick, so nothing repaints between the two */
 })();
 </script>
 <script src="assets/site.js"></script>

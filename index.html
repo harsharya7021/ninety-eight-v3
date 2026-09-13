@@ -399,9 +399,12 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
    floor no gradient can disguise, because the darkest parts of the film land
    on one black and the section below is a different one. */
 .mont{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg)}
-.mont video,.mont img.mframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
-.mont video.live{opacity:.62}
-.mont img.mframe.on{opacity:.42}
+/* v3.66: the film is on screen from first paint, poster and all. hero.jpg is the film's own
+   first frame, so it stands in for the file while it arrives and the cut to motion is
+   invisible; nothing else has to fill the slot in the meantime (the nine subway stills
+   used to flicker here at .42 for however long the 4 MB took, which read as a fault).
+   .62 is the film's opacity over the carbon floor, as before. */
+.mont video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}
 /* The bottom edge has to arrive at carbon BEFORE the section ends, not at it.
    The old ramp hit full opacity only on the last pixel row, so a few percent
    of the film was still transmitting where the hero met the black below — on
@@ -425,7 +428,7 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
 /* .pcap is left at its resting opacity:0 — the caption that used to run along
    the bottom-left on hover is gone by request. The element and its JS still
    set the text, so restoring it is one rule. */
-#top.previewing .mont video.live,#top.previewing .mont img.mframe.on{opacity:.07}
+#top.previewing .mont video{opacity:.07}
 /* The mark against the film — Indigo's move.
    Their fixed header is white type set in mix-blend-mode:difference: it stays
    white through the dark passages and inverts wherever something bright
@@ -1325,7 +1328,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
     <a class="rev" style="--d:.7s" href="marketing.html" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — the opening · the noise · the return · the habit · the night">Marketing</a>
   </nav>
 
-  <span class="nudge-l" aria-hidden="true"></span>
+  <span class="nudge-l rev" style="--d:.9s" aria-hidden="true"></span><!-- v3.66: arrives with the corner line opposite, not before the mark -->
   <a class="nudge-r mono studio-hint rev" style="--d:.9s" href="#film" data-film="1" aria-label="98 Studio, in beta — watch the first film">Something in the building &middot; 98 Studio<sup>beta</sup></a>
 </section>
 
@@ -1545,7 +1548,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
     document.body.style.overflow='hidden'; if(window.__scrollLock) window.__scrollLock(true);
     var t0 = performance.now(), dur = 1200;
     (function tick(now){
-      var p = Math.min((now - t0)/dur, 1);
+      var p = Math.max(0, Math.min((now - t0)/dur, 1));   /* v3.66: the first frame's timestamp can predate t0 by a few ms, which printed "-2" before "00" */
       var eased = 1 - Math.pow(1-p, 3);
       ln.textContent = String(Math.round(eased*98)).padStart(2,'0');
       if (p < 1) requestAnimationFrame(tick); else setTimeout(finishLoad, 220);
@@ -1615,58 +1618,30 @@ html[data-ground="white"] #top{background:#0B0B0C}
     });
   });
 
-  /* ---------- hero montage: video slot with frame-flicker fallback ---------- */
-  var mont = document.getElementById('mont'), montv = document.getElementById('montv');
-  var heroVisible = true, flickerTimer = null, frames = [], fIdx = 0;
-  var hio = new IntersectionObserver(function(en){ heroVisible = en[0].isIntersecting; syncFlicker(); }, {threshold:.02});
+  /* ---------- hero film (v3.66) ----------
+     The poster is the film's own first frame and the CSS shows the <video>
+     from first paint, so the slot is never empty and never needs standing in
+     for: the file arrives behind a still of itself and the cut to motion is
+     invisible. The nine assets/montage stills that used to flicker here while
+     the 4 MB loaded (and on a slow line kept flickering for seconds after the
+     loader lifted) are retired from the hero — they were the subway concept,
+     flagged stock-risk in this handoff — and buildFrames/startFlicker went
+     with them. If the file cannot play at all the poster simply stays.
+     Reduced motion never starts the film: the still is the hero.
+     The film also rests while the hero is off screen, which it never did. */
+  var montv = document.getElementById('montv');
+  var heroVisible = true;
+  function playFilm(){ try{ var pp = montv.play(); if (pp && pp.catch) pp.catch(function(){}); }catch(e){} }
+  function syncFilm(){
+    if (reduce){ try{ montv.pause(); }catch(e){} return; }
+    if (heroVisible && !document.hidden) playFilm(); else { try{ montv.pause(); }catch(e){} }
+  }
+  var hio = new IntersectionObserver(function(en){ heroVisible = en[0].isIntersecting; syncFilm(); }, {threshold:.02});
   hio.observe(document.getElementById('top'));
-  function buildFrames(){
-    if (frames.length) return;
-    for (var i=1;i<=9;i++){
-      var im = document.createElement('img');
-      im.className='mframe'; im.src='assets/montage/m'+i+'.jpg'; im.alt='';
-      mont.insertBefore(im, mont.querySelector('.mont-shade'));
-      frames.push(im);
-    }
-  }
-  function tickFlicker(){
-    frames[fIdx].classList.remove('on');
-    fIdx = (fIdx+1) % frames.length;
-    frames[fIdx].classList.add('on');
-    flickerTimer = setTimeout(tickFlicker, Math.random() < .28 ? 380 : 760);
-  }
-  function startFlicker(){
-    if (reduce){ buildFrames(); frames[3].classList.add('on'); return; }
-    buildFrames();
-    if (!flickerTimer && heroVisible){ frames[fIdx].classList.add('on'); flickerTimer = setTimeout(tickFlicker, 700); }
-  }
-  function stopFlicker(){ if(flickerTimer){ clearTimeout(flickerTimer); flickerTimer=null; } }
-  function syncFlicker(){
-    if (montv.classList.contains('live')) return;
-    if (heroVisible && !document.hidden && frames.length) { if(!flickerTimer && !reduce) { flickerTimer = setTimeout(tickFlicker, 700);} }
-    else stopFlicker();
-  }
-  document.addEventListener('visibilitychange', syncFlicker);
-  /* if a real stitched montage.mp4 is present it wins; otherwise frames take over */
-  montv.addEventListener('canplay', function(){ stopFlicker(); frames.forEach(function(f){f.classList.remove('on')}); montv.classList.add('live'); });
-  /* Visibility has to track playback, not a one-shot race.
-     .live was added on canplay alone, and the 2600ms guard below strips it
-     again if autoplay has not started by then — after which nothing ever put
-     it back, so a film that began playing a moment late ran at opacity 0
-     behind the flicker frames for the rest of the session. canplay can also
-     have been and gone before this listener attaches, on a cached or
-     fast-served file. 'playing' fires whenever playback actually starts or
-     resumes, which is precisely when the film should be on screen, and it
-     closes both holes. */
-  montv.addEventListener('playing', function(){
-    stopFlicker();
-    frames.forEach(function(f){ f.classList.remove('on'); });
-    montv.classList.add('live');
-  });
-  setTimeout(function(){ if (montv.readyState < 2) startFlicker(); }, 900);
-  montv.addEventListener('error', startFlicker);
-  try{ var pp = montv.play(); if (pp && pp.catch) pp.catch(function(){}); }catch(e){}
-  setTimeout(function(){ if (montv.classList.contains('live') && montv.paused){ montv.classList.remove('live'); startFlicker(); } }, 2600);
+  document.addEventListener('visibilitychange', syncFilm);
+  montv.addEventListener('playing', function(){ montv.classList.add('live'); });
+  if (reduce) montv.removeAttribute('autoplay');
+  syncFilm();
 
   /* The hero's sound toggle was removed — the film runs muted, which is what
      autoplay requires anyway. Its audio track is still in hero.mp4, so putting
