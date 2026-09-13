@@ -189,7 +189,23 @@ h1{
 .mwg094 .p079-stage{position:absolute;inset:0;z-index:3;opacity:0;visibility:hidden;
   background:none;pointer-events:none;overflow:hidden;display:flex;align-items:center}
 @media (max-width:768px){
-  .mwg094 .card{width:min(30vw,calc((48vh - 118px)/1.46))}
+  /* v3.67 — the phone strip. Two things were wrong at 390px: the cards are flex
+     items of a strip whose 105vw side-paddings alone exceed the screen, so the
+     flex algorithm shrank every card to ~43px (the rule above said 117); and
+     the pact line crossed the screen 1,621px wide at 52px, a fragment at a
+     time. Cards now refuse to shrink and take 44vw (the clearance inequality
+     still holds — the min() caps them where a short phone needs it), the
+     strip's lead-in is 60vw, the centre lines are set a size up, and the line
+     wraps in place and holds still while the weight wave runs through it (the
+     079 driver splits it by word on phones and gives the beat a screen). */
+  .mwg094 .card{flex:none;width:min(44vw,calc((48vh - 118px)/1.46));border-radius:2vw}
+  .mwg094 .cards{gap:3vw;padding:0 60vw}
+  .mwg094 .c94-lines{width:min(88vw,30ch)}
+  .mwg094 .c94-phase b,.mwg094 .c94-phase span{font-size:clamp(1.05rem,5vw,1.5rem)}
+  .mwg094 .p079-stage{justify-content:center;padding:0 var(--pad)}
+  .mwg094 .p079-stage .text{padding:0;white-space:normal;width:min(92vw,11ch);text-align:left;
+    font-size:clamp(2.2rem,11.5vw,3.4rem);line-height:1.02;letter-spacing:-.035em}
+  .mwg094 .p079-stage .p079-line{white-space:nowrap}   /* the lines are cut once, at rest: a lit (heavier, wider) letter must not push a word down a line */
 }
 
 /* ---------- the parade — effect 069, inchworm scroll ----------
@@ -242,6 +258,20 @@ h1{
   .mwg094 .cards{padding:0 4vw;flex-wrap:wrap;width:auto;white-space:normal;gap:18px;justify-content:center}
   .mwg094 .container{height:auto;padding:14vh 0}
   .mwg094 .c94-sr{max-width:34ch;margin:0 auto 3rem}
+}
+@media (max-width:768px){
+  /* v3.67: on a phone the parade stands down and the quotes stack — six cards
+     hopping across 390px overlapped each other and cut their own sentences
+     ("They didn't manage my calendar. The|"). The four placeholder cards stay
+     off the phone until their quotes come in (they still show on desktop,
+     where that call is still open); the driver skips the pin on small screens. */
+  .mwg069 .pin-height{height:auto}
+  .mwg069 .container{height:auto;overflow:visible;flex-direction:column;align-items:stretch;gap:14px;padding:10vh var(--pad) 12vh}
+  .mwg069 .media{position:static;left:auto;width:100%;aspect-ratio:auto;transform:none!important}
+  .mwg069 .pquote{padding:26px 22px 22px;gap:1.6rem}
+  .mwg069 .pquote blockquote{font-size:clamp(1.25rem,5.6vw,1.6rem)}
+  .mwg069 .pquote figcaption{font-size:.62rem}
+  .mwg069 .is-ph{display:none}
 }
 
 /* ---------- numbers ---------- */
@@ -495,7 +525,12 @@ a.studio-hint{color:rgba(244,244,242,.42);animation:none;text-decoration:none;fo
 .in a.studio-hint{transition:color .3s}
 a.studio-hint:hover{color:var(--ink)}
 a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spacing:.1em}
-@media (max-width:640px){ a.studio-hint{right:1.2rem;font-size:.55rem} }
+@media (max-width:640px){ a.studio-hint{right:1.2rem;font-size:.62rem;padding:10px 0;margin-bottom:-10px} }   /* v3.67: was .55rem (8.8px) on a 15px line */
+/* v3.67: on touch the two words carry a small mark, so they read as doors and
+   not as a caption — the hover preview that says so on a desktop never fires */
+@media (hover:none){
+  .practice a::after{content:"\2197";display:inline-block;margin-left:.35em;font-size:.55em;vertical-align:.35em;opacity:.55}
+}
 @keyframes npulse{0%,100%{opacity:.4}50%{opacity:1}}
 
 /* ---------- pitch (former hero type) ---------- */
@@ -871,7 +906,11 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 .mwg102 .container > p > span{transform:translate3d(0,0,8vw);display:block;backface-visibility:hidden}
 .mwg102 .dot{font-style:normal;color:var(--red)}
 @media (max-width:768px){
-  .mwg102 .container > p{font-size:8.4vw}
+  /* v3.67: at 8.4vw four of the seven lines ran past both edges of a 390px
+     screen ("Tell us what you're building." was 448px wide). They wrap now,
+     centred, two lines at most; the drum flips them exactly as before. */
+  .mwg102 .container > p{font-size:clamp(1.8rem,8.8vw,2.6rem);white-space:normal;width:min(90vw,14ch);text-align:center;line-height:1.04}
+  .pc-links a{display:inline-block;padding:8px 0;margin:-8px 0}   /* the address on the postcard: a 17px line, now a thumb's height */
 }
 @media(prefers-reduced-motion:reduce){
   .mwg102 .pin-height{height:auto!important}
@@ -980,7 +1019,6 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
     font-size:clamp(2.4rem,7vw,6rem);line-height:1;letter-spacing:-.03em;text-transform:uppercase}
   .p079-head .accent{color:var(--red)}
 }
-}
 
 /* ============ THE THREE VERTICALS — stacked cards ========================
    madewithgsap effect 031. Each card is pinned for one screen while it
@@ -995,7 +1033,7 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
    The reference sets its titles at 10.5vw, which works for one word
    ("Innovation"). "Talent & Branding" is seventeen characters and would run
    off the card, so titles here are clamped and allowed to wrap. */
-.mwg031{position:relative;padding:0 0 100vh;overflow:hidden;background:var(--bg)}
+.mwg031{position:relative;overflow:hidden;background:var(--bg)}   /* v3.67: see the note above — padding-bottom:100vh was never live and stays out */
 .mwg031 .v-slide{height:100vh}
 .mwg031 .v-wrap{width:100%;height:100%;perspective:250vw}
 .mwg031 .v-card{position:absolute;inset:0;transform-style:preserve-3d;
@@ -1043,11 +1081,25 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   border-radius:3px;display:block;background:var(--bg2)}
 
 @media (max-aspect-ratio:1/1){
-  .mwg031 .v-card{justify-content:flex-start;gap:22px}
+  .mwg031 .v-card{justify-content:flex-start;gap:22px;padding-top:calc(var(--s98-h,40px) + 18px)}   /* v3.67: the pinned card's title sat under the fixed header */
   .mwg031 .v-bottom{flex-direction:column;align-items:stretch;margin-top:18px}
   .mwg031 .v-text{max-width:100%;order:2}
   .mwg031 .v-num{display:none}
-  .mwg031 .v-fig img{width:100%}
+  .mwg031 .v-fig img{width:100%;aspect-ratio:auto;height:min(32vh,320px)}   /* v3.67: a square at full width overran a short phone's screen */
+}
+@media (max-width:768px){
+  /* v3.67: the doors into the verticals were 9.5px mono on a 16px line — the
+     smallest tap targets on the page for its most important links. Same type
+     one size up, a thumb's worth of padding, each door on its own line. */
+  .mwg031 .v-subs span{font-size:10px}
+  .mwg031 .v-go{display:inline-block;font-size:11px;padding:10px 0 4px;margin:.6rem 1.4rem 0 0!important;border-bottom-width:1px}
+}
+@media (max-width:768px) and (max-height:720px){
+  /* a short phone (iPhone SE, small Androids): the picture gives up height
+     before the copy does, so the whole card still fits its one screen */
+  .mwg031 .v-card{gap:14px}
+  .mwg031 .v-text{font-size:.92rem}
+  .mwg031 .v-fig img{height:min(23vh,200px)}
 }
 /* the pin and the recede are the effect; with no motion the cards are simply
    three stacked screens of copy, which still reads */
@@ -1093,8 +1145,17 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
   letter-spacing:.13em;text-transform:uppercase;opacity:.66;line-height:1.55}
 #press.cards-live .press-row{display:none}
 @media(max-width:768px){
-  #press .mwg087 .card{width:72vw}
-  #press .mwg087 .cards{padding:0 20vw}
+  /* v3.67: on a phone the rail is a swipe, not a pinned scrub — the thumb
+     already knows the gesture, and the pinned version bought two cut cards a
+     screen at 390px. Cards snap to the centre; the next one peeking at the
+     edge is the cue. The driver builds the cards and skips the pin. */
+  #press .mwg087 .m-container{height:auto;padding:10vh 0 12vh}
+  #press .mwg087 .cards{width:100%;padding:0 11vw;gap:14px;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;transform:none!important}
+  #press .mwg087 .cards::-webkit-scrollbar{display:none}
+  #press .mwg087 .card{flex:none;width:78vw;scroll-snap-align:center;aspect-ratio:auto;display:flex}
+  #press .mwg087 .card-content{transform:none!important;height:auto;min-height:0;gap:2.2rem;padding:24px 22px 20px}
+  #press .mwg087 .q{font-size:clamp(1.15rem,5vw,1.45rem)}
 }
 
 /* ============ TALENT — effect 030, Images on hover =====================
@@ -1663,7 +1724,11 @@ html[data-ground="white"] #top{background:#0B0B0C}
   plinks.forEach(function(a){
     a.addEventListener('pointerenter', function(e){ if(e.pointerType!=='touch') showPreview(a); });
     a.addEventListener('click', function(e){
-      if (matchMedia('(hover:none)').matches && !a.classList.contains('on')){ e.preventDefault(); showPreview(a); return; } /* touch: 1st tap previews, 2nd navigates */
+      /* v3.67: on touch a tap simply goes. The old two-step (first tap previews,
+         second tap enters) never worked on a phone: pointerleave fires on
+         #practice between pointerup and click on every tap, which cleared .on
+         before this handler read it, so every tap was a "first" tap and the two
+         verticals could not be entered from the hero at all. */
       /* Sep 8: the words land on their own vertical card. A jump, not a
          glide - a glide would replay the whole culture pin on the way down.
          (The hrefs pointed at ids that did not exist before this.) */
@@ -1675,7 +1740,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
       }
     });
   });
-  document.getElementById('practice').addEventListener('pointerleave', hidePreview);
+  document.getElementById('practice').addEventListener('pointerleave', function(e){ if(e.pointerType==='touch') return; hidePreview(); });
 
   /* ---------- departure board: flap-scramble ---------- */
   var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·—';
@@ -1917,6 +1982,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
      adblocked. GSAP 3.15 — the version the mwg references ship. -->
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script>/* v3.67: on a phone the browser's address bar shrinking is a "resize"; without this every pin re-measures mid-scroll and the page jumps */if(window.ScrollTrigger){ScrollTrigger.config({ignoreMobileResize:true});}</script>
 <script src="assets/vendor/SplitText.min.js"></script>
 <script src="assets/vendor/matter.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
@@ -2623,7 +2689,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
     var vh=window.innerHeight;
     var colH=foot.scrollHeight;
     var POP=1.3, HOLD=0.35;
-    var UNIT=Math.round(vh*0.8);
+    var UNIT=Math.round(vh*(window.innerWidth<=768?0.55:0.8));   /* v3.67: a phone screen buys less picture, so each flip costs it less scroll */
     var total=6+HOLD+POP;
     pinH.style.height=(vh+Math.round(total*UNIT))+'px';
 
@@ -2755,6 +2821,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
   if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'||typeof Matter==='undefined') return;
   if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
+  var coarse=matchMedia('(hover: none)').matches;   /* v3.67 */
   function build(){
     var Engine=Matter.Engine, World=Matter.World, Bodies=Matter.Bodies,
         Body=Matter.Body, Constraint=Matter.Constraint;
@@ -2788,7 +2855,9 @@ html[data-ground="white"] #top{background:#0B0B0C}
       onLeave:function(){ gsap.ticker.remove(tick); },
       onLeaveBack:function(){ gsap.ticker.remove(tick); },
       onUpdate:function(self){
-        var tug=Math.max(-260,Math.min(260,self.getVelocity()*0.05));
+        /* v3.67: no tug under a thumb — a form that swings while you reach for
+           a field is a form you miss. The elastic entrance and the settle stay. */
+        var tug=coarse?0:Math.max(-260,Math.min(260,self.getVelocity()*0.05));
         constraint.pointA.y=cy+tug;
       }
     });
@@ -2840,7 +2909,10 @@ html[data-ground="white"] #top{background:#0B0B0C}
   }
 
   document.fonts.ready.then(function(){
-    SplitText.create(text, { type:'chars', charsClass:'char' });
+    /* v3.67: on a phone the line wraps (see the CSS), so it is split by word
+       as well — a chars-only split lets a line break fall inside a word */
+    var phone079 = matchMedia('(max-width:768px)').matches;
+    SplitText.create(text, { type: phone079 ? 'lines,words,chars' : 'chars', charsClass:'char', linesClass:'p079-line' });
     var chars = text.querySelectorAll('.char');
 
     var duration = 0.5, letterTotal = duration * 2, simultaneousLetters = 6;
@@ -2934,7 +3006,10 @@ html[data-ground="white"] #top{background:#0B0B0C}
        once it knows, and this re-runs. */
     var lineApi=window.__line079;
     var want=(lineApi&&lineApi.travel)?lineApi.travel():0;
-    linePx=want>0?want:Math.round(window.innerHeight*LINE_SCREENS);
+    /* v3.67: on a phone the line does not travel — it wraps and holds — so its
+       beat is a fixed nine-tenths of a screen for the wave, not its own width */
+    if(window.innerWidth<=768) linePx=Math.round(window.innerHeight*0.9);
+    else linePx=want>0?want:Math.round(window.innerHeight*LINE_SCREENS);
     var total=stripPx+fadePx+linePx;
     A=stripPx/total; B=(stripPx+fadePx)/total;
   }
@@ -2947,13 +3022,27 @@ html[data-ground="white"] #top{background:#0B0B0C}
     if(!built) return;
     var vw=window.innerWidth, vh=window.innerHeight;
     var amp=(vw<vh)?0.38:0.48;
+    var phone=vw<=768;   /* v3.67 */
     for(var i=0;i<cards.length;i++){
       var t=((vw*0.9)-(lefts[i]+x))/((vw*0.8)+ws[i]);
       t=Math.max(0,Math.min(1,t));
       var leg =t<.5?inOutQuad(2*t):inOutQuad(2-2*t);
       var sLeg=t<.5?backInOut(2*t):backInOut(2-2*t);
-      var y=signs[i]*(-amp*vh+hs[i]*.5)*leg;
-      gsap.set(cards[i],{y:y,rotation:tilts[i]*(1-2*leg),scale:1+.4*sLeg});
+      var y;
+      if(phone){
+        /* v3.67: on a phone a card enters at the height of the centre lines and
+           crosses them on its way up — the screen is too narrow for the arc
+           to clear the copy the way it does at 1440. Here the arc starts
+           already clear of the lines and bobs from there; the swell is halved
+           so the peak stays on the screen. */
+        var half=hs[i]*.5, base=half+44;
+        var arc=Math.max(20, vh*.5-half*1.2-base-8);
+        y=signs[i]*-(base+arc*leg);
+        gsap.set(cards[i],{y:y,rotation:tilts[i]*(1-2*leg),scale:1+.2*sLeg});
+      } else {
+        y=signs[i]*(-amp*vh+hs[i]*.5)*leg;
+        gsap.set(cards[i],{y:y,rotation:tilts[i]*(1-2*leg),scale:1+.4*sLeg});
+      }
     }
   }
 
@@ -2962,7 +3051,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
     start:'top top',
     end:function(){ return '+='+(stripPx+fadePx+linePx); },
     invalidateOnRefresh:true,
-    onRefresh:function(){ measure(); },
+    onRefresh:function(self){ measure(); if(built) renderCards(-dist*Math.max(0,Math.min(1, A>0 ? self.progress/A : 1))); },   /* v3.67: laid out on the arc from the first paint — the first card used to sit on the centre lines until the first scroll */
     onUpdate:function(self){
       var t=self.progress;
       /* three beats, strictly in sequence: the strip scrubs every photograph
@@ -2990,7 +3079,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
   Promise.all(cards.map(function(im){
     return im.complete?Promise.resolve():new Promise(function(r){
       im.addEventListener('load',r,{once:true}); im.addEventListener('error',r,{once:true});});
-  })).then(function(){ built=true; measure(); ScrollTrigger.refresh(); });
+  })).then(function(){ built=true; measure(); renderCards(0); ScrollTrigger.refresh(); });
   addEventListener('load', function(){ ScrollTrigger.refresh(); });
 })();
 
@@ -3008,6 +3097,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
   if(!pinH || !container || !medias.length) return;
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (matchMedia('(max-width:768px)').matches) return;   /* v3.67: the quotes stack on a phone (see the CSS) */
 
   var master = gsap.timeline({
     scrollTrigger:{ trigger:pinH, start:'top top', end:'bottom bottom',
@@ -3205,6 +3295,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
   sec.classList.add('cards-live');
 
   var container = wrap.querySelector('.m-container');
+  if (matchMedia('(max-width:768px)').matches) return;   /* v3.67: a swipe rail on phones (see the CSS) */
   var distance  = cardsEl.clientWidth - window.innerWidth;
 
   var scrollTween = gsap.to(cardsEl, {

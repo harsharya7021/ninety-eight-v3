@@ -23,7 +23,9 @@
    (the 104 script removes the class again if GSAP fails to arrive, and the readable
    line comes back); data-cues starts at "wait" so no Scroll cue shows before site.js
    has had its say. Reduced motion adds neither and gets the readable page as before. */
-(function(){var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion:reduce)').matches)d.classList.add('fx');d.setAttribute('data-cues','wait');})();
+(function(){var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&!matchMedia('(max-width:768px)').matches)d.classList.add('fx');d.setAttribute('data-cues','wait');})();
+/* v3.67: on a phone the opener is the readable line, not the wire — at 390px the wire
+   cost eight screens of scroll for one sentence, a fragment a screen. */
 </script>
 <style>
 /* =========================================================================
@@ -140,6 +142,7 @@ svg{display:block}
   font-weight:800;font-stretch:118%;letter-spacing:-.035em;line-height:.94;font-size:clamp(2.1rem,6.6vw,5.4rem);text-wrap:balance}
 .w104-say i{font-style:normal;color:var(--red)}
 @media(max-width:900px){ .w104-say{padding-left:var(--pad)} }
+@media(max-width:768px){ .w104-say{font-size:clamp(2.3rem,10.5vw,5.4rem);padding-top:calc(var(--s98-h,40px) + 14vh);padding-bottom:3rem} }   /* v3.67: the phone's opener */
 .mwg104 .pin-height,.w104-cue{display:none}
 /* v3.66: html.fx is set in the head, so the two rules below already hold at first paint;
    .mwg104.fx follows when the script has installed the stage (and is the state that
@@ -535,6 +538,7 @@ html[data-ground="white"]{
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script>/* v3.67: on a phone the address bar shrinking is a "resize"; without this every pin re-measures mid-scroll and the page jumps */if(window.ScrollTrigger){ScrollTrigger.config({ignoreMobileResize:true});}</script>
 <script src="assets/vendor/MorphSVGPlugin.min.js"></script>
 <script>
 /* ---- 104: the opener rides a wire that waves with your scroll (v3.45) ------
@@ -567,7 +571,7 @@ html[data-ground="white"]{
   land();
   /* v3.66: the head already put html.fx on for this stage; if the stage cannot be built
      after all, take it off again so the plain line is painted instead of nothing */
-  if (matchMedia('(prefers-reduced-motion:reduce)').matches ||
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches || matchMedia('(max-width:768px)').matches ||   /* v3.67: phones read the line */
       typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof MorphSVGPlugin === 'undefined'){
     document.documentElement.classList.remove('fx'); return;
   }

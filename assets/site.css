@@ -114,6 +114,14 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 @media(max-width:380px){
   .s98-head .s98-nav .s98-cs{display:none}
 }
+/* v3.67: phone hit areas — the same glyphs, a thumb-sized target under each
+   (padding pulled back by margin, so nothing moves): Menu was 63×20, the ground
+   buttons 44×21, the footer links 20px tall */
+@media(max-width:768px){
+  .s98-head .s98-menu{padding:12px 8px;margin:-12px -8px}
+  .s98-head .s98-ground button{padding:12px 5px;margin:-12px -5px}
+  .s98-foot a{padding:6px 0;margin:-6px 0}
+}
 @media print{ .s98-head,.nav035{display:none} }
 
 /* ---------- the menu: effect 035, hung as a curtain ----------
@@ -164,6 +172,11 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
   .n35-media{width:60px;height:60px}
   .n35-media:nth-child(n+4){display:none}
   .n35-name{font-size:.8rem}
+  .nav035 ul li:first-child .n35-name{padding-right:150px}   /* v3.67: the first row's name ran under its three pictures at 360px */
+}
+@media (max-width:400px){
+  .n35-media:nth-child(n+3){display:none}
+  .nav035 ul li:first-child .n35-name{padding-right:110px}
 }
 
 /* ---------- the footer ---------- */

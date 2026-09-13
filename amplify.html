@@ -22,7 +22,7 @@ document.documentElement.classList.add('js');
    slow line, two seconds of wall and then an empty screen); the wall's script hands over
    to its own .fx and takes this one off, or takes it off if it cannot run. Reduced motion
    never sets it and keeps the grid, as before. */
-if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('fx');
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&!matchMedia('(max-width:768px)').matches)document.documentElement.classList.add('fx');   /* v3.67: a phone gets the wall as a grid — the float was twenty-three screens of one or two pictures each, with nothing to read */
 document.documentElement.setAttribute('data-cues','wait');   /* the Scroll cue waits for site.js's stillness clock rather than showing for the tick before it */})();
 </script>
 <link rel="stylesheet" href="assets/room.css">
@@ -69,6 +69,11 @@ html.fx .w051 .w-medias{display:none}
 .w051.fx .w-slot{position:absolute;left:0;top:100%;width:25vw;aspect-ratio:.75;max-width:none;border-radius:1vw;object-fit:cover;will-change:transform}   /* the zip's .media: 25vw at 3:4, starting just below the screen */
 .w051.fx .w-slot:not([src]){visibility:hidden}                                /* a slot with nothing left to deal */
 @media(max-width:768px){
+  /* v3.67: the phone's wall is the readable grid, two pictures across, with the
+     page's title over it — the float keeps to screens wide enough to float on */
+  .w051 h1.vh{position:static;width:auto;height:auto;margin:0 0 1.1rem;padding:0;overflow:visible;clip:auto;clip-path:none;white-space:normal;
+    font-weight:800;font-stretch:118%;font-size:clamp(2rem,9.5vw,2.8rem);line-height:.95;letter-spacing:-.03em;color:var(--ink)}
+  .w051 .w-medias{grid-template-columns:repeat(2,minmax(0,1fr))}
   .w051.fx .w-slot{width:40vw;border-radius:1.6vw}
 }
 </style>
@@ -286,6 +291,7 @@ html.fx .w051 .w-medias{display:none}
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script>/* v3.67: on a phone the address bar shrinking is a "resize"; without this every pin re-measures mid-scroll and the page jumps */if(window.ScrollTrigger){ScrollTrigger.config({ignoreMobileResize:true});}</script>
 <script>
 /* ---- 051: the float, carried by the scroll ----
    The zip's driver and numbers: three pictures, 25vw wide at 3:4 (40vw on
@@ -329,6 +335,7 @@ html.fx .w051 .w-medias{display:none}
 
   gsap.matchMedia().add({ phone: '(max-width: 768px)', desk: 'not all and (max-width: 768px)', still: '(prefers-reduced-motion: reduce)' }, function(ctx){
     if (ctx.conditions.still) return;
+    if (ctx.conditions.phone){ html.classList.remove('fx'); return; }   /* v3.67: the grid, on a phone */
     root.classList.add('fx');
     var slots = [0, 1, 2].map(function(){
       var im = document.createElement('img');

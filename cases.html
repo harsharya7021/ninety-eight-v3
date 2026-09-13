@@ -89,6 +89,11 @@ html.js.in .crw,html.js.in .term{opacity:1}
 @media(max-width:1199px){
   .cdir .s{grid-column:9/12}.cdir .y{grid-column:12/13;text-align:right}.cdir .o{display:none}
 }
+@media(max-width:768px){
+  /* v3.67: eighty-two rows at 21px were the smallest targets on the site; the
+     same lines with a thumb's worth of padding */
+  .crw{min-height:0;padding:9px 0}
+}
 @media(max-width:900px){
   .hero .dir{grid-column:auto}
   .cdir .chd,.cdir .crw{grid-template-columns:44px minmax(0,1fr) auto}
