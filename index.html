@@ -189,23 +189,19 @@ h1{
 .mwg094 .p079-stage{position:absolute;inset:0;z-index:3;opacity:0;visibility:hidden;
   background:none;pointer-events:none;overflow:hidden;display:flex;align-items:center}
 @media (max-width:768px){
-  /* v3.67 — the phone strip. Two things were wrong at 390px: the cards are flex
-     items of a strip whose 105vw side-paddings alone exceed the screen, so the
-     flex algorithm shrank every card to ~43px (the rule above said 117); and
-     the pact line crossed the screen 1,621px wide at 52px, a fragment at a
-     time. Cards now refuse to shrink and take 44vw (the clearance inequality
-     still holds — the min() caps them where a short phone needs it), the
-     strip's lead-in is 60vw, the centre lines are set a size up, and the line
-     wraps in place and holds still while the weight wave runs through it (the
-     079 driver splits it by word on phones and gives the beat a screen). */
+  /* v3.67 — the phone strip. The cards are flex items of a strip whose two
+     105vw side-paddings alone exceed the screen, so the flex algorithm shrank
+     every card to ~43px (the rule above said 117). They refuse to shrink now
+     and take 44vw — the clearance inequality still holds, and the min() caps
+     them where a short phone needs it — the strip's lead-in is 60vw, and the
+     two centre lines are set a size up.
+     v3.68: the pact line is NOT wrapped and held here. At Harsh's call it
+     crosses a phone exactly as it crosses the desktop, on the 079 wave, at
+     1:1 against the scroll — see the 079 driver and measure() below. */
   .mwg094 .card{flex:none;width:min(44vw,calc((48vh - 118px)/1.46));border-radius:2vw}
   .mwg094 .cards{gap:3vw;padding:0 60vw}
   .mwg094 .c94-lines{width:min(88vw,30ch)}
   .mwg094 .c94-phase b,.mwg094 .c94-phase span{font-size:clamp(1.05rem,5vw,1.5rem)}
-  .mwg094 .p079-stage{justify-content:center;padding:0 var(--pad)}
-  .mwg094 .p079-stage .text{padding:0;white-space:normal;width:min(92vw,11ch);text-align:left;
-    font-size:clamp(2.2rem,11.5vw,3.4rem);line-height:1.02;letter-spacing:-.035em}
-  .mwg094 .p079-stage .p079-line{white-space:nowrap}   /* the lines are cut once, at rest: a lit (heavier, wider) letter must not push a word down a line */
 }
 
 /* ---------- the parade — effect 069, inchworm scroll ----------
@@ -258,20 +254,6 @@ h1{
   .mwg094 .cards{padding:0 4vw;flex-wrap:wrap;width:auto;white-space:normal;gap:18px;justify-content:center}
   .mwg094 .container{height:auto;padding:14vh 0}
   .mwg094 .c94-sr{max-width:34ch;margin:0 auto 3rem}
-}
-@media (max-width:768px){
-  /* v3.67: on a phone the parade stands down and the quotes stack — six cards
-     hopping across 390px overlapped each other and cut their own sentences
-     ("They didn't manage my calendar. The|"). The four placeholder cards stay
-     off the phone until their quotes come in (they still show on desktop,
-     where that call is still open); the driver skips the pin on small screens. */
-  .mwg069 .pin-height{height:auto}
-  .mwg069 .container{height:auto;overflow:visible;flex-direction:column;align-items:stretch;gap:14px;padding:10vh var(--pad) 12vh}
-  .mwg069 .media{position:static;left:auto;width:100%;aspect-ratio:auto;transform:none!important}
-  .mwg069 .pquote{padding:26px 22px 22px;gap:1.6rem}
-  .mwg069 .pquote blockquote{font-size:clamp(1.25rem,5.6vw,1.6rem)}
-  .mwg069 .pquote figcaption{font-size:.62rem}
-  .mwg069 .is-ph{display:none}
 }
 
 /* ---------- numbers ---------- */
@@ -2909,10 +2891,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
   }
 
   document.fonts.ready.then(function(){
-    /* v3.67: on a phone the line wraps (see the CSS), so it is split by word
-       as well — a chars-only split lets a line break fall inside a word */
-    var phone079 = matchMedia('(max-width:768px)').matches;
-    SplitText.create(text, { type: phone079 ? 'lines,words,chars' : 'chars', charsClass:'char', linesClass:'p079-line' });
+    SplitText.create(text, { type:'chars', charsClass:'char' });
     var chars = text.querySelectorAll('.char');
 
     var duration = 0.5, letterTotal = duration * 2, simultaneousLetters = 6;
@@ -3006,10 +2985,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
        once it knows, and this re-runs. */
     var lineApi=window.__line079;
     var want=(lineApi&&lineApi.travel)?lineApi.travel():0;
-    /* v3.67: on a phone the line does not travel — it wraps and holds — so its
-       beat is a fixed nine-tenths of a screen for the wave, not its own width */
-    if(window.innerWidth<=768) linePx=Math.round(window.innerHeight*0.9);
-    else linePx=want>0?want:Math.round(window.innerHeight*LINE_SCREENS);
+    linePx=want>0?want:Math.round(window.innerHeight*LINE_SCREENS);
     var total=stripPx+fadePx+linePx;
     A=stripPx/total; B=(stripPx+fadePx)/total;
   }
@@ -3097,7 +3073,6 @@ html[data-ground="white"] #top{background:#0B0B0C}
   if(!pinH || !container || !medias.length) return;
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  if (matchMedia('(max-width:768px)').matches) return;   /* v3.67: the quotes stack on a phone (see the CSS) */
 
   var master = gsap.timeline({
     scrollTrigger:{ trigger:pinH, start:'top top', end:'bottom bottom',
