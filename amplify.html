@@ -16,14 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script>
 (function(){try{document.documentElement.setAttribute('data-ground',localStorage.getItem('98-ground')==='white'?'white':'carbon');}catch(e){document.documentElement.setAttribute('data-ground','carbon');}
-document.documentElement.classList.add('js');
-/* v3.66: the float is decided here, before first paint. html.fx hides the readable grid of
-   forty-four pictures that used to paint and then vanish the moment GSAP arrived (on a
-   slow line, two seconds of wall and then an empty screen); the wall's script hands over
-   to its own .fx and takes this one off, or takes it off if it cannot run. Reduced motion
-   never sets it and keeps the grid, as before. */
-if(!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('fx');   /* v3.68: the float runs on a phone too, at Harsh's call */
-document.documentElement.setAttribute('data-cues','wait');   /* the Scroll cue waits for site.js's stillness clock rather than showing for the tick before it */})();
+document.documentElement.classList.add('js');})();
 </script>
 <link rel="stylesheet" href="assets/room.css">
 <style>
@@ -56,12 +49,7 @@ document.documentElement.setAttribute('data-cues','wait');   /* the Scroll cue w
 .w051 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
 .w051 .media{display:block;width:100%;height:auto}
 
-/* the effect, once the script has taken over — and, under html.fx, from first paint (v3.66):
-   no padding, the screen already a screen tall and the grid already away, so nothing is
-   painted that the script will take back */
-html.fx .w051{padding:0}
-html.fx .w051 .w-screen{height:100vh}
-html.fx .w051 .w-medias{display:none}
+/* the effect, once the script has taken over */
 .w051.fx{padding:0}
 .w051.fx .w-cue{display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;margin:0;pointer-events:none;opacity:var(--faint)}
 .w051.fx .w-screen{position:relative;height:100vh;overflow:hidden}         /* the pinned screen */
@@ -79,16 +67,8 @@ html.fx .w051 .w-medias{display:none}
 <header class="s98-head" id="s98-head">
   <div class="s98-l">
     <button class="s98-menu" id="s98-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu"><span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="md-txt">Menu</span></button>
-    <div class="s98-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="s98-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
   </div>
   <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
-  <nav class="s98-nav s98-r" aria-label="Pages">
-    <a class="s98-pg" href="marketing.html" aria-current="page">Marketing</a>
-    <a class="s98-pg" href="talent.html">Personal Branding</a>
-    <a class="s98-pg" href="blog/index.html">Journal</a>
-    <a class="s98-cs" href="cases.html">Case studies</a>
-    <a href="index.html#contact">Contact</a>
-  </nav>
 </header>
 <div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="n35-inner">
@@ -106,16 +86,6 @@ html.fx .w051 .w-medias{display:none}
       </div>
     </div>
     <ul>
-      <li><a href="index.html#culture">
-        <span class="n35-name">For the culture</span>
-        <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
-        </span>
-      </a></li>
       <li><a href="talent.html">
         <span class="n35-name">Talent &amp; Branding</span>
         <span class="n35-medias" aria-hidden="true">
@@ -123,7 +93,7 @@ html.fx .w051 .w-medias{display:none}
           <img class="n35-media" src="assets/retain/ishant-social.webp" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
-      <li><a href="marketing.html">
+      <li><a href="marketing.html" aria-current="page">
         <span class="n35-name">Marketing &middot; the five rooms &middot; 35 cases</span>
         <span class="n35-medias" aria-hidden="true">
           <img class="n35-media" src="assets/covers/bayroute.jpg" alt="" loading="lazy" decoding="async">
@@ -140,14 +110,6 @@ html.fx .w051 .w-medias{display:none}
           <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
-        </span>
-      </a></li>
-      <li><a href="index.html#press">
-        <span class="n35-name">On the record</span>
-        <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/montage/m2.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="index.html#film" data-action="film">
@@ -183,7 +145,10 @@ html.fx .w051 .w-medias{display:none}
         </span>
       </a></li>
     </ul>
-    <div class="n35-bottom"><p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the page</p></div>
+    <div class="n35-bottom">
+      <div class="n35-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="n35-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
+      <p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the page</p>
+    </div>
   </div>
 </div>
 <!--/S98:HEAD-->
@@ -286,7 +251,6 @@ html.fx .w051 .w-medias{display:none}
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script>/* v3.67: on a phone the address bar shrinking is a "resize"; without this every pin re-measures mid-scroll and the page jumps */if(window.ScrollTrigger){ScrollTrigger.config({ignoreMobileResize:true});}</script>
 <script>
 /* ---- 051: the float, carried by the scroll ----
    The zip's driver and numbers: three pictures, 25vw wide at 3:4 (40vw on
@@ -318,12 +282,11 @@ html.fx .w051 .w-medias{display:none}
       readable grid back. Nothing at all happens without GSAP.
    5. Pictures are decoded a few ahead of their turn (see ahead()). */
 (function(){
-  var html = document.documentElement;                    /* v3.66: the head's html.fx is only a guess; see below */
-  var root = document.getElementById('wall'); if (!root){ html.classList.remove('fx'); return; }
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined'){ html.classList.remove('fx'); return; }
+  var root = document.getElementById('wall'); if (!root) return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-screen'), cue = root.querySelector('.w-cue');
   var list = [].slice.call(root.querySelectorAll('.w-medias .media')), N = list.length;
-  if (!pin || !screen || !N){ html.classList.remove('fx'); return; }
+  if (!pin || !screen || !N) return;
   gsap.registerPlugin(ScrollTrigger);
   var SRC = list.map(function(m){ return m.getAttribute('src'); });
   var OFF = [0, 200, 400], DUR = [1, 2, 3];      /* the zip's offsets (px) and trails (s) for its three pictures */
@@ -438,7 +401,6 @@ html.fx .w051 .w-medias{display:none}
       root.classList.remove('fx');
     };
   });
-  html.classList.remove('fx');                          /* v3.66: the wall's own .fx is on now (or, under reduced motion, rightly not); the head's guess steps aside in the same tick, so nothing repaints between the two */
 })();
 </script>
 <script src="assets/site.js"></script>

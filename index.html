@@ -474,7 +474,6 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
    to be the mark alone. */
 .mark98{width:clamp(94px,11vw,160px);height:auto;mix-blend-mode:difference}
 .practice{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:.12rem;text-align:center}
-.practice .plabel{margin-bottom:1.15rem}
 .practice a{display:block;font-weight:750;font-stretch:112%;text-transform:uppercase;letter-spacing:.012em;line-height:1.3;font-size:clamp(1.5rem,2.9vw,2.45rem);color:var(--ink);transition:color .3s,opacity .3s}
 .practice a:hover{color:#fff}
 /* Hovering a vertical reduces the hero to the film and the one word being
@@ -492,13 +491,12 @@ footer .fleft{display:flex;align-items:center;gap:.8rem}
    centimetres.
 
    The fast transition is armed on the first hover rather than declared
-   outright, because declaring it would flatten the intro stagger the three
+   outright, because declaring it would flatten the intro stagger the two
    verticals cascade in with. You cannot hover before the intro has played, so
    arming it there gets a snappy hover and keeps the entrance. */
-#practice.armed .plabel,#practice.armed a{transition:color .3s var(--ease),opacity .3s var(--ease);transition-delay:0s}
+#practice.armed a{transition:color .3s var(--ease),opacity .3s var(--ease);transition-delay:0s}
 #top.previewing .practice a:not(.on){opacity:0}
 #top.previewing .practice a.on{color:#fff}
-#top.previewing .plabel{opacity:0;transition:opacity .3s var(--ease)}
 .nudge-l{position:absolute;left:1.4rem;bottom:1.7rem;width:1px;height:46px;background:rgba(244,244,242,.2);overflow:hidden;z-index:3}
 .nudge-l::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:drip 2.1s var(--ease) infinite}
 .nudge-r{position:absolute;right:1.4rem;bottom:1.6rem;z-index:3;animation:npulse 2.8s ease-in-out infinite}
@@ -1235,16 +1233,8 @@ html[data-ground="white"] #top{background:#0B0B0C}
 <header class="s98-head" id="s98-head" data-s98-top="dark">
   <div class="s98-l">
     <button class="s98-menu" id="s98-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="nav035" aria-label="Menu"><span class="md-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="md-txt">Menu</span></button>
-    <div class="s98-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="s98-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
   </div>
   <a class="s98-c" href="index.html" aria-label="Ninety-Eight &mdash; home"><img src="assets/98-graffiti.png" alt="" width="834" height="529"></a>
-  <nav class="s98-nav s98-r" aria-label="Pages">
-    <a class="s98-pg" href="marketing.html">Marketing</a>
-    <a class="s98-pg" href="talent.html">Personal Branding</a>
-    <a class="s98-pg" href="blog/index.html">Journal</a>
-    <a class="s98-cs" href="cases.html">Case studies</a>
-    <a href="#contact">Contact</a>
-  </nav>
 </header>
 <div class="nav035" id="nav035" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="n35-inner">
@@ -1262,16 +1252,6 @@ html[data-ground="white"] #top{background:#0B0B0C}
       </div>
     </div>
     <ul>
-      <li><a href="#culture">
-        <span class="n35-name">For the culture</span>
-        <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/gurls/g01.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g02.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g03.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g04.webp" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/gurls/g05.webp" alt="" loading="lazy" decoding="async">
-        </span>
-      </a></li>
       <li><a href="talent.html">
         <span class="n35-name">Talent &amp; Branding</span>
         <span class="n35-medias" aria-hidden="true">
@@ -1296,14 +1276,6 @@ html[data-ground="white"] #top{background:#0B0B0C}
           <img class="n35-media" src="assets/covers/farzi.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/poetry.jpg" alt="" loading="lazy" decoding="async">
           <img class="n35-media" src="assets/covers/tbsp.jpg" alt="" loading="lazy" decoding="async">
-        </span>
-      </a></li>
-      <li><a href="#press">
-        <span class="n35-name">On the record</span>
-        <span class="n35-medias" aria-hidden="true">
-          <img class="n35-media" src="assets/montage/m1.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/montage/m2.jpg" alt="" loading="lazy" decoding="async">
-          <img class="n35-media" src="assets/montage/m3.jpg" alt="" loading="lazy" decoding="async">
         </span>
       </a></li>
       <li><a href="#film" data-action="film">
@@ -1339,7 +1311,10 @@ html[data-ground="white"] #top{background:#0B0B0C}
         </span>
       </a></li>
     </ul>
-    <div class="n35-bottom"><p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the film</p></div>
+    <div class="n35-bottom">
+      <div class="n35-ground" role="group" aria-label="Background"><button type="button" data-s98-ground="carbon">Carbon</button><span class="n35-sep" aria-hidden="true">/</span><button type="button" data-s98-ground="white">White</button></div>
+      <p class="n35-hint" aria-hidden="true">Scroll &darr; to go back to the film</p>
+    </div>
   </div>
 </div>
 <!--/S98:HEAD-->
@@ -1366,7 +1341,6 @@ html[data-ground="white"] #top{background:#0B0B0C}
        later - see NOTES FOR UX.md. Hover: image today, film when a file
        exists at data-video (assets/practice/talent.mp4 / marketing.mp4). -->
   <nav class="practice" id="practice" aria-label="The practice">
-    <span class="plabel mono rev" style="--d:.55s">Two verticals of scale</span>
     <a class="rev" style="--d:.63s" href="talent.html" data-img="assets/practice/talent.jpg" data-video="assets/practice/talent.mp4" data-cap="Talent Management &amp; Personal Branding — exclusive contracts · editorial · individuals built into brands">Talent &amp; Branding</a>
     <a class="rev" style="--d:.7s" href="marketing.html" data-img="assets/practice/hospitality.jpg" data-video="assets/practice/marketing.mp4" data-cap="Marketing — the opening · the noise · the return · the habit · the night">Marketing</a>
   </nav>

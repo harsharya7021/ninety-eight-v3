@@ -53,25 +53,13 @@ html{background:var(--s98-bg)}
 .s98-head a,.s98-head button{color:inherit;text-decoration:none;font:inherit;letter-spacing:inherit;text-transform:none;background:none;border:0;border-radius:0;padding:0;margin:0;cursor:pointer;
   -webkit-appearance:none;appearance:none;opacity:1;transition:opacity .25s}
 .s98-l{display:flex;align-items:center;gap:22px;min-width:0;white-space:nowrap;justify-self:start}
+/* v3.69: the Carbon / White switch is in the menu's bottom rail (.n35-ground,
+   below) and the five page buttons are the menu's rows, so the header is the
+   dots and the mark. The grid's third column is empty and keeps the mark in
+   the middle of the screen; nothing can run into it any more, which is why the
+   steps that used to move it out of the way are gone from the foot of this
+   section. */
 
-.s98-ground button{position:relative;padding-bottom:1px}
-.s98-ground button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor}
-.s98-ground button:not(.on):hover{opacity:.5}
-.s98-ground{display:block;white-space:nowrap}
-.s98-sep{margin:0 .28em}
-
-/* the pages and Contact: buttons, together on the right (v3.56). A hairline
-   pill in the header's own ink, filled for the section you are in. Ring and
-   fill are drawn by ::before in currentColor, so they follow the ink wherever
-   the header changes it (the landing's dark top on White, the open curtain);
-   ::after stretches each button's tap area to the header's full height. */
-.s98-nav{display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;justify-self:end}
-.s98-head .s98-nav a{position:relative;z-index:0;display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:13px}
-.s98-nav a::before{content:"";position:absolute;inset:0;z-index:-1;border:1px solid currentColor;border-radius:inherit;opacity:.3;transition:opacity .25s}
-.s98-nav a::after{content:"";position:absolute;inset:-7px -3px}
-.s98-nav a:hover::before,.s98-nav a:focus-visible::before{opacity:.85}
-.s98-head .s98-nav a[aria-current="page"]{color:var(--s98-bg)}
-.s98-nav a[aria-current="page"]::before{background:var(--s98-ink);border-color:var(--s98-ink);opacity:1}
 .s98-c{display:block;justify-self:center;line-height:0}
 .s98-c img{display:block;height:26px;width:auto;max-width:none;border-radius:0;box-shadow:none;filter:none;transition:opacity .35s,filter .35s}
 html[data-ground="white"] .s98-c img{filter:invert(1)}
@@ -98,28 +86,14 @@ html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not
 html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not(.s98-glass) .s98-c img{filter:none}
 html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
 
-/* where a side would run into the mark, it gives way (measured with Archivo, v3.61):
-   at 1100px and below Marketing, Personal Branding and Journal step out (the menu
-   lists them) and Case studies and Contact stay; at 480px and below the mark steps
-   out too; at 380px and below Case studies steps out, and Contact is alone */
-@media(max-width:1100px){
-  .s98-head .s98-nav .s98-pg{display:none}
-  .s98-l{gap:16px}
-}
-@media(max-width:480px){
-  .s98-head{grid-template-columns:auto 1fr auto}
-  .s98-c{display:none}
-  .s98-r{grid-column:3}
-}
-@media(max-width:380px){
-  .s98-head .s98-nav .s98-cs{display:none}
-}
+/* v3.69: nothing steps out any more. With the buttons gone the header is one
+   word and the mark, so the mark stays on screen from 320px up — the 1100 /
+   480 / 380 steps measured in v3.61 went with the thing they were dodging. */
 /* v3.67: phone hit areas — the same glyphs, a thumb-sized target under each
    (padding pulled back by margin, so nothing moves): Menu was 63×20, the ground
    buttons 44×21, the footer links 20px tall */
 @media(max-width:768px){
   .s98-head .s98-menu{padding:12px 8px;margin:-12px -8px}
-  .s98-head .s98-ground button{padding:12px 5px;margin:-12px -5px}
   .s98-foot a{padding:6px 0;margin:-6px 0}
 }
 @media print{ .s98-head,.nav035{display:none} }
@@ -142,8 +116,36 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 .n35-inner{height:100vh;display:flex;flex-direction:column;justify-content:center}
 .n35-top,.n35-bottom{flex:1 1 0;min-height:0;display:flex;align-items:center;padding:0 var(--s98-pad)}
 .n35-top{padding-top:3.2rem;position:relative;z-index:3}  /* the word's pictures above the rules */
-.n35-bottom{align-items:flex-end;justify-content:center;padding-bottom:1.6rem}
-.n35-hint{margin:0;color:var(--s98-ink);font:400 13px/20px 'Archivo',Helvetica,Arial,sans-serif;letter-spacing:-.01em;opacity:.5;animation:s98pulse 2.8s ease-in-out infinite}
+/* the bottom rail (v3.69): the ground switch on the left, the hint in the middle.
+   A grid rather than a centred flex row, so the hint sits in the middle of the
+   SCREEN whatever the switch measures beside it. Under 600px the two stack,
+   centred, rather than meet. The switch is the header's old one, quieter: the
+   ground you are on is at full ink and underlined, the other at half. */
+.n35-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;padding-bottom:1.6rem}
+.n35-ground{grid-column:1;justify-self:start;white-space:nowrap;color:var(--s98-ink);
+  font:400 13px/20px 'Archivo',Helvetica,Arial,sans-serif;letter-spacing:-.01em}
+.n35-ground button{position:relative;font:inherit;color:inherit;letter-spacing:inherit;text-transform:none;
+  background:none;border:0;margin:0;padding:0 0 1px;-webkit-appearance:none;appearance:none;cursor:pointer;
+  opacity:.5;transition:opacity .25s}
+.n35-ground button.on{opacity:1}
+.n35-ground button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor}
+.n35-ground button:hover{opacity:.8}
+.n35-ground button.on:hover{opacity:1}
+.n35-sep{margin:0 .28em;opacity:.5}
+.n35-hint{grid-column:2;margin:0;color:var(--s98-ink);font:400 13px/20px 'Archivo',Helvetica,Arial,sans-serif;letter-spacing:-.01em;opacity:.5;animation:s98pulse 2.8s ease-in-out infinite}
+@media(max-width:768px){
+  /* the thumb-sized target v3.67 gave the header's switch, carried over with it. The
+     underline has to follow the text rather than the padded box, or it sits twelve
+     pixels adrift of the word it belongs to. */
+  .n35-ground button{padding:12px 5px;margin:-12px -5px}
+  .n35-ground button.on::after{bottom:11px;left:5px;right:5px}   /* and inside the side padding, so it underlines the word and not the target */
+}
+@media(max-width:600px){
+  /* stacked and centred, and packed to the foot of the rail: two auto rows in a grid
+     this tall would otherwise stretch and stand half a screen apart */
+  .n35-bottom{grid-template-columns:1fr;justify-items:center;align-content:end;row-gap:.6rem}
+  .n35-ground,.n35-hint{grid-column:1;justify-self:center}
+}
 @keyframes s98pulse{0%,100%{opacity:.25}50%{opacity:.6}}
 /* effect 093: the word */
 .n35-word{display:flex;font-weight:800;font-stretch:118%;text-transform:uppercase;line-height:.9;letter-spacing:-.02em;
