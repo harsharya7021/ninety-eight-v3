@@ -53,6 +53,23 @@ html{background:var(--s98-bg)}
   border-bottom:1px solid transparent;
   transition:background-color .35s,color .35s,-webkit-backdrop-filter .35s,backdrop-filter .35s}
 .s98-head.s98-glass{background:var(--s98-glass);-webkit-backdrop-filter:blur(14px) saturate(1.25);backdrop-filter:blur(14px) saturate(1.25)}
+/* v3.71: --s98-glass is the ground's own colour at 62%, so on a flat ground the
+   veil is the ground painted over itself and cannot be seen — measured, the
+   header and the page a row apart differ by 0.07 of 255. On a page whose ground
+   is the Field98 canvas it is the wrong colour: the field sits around L=27 where
+   the header crosses it and the veil is still mixing toward #0B0B0C, which is the
+   band. The frosting is the blur; the tint was only standing in for the ground,
+   and the canvas is fixed behind the header already, so here the header shows it.
+   Not site-wide: on a flat ground the veil is what dims a cover, display type or a
+   photograph passing under the header (without it the ink falls to ~3.8:1 there),
+   while here it is not carrying that load — the word "Menu", the header's only real
+   text, measures 17.5:1 at worst with the veil and without it. Only the live canvas:
+   html.field-static is reduced motion or no
+   WebGL, where marketing drops its pinned stage and the readable page scrolls under
+   the header (the ink falls to 1.13:1 there without the veil), and with no class at
+   all the script never ran and the ground really is flat. Keyed on the class rather
+   than the page, so a later field page inherits it. */
+html.field-on .s98-head.s98-glass{background:transparent}
 .s98-head *{box-sizing:border-box}
 .s98-head a,.s98-head button{color:inherit;text-decoration:none;font:inherit;letter-spacing:inherit;text-transform:none;background:none;border:0;border-radius:0;padding:0;margin:0;cursor:pointer;
   -webkit-appearance:none;appearance:none;opacity:1;transition:opacity .25s}
