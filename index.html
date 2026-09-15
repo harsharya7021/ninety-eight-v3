@@ -1350,6 +1350,8 @@ html[data-ground="white"] #top{background:#0B0B0C}
 </section>
 
 
+
+
 <!-- ============ FOR THE CULTURE — effect 094, orbital image scroll ========
      This replaced the old statement section rather than sitting next to it.
      That section already carried "a collective for the culture", so keeping
@@ -1428,6 +1430,123 @@ html[data-ground="white"] #top{background:#0B0B0C}
 
 <!-- ============ SERVICES ============ -->
 <!-- #services became #verticals, the stacked cards below the hero. -->
+
+<!-- ============ WORKED WITH — the dock (v3.72) ==================
+     Osmo's "Apple Dock Navigation Bar" (osmo.supply/demo/apple-dock-
+     navigation-bar, Ilja van Eck), used as-is: same structure (.nav-wrap
+     > .nav-list > .nav-item > .nav-item__link + .nav-item__tooltip), same
+     CSS (5em items, 6/7/8em for far/close/hovered siblings, width
+     transition on cubic-bezier(.16,1,.3,1)), same script (class toggles
+     on mouseenter/leave). Only differences: it sits in the flow here
+     instead of position:fixed, and it is a list of brands, not links.
+     Icons are 256px app-icon tiles in assets/brands/. ================== -->
+<section class="dock98" id="brands" aria-label="Brands we have worked with">
+  <p class="dk-label mono"><span class="dk-dot" aria-hidden="true"></span>Worked with</p>
+  <div class="nav-wrap">
+    <ul class="nav-list" role="list">
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/meta.png" alt="Meta" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Meta</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/samsung.png" alt="Samsung" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Samsung</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/rupay.png" alt="RuPay" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">RuPay</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/jio.png" alt="Jio" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Jio</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/swiggy.png" alt="Swiggy" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Swiggy</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/winzo.png" alt="WinZO" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">WinZO</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/unacademy.png" alt="Unacademy" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Unacademy</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/upgrad.png" alt="upGrad" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">upGrad</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/spinny.png" alt="Spinny" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Spinny</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/fastandup.png" alt="Fast&amp;Up" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Fast&amp;Up</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/betway.png" alt="Betway" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Betway</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/itc.png" alt="ITC" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">ITC</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/jsw.png" alt="JSW" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">JSW</span></div></li>
+      <li class="nav-item"><div class="nav-item__link"><img class="image" src="assets/brands/adani.png" alt="Adani" width="256" height="256" loading="lazy" decoding="async"><span class="nav-item__tooltip" aria-hidden="true">Adani</span></div></li>
+    </ul>
+  </div>
+</section>
+<style>
+/* ============ WORKED WITH — the dock (v3.72) ============
+   Osmo's Apple Dock Navigation Bar CSS, verbatim where it matters
+   (.nav-item / .nav-item__link / .nav-item__tooltip and the three sibling
+   widths), scoped under .dock98. Two site-side additions: the list's em
+   scales with the viewport so fourteen tiles fit in a row, and below 720px
+   the row wraps to two lines. No tray, no container — the tiles sit on
+   the carbon ground, as in the demo. */
+.dock98{position:relative;z-index:2;background:var(--bg);color:var(--ink);padding:clamp(56px,7vw,104px) 0 clamp(64px,8vw,112px);overflow:hidden}
+.dock98 .dk-label{margin:0 auto 40px;width:min(100% - 48px,1320px);display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.86}
+.dock98 .dk-dot{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(238,53,46,.18)}
+
+/* — Osmo — */
+.dock98 .nav-wrap{pointer-events:none;justify-content:center;align-items:flex-end;display:flex;position:relative}
+.dock98 .nav-list{flex-flow:row;justify-content:center;align-items:flex-end;margin:0;padding-left:0;list-style:none;display:flex;
+  font-size:clamp(9px,1.05vw,16px)}
+.dock98 .nav-item{justify-content:center;align-items:center;width:5em;transition:width .5s cubic-bezier(.16,1,.3,1);display:flex;position:relative}
+.dock98 .nav-item__link{z-index:1;pointer-events:auto;justify-content:center;align-items:center;width:100%;height:100%;padding-left:.5em;padding-right:.5em;display:flex;position:relative}
+.dock98 .image{object-fit:contain;width:100%;height:auto;display:block;-webkit-user-drag:none;user-select:none}
+.dock98 .nav-item__tooltip{z-index:0;opacity:0;white-space:nowrap;background-color:var(--ink);color:var(--bg);border-radius:.25em;padding:.4em .5em;
+  font:500 1em/1.2 "Space Mono",ui-monospace,monospace;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .5s cubic-bezier(.16,1,.3,1);position:absolute;top:0;transform:translate(0,-80%)}
+.dock98 .nav-item.sibling-far{width:6em}
+.dock98 .nav-item.sibling-close{width:7em}
+.dock98 .nav-item.hover{width:8em}
+.dock98 .nav-item:hover .nav-item__tooltip{opacity:1;transform:translate(0,-140%)}
+
+/* — site — */
+html[data-ground="white"] .dock98 .image{box-shadow:0 0 0 1px var(--line);border-radius:22.5%}
+@media (max-width:720px){
+  .dock98{padding:48px 0 56px}
+  .dock98 .nav-list{flex-wrap:wrap;font-size:11px;max-width:calc(7 * 5em);row-gap:.75em}
+  .dock98 .dk-label{margin-bottom:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  .dock98 .nav-item,.dock98 .nav-item__tooltip{transition:none}
+}
+</style>
+<script>
+/* ============ WORKED WITH — the dock (v3.72) ============
+   Osmo's initAppleDockNavigationBar(), verbatim: .hover on the entered
+   item, .sibling-close on its neighbours, .sibling-far on the next pair,
+   all removed on mouseleave. Scoped to #brands so any other .nav-item on
+   the page is untouched. The demo also loads GSAP but never calls it, so
+   it is not needed here. */
+function initAppleDockNavigationBar() {
+  // Select all .nav-item elements
+  const navItems = document.querySelectorAll('#brands .nav-item');
+
+  // Helper function to add/remove a class to a sibling at a given offset
+  const toggleSiblingClass = (items, index, offset, className, add) => {
+    const sibling = items[index + offset];
+    if (sibling) {
+      sibling.classList.toggle(className, add);
+    }
+  };
+
+  // Event listeners to toggle classes on hover
+  navItems.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+      item.classList.add('hover'); // Add .hover to current item
+      // Toggle classes for siblings
+      toggleSiblingClass(navItems, index, -1, 'sibling-close', true); // Previous sibling
+      toggleSiblingClass(navItems, index, 1, 'sibling-close', true);  // Next sibling
+      toggleSiblingClass(navItems, index, -2, 'sibling-far', true);   // Previous-previous sibling
+      toggleSiblingClass(navItems, index, 2, 'sibling-far', true);    // Next-next sibling
+    });
+    item.addEventListener('mouseleave', () => {
+      item.classList.remove('hover'); // Remove .hover from current item
+      // Toggle classes for siblings
+      toggleSiblingClass(navItems, index, -1, 'sibling-close', false); // Previous sibling
+      toggleSiblingClass(navItems, index, 1, 'sibling-close', false);  // Next sibling
+      toggleSiblingClass(navItems, index, -2, 'sibling-far', false);   // Previous-previous sibling
+      toggleSiblingClass(navItems, index, 2, 'sibling-far', false);    // Next-next sibling
+    });
+  });
+}
+
+// Initialize Apple Dock Navigation Bar
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAppleDockNavigationBar);
+} else {
+  initAppleDockNavigationBar();
+}
+</script>
+
 
 <!-- ============ PRESS ============ -->
 <section class="section wrap io" id="press">
