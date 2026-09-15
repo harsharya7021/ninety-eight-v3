@@ -3237,7 +3237,7 @@ if (document.readyState === 'loading') {
   gsap.registerPlugin(ScrollTrigger);
 
   if (typeof Lenis !== 'undefined'){
-    var lenis = new Lenis({ autoRaf:true });
+    var lenis = new Lenis();   /* v3.73: no rAF loop of its own — gsap.ticker drives it below */
     window.__lenis = lenis;
 
     /* Every overlay locks the body; Lenis has to be locked with it, and simply
@@ -3252,6 +3252,17 @@ if (document.readyState === 'loading') {
       else  { l.start(); }
     };
     lenis.on('scroll', ScrollTrigger.update);
+
+    /* v3.73: and one loop for both. Lenis used to run its own rAF beside
+       gsap.ticker's, and nothing fixed their order within a frame, so every
+       scrubbed effect read a scroll position that was alternately ahead of
+       and behind the one Lenis had written — the sideways rail in #press
+       advanced in uneven bursts rather than a glide. Driving lenis.raf from
+       the ticker puts the scroll write, ScrollTrigger's update and the tween
+       render in that order in the same tick. lagSmoothing(0) because GSAP
+       must not re-time a delta Lenis has already smoothed. */
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+    gsap.ticker.lagSmoothing(0);
 
     /* Lenis does not reliably emit a native scroll event, and everything on
        this page that predates it listens for one: the header's progress bar
@@ -3368,7 +3379,7 @@ if (document.readyState === 'loading') {
 
   var scrollTween = gsap.to(cardsEl, {
     x: -distance, ease:'none',
-    scrollTrigger:{ trigger:container, pin:true, scrub:true,
+    scrollTrigger:{ trigger:container, pin:true, scrub:0.4,
                     start:'top top', end:'+=' + distance, invalidateOnRefresh:true }
   });
 
