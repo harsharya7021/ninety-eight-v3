@@ -46,9 +46,13 @@ html{background:var(--s98-bg)}
   display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:10px;
   font:400 13px/20px 'Archivo',Helvetica,Arial,sans-serif;font-stretch:100%;letter-spacing:-.01em;text-transform:none;text-align:left;
   color:var(--s98-ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  /* v3.70: declared, never coloured. On a 40px border-box header this border is
+     holding a pixel — remove it and the content box grows from 39 to 40 and
+     everything centred in the header drops half a pixel, on every page. Giving it
+     a colour here (or in .s98-glass below) is the whole of bringing the hairline back. */
   border-bottom:1px solid transparent;
-  transition:background-color .35s,border-color .35s,color .35s,-webkit-backdrop-filter .35s,backdrop-filter .35s}
-.s98-head.s98-glass{background:var(--s98-glass);-webkit-backdrop-filter:blur(14px) saturate(1.25);backdrop-filter:blur(14px) saturate(1.25);border-bottom-color:var(--s98-line)}
+  transition:background-color .35s,color .35s,-webkit-backdrop-filter .35s,backdrop-filter .35s}
+.s98-head.s98-glass{background:var(--s98-glass);-webkit-backdrop-filter:blur(14px) saturate(1.25);backdrop-filter:blur(14px) saturate(1.25)}
 .s98-head *{box-sizing:border-box}
 .s98-head a,.s98-head button{color:inherit;text-decoration:none;font:inherit;letter-spacing:inherit;text-transform:none;background:none;border:0;border-radius:0;padding:0;margin:0;cursor:pointer;
   -webkit-appearance:none;appearance:none;opacity:1;transition:opacity .25s}
@@ -84,7 +88,7 @@ html[data-ground="white"] .s98-c img{filter:invert(1)}
    on white, the clear header at the very top takes light ink over it */
 html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not(.s98-glass){color:#F4F4F2}
 html[data-ground="white"]:not(.s98-menu-open) .s98-head[data-s98-top="dark"]:not(.s98-glass) .s98-c img{filter:none}
-html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
+html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
 
 /* v3.69: nothing steps out any more. With the buttons gone the header is one
    word and the mark, so the mark stays on screen from 320px up — the 1100 /
