@@ -1212,18 +1212,26 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
    and letters by the driver at the foot of the page; these rules only have
    to keep a word in one piece and let a letter take a transform. .t118 is
    the house title for the three sections that had none — the closing line's
-   type (750, 112% wide, sentence case, the red full stop), a size up. */
+   type (750, 112% wide, sentence case, the red full stop). v3.79: one size
+   for all three, the one the press title was given to fit its lead-in (60px
+   at 1440); v3.78 had #voices and #brands a size up, at 80. */
 .t118{margin:0;font-weight:750;font-stretch:112%;letter-spacing:-.03em;line-height:1;
-  font-size:clamp(2.2rem,5.6vw,6rem);color:var(--ink);text-wrap:balance}
+  font-size:clamp(2rem,4.2vw,4.8rem);color:var(--ink);text-wrap:balance}
 .t118 .dot{font-style:normal;color:var(--red)}
 .w118{display:inline-block;white-space:nowrap}
 .l118{display:inline-block}
 
-/* #voices — the title stands in the middle of the parade's pinned stage and
-   the quote cards hop across in front of it: what they say, literally
-   passing behind our backs. First in the markup, so the cards paint over it. */
-.mwg069 .v118{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
-  margin:0 auto;padding:0 var(--pad);max-width:20ch;text-align:center;pointer-events:none}
+/* #voices — v3.79: the title stands at the left of the parade's pinned stage,
+   where the press title stands in its rail (the left 40vw, the same padding,
+   vertically centred), and the 069 driver hops it off ahead of the first
+   quote card. v3.78 had it centred with the cards hopping across it. The
+   hop moves the h2; the wrapper only places it, so no CSS transform of its
+   own sits under the tween. */
+.mwg069 .v118-lead{position:absolute;left:0;top:0;bottom:0;width:40vw;display:flex;align-items:center;
+  padding:0 3.2vw 0 var(--pad);pointer-events:none}
+@media(max-width:768px){
+  .mwg069 .v118-lead{width:100%;padding:0 11vw}
+}
 
 /* #press — without the rail (no script, reduced motion) the title heads the
    list. With it, the 087 driver moves it into the rail: into the 40vw
@@ -1233,12 +1241,13 @@ a.studio-hint sup{font-size:.7em;color:var(--red);margin-left:.35em;letter-spaci
 #press .mwg087 .cards{position:relative}
 #press .mwg087 .pr-lead{position:absolute;left:0;top:0;bottom:0;width:40vw;
   display:flex;align-items:center;padding:0 3.2vw 0 var(--pad);white-space:normal}
-#press .mwg087 .pr-lead .pr-title{margin:0;font-size:clamp(2rem,4.2vw,4.8rem)}
+#press .mwg087 .pr-lead .pr-title{margin:0}
 @media(max-width:768px){
   #press .mwg087 .pr-title{margin:0 11vw 28px}
 }
 @media(prefers-reduced-motion:reduce){
-  .mwg069 .v118{position:static;transform:none;flex:0 0 100%;max-width:none;margin:0 0 3vh}
+  .mwg069 .v118-lead{position:static;width:auto;flex:0 0 100%;padding:0;justify-content:center;margin:0 0 3vh}
+  .mwg069 .v118{text-align:center}
 }
 
 /* ---------- the white ground (v3.53) ----------
@@ -1458,8 +1467,8 @@ html[data-ground="white"] #top{background:#0B0B0C}
 <section class="mwg069" id="voices" aria-labelledby="voices-title">
   <div class="pin-height">
     <div class="container">
-      <!-- v3.78: the title, effect 118 — first, so the cards hop across in front of it -->
-      <h2 class="t118 v118" id="voices-title" data-t118>This is what they say behind our backs<i class="dot">.</i></h2>
+      <!-- v3.79: the title, effect 118, at the left of the stage; the 069 driver hops it off ahead of the cards -->
+      <div class="v118-lead"><h2 class="t118 v118" id="voices-title" data-t118>This is what they say behind our backs<i class="dot">.</i></h2></div>
       <figure class="media pquote" style="--qbg:#E0322B;--qfg:#FFFFFF"><blockquote>They didn’t manage my calendar. They built me as a product.</blockquote><figcaption>Ishant Sharma<span>Talent · Personal Brand</span></figcaption></figure>
       <figure class="media pquote" style="--qbg:#0039A6;--qfg:#FFFFFF"><blockquote>They saw the practice before they saw the player.</blockquote><figcaption>Pratima Singh<span>Talent · Personal Brand</span></figcaption></figure>
       <!-- PLACEHOLDER QUOTES — copy pending from Harsh; swap each blockquote when the comments land -->
@@ -1524,7 +1533,7 @@ html[data-ground="white"] #top{background:#0B0B0C}
    the carbon ground, as in the demo. */
 .dock98{position:relative;z-index:2;background:var(--bg);color:var(--ink);padding:clamp(56px,7vw,104px) 0 clamp(64px,8vw,112px);overflow:hidden}
 /* v3.78: the title (effect 118) replaces the mono label and its red dot */
-.dock98 .dk-title{margin:0 auto clamp(40px,4.6vw,76px);width:min(100% - 48px,1320px);text-align:center}
+.dock98 .dk-title{margin:0 auto clamp(32px,3.4vw,56px);width:min(100% - 48px,1320px);text-align:center}
 
 /* — Osmo — */
 .dock98 .nav-wrap{pointer-events:none;justify-content:center;align-items:flex-end;display:flex;position:relative}
@@ -1550,7 +1559,7 @@ html[data-ground="white"] .dock98 .image{box-shadow:0 0 0 1px var(--line);border
 @media (max-width:720px){
   .dock98{padding:48px 0 56px}
   .dock98 .nav-list{flex-wrap:wrap;font-size:11px;max-width:calc(7 * 5em);row-gap:.75em;height:auto}
-  .dock98 .dk-title{margin-bottom:30px}
+  .dock98 .dk-title{margin-bottom:26px}
 }
 @media (prefers-reduced-motion:reduce){
   .dock98 .nav-item,.dock98 .nav-item__tooltip{transition:none}
@@ -3261,6 +3270,24 @@ if (document.readyState === 'loading') {
       .to(media, { x:function(){ return -1.0*total(); }, yPercent:-35, rotation:0 });
     master.add(tl, i * (1 / n));
   });
+
+  /* v3.79: the section's title (#voices-title, effect 118) stands where the
+     parade begins and hops off ahead of it as the first card hops in. The
+     cards' own hop — their duration and power2.inOut, up then down by 35%
+     of a card, no roll, as for a quote — twice, each half the distance that
+     takes the title's right edge clear of the screen. Measured from offsets,
+     not the bounding box, so a refresh mid-hop still reads the resting
+     title. Placed at 0 on the master, it ends long before the last card, so
+     the parade's length and every card's pace are unchanged. */
+  var title = root.querySelector('.v118');
+  if (title){
+    var lead = title.parentNode;
+    var away = function(){ return lead.offsetLeft + title.offsetLeft + title.offsetWidth + 40; };
+    var lift = function(){ return 0.35 * medias[0].offsetHeight; };
+    master.add(gsap.timeline({ defaults:{ ease:'power2.inOut', duration:duration } })
+      .to(title, { x:function(){ return -0.5 * away(); }, y:function(){ return -lift(); } })
+      .to(title, { x:function(){ return -away(); },       y:function(){ return  lift(); } }), 0);
+  }
 })();
 
 /* ===== the handoff: the first vertical rises as the line leaves ============
