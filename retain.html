@@ -35,6 +35,8 @@ document.documentElement.classList.add('js');})();
    v3.85, Sep 29: at Harsh's call the page is the MWG 034 wall alone
    ("replace the current page"): 01–03 are gone, and the wall's rules are
    below. Everything else is still in assets/room.css.
+   v3.86, Sep 29: locked like the original, at Harsh's pick — the wall is
+   the whole screen and the page no longer scrolls (the lock is below).
    ========================================================================= */
 :root{ --room:#FF6319; }   /* The Habit's colour on the flywheel */
 
@@ -43,9 +45,9 @@ document.documentElement.classList.add('js');})();
    the columns and around every picture and its 10px margins, so each column
    is three grid columns wide. One screen tall under the fixed header; no
    background of its own (the page's ground shows between the pictures); it
-   clips what it holds, and the page itself still scrolls, to the footer.
+   clips what it holds. v3.86: the page is locked while the wall is live.
    The component's own ≤768px block (15px gaps) gives way to the grid's. */
-.mwg_effect034{height:calc(100vh - var(--s98-h,40px));display:flex;gap:var(--gap);padding:0 var(--m);width:100%;overflow:hidden;-webkit-user-select:none;user-select:none}
+.mwg_effect034{height:calc(100vh - var(--s98-h,40px));height:calc(100dvh - var(--s98-h,40px));display:flex;gap:var(--gap);padding:0 var(--m);width:100%;overflow:hidden;-webkit-user-select:none;user-select:none}
 .mwg_effect034 .col{flex:1;min-width:0}
 .mwg_effect034 .container{display:flex;flex-direction:column;gap:var(--gap);padding-bottom:var(--gap);will-change:transform}
 .mwg_effect034 .media{display:block;width:100%;height:auto}
@@ -55,6 +57,14 @@ html.js.in .mwg_effect034{opacity:1}
 @media(prefers-reduced-motion:reduce){ html.js .mwg_effect034{opacity:1;transition:none} }
 /* the page's heading, for screen readers: the wall has no visible title */
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+/* v3.86: locked like the original. Once the wall is live — the script sets
+   html.s98-wall when GSAP is there and motion is allowed — the page does not
+   scroll: every wheel, swipe or scrolling key moves the pictures instead.
+   The footer stays in the page for keyboards and screen readers (tabbing
+   into it brings it up; the wall comes back with the next move), and
+   overscroll is off, so a swipe down on a phone never pulls to refresh.
+   Without the script, or under reduced motion, the page scrolls as before. */
+html.s98-wall,html.s98-wall body{overflow:hidden;overscroll-behavior:none}
 </style>
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -285,10 +295,14 @@ html.js.in .mwg_effect034{opacity:1}
    wall — on a phone (four narrow columns) or in a tall window it is not,
    and a moved column would show its end — so further copies are added
    there (alt="", like the component's own repeats) until one set plus the
-   wall fits. The page is not locked: it still scrolls to the footer. */
+   wall fits. v3.86: the page is locked while the wall is live (the lock
+   is below, its rule in the CSS); nothing moves while the menu is open. */
 (function(){
   var root=document.querySelector('.mwg_effect034');
   if(!root||typeof gsap==='undefined'||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  /* v3.86: the lock — html.s98-wall holds the page still (see the CSS) */
+  var doc=document.documentElement, menu=document.getElementById('s98-menu'), foot=document.getElementById('s98-foot');
+  doc.classList.add('s98-wall');
   var incr=0;
   var cols=[['.container1',.5],['.container2',.8],['.container3',.6],['.container4',.2]].map(function(d){
     var el=root.querySelector(d[0]); if(!el) return null;
@@ -308,15 +322,31 @@ html.js.in .mwg_effect034{opacity:1}
       }
     });
   }
-  function drive(d){ incr-=d/2; cols.forEach(function(c){ c.to(incr); }); }
+  function menuOpen(){ return !!menu&&menu.getAttribute('aria-expanded')==='true'; }
+  function drive(d){ if(menuOpen()) return; if(pageYOffset) scrollTo(0,0);
+    incr-=d/2; cols.forEach(function(c){ c.to(incr); }); }
   measure();
   addEventListener('wheel', function(e){ if(e.ctrlKey) return;
     drive(e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?innerHeight:1)); }, {passive:true});
   var ty=null;
   addEventListener('touchstart', function(e){ ty=e.touches.length===1?e.touches[0].clientY:null; }, {passive:true});
-  addEventListener('touchmove', function(e){ if(ty===null||e.touches.length!==1) return;
-    var y=e.touches[0].clientY; drive(ty-y); ty=y; }, {passive:true});
+  /* not passive since v3.86: on the locked page a one-finger swipe belongs
+     to the wall, and holding it here keeps a browser that would still
+     scroll a hidden body (older iOS) from doing so; two fingers still zoom */
+  addEventListener('touchmove', function(e){ if(ty===null||e.touches.length!==1||menuOpen()) return;
+    if(e.cancelable) e.preventDefault();
+    var y=e.touches[0].clientY; drive(ty-y); ty=y; }, {passive:false});
   addEventListener('touchend', function(){ ty=null; }, {passive:true});
+  /* the keys a locked page would ignore move the wall instead */
+  addEventListener('keydown', function(e){
+    if(menuOpen()||e.altKey||e.ctrlKey||e.metaKey) return;
+    var t=e.target; if(t&&t!==document.body&&t!==doc) return;
+    var k=e.key, h=innerHeight*.8;
+    var d=k==='ArrowDown'?80:k==='ArrowUp'?-80:k==='PageDown'?h:k==='PageUp'?-h:k===' '?(e.shiftKey?-h:h):0;
+    if(d){ e.preventDefault(); drive(d); }
+  });
+  /* tabbing into the footer brings it up; tabbing out puts the wall back */
+  document.addEventListener('focusin', function(e){ if(foot&&!foot.contains(e.target)&&pageYOffset) scrollTo(0,0); });
   addEventListener('resize', measure);
   addEventListener('load', measure);
 })();
