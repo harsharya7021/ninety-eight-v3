@@ -325,6 +325,14 @@ a.media.ph:hover b{opacity:.2}
     l.addEventListener('keydown', function(e){ if(wide.matches&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); open(i); } });
   });
   open(0); arm();
+  /* v3.84: the covers are lazy, and a closed project's cover is not
+     displayed, so each one only began to load on its first hover and the
+     project opened on an empty frame until it came in. Once the page has
+     loaded, fetch the ones not yet in, so a hover opens a cover that is
+     already there. */
+  function warm(){ projects.forEach(function(p){ var im=p.querySelector('.media img');
+    if(im&&!im.complete&&im.src){ var w=new Image(); w.decoding='async'; w.src=im.src; } }); }
+  if(document.readyState==='complete') warm(); else addEventListener('load', warm);
   if(wide.addEventListener) wide.addEventListener('change', arm); else if(wide.addListener) wide.addListener(arm);
 })();
 </script>
