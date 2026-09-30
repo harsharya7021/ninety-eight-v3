@@ -186,10 +186,11 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 .n35-name .beta{font-size:.55em;font-weight:600;color:var(--s98-red);letter-spacing:.1em;vertical-align:super;margin-left:.5em}
 .n35-medias{display:flex;gap:15px;position:absolute;right:var(--s98-pad);top:50%;transform:translate(0,-50%);overflow:hidden}
 .n35-media{width:92px;height:92px;max-width:none;object-fit:cover;transform:translate(0,100%);border-radius:4%}
-/* v3.92–3.93: a picture that keeps its own shape — the laptop in Talent & Branding, a
-   transparent cut-out: the row's height, and the width its shape gives (its tag's width and
-   height, then the picture itself; 141px, 92px under 768px) instead of a square crop */
-.n35-media.n35-wide{width:auto}
+/* v3.92–3.94: pictures that keep their own shape — in Talent & Branding, the laptop (a
+   transparent cut-out, 423×276: 141px wide, 92px under 768px) and the Jerry Maguire poster
+   (3:4, 207×276: 69px wide): the row's height, and the width their shape gives (the tag's
+   width and height, then the picture itself) instead of a square crop */
+.n35-media.n35-own{width:auto}
 .nav035.nofx .n35-media{transform:none}
 .nav035.nofx li:not(:first-child) .n35-media{display:none}   /* no motion, no bloom: only the open first row shows its pictures */
 @media (max-width:768px){
