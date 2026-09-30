@@ -191,6 +191,10 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
    (3:4, 207×276: 69px wide): the row's height, and the width their shape gives (the tag's
    width and height, then the picture itself) instead of a square crop */
 .n35-media.n35-own{width:auto}
+/* v3.95: every row's pictures are its bank; assets/site.js deals them afresh each time the
+   row opens (a random order, as many as fit beside the name, five at most) and the ones a
+   deal leaves out wait here, hidden */
+.n35-media.n35-off{display:none}
 .nav035.nofx .n35-media{transform:none}
 .nav035.nofx li:not(:first-child) .n35-media{display:none}   /* no motion, no bloom: only the open first row shows its pictures */
 @media (max-width:768px){
