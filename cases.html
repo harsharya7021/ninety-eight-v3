@@ -34,9 +34,10 @@ document.documentElement.classList.add('js');})();
         21px rows and hairlines, widened to the columns this one needs:
         number, project, discipline, sector, year, and where it opens.
         A still follows the pointer over rows that have one.
-     02 Index: a book's index, by discipline and by sector; every number
-        is a link to its row.
-   The rows and the index are written by Workshop/build_cases.py from the
+     02 Index: a book's index, by discipline and by sector — gone in v3.90
+        (Harsh, Sep 30: redundant once the v3.89 filter bar sorts the
+        directory by discipline).
+   The rows are written by Workshop/build_cases.py from the
    site's own pages (the case drawer on the landing, the rooms, the press
    room): add work to those pages, then rebuild this one.
    ========================================================================= */
@@ -66,25 +67,15 @@ a.crw:hover .o{opacity:1}
 .crw:target{animation:hit 2.4s var(--ease)}
 @keyframes hit{0%,35%{background:var(--line)}100%{background:transparent}}
 
-/* ---------- 02 the index ---------- */
-.cidx{margin-top:calc(var(--lh) * 2);align-items:start}
-.cidx .col{grid-column:span 6;min-width:0}
-.cidx .col + .col{grid-column:7/13}
-.cidx .hd{display:grid;grid-template-columns:2fr 3fr;column-gap:var(--gap);margin-bottom:3px}
-.term{display:grid;grid-template-columns:2fr 3fr;column-gap:var(--gap);padding-bottom:1px;border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--s98-h,40px) + 30vh)}
-.term .k{min-width:0}
-.term.sub .k{padding-left:1.1em}
-.term .nums a{font-variant-numeric:tabular-nums;transition:opacity .25s}
-.term .nums a:hover{opacity:.5}
-.term:target{animation:hit 2.4s var(--ease)}
-.cnote{margin-top:var(--lh)}
+/* the note under the directory closes the page (02 Index went in v3.90) */
+.cnote{margin-top:var(--lh);margin-bottom:calc(var(--lh) * 3)}
 .cnote p{grid-column:1/7}
 
 /* the entrance: the directory's rows fade in as the room's do, the first two dozen staggered */
-html.js .crw,html.js .term{opacity:0;transition:opacity .8s var(--ease);transition-delay:calc(.25s + var(--i,0) * .03s)}
-html.js.in .crw,html.js.in .term{opacity:1}
+html.js .crw{opacity:0;transition:opacity .8s var(--ease);transition-delay:calc(.25s + var(--i,0) * .03s)}
+html.js.in .crw{opacity:1}
 .cdir:hover .crw:not(:hover),html.js.in .cdir:hover .crw:not(:hover){opacity:.35}
-@media(prefers-reduced-motion:reduce){ html.js .crw,html.js .term{transition:none;opacity:1} .crw:target,.term:target{animation:none} }
+@media(prefers-reduced-motion:reduce){ html.js .crw{transition:none;opacity:1} .crw:target{animation:none} }
 
 /* between 900 and 1200px, Opens steps out (the note under the directory says where
    rows open) and the sector takes its column */
@@ -96,8 +87,6 @@ html.js.in .crw,html.js.in .term{opacity:1}
   .cdir .chd,.cdir .crw{grid-template-columns:44px minmax(0,1fr) auto}
   .cdir .n{grid-column:1}.cdir .p{grid-column:2}.cdir .y{grid-column:3;text-align:right}
   .cdir .d,.cdir .s,.cdir .o{display:none}
-  .cidx .col,.cidx .col + .col{grid-column:1/13}
-  .cidx .col + .col{margin-top:calc(var(--lh) * 2)}
   .cnote p{grid-column:1/13}
 }
 /* ---------- v3.89: the filter bar over the directory ----------
@@ -117,8 +106,8 @@ html.js .cflt ~ .cdir{margin-top:calc(var(--lh) * 1.5)}
 .cflt button:focus-visible{outline:1px solid var(--ink);outline-offset:2px}
 .cflt-live{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 .cdir .crw[hidden]{display:none}
-/* a filter's rows come back in, a little staggered; a row an index number
-   lands on still flashes (the hit above) */
+/* a filter's rows come back in, a little staggered; a row a link lands on
+   (cases.html#w05) still flashes (the hit above) */
 @keyframes cfltIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .cdir .crw.cflt-in{animation:cfltIn .45s var(--ease) backwards;animation-delay:calc(var(--k,0) * 14ms)}
 .cdir .crw.cflt-in:target{animation:hit 2.4s var(--ease)}
@@ -357,44 +346,7 @@ html.js .cflt ~ .cdir{margin-top:calc(var(--lh) * 1.5)}
     <a class="crw" href="cases/yyc-group/" id="w82" style="--i:24" title="Three brands. One operating playbook. Two national awards in a single year."><span class="n">82</span><span class="p">Yum Yum Cha Group</span><span class="d">Launch &amp; PR</span><span class="s">Hospitality &middot; restaurants &amp; dining</span><span class="y">&mdash;</span><span class="o">Case &rarr;</span></a>
 </section>
 <div class="g cnote"><p class="faint">A case opens in its case file on the home page. Everything else opens on the page that holds it &mdash; a showcase, the press room, production, the creator floor, retain or the identity strip &mdash; and Behance opens in a new tab. A year is shown where the work carries one.</p></div>
-
-<!-- ============ 02 — the index ============ -->
-<div class="g kick" id="index">
-  <span class="n faint" style="--i:0">02</span>
-  <span class="t" style="--i:1">Index</span>
-  <span class="s faint" style="--i:2">By discipline and by sector &mdash; every number is a row above</span>
-</div>
-<section class="g cidx" aria-label="The index">
-  <div class="col" aria-label="By discipline">
-    <div class="hd"><span class="faint">Discipline:</span><span class="faint">Entries:</span></div>
-      <div class="term" id="i-app-and-product-design"><span class="k">App &amp; product design <span class="c faint">3</span></span><span class="nums"><a href="#w15">15</a>, <a href="#w62">62</a>, <a href="#w63">63</a></span></div>
-      <div class="term" id="i-brand-identity-and-design"><span class="k">Brand identity &amp; design <span class="c faint">4</span></span><span class="nums"><a href="#w12">12</a>, <a href="#w13">13</a>, <a href="#w41">41</a>, <a href="#w51">51</a></span></div>
-      <div class="term" id="i-creator-marketing"><span class="k">Creator marketing <span class="c faint">30</span></span><span class="nums"><a href="#w02">02</a>, <a href="#w08">08</a>, <a href="#w10">10</a>, <a href="#w18">18</a>, <a href="#w20">20</a>, <a href="#w23">23</a>, <a href="#w26">26</a>, <a href="#w27">27</a>, <a href="#w29">29</a>, <a href="#w30">30</a>, <a href="#w34">34</a>, <a href="#w39">39</a>, <a href="#w42">42</a>, <a href="#w43">43</a>, <a href="#w44">44</a>, <a href="#w45">45</a>, <a href="#w47">47</a>, <a href="#w48">48</a>, <a href="#w53">53</a>, <a href="#w55">55</a>, <a href="#w56">56</a>, <a href="#w59">59</a>, <a href="#w61">61</a>, <a href="#w65">65</a>, <a href="#w66">66</a>, <a href="#w67">67</a>, <a href="#w72">72</a>, <a href="#w74">74</a>, <a href="#w77">77</a>, <a href="#w81">81</a></span></div>
-      <div class="term" id="i-digital-and-social-pr"><span class="k">Digital &amp; social PR <span class="c faint">1</span></span><span class="nums"><a href="#w19">19</a></span></div>
-      <div class="term" id="i-events-and-experiential"><span class="k">Events &amp; experiential <span class="c faint">12</span></span><span class="nums"><a href="#w20">20</a>, <a href="#w27">27</a>, <a href="#w29">29</a>, <a href="#w30">30</a>, <a href="#w34">34</a>, <a href="#w53">53</a>, <a href="#w55">55</a>, <a href="#w61">61</a>, <a href="#w65">65</a>, <a href="#w72">72</a>, <a href="#w74">74</a>, <a href="#w81">81</a></span></div>
-      <div class="term" id="i-launch-and-pr"><span class="k">Launch &amp; PR <span class="c faint">5</span></span><span class="nums"><a href="#w02">02</a>, <a href="#w31">31</a>, <a href="#w37">37</a>, <a href="#w42">42</a>, <a href="#w82">82</a></span></div>
-      <div class="term" id="i-media-relations"><span class="k">Media relations <span class="c faint">12</span></span><span class="nums"><a href="#w11">11</a>, <a href="#w32">32</a>, <a href="#w33">33</a>, <a href="#w35">35</a>, <a href="#w36">36</a>, <a href="#w40">40</a>, <a href="#w50">50</a>, <a href="#w57">57</a>, <a href="#w58">58</a>, <a href="#w71">71</a>, <a href="#w78">78</a>, <a href="#w79">79</a></span></div>
-      <div class="term" id="i-personal-branding"><span class="k">Personal branding <span class="c faint">2</span></span><span class="nums"><a href="#w37">37</a>, <a href="#w38">38</a></span></div>
-      <div class="term" id="i-production-and-photography"><span class="k">Production &amp; photography <span class="c faint">16</span></span><span class="nums"><a href="#w01">01</a>, <a href="#w03">03</a>, <a href="#w04">04</a>, <a href="#w06">06</a>, <a href="#w09">09</a>, <a href="#w14">14</a>, <a href="#w16">16</a>, <a href="#w17">17</a>, <a href="#w22">22</a>, <a href="#w46">46</a>, <a href="#w49">49</a>, <a href="#w52">52</a>, <a href="#w69">69</a>, <a href="#w73">73</a>, <a href="#w75">75</a>, <a href="#w76">76</a></span></div>
-      <div class="term" id="i-social-media-and-retain"><span class="k">Social media &amp; Retain <span class="c faint">19</span></span><span class="nums"><a href="#w02">02</a>, <a href="#w05">05</a>, <a href="#w07">07</a>, <a href="#w10">10</a>, <a href="#w21">21</a>, <a href="#w24">24</a>, <a href="#w25">25</a>, <a href="#w28">28</a>, <a href="#w37">37</a>, <a href="#w38">38</a>, <a href="#w53">53</a>, <a href="#w54">54</a>, <a href="#w60">60</a>, <a href="#w64">64</a>, <a href="#w68">68</a>, <a href="#w70">70</a>, <a href="#w72">72</a>, <a href="#w74">74</a>, <a href="#w80">80</a></span></div>
-  </div>
-  <div class="col" aria-label="By sector">
-    <div class="hd"><span class="faint">Sector:</span><span class="faint">Entries:</span></div>
-      <div class="term" id="i-consumer-products"><span class="k">Consumer products <span class="c faint">1</span></span><span class="nums"><a href="#w05">05</a></span></div>
-      <div class="term" id="i-culture-and-festivals"><span class="k">Culture &amp; festivals <span class="c faint">1</span></span><span class="nums"><a href="#w30">30</a></span></div>
-      <div class="term" id="i-food-and-drink-brands"><span class="k">Food &amp; drink brands <span class="c faint">13</span></span><span class="nums"><a href="#w01">01</a>, <a href="#w04">04</a>, <a href="#w06">06</a>, <a href="#w09">09</a>, <a href="#w10">10</a>, <a href="#w13">13</a>, <a href="#w22">22</a>, <a href="#w31">31</a>, <a href="#w49">49</a>, <a href="#w66">66</a>, <a href="#w69">69</a>, <a href="#w75">75</a>, <a href="#w76">76</a></span></div>
-      <div class="term" id="i-hospitality"><span class="k">Hospitality <span class="c faint">55</span></span><span class="nums"><a href="#w18">18</a>, <a href="#w19">19</a> &middot; <span class="faint">and below</span></span></div>
-      <div class="term sub"><span class="k">— bars &amp; nightlife <span class="c faint">13</span></span><span class="nums"><a href="#w12">12</a>, <a href="#w21">21</a>, <a href="#w24">24</a>, <a href="#w25">25</a>, <a href="#w29">29</a>, <a href="#w34">34</a>, <a href="#w43">43</a>, <a href="#w44">44</a>, <a href="#w51">51</a>, <a href="#w64">64</a>, <a href="#w67">67</a>, <a href="#w70">70</a>, <a href="#w81">81</a></span></div>
-      <div class="term sub"><span class="k">— cafés &amp; desserts <span class="c faint">10</span></span><span class="nums"><a href="#w14">14</a>, <a href="#w16">16</a>, <a href="#w17">17</a>, <a href="#w23">23</a>, <a href="#w32">32</a>, <a href="#w33">33</a>, <a href="#w47">47</a>, <a href="#w56">56</a>, <a href="#w65">65</a>, <a href="#w73">73</a></span></div>
-      <div class="term sub"><span class="k">— hotels <span class="c faint">1</span></span><span class="nums"><a href="#w39">39</a></span></div>
-      <div class="term sub"><span class="k">— restaurants &amp; dining <span class="c faint">29</span></span><span class="nums"><a href="#w02">02</a>, <a href="#w03">03</a>, <a href="#w07">07</a>, <a href="#w08">08</a>, <a href="#w11">11</a>, <a href="#w20">20</a>, <a href="#w26">26</a>, <a href="#w35">35</a>, <a href="#w36">36</a>, <a href="#w40">40</a>, <a href="#w42">42</a>, <a href="#w48">48</a>, <a href="#w50">50</a>, <a href="#w52">52</a>, <a href="#w53">53</a>, <a href="#w54">54</a>, <a href="#w55">55</a>, <a href="#w57">57</a>, <a href="#w58">58</a>, <a href="#w59">59</a>, <a href="#w60">60</a>, <a href="#w61">61</a>, <a href="#w68">68</a>, <a href="#w71">71</a>, <a href="#w72">72</a>, <a href="#w74">74</a>, <a href="#w78">78</a>, <a href="#w79">79</a>, <a href="#w82">82</a></span></div>
-      <div class="term" id="i-jewellery-and-retail"><span class="k">Jewellery &amp; retail <span class="c faint">1</span></span><span class="nums"><a href="#w41">41</a></span></div>
-      <div class="term" id="i-platforms-and-education"><span class="k">Platforms &amp; education <span class="c faint">2</span></span><span class="nums"><a href="#w45">45</a>, <a href="#w77">77</a></span></div>
-      <div class="term" id="i-talent-and-creators"><span class="k">Talent &amp; creators <span class="c faint">3</span></span><span class="nums"><a href="#w37">37</a>, <a href="#w38">38</a>, <a href="#w46">46</a></span></div>
-      <div class="term" id="i-technology-and-apps"><span class="k">Technology &amp; apps <span class="c faint">3</span></span><span class="nums"><a href="#w15">15</a>, <a href="#w62">62</a>, <a href="#w63">63</a></span></div>
-      <div class="term" id="i-wellness-and-lifestyle"><span class="k">Wellness &amp; lifestyle <span class="c faint">3</span></span><span class="nums"><a href="#w27">27</a>, <a href="#w28">28</a>, <a href="#w80">80</a></span></div>
-  </div>
-</section>
+<!-- v3.90: the index is gone at Harsh's call — the filter bar above sorts the directory -->
 </main>
 
 <!--S98:FOOT — the shared footer: written by Workshop/patch_site_chrome_v353.py; edit it there -->
@@ -472,7 +424,8 @@ html.js .cflt ~ .cdir{margin-top:calc(var(--lh) * 1.5)}
    it), so a rebuilt directory keeps working. A filter hides the rows it does
    not hold and fades the rest back in; the choice rides in the address
    (?f=events) so a view can be shared; a link to a row that is filtered out
-   (the index's numbers) goes back to All first, so every number still lands. */
+   (cases.html?f=events#w05, a typed hash) goes back to All first, so it lands.
+   v3.90: the index went, and with it the handler for its numbers. */
 (function(){
   var bar = document.getElementById('cflt'); if (!bar) return;
   var live = document.getElementById('cflt-live');
@@ -510,11 +463,6 @@ html.js .cflt ~ .cdir{margin-top:calc(var(--lh) * 1.5)}
     }
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.getAttribute('data-f')); }); });
-  document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a[href^="#w"]'); if (!a) return;
-    var row = document.getElementById(a.getAttribute('href').slice(1));
-    if (row && row.hidden) set('all');
-  }, true);
   addEventListener('hashchange', function(){
     var row = location.hash && document.getElementById(location.hash.slice(1));
     if (row && row.hidden){ set('all'); row.scrollIntoView(); }
