@@ -203,9 +203,12 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 }
 
 /* ---------- the footer ---------- */
+/* v3.91: no hairline along its top (Harsh, Sep 30: "remove the line before the footer
+   everywhere"). border-top is 0, not left out: index, talent and privacy still carry
+   old footer{border-top:…} rules that this one has to go on beating. */
 .s98-foot{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:10px;row-gap:20px;align-items:start;
   position:relative;z-index:2;margin:0;padding:clamp(80px,14vh,160px) var(--s98-m) var(--s98-m);box-sizing:border-box;
-  background:var(--s98-bg);color:var(--s98-ink);border-top:1px solid var(--s98-line);
+  background:var(--s98-bg);color:var(--s98-ink);border-top:0;
   font:400 13px/20px 'Archivo',Helvetica,Arial,sans-serif;font-stretch:100%;letter-spacing:-.01em;text-transform:none;text-align:left;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 .s98-foot *{box-sizing:border-box}
