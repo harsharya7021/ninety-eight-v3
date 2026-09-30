@@ -186,9 +186,10 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
 .n35-name .beta{font-size:.55em;font-weight:600;color:var(--s98-red);letter-spacing:.1em;vertical-align:super;margin-left:.5em}
 .n35-medias{display:flex;gap:15px;position:absolute;right:var(--s98-pad);top:50%;transform:translate(0,-50%);overflow:hidden}
 .n35-media{width:92px;height:92px;max-width:none;object-fit:cover;transform:translate(0,100%);border-radius:4%}
-/* v3.92: a picture that keeps its own shape — the laptop in Talent & Branding (3:2) takes
-   the row's height and its own width (138px; 90px under 768px) instead of a square crop */
-.n35-media.n35-wide{width:auto;aspect-ratio:3/2}
+/* v3.92–3.93: a picture that keeps its own shape — the laptop in Talent & Branding, a
+   transparent cut-out: the row's height, and the width its shape gives (its tag's width and
+   height, then the picture itself; 141px, 92px under 768px) instead of a square crop */
+.n35-media.n35-wide{width:auto}
 .nav035.nofx .n35-media{transform:none}
 .nav035.nofx li:not(:first-child) .n35-media{display:none}   /* no motion, no bloom: only the open first row shows its pictures */
 @media (max-width:768px){
@@ -198,11 +199,11 @@ html.s98-menu-open .s98-head{z-index:500;background:transparent;-webkit-backdrop
   .n35-media{width:60px;height:60px}
   .n35-media:nth-child(n+4){display:none}
   .n35-name{font-size:.8rem}
-  .nav035 ul li:first-child .n35-name{padding-right:160px}   /* v3.67: the first row's name ran under its three pictures at 360px; v3.92: its two, Ishant and the wider laptop, take 60 + 5 + 90 */
+  .nav035 ul li:first-child .n35-name{padding-right:230px}   /* v3.67: the first row's name ran under its three pictures at 360px; v3.93: Ishant, the laptop and the notebook take 60 + 5 + 92 + 5 + 60 */
 }
 @media (max-width:400px){
   .n35-media:nth-child(n+3){display:none}
-  .nav035 ul li:first-child .n35-name{padding-right:160px}   /* v3.92: was 110px; the laptop is 90px wide here */
+  .nav035 ul li:first-child .n35-name{padding-right:165px}   /* v3.93: two pictures here, Ishant and the laptop (60 + 5 + 92) */
 }
 
 /* ---------- the footer ---------- */
