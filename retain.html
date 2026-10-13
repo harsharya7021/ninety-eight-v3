@@ -341,8 +341,8 @@ html:not(.js) .mwg_effect034 .mvb{display:none}
    Under reduced motion they wait for Play. A browser that refuses to start it (an
    iPhone in Low Power Mode: NotAllowedError) leaves it on its poster with Play showing;
    a play cut short because the tile left the screen while it loaded (AbortError) is not
-   a refusal. A tile narrower than 360 device pixels (a phone's column) plays the 240px
-   copy (data-small). The wall calls s98mv() after it adds copies, so they are watched too. */
+   a refusal. A tile shown under 260 device pixels wide (a phone's column) plays the 240px
+   copy (data-small); a laptop's (about 350) plays the 480 one. The wall calls s98mv() after it adds copies, so they are watched too. */
 (function(){
   var root=document.querySelector('.mwg_effect034'); if(!root) return;
   var held=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -355,16 +355,21 @@ html:not(.js) .mwg_effect034 .mvb{display:none}
       b.setAttribute('aria-label',(held?'Play':'Pause')+' the moving Esquire Club post');
     });
   }
+  /* the copy to play is picked once, as a tile first plays, from the width it is shown at */
+  function pick(v){
+    var w=v.getBoundingClientRect().width, sm=v.getAttribute('data-small');
+    if(v.s98p||!w) return; v.s98p=1;
+    if(sm&&w*(window.devicePixelRatio||1)<=260) v.setAttribute('src',sm);
+  }
   function sync(v){
     if(!held&&v.s98in&&!document.hidden){
+      pick(v);
       var p=v.play(); if(p&&p.catch) p.catch(function(e){ if(e&&e.name==='NotAllowedError'&&!held){ held=true; label(); } });
     } else if(!v.paused) v.pause();
   }
   function all(){ [].forEach.call(vids(),sync); }
   window.s98mv=function(){
     [].forEach.call(vids(),function(v){ if(v.s98w) return; v.s98w=1; v.muted=true;
-      var sm=v.getAttribute('data-small');
-      if(sm&&v.getBoundingClientRect().width*(window.devicePixelRatio||1)<=360&&v.getAttribute('src')!==sm) v.setAttribute('src',sm);
       if(io) io.observe(v); else { v.s98in=true; sync(v); } });
   };
   root.addEventListener('click',function(e){
