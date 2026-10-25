@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B0B0C"><!-- v3.118: the browser's own chrome takes the ground; site.js turns it white with the switch -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><!-- v3.118: the mark on every tab and home screen; only the landing had an icon -->
 <title>About Ninety-Eight — a creative firm in Delhi NCR, since 2020</title>
 <meta name="description" content="Ninety-Eight Entertainment: founded 1 January 2020 in Delhi NCR by Harsh Arya. Talent &amp; Branding and Marketing; 70+ brands, 35 documented cases.">
 <meta property="og:title" content="About Ninety-Eight — a creative firm in Delhi NCR, since 2020">
@@ -13,9 +16,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.ninety-eight.in/about.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://www.ninety-eight.in/#org","name":"Ninety-Eight Entertainment","alternateName":["Ninety-Eight","98 Entertainment","98"],"url":"https://www.ninety-eight.in/","logo":"https://www.ninety-eight.in/assets/98-graffiti.png","image":"https://www.ninety-eight.in/assets/og-cover.jpg","description":"A creative and strategic firm in Delhi NCR that works as a business partner, not a vendor: influencer marketing, PR, brand identity, social, production and events under Marketing; personal branding and talent management under Talent & Branding. Founded 1 January 2020.","foundingDate":"2020-01-01","founder":{"@id":"https://www.ninety-eight.in/#harsh"},"address":{"@type":"PostalAddress","addressLocality":"Greater Noida","addressRegion":"Uttar Pradesh","postalCode":"201310","addressCountry":"IN"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Place","name":"Delhi NCR"}],"email":"contact@ninety-eight.in","telephone":"+91-97111-84674","sameAs":["https://www.instagram.com/98.entertainment/","https://www.linkedin.com/company/ninetyeight","https://www.behance.net/harsharya"],"knowsAbout":["influencer marketing","creator marketing","public relations","brand identity design","personal branding","talent management","restaurant marketing","hospitality marketing","experiential marketing","food photography","social media marketing"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Six instruments","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Branding and identity","url":"https://www.ninety-eight.in/identity.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"PR and media","url":"https://www.ninety-eight.in/press.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Influencer marketing","url":"https://www.ninety-eight.in/amplify.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Social","url":"https://www.ninety-eight.in/retain.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Production","url":"https://www.ninety-eight.in/production.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Events","url":"https://www.ninety-eight.in/events.html"}}]}},{"@type":"Person","@id":"https://www.ninety-eight.in/#harsh","name":"Harsh Arya","jobTitle":"Founder","image":"https://www.ninety-eight.in/assets/about/harsh-960.webp","worksFor":{"@id":"https://www.ninety-eight.in/#org"},"url":"https://www.ninety-eight.in/about.html","alumniOf":[{"@type":"CollegeOrUniversity","name":"Indian School of Business"}],"sameAs":["https://www.linkedin.com/in/harsharyaa","https://www.behance.net/harsharya","https://www.instagram.com/harsh.aryaa/"]}]}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css"><!-- v3.118: the typefaces, from here rather than from Google -->
 <script>
 /* the ground is remembered per browser; read it before first paint so the
    page never flashes the other one. Falls back to carbon. */
@@ -51,7 +53,7 @@ document.documentElement.classList.add('js');})();
 .bl i{display:block;font-style:normal}
 .belief .bx{grid-column:9/13;padding-top:3px;max-width:44ch}
 .belief .bx p + p{margin-top:calc(var(--lh) * .6)}
-.belief .rc a,.facts-lede a,.yr a{border-bottom:1px solid var(--line);padding-bottom:1px}
+.belief .rc a,.facts-lede a,.yr a{border-bottom:1px solid var(--line);padding-bottom:1px;padding-top:8px}   /* v3.118: inline, so the padding changes no line; it makes the 16px link a 24px target (WCAG 2.2, 2.5.8) with the underline where it was */
 .belief .rc a:hover,.yr a:hover{border-bottom-color:var(--ink)}
 
 /* the beliefs land as they arrive (only with script, an observer and motion allowed: html.io) */
@@ -102,10 +104,10 @@ html.js.io .name.seen .bar{transform:none}
 .facts{grid-column:1/13;margin-top:calc(var(--lh) * 2)}
 .facts .hd,.facts .row{display:grid;grid-template-columns:2fr 10fr;column-gap:var(--gap)}
 .facts .hd{margin-bottom:3px}
-.facts .row{height:auto;min-height:21px;white-space:normal;align-items:baseline;padding:6px 0}
+.facts .row{height:auto;min-height:24px;line-height:var(--lh);white-space:normal;align-items:baseline;padding:6px 0}   /* v3.118: room.css's rows are 24px on a 23px line now; these wrap, so they keep the page's 20px leading (and a 24px floor) */
 .facts .row span:first-child{opacity:var(--faint)}
 .facts .row span:nth-child(2){overflow:visible;text-overflow:clip;white-space:normal}
-.facts .row a{border-bottom:1px solid var(--line);padding-bottom:1px}
+.facts .row a{border-bottom:1px solid var(--line);padding-bottom:1px;padding-top:8px}   /* v3.118: 24px targets, as above */
 .facts .row a:hover{border-bottom-color:var(--ink)}
 .post.ask{margin-top:clamp(120px,22vh,260px)}
 

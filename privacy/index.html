@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <script>(function(){var d=document.documentElement,g='carbon';try{if(localStorage.getItem('98-ground')==='white')g='white';}catch(e){}d.setAttribute('data-ground',g);})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B0B0C"><!-- v3.118: the browser's own chrome takes the ground; site.js turns it white with the switch -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"><!-- v3.118: the mark on every tab and home screen; only the landing had an icon -->
 <title>Privacy · Ninety-Eight Entertainment</title>
 <meta name="description" content="What Ninety-Eight Entertainment collects on ninety-eight.in, what it doesn’t, and what our Pinterest tool does.">
 <meta property="og:title" content="Privacy · Ninety-Eight Entertainment">
@@ -30,15 +33,14 @@
   Not legal advice. Honest plain-English description of actual behaviour.
   ───────────────────────────────────────────────────────────────────────────
 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/fonts.css"><!-- v3.118: the typefaces, from here rather than from Google -->
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 *{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 :root{
   --ink:#E9EAE4; --bg:#0A0A0A;
-  --dim:rgba(233,234,228,.44); --dimmer:rgba(233,234,228,.22);
+  --dim:rgba(233,234,228,.56); --dimmer:rgba(233,234,228,.5);
   --hair:rgba(233,234,228,.13);
   --red:#E4322B;
   --mono:"Space Mono",ui-monospace,Menlo,monospace;
@@ -102,10 +104,11 @@ footer i{font-style:normal;color:var(--ink)}
 
 /* ---------- the white ground (v3.53): the site-wide switch can put this page on white ---------- */
 html[data-ground="white"]{
-  --ink:#111111; --bg:#FFFFFF; --dim:rgba(17,17,17,.52); --dimmer:rgba(17,17,17,.3); --hair:rgba(17,17,17,.13);
+  --ink:#111111; --bg:#FFFFFF; --dim:rgba(17,17,17,.52); --dimmer:rgba(17,17,17,.55); --hair:rgba(17,17,17,.13);
 }
-html[data-ground="white"] p,html[data-ground="white"] li{color:rgba(17,17,17,.8)}
+html[data-ground="white"] main p,html[data-ground="white"] main li{color:rgba(17,17,17,.8)}   /* v3.118: scoped to the page's own text; it used to reach the menu's word MENU, which went grey on White here and nowhere else */
 html[data-ground="white"] .note{color:rgba(17,17,17,.72)}
+::selection{background:var(--s98-red,#EE352E);color:#fff}   /* v3.118: the house selection colour, as every other page has */
 </style>
 <link rel="stylesheet" href="../assets/site.css">
 </head>
@@ -208,7 +211,7 @@ html[data-ground="white"] .note{color:rgba(17,17,17,.72)}
 <main>
   <div class="kicker">Ninety-Eight Entertainment</div>
   <h1>Privacy<b>.</b></h1>
-  <div class="updated">Last updated 10 October 2026</div>
+  <div class="updated">Last updated 25 October 2026</div>
 
   <p class="lede">We are a creative studio, not a data business. This page says
   plainly what we collect, what we don't, and what our Pinterest tool does. If
@@ -269,8 +272,6 @@ html[data-ground="white"] .note{color:rgba(17,17,17,.72)}
   <ul>
     <li><strong>Our web host</strong> — serves the pages and keeps the server
         logs described above.</li>
-    <li><strong>Google Fonts</strong> — typefaces load from Google's servers, so
-        your browser makes a request to them and they see your IP address.</li>
     <li><strong>Formspree</strong> — receives what you send through the brief
         form, screens it for spam and emails it to us. Our Formspree account
         keeps 30 days of submissions.</li>

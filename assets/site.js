@@ -123,6 +123,21 @@
   var expanded = function(){ return window.innerWidth > 768 ? 122 : 90; };
   var lastIndexEntered = 0, tls = [], isOpen = false;
 
+  /* v3.118: the menu's pictures are not fetched until the menu is about to be
+     wanted (site.css keeps them display:none until .n35-ready). The pointer
+     reaching the Menu button, the button taking focus, or a touch anywhere on
+     the header is the signal — a few hundred milliseconds ahead of the click,
+     which on an ordinary connection is enough for the first row's four — and
+     openMenu() sets it regardless, so a keyboard shortcut or a script never
+     opens an empty curtain. */
+  var ready = false;
+  function arm(){
+    if (ready) return; ready = true;
+    root.classList.add('n35-ready');
+  }
+  ['pointerenter', 'focus', 'touchstart', 'pointerdown'].forEach(function(t){ btn.addEventListener(t, arm, { passive: true }); });
+  if (head) head.addEventListener('touchstart', arm, { passive: true });
+
   /* v3.95: every row keeps a bank of pictures (Harsh, Sep 30: "each aisle has a bank of
      icons to show ... it shows it in a random order"). Each time a row opens (the menu
      opening, or the pointer coming onto a row) it deals them afresh: a random order, then as
@@ -302,6 +317,7 @@
 
   function openMenu(){
     if (isOpen) return; isOpen = true;
+    arm();                                           /* v3.118: the pictures, if nothing asked for them sooner */
     clearTimeout(settleT);
     lock(true);
     root.classList.add('open');

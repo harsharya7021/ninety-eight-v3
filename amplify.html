@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B0B0C"><!-- v3.118: the browser's own chrome takes the ground; site.js turns it white with the switch -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><!-- v3.118: the mark on every tab and home screen; only the landing had an icon -->
 <title>Influencer marketing agency, Delhi · Ninety-Eight</title>
 <meta name="description" content="Influencer marketing at Ninety-Eight: forty-four creators from thirty-five documented campaigns. One verified voice per audience class.">
 <meta property="og:title" content="Influencer marketing agency, Delhi · Ninety-Eight">
@@ -13,9 +16,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.ninety-eight.in/amplify.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://www.ninety-eight.in/#org","name":"Ninety-Eight Entertainment","alternateName":["Ninety-Eight","98 Entertainment","98"],"url":"https://www.ninety-eight.in/","logo":"https://www.ninety-eight.in/assets/98-graffiti.png","image":"https://www.ninety-eight.in/assets/og-cover.jpg","description":"A creative and strategic firm in Delhi NCR that works as a business partner, not a vendor: influencer marketing, PR, brand identity, social, production and events under Marketing; personal branding and talent management under Talent & Branding. Founded 1 January 2020.","foundingDate":"2020-01-01","founder":{"@id":"https://www.ninety-eight.in/#harsh"},"address":{"@type":"PostalAddress","addressLocality":"Greater Noida","addressRegion":"Uttar Pradesh","postalCode":"201310","addressCountry":"IN"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Place","name":"Delhi NCR"}],"email":"contact@ninety-eight.in","telephone":"+91-97111-84674","sameAs":["https://www.instagram.com/98.entertainment/","https://www.linkedin.com/company/ninetyeight","https://www.behance.net/harsharya"],"knowsAbout":["influencer marketing","creator marketing","public relations","brand identity design","personal branding","talent management","restaurant marketing","hospitality marketing","experiential marketing","food photography","social media marketing"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Six instruments","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Branding and identity","url":"https://www.ninety-eight.in/identity.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"PR and media","url":"https://www.ninety-eight.in/press.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Influencer marketing","url":"https://www.ninety-eight.in/amplify.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Social","url":"https://www.ninety-eight.in/retain.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Production","url":"https://www.ninety-eight.in/production.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Events","url":"https://www.ninety-eight.in/events.html"}}]}},{"@type":"Person","@id":"https://www.ninety-eight.in/#harsh","name":"Harsh Arya","jobTitle":"Founder","worksFor":{"@id":"https://www.ninety-eight.in/#org"},"url":"https://www.ninety-eight.in/about.html","alumniOf":[{"@type":"CollegeOrUniversity","name":"Indian School of Business"}],"sameAs":["https://www.linkedin.com/in/harsharyaa","https://www.behance.net/harsharya","https://www.instagram.com/harsh.aryaa/"]},{"@type":"Service","@id":"https://www.ninety-eight.in/amplify.html#service","name":"Influencer marketing","serviceType":"Influencer marketing","provider":{"@id":"https://www.ninety-eight.in/#org"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Place","name":"Delhi NCR"}],"url":"https://www.ninety-eight.in/amplify.html","description":"Creator campaigns cast one verified voice per audience class, counted in tiers."}]}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css"><!-- v3.118: the typefaces, from here rather than from Google -->
 <script>
 (function(){try{document.documentElement.setAttribute('data-ground',localStorage.getItem('98-ground')==='white'?'white':'carbon');}catch(e){document.documentElement.setAttribute('data-ground','carbon');}
 document.documentElement.classList.add('js');})();
@@ -49,6 +51,11 @@ document.documentElement.classList.add('js');})();
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}   /* the page's title, for screen readers and search: the wall shows none (v3.54) */
 .w051 .w-cue{display:none}
 .w051 .w-medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:var(--gap);align-items:start}
+/* v3.118: with script, the readable grid has no box from the first parse (html.js is set in the head),
+   so its 44 lazy pictures are not fetched while the page decides; the script then either takes over
+   (.fx, the slots fetch pictures as they are dealt) or gives the grid back (.w-plain: no GSAP, or
+   motion reduced). Without script the grid is simply there, as before. */
+html.js .w051:not(.fx):not(.w-plain) .w-medias{display:none}
 .w051 .media{display:block;width:100%;height:auto}
 
 /* the effect, once the script has taken over */
@@ -165,50 +172,50 @@ document.documentElement.classList.add('js');})();
   <div class="w-pin">
     <div class="w-screen">
       <div class="w-medias">
-      <img class="media" src="assets/creators/wsfbhebhgmbyfx8klhsi.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/it7f7gwio2z3krs2r8ai.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/9ev5t2zpkghu8trorqzx.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/1n12irf1ye8u10rtegvi.webp" alt="" width="961" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/bt2ufy4u4pnlvsy0d5h2.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/fqewc3ovi00e3v5dqgnu.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/5vl6lnegrxpcw72wnr2b.webp" alt="" width="964" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/36w83wefqxc4achgbo50.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/mudecs1ii6jm2xmrrnji.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/apdtm0dje8t0bpodr3mc.webp" alt="" width="1080" height="1349" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/9b8cvo3in44vnm0af9ni.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/bgoxvednr9jzhc1v8t6v.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/lt8l8z2xspwsm3nwitd6.webp" alt="" width="1080" height="1349" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/ya3gktglc9xs65akan21.webp" alt="" width="960" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/g89xnj9bmd86r4xzbnqb.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/sdczihwfodv4vyqh22fk.webp" alt="" width="672" height="840" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/3figg80w96ghrsq2diqb.webp" alt="" width="960" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/supja9vzdvd144h9ctwj.webp" alt="" width="1080" height="1080" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/xfundbbxs5cu6lpmn2as.webp" alt="" width="960" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/i53cotmqqkej3fxrqs44.webp" alt="" width="1080" height="1346" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/788tysxp266fny5iemmq.webp" alt="" width="1050" height="1400" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/1ip1enwddwcocpc8qz4u.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/u04xmbtokoedtlceg7l1.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/ljivgd0ouz3srnnsfbxh.webp" alt="" width="672" height="840" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/zgti7a43slypjdr8q66e.webp" alt="" width="1080" height="1349" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/ugtk1jztts9xknu34m89.webp" alt="" width="1080" height="1263" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/30038lilkpk58dphljqn.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/vgutinyslqczl3ex9akm.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/blc344pkirg9c5dzovsy.webp" alt="" width="674" height="840" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/t7ekn0gb1l8f5sbb4rev.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/wuqp0zr0nejfgofnpxr8.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/dv3zhnwudeax6nt4uaep.webp" alt="" width="1050" height="1400" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/7ed7rw8j9j7b5q5gvh78.webp" alt="" width="958" height="1280" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/7nvmf23m110f7rzgouvb.webp" alt="" width="959" height="1200" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/0w3ofr5u0vvoiyqi7qto.webp" alt="" width="1080" height="1350" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/kjouw8ewjv6u3xr7sizn.webp" alt="" width="936" height="1248" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/kugq9xrgdd3j3p9b3rb0.webp" alt="" width="942" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/4njisqicvpmx6lfgx9hf.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/fmmkbwvouaoer5e0nizj.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/kyw10nriykpvbmo0e6ye.webp" alt="" width="801" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/a1jddoipwdgdlojj4wip.webp" alt="" width="799" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/3ljd6153z6l9fye98cxy.webp" alt="" width="903" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/zjacpe20pgtj55qch0us.webp" alt="" width="800" height="1000" decoding="async" draggable="false">
-      <img class="media" src="assets/creators/tzw6bbhofklsxzy7uo3e.webp" alt="" width="1000" height="1000" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/wsfbhebhgmbyfx8klhsi.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/it7f7gwio2z3krs2r8ai.webp" alt="" width="1080" height="1346" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/9ev5t2zpkghu8trorqzx.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/1n12irf1ye8u10rtegvi.webp" alt="" width="961" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/bt2ufy4u4pnlvsy0d5h2.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/fqewc3ovi00e3v5dqgnu.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/5vl6lnegrxpcw72wnr2b.webp" alt="" width="964" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/36w83wefqxc4achgbo50.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/mudecs1ii6jm2xmrrnji.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/apdtm0dje8t0bpodr3mc.webp" alt="" width="1080" height="1349" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/9b8cvo3in44vnm0af9ni.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/bgoxvednr9jzhc1v8t6v.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/lt8l8z2xspwsm3nwitd6.webp" alt="" width="1080" height="1349" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/ya3gktglc9xs65akan21.webp" alt="" width="960" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/g89xnj9bmd86r4xzbnqb.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/sdczihwfodv4vyqh22fk.webp" alt="" width="672" height="840" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/3figg80w96ghrsq2diqb.webp" alt="" width="960" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/supja9vzdvd144h9ctwj.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/xfundbbxs5cu6lpmn2as.webp" alt="" width="960" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/i53cotmqqkej3fxrqs44.webp" alt="" width="1080" height="1346" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/788tysxp266fny5iemmq.webp" alt="" width="1050" height="1400" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/1ip1enwddwcocpc8qz4u.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/u04xmbtokoedtlceg7l1.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/ljivgd0ouz3srnnsfbxh.webp" alt="" width="672" height="840" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/zgti7a43slypjdr8q66e.webp" alt="" width="1080" height="1349" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/ugtk1jztts9xknu34m89.webp" alt="" width="1080" height="1263" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/30038lilkpk58dphljqn.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/vgutinyslqczl3ex9akm.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/blc344pkirg9c5dzovsy.webp" alt="" width="674" height="840" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/t7ekn0gb1l8f5sbb4rev.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/wuqp0zr0nejfgofnpxr8.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/dv3zhnwudeax6nt4uaep.webp" alt="" width="1050" height="1400" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/7ed7rw8j9j7b5q5gvh78.webp" alt="" width="958" height="1280" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/7nvmf23m110f7rzgouvb.webp" alt="" width="959" height="1200" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/0w3ofr5u0vvoiyqi7qto.webp" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/kjouw8ewjv6u3xr7sizn.webp" alt="" width="936" height="1248" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/kugq9xrgdd3j3p9b3rb0.webp" alt="" width="942" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/4njisqicvpmx6lfgx9hf.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/fmmkbwvouaoer5e0nizj.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/kyw10nriykpvbmo0e6ye.webp" alt="" width="801" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/a1jddoipwdgdlojj4wip.webp" alt="" width="799" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/3ljd6153z6l9fye98cxy.webp" alt="" width="903" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/zjacpe20pgtj55qch0us.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false">
+      <img class="media" src="assets/creators/tzw6bbhofklsxzy7uo3e.webp" alt="" width="1000" height="1000" loading="lazy" decoding="async" draggable="false">
       </div>
     </div>
   </div>
@@ -288,23 +295,23 @@ document.documentElement.classList.add('js');})();
    5. Pictures are decoded a few ahead of their turn (see ahead()). */
 (function(){
   var root = document.getElementById('wall'); if (!root) return;
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined'){ root.classList.add('w-plain'); return; }   /* v3.118: the grid back */
   var pin = root.querySelector('.w-pin'), screen = root.querySelector('.w-screen'), cue = root.querySelector('.w-cue');
   var list = [].slice.call(root.querySelectorAll('.w-medias .media')), N = list.length;
-  if (!pin || !screen || !N) return;
+  if (!pin || !screen || !N){ root.classList.add('w-plain'); return; }
   gsap.registerPlugin(ScrollTrigger);
   var SRC = list.map(function(m){ return m.getAttribute('src'); });
   var OFF = [0, 200, 400], DUR = [1, 2, 3];      /* the zip's offsets (px) and trails (s) for its three pictures */
 
   gsap.matchMedia().add({ phone: '(max-width: 768px)', desk: 'not all and (max-width: 768px)', still: '(prefers-reduced-motion: reduce)' }, function(ctx){
-    if (ctx.conditions.still) return;
-    root.classList.add('fx');
+    if (ctx.conditions.still){ root.classList.add('w-plain'); return; }   /* v3.118: motion reduced: the grid, lazily */
+    root.classList.remove('w-plain'); root.classList.add('fx');
     var slots = [0, 1, 2].map(function(){
       var im = document.createElement('img');
       im.className = 'w-slot'; im.alt = ''; im.setAttribute('aria-hidden', 'true'); im.decoding = 'async'; im.draggable = false;
       screen.appendChild(im); return im;
     });
-    var H = 0, C = [], D = 0, sched = [], xs = [], shown = [-1, -1, -1], ready = 0, laid = [0, 0];
+    var H = 0, C = [], D = 0, LEAD = 0, sched = [], xs = [], shown = [-1, -1, -1], ready = 0, laid = [0, 0];
 
     /* the deal: which picture each slot carries on each of its loops, and where.
        The loops come round in a fixed order, so the whole deal can be worked
@@ -354,12 +361,21 @@ document.documentElement.classList.add('js');})();
         sched[o.k][o.n] = next++; xs[o.k][o.n] = best; last = o;
       }
       D = (last ? last.n * C[last.k] : 0) + H + h;  /* the scroll until the last picture has risen out of the top */
+      /* v3.118: the floor no longer opens on an empty screen. At rest the first three pictures already
+         stand in the lower part of the window, their tops just under the middle (.45 of the height up
+         from the bottom edge), and they rise into that place as the page opens, each on its own trail
+         (1, 2, 3 s), which is the effect's own motion. The scroll then carries on from there: the run
+         is shorter by the same amount, the deal and every cycle unchanged. */
+      LEAD = Math.round(H * 0.45);
       shown = [-1, -1, -1];
       laid = [screen.clientWidth, H];
     }
-    function ahead(i){                              /* decode pictures a few ahead of their turn */
+    var warm = [];
+    function ahead(i){                              /* fetch and decode pictures a few ahead of their turn */
+      /* v3.118: through Image objects. The grid's own imgs are loading="lazy" and have no box under
+         .fx, so nothing is fetched until a slot asks for it; this keeps the next seven warm. */
       var upto = Math.min(N, i + 7);
-      while (ready < upto){ var m = list[ready++]; if (m.decode) m.decode().catch(function(){}); }
+      while (ready < upto){ var im = new Image(); im.decoding = 'async'; im.src = SRC[ready++]; if (im.decode) im.decode().catch(function(){}); warm.push(im); }
     }
     function show(k, n){
       shown[k] = n;
@@ -378,10 +394,11 @@ document.documentElement.classList.add('js');})();
       } } });
     });
     slots.forEach(function(im, k){ show(k, 0); });
+    to.forEach(function(t){ t(-LEAD); });                                  /* v3.118: the entrance */
 
     var st = ScrollTrigger.create({
-      trigger: pin, start: 'top top', end: function(){ return '+=' + D; }, pin: screen,
-      onUpdate: function(self){ var p = Math.max(0, self.scroll() - self.start); to.forEach(function(t){ t(-p); }); }
+      trigger: pin, start: 'top top', end: function(){ return '+=' + (D - LEAD); }, pin: screen,
+      onUpdate: function(self){ var p = LEAD + Math.max(0, self.scroll() - self.start); to.forEach(function(t){ t(-p); }); }
     });
     gsap.to(cue, {
       autoAlpha: 0, duration: 0.2,
@@ -394,7 +411,7 @@ document.documentElement.classList.add('js');})();
       timer = setTimeout(function(){
         if (Math.abs(screen.clientWidth - laid[0]) < 3 && Math.abs(screen.clientHeight - laid[1]) / laid[1] < 0.15) return;
         deal(); ScrollTrigger.refresh();
-        var p = Math.max(0, st.scroll() - st.start);
+        var p = LEAD + Math.max(0, st.scroll() - st.start);
         to.forEach(function(t){ t(-p); });
       }, 200);
     }

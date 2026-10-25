@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <script>(function(){var d=document.documentElement,g='carbon';try{if(localStorage.getItem('98-ground')==='white')g='white';}catch(e){}d.setAttribute('data-ground',g);})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B0B0C"><!-- v3.118: the browser's own chrome takes the ground; site.js turns it white with the switch -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><!-- v3.118: the mark on every tab and home screen; only the landing had an icon -->
 <title>Marketing agency, Delhi NCR — six instruments · Ninety-Eight</title>
 <meta name="description" content="Full-scale marketing practice: branding, PR &amp; media, influencer marketing, social, production, events. 35 records, 70+ brands.">
 <meta property="og:title" content="Marketing agency, Delhi NCR — six instruments · Ninety-Eight">
@@ -15,9 +18,8 @@
 <link rel="canonical" href="https://www.ninety-eight.in/marketing.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://www.ninety-eight.in/#org","name":"Ninety-Eight Entertainment","alternateName":["Ninety-Eight","98 Entertainment","98"],"url":"https://www.ninety-eight.in/","logo":"https://www.ninety-eight.in/assets/98-graffiti.png","image":"https://www.ninety-eight.in/assets/og-cover.jpg","description":"A creative and strategic firm in Delhi NCR that works as a business partner, not a vendor: influencer marketing, PR, brand identity, social, production and events under Marketing; personal branding and talent management under Talent & Branding. Founded 1 January 2020.","foundingDate":"2020-01-01","founder":{"@id":"https://www.ninety-eight.in/#harsh"},"address":{"@type":"PostalAddress","addressLocality":"Greater Noida","addressRegion":"Uttar Pradesh","postalCode":"201310","addressCountry":"IN"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Place","name":"Delhi NCR"}],"email":"contact@ninety-eight.in","telephone":"+91-97111-84674","sameAs":["https://www.instagram.com/98.entertainment/","https://www.linkedin.com/company/ninetyeight","https://www.behance.net/harsharya"],"knowsAbout":["influencer marketing","creator marketing","public relations","brand identity design","personal branding","talent management","restaurant marketing","hospitality marketing","experiential marketing","food photography","social media marketing"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Six instruments","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Branding and identity","url":"https://www.ninety-eight.in/identity.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"PR and media","url":"https://www.ninety-eight.in/press.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Influencer marketing","url":"https://www.ninety-eight.in/amplify.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Social","url":"https://www.ninety-eight.in/retain.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Production","url":"https://www.ninety-eight.in/production.html"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Events","url":"https://www.ninety-eight.in/events.html"}}]}},{"@type":"Person","@id":"https://www.ninety-eight.in/#harsh","name":"Harsh Arya","jobTitle":"Founder","worksFor":{"@id":"https://www.ninety-eight.in/#org"},"url":"https://www.ninety-eight.in/about.html","alumniOf":[{"@type":"CollegeOrUniversity","name":"Indian School of Business"}],"sameAs":["https://www.linkedin.com/in/harsharyaa","https://www.behance.net/harsharya","https://www.instagram.com/harsh.aryaa/"]},{"@type":"Service","@id":"https://www.ninety-eight.in/marketing.html#service","name":"Marketing","serviceType":"Marketing","provider":{"@id":"https://www.ninety-eight.in/#org"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Place","name":"Delhi NCR"}],"url":"https://www.ninety-eight.in/marketing.html","description":"A full-scale marketing practice in six instruments: branding, PR and media, influencer marketing, social, production, events."}]}</script>
 <meta name="twitter:image" content="https://www.ninety-eight.in/assets/og-cover.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css"><!-- v3.118: the typefaces, from here rather than from Google -->
 <link rel="stylesheet" href="assets/field.css">
 <script>
 /* v3.66: the stage is decided here, before first paint, not at the foot of the body.
@@ -160,7 +162,7 @@ html.fx .mwg104 .pin-height,.mwg104.fx .pin-height{display:block;height:857vh}  
 .mwg104 text.segment .stop{fill:var(--red);stroke:var(--red)}
 .mwg104 .emo{font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji','Twemoji Mozilla',sans-serif;font-size:280px;fill:var(--ink)}   /* fill only shows if a device has no colour emoji font */
 .mwg104.fx .w104-cue{display:flex;flex-direction:column;align-items:center;gap:.85rem;
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none}
+  position:fixed;top:auto;bottom:7vh;left:50%;transform:translate(-50%,0);z-index:3;pointer-events:none}   /* v3.118: under the line, which now opens on screen; it was centred where the first word now stands */
 .w104-cue i{display:block;width:1px;height:34px;background:var(--line);position:relative;overflow:hidden}
 .w104-cue i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--ink);animation:w104drip 1.8s var(--ease) infinite}
 @keyframes w104drip{to{top:100%}}
@@ -201,7 +203,7 @@ html.fx .mwg104 .pin-height,.mwg104.fx .pin-height{display:block;height:857vh}  
 .mwg109 .media i{position:absolute;left:0;top:7px;width:100%;height:100%;border-radius:7px;background:var(--on)}
 .mwg109 .media img{position:relative;left:9px;display:block;width:100%;height:100%;border-radius:7px;object-fit:cover;object-position:var(--pos,50% 50%)}
 .mwg109 .txt p{font-size:.95rem;line-height:1.45;letter-spacing:-.005em}
-.mwg109 .txt .meta{margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.95}
+.mwg109 .txt .meta{margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.625rem;   /* v3.118: .58rem was 9.3px; 10px is the floor */letter-spacing:.14em;text-transform:uppercase;line-height:1.95}
 .mwg109 .meta a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
   display:inline-block;padding:.4rem 0;margin:-.4rem 0}   /* v3.66: the type stays .58rem; the target grows to ~26px without moving anything */
 .mwg109 .meta a:hover{text-decoration-thickness:2px}
@@ -634,10 +636,22 @@ html[data-ground="white"]{
     }
   }
 
+  /* v3.118: the train has a head start. At rest the zip parks its first word just
+     past the right edge, so this page opened on the field alone — and the site
+     holds every Scroll cue back for six seconds of stillness (v3.63), so a visitor
+     arriving from the menu saw nothing at all for six seconds, on a phone especially.
+     Now the page opens on its first word: "Full-scale" stands whole across the screen
+     (its left edge at a sixth of the path, a tenth of the window in; the word is
+     four fifths of any window wide, so anywhere further right it would be cut) and
+     the scroll pulls the rest of the line in behind it. The run is shorter by the
+     same lead, so the pace is the zip's. The Scroll cue, when stillness brings it,
+     sits under the line rather than across it (the rule after .w104-cue). */
+  var LEAD = 0.833;
+  function span(){ var pl = svgPath.getTotalLength(); return pl + totalLength - LEAD * pl; }
   function update(){
     if (!ready) return;
     var pl = svgPath.getTotalLength();
-    var cursor = pl + totalLength - scrollProgress * (pl + totalLength);
+    var cursor = span() - scrollProgress * span();
 
     for (var i = segments.length - 1; i >= 0; i--){
       var seg = segments[i];
@@ -659,8 +673,8 @@ html[data-ground="white"]{
   }
   function handleWheel(e){ bumpAmplitude(e.deltaY); }
 
-  function repace(){                            /* the zip's pace, this line's length */
-    var run = REF_RUN * (svgPath.getTotalLength() + totalLength) / REF_SPAN;
+  function repace(){                            /* the zip's pace, this line's length (less the head start, v3.118) */
+    var run = REF_RUN * span() / REF_SPAN;
     pinHeight.style.height = (100 + run).toFixed(1) + 'vh';
   }
 
